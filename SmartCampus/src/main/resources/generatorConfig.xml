@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+	<classPathEntry
+		location="D:\mavenku\mysql\mysql-connector-java\5.1.6\mysql-connector-java-5.1.6.jar" />
+	<context id="context1">
+		<!-- 注释 -->
+		<commentGenerator>
+			<property name="suppressAllComments" value="true" /><!-- 是否取消注释 -->
+			<property name="suppressDate" value="true" /> <!-- 是否生成注释代时间戳 -->
+		</commentGenerator>
+		<jdbcConnection connectionURL="jdbc:mysql://localhost:3306/houses"
+			driverClass="com.mysql.jdbc.Driver" password="123456" userId="root" />
+		<!-- 实体生成位置，RedisTest：是项目名 -->
+		<javaModelGenerator targetPackage="com.bdqn.domain"
+			targetProject="RedisTest" />
+		<!-- mapper配置文件生成，RedisTest：是项目名 -->
+		<sqlMapGenerator targetPackage="mapper"
+			targetProject="RedisTest" />
+		<!-- mapper接口生成，RedisTest：是项目名 -->
+		<javaClientGenerator targetPackage="com.bdqn.mapper"
+			targetProject="RedisTest" type="XMLMAPPER" />
+		<!-- schema:实体名称，tableName表名 -->
+		<table schema="Student" tableName="student">
+
+		</table>
+	</context>
+</generatorConfiguration>
