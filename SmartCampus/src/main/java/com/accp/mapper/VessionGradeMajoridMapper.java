@@ -3,9 +3,12 @@ package com.accp.mapper;
 import com.accp.domain.VessionGradeMajorid;
 import com.accp.domain.VessionGradeMajoridExample;
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+@Mapper
 public interface VessionGradeMajoridMapper {
+	List<VessionGradeMajorid> queryVessionGradeMajoridByBid(Integer bid);
     long countByExample(VessionGradeMajoridExample example);
 
     int deleteByExample(VessionGradeMajoridExample example);

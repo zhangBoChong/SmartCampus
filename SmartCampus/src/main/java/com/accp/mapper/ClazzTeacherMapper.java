@@ -3,9 +3,15 @@ package com.accp.mapper;
 import com.accp.domain.ClazzTeacher;
 import com.accp.domain.ClazzTeacherExample;
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
-public interface ClazzTeacherMapper {
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+@Mapper
+public interface ClazzTeacherMapper {	
+	int updatecourseschedule(ClazzTeacher record);
+	ClazzTeacher queryBycid(Integer cid);
+	ClazzTeacher updatetwo(Integer cid);
+	List<ClazzTeacher> queryClazzTeacherByctid(Integer ctid);
     long countByExample(ClazzTeacherExample example);
 
     int deleteByExample(ClazzTeacherExample example);

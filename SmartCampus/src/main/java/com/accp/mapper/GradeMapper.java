@@ -8,9 +8,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 @Mapper
 public interface GradeMapper {
-	//根据gid查询年级
-	Grade queryByGid(Integer gid);
-	
+	int insertGrade(Grade grade);
+	Grade selectBygid(Integer gid);
     long countByExample(GradeExample example);
 
     int deleteByExample(GradeExample example);

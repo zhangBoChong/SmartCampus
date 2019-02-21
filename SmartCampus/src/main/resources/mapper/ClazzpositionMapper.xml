@@ -5,6 +5,15 @@
     <id column="clazzPositionId" jdbcType="INTEGER" property="clazzpositionid" />
     <result column="clazzPositionName" jdbcType="VARCHAR" property="clazzpositionname" />
   </resultMap>
+  <select id="queryBypositionid" resultMap="BaseResultMap">
+  	select 
+    <include refid="Base_Column_List" />
+    from clazzposition
+    where clazzPositionId = #{clazzpositionid,jdbcType=INTEGER}
+  </select>
+  <select id="queryAllclazzpositions" resultMap="BaseResultMap">
+  	select * from clazzposition
+  </select>
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">

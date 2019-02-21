@@ -6,26 +6,12 @@
     <result column="vgmId" jdbcType="INTEGER" property="vgmid" />
     <result column="courseId" jdbcType="INTEGER" property="courseid" />
   </resultMap>
-  <resultMap type="com.accp.domain.VessionGradeMajoridCourse" id="BaseResultMapOne">
-  	<association property="vgjd" column="vgmid" javaType="com.accp.domain.VessionGradeMajorid">
-  		<id property="vgmid" column="vgmId"/>
-  		<result property="bid" column="bid"/>
-  		<result property="majorid" column="majorId"/>
-  	</association>
-  </resultMap>
-  <resultMap type="com.accp.domain.VessionGradeMajoridCourse" id="BaseResultMapTwo" extends="BaseResultMapOne">
-  	<association property="course" column="courseId" javaType="com.accp.domain.Course">
-  		<id property="courseid" column="courseId"/>
-  		<result property="coursename" column="courseName"/>
-  		<result property="coursetime" column="courseTime"/>
-  	</association>
-  </resultMap>
-  <resultMap type="com.accp.domain.VessionGradeMajoridCourse" id="BaseResultMapThree" extends="BaseResultMapTwo">
-  	<association property="major" column="majorId" javaType="com.accp.domain.Major">
-  		<id property="majorid" column="majorId"/>
-  		<result property="majorname" column="majorName"/>
-  	</association>
-  </resultMap>
+  <select id="queryVessionGradeMajoridCourseByvgmid" resultMap="BaseResultMap">
+  	SELECT * FROM `vession_grade_majorid_course` WHERE vgmId=#{vgmId}
+  </select>
+  <select id="selectBycvgmid" resultMap="BaseResultMap">
+ 	 SELECT * FROM `vession_grade_majorid_course` WHERE cvgmId=#{cvgmid}
+  </select>
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -114,10 +100,10 @@
   <delete id="deleteByExample" parameterType="com.accp.domain.VessionGradeMajoridCourseExample">
     delete from vession_grade_majorid_course
     <if test="_parameter != null">
-      <include refid="Example_Where_Clause"/>
+      <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.accp.domain.VessionGradeMajoridCourse">
+  <insert id="insertVessionGradeMajoridCourse" parameterType="com.accp.domain.VessionGradeMajoridCourse" keyProperty="vgmid" useGeneratedKeys="true">
     insert into vession_grade_majorid_course (cvgmId, vgmId, courseId
       )
     values (#{cvgmid,jdbcType=INTEGER}, #{vgmid,jdbcType=INTEGER}, #{courseid,jdbcType=INTEGER}
@@ -198,10 +184,4 @@
       courseId = #{courseid,jdbcType=INTEGER}
     where cvgmId = #{cvgmid,jdbcType=INTEGER}
   </update>
-  <select id="queryAll" resultMap="BaseResultMapThree">
-  	SELECT * FROM `vession_grade_majorid_course` INNER JOIN `vession_grade_majorid` ON vession_grade_majorid_course.`vgmId`=vession_grade_majorid.`vgmId`
-	INNER JOIN `course` ON course.`courseId`=vession_grade_majorid_course.`courseId` 
-	INNER JOIN `major` ON  major.`majorId`=vession_grade_majorid.`majorId`
-  </select>
-
 </mapper>

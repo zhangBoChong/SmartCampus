@@ -8,13 +8,14 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 @Mapper
 public interface VessionGradeMajoridCourseMapper {
+	VessionGradeMajoridCourse selectBycvgmid(Integer cvgmid);
+	int insertVessionGradeMajoridCourse(VessionGradeMajoridCourse record);
+	List<VessionGradeMajoridCourse> queryVessionGradeMajoridCourseByvgmid(Integer vgmid);
     long countByExample(VessionGradeMajoridCourseExample example);
 
     int deleteByExample(VessionGradeMajoridCourseExample example);
 
-    int deleteByPrimaryKey(Integer cvgmid);
-
-    int insert(VessionGradeMajoridCourse record);
+    int deleteByPrimaryKey(Integer cvgmid);   
 
     int insertSelective(VessionGradeMajoridCourse record);
 
@@ -29,5 +30,4 @@ public interface VessionGradeMajoridCourseMapper {
     int updateByPrimaryKeySelective(VessionGradeMajoridCourse record);
 
     int updateByPrimaryKey(VessionGradeMajoridCourse record);
-    List<VessionGradeMajoridCourse> queryAll();
 }

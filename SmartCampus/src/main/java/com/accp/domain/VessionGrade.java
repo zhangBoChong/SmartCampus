@@ -7,24 +7,15 @@ public class VessionGrade {
 
     private Integer gid;
     
-    private Vession vession;
-    
     private Grade grade;
     
+
     public Grade getGrade() {
 		return grade;
 	}
 
 	public void setGrade(Grade grade) {
 		this.grade = grade;
-	}
-
-	public Vession getVession() {
-		return vession;
-	}
-
-	public void setVession(Vession vession) {
-		this.vession = vession;
 	}
 
 	public Integer getBid() {

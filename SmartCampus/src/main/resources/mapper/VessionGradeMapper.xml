@@ -6,6 +6,18 @@
     <result column="vid" jdbcType="INTEGER" property="vid" />
     <result column="gid" jdbcType="INTEGER" property="gid" />
   </resultMap>
+  <select id="queryByVessionGradeVid" resultMap="BaseResultMap">
+  	SELECT * FROM `vession_grade` WHERE vid=#{vid}
+  </select>
+  <select id="queryByVGbid" resultMap="BaseResultMap">
+  	select * from vession_grade where bid=#{bid}
+  </select>
+  <insert id="insertVG" parameterType="com.accp.domain.VessionGrade">
+  	 insert into vession_grade (bid, vid, gid
+      )
+    values (#{bid,jdbcType=INTEGER}, #{vid,jdbcType=INTEGER}, #{gid,jdbcType=INTEGER}
+      )
+  </insert>
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -81,7 +93,7 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="queryByBid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from vession_grade

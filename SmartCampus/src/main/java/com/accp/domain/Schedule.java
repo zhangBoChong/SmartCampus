@@ -1,23 +1,51 @@
 package com.accp.domain;
 
-import java.util.Date;
 
 public class Schedule {
     private Integer scheduleid;
 
     private Integer cid;
 
-    private Date datestart;
+    private String datestart;
 
-    private Date dateend;
+    private String dateend;
 
-    private Integer tid;
+    private String tname;
 
     private String title;
 
     private String outline;
+    private Integer startqj;
+    private Integer endqj;
+    
+    private Clazz clazz;
+    
+    
+    public Clazz getClazz() {
+		return clazz;
+	}
 
-    public Integer getScheduleid() {
+	public void setClazz(Clazz clazz) {
+		this.clazz = clazz;
+	}
+
+	public Integer getStartqj() {
+		return startqj;
+	}
+
+	public void setStartqj(Integer startqj) {
+		this.startqj = startqj;
+	}
+
+	public Integer getEndqj() {
+		return endqj;
+	}
+
+	public void setEndqj(Integer endqj) {
+		this.endqj = endqj;
+	}
+
+	public Integer getScheduleid() {
         return scheduleid;
     }
 
@@ -33,28 +61,28 @@ public class Schedule {
         this.cid = cid;
     }
 
-    public Date getDatestart() {
+    public String getDatestart() {
         return datestart;
     }
 
-    public void setDatestart(Date datestart) {
+    public void setDatestart(String datestart) {
         this.datestart = datestart;
     }
 
-    public Date getDateend() {
+    public String getDateend() {
         return dateend;
     }
 
-    public void setDateend(Date dateend) {
+    public void setDateend(String dateend) {
         this.dateend = dateend;
     }
 
-    public Integer getTid() {
-        return tid;
+    public String getTname() {
+        return tname;
     }
 
-    public void setTid(Integer tid) {
-        this.tid = tid;
+    public void setTname(String tname) {
+        this.tname = tname;
     }
 
     public String getTitle() {

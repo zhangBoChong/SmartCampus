@@ -3,9 +3,14 @@ package com.accp.mapper;
 import com.accp.domain.Studentinfo;
 import com.accp.domain.StudentinfoExample;
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+@Mapper
 public interface StudentinfoMapper {
+	int insertStudentinfo(Studentinfo stu);
+	int updateStudentinfo(Studentinfo stu);
+	Studentinfo queryBystusid(Integer sid);
     long countByExample(StudentinfoExample example);
 
     int deleteByExample(StudentinfoExample example);

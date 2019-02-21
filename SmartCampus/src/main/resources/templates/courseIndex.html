@@ -44,13 +44,16 @@
 	    border-top-color: #c5c5c5;
 	    border-right-color: #e0e0e0;
 	    border-bottom-color: #e0e0e0;
-	   
 	    margin-top: 0.3rem;
+	}
+	.opt span{
+		margin-left: 1.1rem;
 	}
 	.opt select{
 		position: relative;
 	    width: 107px;
 	    height: 28px;
+	    top:0.35rem;
 	}
 	.opt input{
 		width: 5rem;
@@ -95,13 +98,14 @@
 		margin-left: 5rem;
 	}
 	#addKC p{
-		display: flex;		
+		display: flex;
+		margin-top: 0.5rem		
 	}
 	
 	#addKC p select{
-		position: absolute;
 	    width: 227px;
 	    height: 28px;
+	    margin-top: 0.3rem	    
 	}
 	#addKC p span{
 		margin-top: 0.5rem;
@@ -141,91 +145,48 @@
             <div class="table">
             	<div class="opt ue-clear" style="display: flex;line-height: 2.5rem;">
                 		<span>版本号</span>
-	            		<select>
-	            			<option>7.0版本</option>
-	            			<option>8.0版本</option>
+	            		<select class="chooseVession">
+	            			<option value="0">请选择</option>
+	            			<option v-for="(item,index) in vessions" v-bind:value="item.vid">{{item.vname}}</option>
 	            		</select>
-	            		<div style="margin-left: 1rem;"></div>
 	            		<span>年级</span>
-	            		<select>
-	            			<option>S1</option>
-	            			<option>S2</option>
-	            			<option>Y2</option>
-	            		</select>
-	            		<div style="margin-left: 1.5rem;"></div>
+	            		<select class="chooseGrade">
+	            			<option value="0">请选择</option>
+	            			<option v-for="(item,index) in grades" v-bind:value="item.bid">{{item.grade.gname}}</option>
+	            		</select>	            		
 	            		<span>专业</span>
-	            		<select>
-	            			<option>Java</option>
-	            			<option>.Net</option>
-	            			<option>无</option>
-	            		</select>	
-	            		<div style="margin-left: 1.5rem;"></div>
-	            		<span>课程</span>
-	            		<select>
-	            			<option>JavaOOP</option>
-	            			<option>HTML5</option>
+	            		<select class="chooseMajor">
+	            			<option value="0">请选择</option>
+	            			<option v-for="(item,index) in majors" v-bind:value="item.vgmid">{{item.major.majorname}}</option>
 	            		</select>
-	            		
-	            		<div class="search-button" style="margin-left: 61.5rem;">
+	            		<span>课程</span>
+	            		<select id="chooseCourse">
+	            			<option value="0">请选择</option>
+	            			<option v-for="(item,index) in courses" v-bind:value="item.cvgmid">{{item.course.coursename}}</option>
+	            		</select>
+	            		<span>教员</span>
+	            		<select id="chooseTeacher">
+	            			<option value="0">请选择</option>
+	            			<option v-for="(item,index) in teachers" v-bind:value="item.ctid">{{item.staff.tname}}</option>
+	            		</select>
+	            		<div class="search-button" style="margin-left: 51.5rem;">
 		                	<input class="button" id="AddCourse" type="button" value="新增课程" />
 		                </div>
                 </div>
                 <div  class="opt ue-clear tab">
-                	<table>
-                		<tr>
-                			<td>版本号</td>
-                			<td>年级</td>
-                			<td>课程</td>
-                			<td>教员</td>
-                			<td>课时(节次)</td>
-                		</tr>
-                	</table>
-                	<div th:each="courses:${Allcourses}">
-	                	<table>	
-	                		<tr>
-	                			<td th:text="${courses.vgjd.vessionGrade.vession.vname}"></td> 
-	                			<td th:text="${courses.vgjd.vessionGrade.grade.gname}"></td>
-	                			<td th:text="${courses.course.coursename}"></td>
-	                			<td class="teachers" style="cursor: pointer;color: deepskyblue;">︾</td>               			               			
-	                			<td th:text="${courses.course.coursetime}"></td>
-	                		</tr>               		               		       
+                		<table>	     
+	                		<tr class="opt">
+	                			<td>班级名称</td>
+	                			<td>班主任</td>
+	                			<td>课程进度(节次)</td>
+	                		</tr>
+	                		<tr v-for="(item,index) in clazzs">
+	                			<td>{{item.clazz.cname}}</td>
+	                			<td>{{item.clazz.staff.tname}}</td>
+	                			<td>{{item.courseschedule}}</td>
+	                		</tr>                		
 	                	</table>
-	                	<div style="display: none;">
-	                		<table>
-		                		<tr class="opt">
-		                			<td>教员</td>
-		                			<td>班级</td>
-		                		</tr>
-		                	</table>
-		                	<div th:each="teachers:${courses.ctc}">
-			                	<table>	
-			                		<tr>
-			                			<td th:text="${teachers.staff.tname}"></td>
-			                			<td class="clazzs" style="cursor: pointer;color: deepskyblue;">︾</td>
-			                		</tr>                		
-			                	</table>
-			                	<table style="display: none;">
-			                		<tr class="opt">
-			                			<td>班级</td>
-			                			<td>班主任</td>
-			                			<td>课程进度(节次)</td>
-			                		</tr>
-			                		<tr>
-			                			<td>AT1716</td>
-			                			<td>张飞</td>
-			                			<td>20</td>
-			                		</tr>
-			                		<tr>
-			                			<td>AT1713</td>
-			                			<td>曹操</td>
-			                			<td>22</td>
-			                		</tr>
-			                	</table>
-		                	</div>
-		                	
-	                	</div>
-                	</div>
-                	
+  	
                 </div>  
                 
             </div>
@@ -236,40 +197,39 @@
     	<h1>新增课程</h1>
     	<p>
     		<span>版  本  :</span>
-	    	<select>
-	    		<option>7.0</option>
-	    		<option>8.0</option>
+	    	<select class="chooseVession" id="vid">
+	    		<option value="0">请选择</option>
+	    		<option v-for="(item,index) in vessions" v-bind:value="item.vid">{{item.vname}}</option>
 	    	</select>
     	</p>
     	<p>
     		<span>年  级  :</span>
-	    	<select>
-	    		<option>S1</option>
-	    		<option>S2</option>
+	    	<select class="chooseGrade" id="bid"> 
+	    		<option value="0">请选择</option>
+	    		<option v-for="(item,index) in grades" v-bind:value="item.bid">{{item.grade.gname}}</option>
 	    	</select>
     	</p>
     	<p>
     		<span>专  业  :</span>
-	    	<select>
-	    		<option>Java</option>
-	    		<option>.Net</option>
-	    		<option>无</option>
+	    	<select class="chooseMajor" id="vgmid">
+	    		<option value="0">请选择</option>
+	    		<option v-for="(item,index) in majors" v-bind:value="item.vgmid">{{item.major.majorname}}</option>
 	    	</select>
     	</p>
     	<p style="margin-left: -1.3rem;">
     		<span>课程名称  :</span>
-	    	<input class="CK" type="text" name="" id="" value="" />
+	    	<input class="CK" type="text" name="" id="coursename" value="" />
     	</p>
     	<p style="margin-left: 0.3rem;">
     		<span>课时  :</span>
-	    	<input class="CK" type="text" name="" id="" value="" />
+	    	<input class="CK" type="text" name="" id="coursetime" value="" />
     	</p>
-    	<div style="display: flex;padding-top: 3rem;">
+    	<div style="display: flex;padding-top: 1rem;">
     		<div class="search-button" id="save">
         		<input class="button" type="button" value="保存" />
         	</div>
 	        <div class="search-button" id="cancel" style="margin-left: 1rem;">
-	        	<input class="button" type="button" value="取消" />
+	        	<input class="button" type="reset" value="取消" />
 	        </div>
     	</div>
     	        
@@ -283,27 +243,21 @@
 <script type="text/javascript" src="js/jquery.pagination.js"></script>
 <script type="text/javascript" src="js/jquery.grid.js"></script>
 <script type="text/javascript" src="js/WdatePicker.js"></script>
+<script type="text/javascript" src="js/vue.js"></script>
 <script type="text/javascript">
-	$('select').select();
 	$(function(){
-		//教员下拉列表
-		$(".teachers").toggle(
-			function(){
-			$(this).text("︽");
-			$(this).parents("table").next().show();			
-		},function(){
-			$(this).text("︾");	
-			$(this).parents("table").next().hide();
+		var v=new Vue({
+			el:"#container",
+			data:{
+				vessions:null,
+				grades:null,
+				majors:null,
+				courses:null,
+				teachers:null,
+				clazzs:null
+			}
 		});
-		//班级下拉列表
-		$(".clazzs").toggle(
-			function(){
-			$(this).text("︽");		
-			$(this).parents("table").next().show();		
-		},function(){
-			$(this).text("︾");	
-			$(this).parents("table").next().hide();
-		});
+
 		//显示隐藏新增课程
 		$("#AddCourse").click(
 			function(){	
@@ -316,6 +270,97 @@
 		//取消隐藏div
 		$("#cancel").click(function(){
 			$("#addKC").fadeOut();
+		});
+		
+		//ajax查询版本
+		$.ajax({
+			url:'ToVessions',
+			dataType:'json',
+			type:'post',
+			success:function(data){
+	    		v.vessions=data;
+	    	}
+		});
+		
+		
+		$(".chooseVession").change(function(){
+			var vid=$(this).val();
+			$.ajax({
+				url:'ToGrades',
+				data:'vid='+vid,
+				dataType:'json',
+				type:'post',
+				success:function(data){
+		    		v.grades=data;
+		    	}
+			});
+		});
+		$(".chooseGrade").change(function(){
+			var bid=$(this).val();
+			$.ajax({
+				url:'ToMajors',
+				data:'bid='+bid,
+				dataType:'json',
+				type:'post',
+				success:function(data){
+		    		v.majors=data;
+		    	}
+			});
+		});
+		$(".chooseMajor").change(function(){
+			var vgmid=$(this).val();
+			$.ajax({
+				url:'ToCourses',
+				data:'vgmid='+vgmid,
+				dataType:'json',
+				type:'post',
+				success:function(data){
+		    		v.courses=data;
+		    	}
+			});
+		});
+		$("#chooseCourse").change(function(){
+			var cvgmid=$(this).val();
+			$.ajax({
+				url:'ToTeachers',
+				data:'cvgmid='+cvgmid,
+				dataType:'json',
+				type:'post',
+				success:function(data){
+		    		v.teachers=data;
+		    	}
+			});
+		});
+		$("#chooseTeacher").change(function(){
+			var ctid=$(this).val();
+			$.ajax({
+				url:'ToClazzs',
+				data:'ctid='+ctid,
+				dataType:'json',
+				type:'post',
+				success:function(data){
+		    		v.clazzs=data;
+		    	}
+			});
+		});
+		$("#save").click(function(){
+			var vgmid=$("#vgmid").val();
+			var coursename=$("#coursename").val();
+			var coursetime=$("#coursetime").val();			
+			/* $.ajax({
+				url:'AddCourse',
+				data:'coursename='+coursename+'&coursetime='+coursetime+'&vgmid='+vgmid,
+				dataType:'json',
+				type:'post',
+				success:function(data){
+					alert("新增成功!");
+		    	}
+			}); */
+			$("#vid option:first").prop("selected", 'selected');
+			$("#bid option:first").prop("selected", 'selected');
+			$("#vgmid option:first").prop("selected", 'selected');
+			$("#coursename").val("");
+			$("#coursetime").val("");
 		});
 	})
 </script>

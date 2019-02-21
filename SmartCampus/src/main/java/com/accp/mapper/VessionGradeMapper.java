@@ -8,8 +8,9 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 @Mapper
 public interface VessionGradeMapper {
-	//根据bid查询版本年级中间表
-	VessionGrade queryByBid(Integer bid);
+	int insertVG(VessionGrade vg);
+	List<VessionGrade> queryByVessionGradeVid(Integer vid);
+	VessionGrade queryByVGbid(Integer bid);
     long countByExample(VessionGradeExample example);
 
     int deleteByExample(VessionGradeExample example);

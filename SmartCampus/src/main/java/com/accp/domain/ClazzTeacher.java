@@ -3,13 +3,25 @@ package com.accp.domain;
 public class ClazzTeacher {
     private Integer tcid;
 
-    private Integer tid;
+    private Integer ctid;
 
     private Integer cid;
 
     private Integer status;
 
-    public Integer getTcid() {
+    private Integer courseschedule;
+    private Clazz clazz;
+    
+
+    public Clazz getClazz() {
+		return clazz;
+	}
+
+	public void setClazz(Clazz clazz) {
+		this.clazz = clazz;
+	}
+
+	public Integer getTcid() {
         return tcid;
     }
 
@@ -17,12 +29,12 @@ public class ClazzTeacher {
         this.tcid = tcid;
     }
 
-    public Integer getTid() {
-        return tid;
+    public Integer getCtid() {
+        return ctid;
     }
 
-    public void setTid(Integer tid) {
-        this.tid = tid;
+    public void setCtid(Integer ctid) {
+        this.ctid = ctid;
     }
 
     public Integer getCid() {
@@ -39,5 +51,13 @@ public class ClazzTeacher {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public Integer getCourseschedule() {
+        return courseschedule;
+    }
+
+    public void setCourseschedule(Integer courseschedule) {
+        this.courseschedule = courseschedule;
     }
 }

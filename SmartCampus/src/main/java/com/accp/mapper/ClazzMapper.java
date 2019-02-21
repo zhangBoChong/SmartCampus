@@ -3,10 +3,15 @@ package com.accp.mapper;
 import com.accp.domain.Clazz;
 import com.accp.domain.ClazzExample;
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+@Mapper
 public interface ClazzMapper {
-	Clazz queryBycid(Integer cid);
+	List<Clazz> queryClazzs();
+	List<Clazz> queryAllclazz();
+	List<Clazz> queryBybid(Integer bid);
+	Clazz selectBycid(Integer cid);
     long countByExample(ClazzExample example);
 
     int deleteByExample(ClazzExample example);

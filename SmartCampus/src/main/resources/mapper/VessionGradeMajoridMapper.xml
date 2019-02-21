@@ -6,6 +6,9 @@
     <result column="bid" jdbcType="INTEGER" property="bid" />
     <result column="majorId" jdbcType="INTEGER" property="majorid" />
   </resultMap>
+  <select id="queryVessionGradeMajoridByBid" resultMap="BaseResultMap">
+  	SELECT * FROM `vession_grade_majorid` WHERE bid=#{bid}
+  </select>
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">

@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 @Mapper
 public interface StaffMapper {
-	Staff queryBytid(Integer tid);
+	Staff selectBytid(Integer tid);
     long countByExample(StaffExample example);
 
     int deleteByExample(StaffExample example);

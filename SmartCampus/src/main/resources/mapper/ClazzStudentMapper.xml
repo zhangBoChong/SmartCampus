@@ -8,6 +8,18 @@
     <result column="status" jdbcType="INTEGER" property="status" />
     <result column="clazzPositionId" jdbcType="INTEGER" property="clazzpositionid" />
   </resultMap>
+  <select id="countstu"  resultType="Integer">
+  	select count(*) from clazz_student where cid=#{cid}
+  </select>
+  <select id="queryByClzStucid" resultMap="BaseResultMap">
+  	select * from clazz_student where cid=#{cid}
+  </select>
+  <update id="updateclazzStudent">
+  	update clazz_student set clazzPositionId=#{clazzpositionid} where sid=#{sid} and cid=#{cid}
+  </update>
+  <insert id="insertclazzStudentinfos">
+  	insert into clazz_student(cid,sid,status,clazzPositionId)values(#{cid},#{sid},1,0)
+  </insert>
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">

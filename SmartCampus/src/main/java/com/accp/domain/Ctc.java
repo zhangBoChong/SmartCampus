@@ -12,27 +12,8 @@ public class Ctc {
     private Integer tid;
 
     private Integer courseschedule;
-    private Staff staff;
-    private Clazz clazz;
-    
 
-    public Clazz getClazz() {
-		return clazz;
-	}
-
-	public void setClazz(Clazz clazz) {
-		this.clazz = clazz;
-	}
-
-	public Staff getStaff() {
-		return staff;
-	}
-
-	public void setStaff(Staff staff) {
-		this.staff = staff;
-	}
-
-	public Integer getCcid() {
+    public Integer getCcid() {
         return ccid;
     }
 

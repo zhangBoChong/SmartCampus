@@ -3,16 +3,20 @@ package com.accp.mapper;
 import com.accp.domain.Course;
 import com.accp.domain.CourseExample;
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+@Mapper
 public interface CourseMapper {
+	Course selectBycourseid(Integer courseid);
+    int insertCourse(Course record);
     long countByExample(CourseExample example);
 
     int deleteByExample(CourseExample example);
 
     int deleteByPrimaryKey(Integer courseid);
 
-    int insert(Course record);
+
 
     int insertSelective(Course record);
 

@@ -4,9 +4,39 @@
   <resultMap id="BaseResultMap" type="com.accp.domain.ClazzSchedule">
     <id column="csId" jdbcType="INTEGER" property="csid" />
     <result column="dateTime" jdbcType="DATE" property="datetime" />
-    <result column="ccid" jdbcType="INTEGER" property="ccid" />
+    <result column="cid" jdbcType="INTEGER" property="cid" />
     <result column="classroomId" jdbcType="INTEGER" property="classroomid" />
+    <result column="apm" jdbcType="INTEGER" property="apm" />
+    <result column="scheduleid" jdbcType="INTEGER" property="scheduleid" />
+    <result column="status" jdbcType="INTEGER" property="status"/>
   </resultMap>
+  <select id="selectByClazzSchedulecid" resultMap="BaseResultMap">
+  	SELECT * FROM `clazz_schedule` WHERE cid=(SELECT cid FROM clazz WHERE bid=#{bid} LIMIT 1) ORDER BY `dateTime` DESC LIMIT 1
+  </select>
+  <select id="queryBycids" resultMap="BaseResultMap">
+  	SELECT * FROM `clazz_schedule` WHERE cid=#{cid} AND STATUS=1 AND apm=0 ORDER BY DATETIME DESC LIMIT 7
+  </select>
+  <insert id="insertClazzSchedule">
+  	insert into clazz_schedule (dateTime,cid,apm) values
+	<foreach collection="list" item="l" separator=",">
+		(#{l.datetime},#{l.cid},#{l.apm})
+	</foreach>
+  </insert>  
+  <update id="updateStatus">
+  	UPDATE `clazz_schedule` SET STATUS=1  WHERE cid=#{cid} AND DATETIME&gt;=#{datetime1} AND DATETIME&lt;=#{datetime2}
+  </update>
+  <update id="updateClazzSchedule">
+  	UPDATE `clazz_schedule` SET scheduleId=#{scheduleid} WHERE cid=#{cid} AND apm=#{apm} AND DATETIME=#{datetime}
+  </update>
+  <update id="updateClassroomId">
+  	update clazz_schedule set classroomId=#{classroomid} where cid=#{cid} and apm=#{apm} and DATETIME=#{datetime}
+  </update>
+  <select id="queryClazzSchedule" resultMap="BaseResultMap">
+  	SELECT * FROM `clazz_schedule` WHERE cid=#{cid} AND DATETIME&gt;=#{datetime1} AND DATETIME&lt;=#{datetime2} and status=0
+  </select>
+  <select id="queryClazzSchedule1" resultMap="BaseResultMap">
+  	SELECT * FROM `clazz_schedule` WHERE cid=#{cid} AND DATETIME&gt;=#{datetime1} AND DATETIME&lt;=#{datetime2} and status=1
+  </select>
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">

@@ -10,8 +10,28 @@ public class ClazzStudent {
     private Integer status;
 
     private Integer clazzpositionid;
+    
+    private String clazzPositionName;
+    private Studentinfo stu;
+    
+    
+    public Studentinfo getStu() {
+		return stu;
+	}
 
-    public Integer getCzid() {
+	public void setStu(Studentinfo stu) {
+		this.stu = stu;
+	}
+
+	public String getClazzPositionName() {
+		return clazzPositionName;
+	}
+
+	public void setClazzPositionName(String clazzPositionName) {
+		this.clazzPositionName = clazzPositionName;
+	}
+
+	public Integer getCzid() {
         return czid;
     }
 

@@ -6,7 +6,7 @@ public class Course {
     private String coursename;
 
     private Integer coursetime;
-    
+
     public Integer getCourseid() {
         return courseid;
     }

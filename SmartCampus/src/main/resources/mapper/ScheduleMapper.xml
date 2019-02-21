@@ -6,10 +6,24 @@
     <result column="cid" jdbcType="INTEGER" property="cid" />
     <result column="datestart" jdbcType="DATE" property="datestart" />
     <result column="dateend" jdbcType="DATE" property="dateend" />
-    <result column="tid" jdbcType="INTEGER" property="tid" />
+    <result column="tname" jdbcType="VARCHAR" property="tname" />
     <result column="title" jdbcType="VARCHAR" property="title" />
     <result column="outline" jdbcType="VARCHAR" property="outline" />
+    <result column="startqj" jdbcType="INTEGER" property="startqj" />
+    <result column="endqj" jdbcType="INTEGER" property="endqj" />
   </resultMap>
+  <select id="queryByScheduleid" resultMap="BaseResultMap">
+  	select * from schedule where scheduleId=#{scheduleid}
+  </select>
+  <select id="queryByTime" resultMap="BaseResultMap">
+  	SELECT * FROM schedule WHERE datestart &gt;= #{datestart} AND dateend &lt;= #{dateend} AND cid=#{cid}
+  </select>
+  <insert id="insertSchedule">
+  	insert into schedule (cid,datestart,dateend,tname,title,outline,startqj,endqj) values
+	<foreach collection="list" item="l" separator=",">
+		(#{l.cid},#{l.datestart},#{l.dateend},#{l.tname},#{l.title},#{l.outline},#{l.startqj},#{l.endqj})
+	</foreach>
+  </insert>
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -69,7 +83,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    scheduleId, cid, datestart, dateend, tid, title, outline
+    scheduleId, cid, datestart, dateend, tname, title, outline
   </sql>
   <select id="selectByExample" parameterType="com.accp.domain.ScheduleExample" resultMap="BaseResultMap">
     select

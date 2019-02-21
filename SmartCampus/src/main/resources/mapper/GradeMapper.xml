@@ -5,6 +5,10 @@
     <id column="gid" jdbcType="INTEGER" property="gid" />
     <result column="gname" jdbcType="VARCHAR" property="gname" />
   </resultMap>
+  <insert id="insertGrade" keyProperty="gid" useGeneratedKeys="true" parameterType="com.accp.domain.Grade">
+  	insert into grade (gid, gname)
+    values (#{gid,jdbcType=INTEGER}, #{gname,jdbcType=VARCHAR})
+  </insert>
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -80,7 +84,7 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="queryByGid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectBygid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from grade

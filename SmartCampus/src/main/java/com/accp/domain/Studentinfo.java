@@ -23,7 +23,19 @@ public class Studentinfo {
 
     private String headimg;
 
-    public Integer getSid() {
+    private Integer age;
+    private Integer choice;
+    
+
+    public Integer getChoice() {
+		return choice;
+	}
+
+	public void setChoice(Integer choice) {
+		this.choice = choice;
+	}
+
+	public Integer getSid() {
         return sid;
     }
 
@@ -109,5 +121,13 @@ public class Studentinfo {
 
     public void setHeadimg(String headimg) {
         this.headimg = headimg;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
     }
 }

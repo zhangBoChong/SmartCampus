@@ -9,6 +9,21 @@
     <result column="type" jdbcType="INTEGER" property="type" />
     <result column="accommodate" jdbcType="INTEGER" property="accommodate" />
   </resultMap>
+  <select id="queryByroom" resultMap="BaseResultMap">
+  	select * from classroom where type=1 and status=0 limit 1
+  </select>
+  <select id="queryByroom1" resultMap="BaseResultMap">
+  	select * from classroom where type!=1 and status=0 limit 1
+  </select>
+  <select id="queryByRoomId" resultMap="BaseResultMap">
+  	select * from classroom where classroomId=#{classroomid}
+  </select>
+  <update id="updateRoom">
+  	update classroom set status=1 where classroomId=#{classroomid}
+  </update>
+  <update id="updateRooms">
+  	update classroom set status=0
+  </update>
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">

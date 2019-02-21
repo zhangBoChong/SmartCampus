@@ -80,5 +80,113 @@
 		<table schema="Vession_grade_majorid_course" tableName="vession_grade_majorid_course">
 
 		</table>
+		<table schema="Affiche" tableName="affiche">
+
+		</table>	
+		<table schema="Appendix" tableName="appendix">
+
+		</table>
+		<table schema="Attence" tableName="attence">
+
+		</table>	
+		<table schema="Authority" tableName="authority">
+
+		</table>
+		<table schema="Authority_middle" tableName="authority_middle">
+
+		</table>
+		<table schema="Clazz_student" tableName="clazz_student">
+
+		</table>
+		<table schema="Clazzposition" tableName="clazzposition">
+
+		</table>
+		<table schema="Character" tableName="character">
+
+		</table>
+		<table schema="Dccharacter" tableName="dccharacter">
+
+		</table>
+		<table schema="Examination" tableName="examination">
+
+		</table>
+		<table schema="Examination_fb" tableName="examination_fb">
+
+		</table>
+		<table schema="Examination_lx" tableName="examination_lx">
+
+		</table>
+		<table schema="Examination_tm" tableName="examination_tm">
+
+		</table>
+		<table schema="Havetask" tableName="havetask">
+
+		</table>
+		<table schema="Img" tableName="img">
+
+		</table>
+		<table schema="Img_children" tableName="img_children">
+
+		</table>
+		<table schema="Information" tableName="information">
+
+		</table>
+		<table schema="Interview" tableName="interview">
+
+		</table>
+		<table schema="Leave" tableName="leave">
+
+		</table>
+		<table schema="Login" tableName="login">
+
+		</table>
+		<table schema="Module" tableName="module">
+
+		</table>
+		<table schema="Module_middle" tableName="module_middle">
+
+		</table>
+		<table schema="Option" tableName="option">
+
+		</table>
+		<table schema="Parents" tableName="parents">
+
+		</table>
+		<table schema="Questionnaire" tableName="questionnaire">
+
+		</table>
+		<table schema="Questionnaire_middle" tableName="questionnaire_middle">
+
+		</table>
+		<table schema="Questionnaire_topic" tableName="questionnaire_topic">
+
+		</table>
+		<table schema="Relation" tableName="relation">
+
+		</table>
+		<table schema="Task" tableName="task">
+
+		</table>
+		<table schema="Task_fb" tableName="task_fb">
+
+		</table>
+		<table schema="Task_lx" tableName="task_lx">
+
+		</table>
+		<table schema="Task_middle" tableName="task_middle">
+
+		</table>
+		<table schema="Task_stage" tableName="task_stage">
+
+		</table>
+		<table schema="Task_tm" tableName="task_tm">
+
+		</table>
+		<table schema="Topic" tableName="topic">
+
+		</table>
+		<table schema="Topic_lx" tableName="topic_lx">
+
+		</table>
 	</context>
 </generatorConfiguration>

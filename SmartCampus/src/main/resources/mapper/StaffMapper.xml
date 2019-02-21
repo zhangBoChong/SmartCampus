@@ -10,8 +10,8 @@
     <result column="characterId" jdbcType="INTEGER" property="characterid" />
     <result column="headImg" jdbcType="VARCHAR" property="headimg" />
     <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="choice" jdbcType="INTEGER" property="choice" />   
   </resultMap>
- 
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -71,7 +71,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    tid, sex, tname, roleId, postId, characterId, headImg, status
+    tid, sex, tname, roleId, postId, characterId, headImg, status,choice
   </sql>
   <select id="selectByExample" parameterType="com.accp.domain.StaffExample" resultMap="BaseResultMap">
     select
@@ -87,7 +87,7 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="queryBytid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectBytid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from staff

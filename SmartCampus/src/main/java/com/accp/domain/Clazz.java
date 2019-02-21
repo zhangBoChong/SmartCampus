@@ -11,13 +11,52 @@ public class Clazz {
 
     private Integer tid;
 
-    private Date starttime;
+    private String starttime;
 
     private Integer status;
 
     private Integer majorid;
+    
+    private Staff staff;
+    private String gname;//年级名称
+    private String tname;//任课教员
+    private Integer count;//班级人数
+     
+    
 
-    public Integer getCid() {
+    public String getGname() {
+		return gname;
+	}
+
+	public void setGname(String gname) {
+		this.gname = gname;
+	}
+
+	public String getTname() {
+		return tname;
+	}
+
+	public void setTname(String tname) {
+		this.tname = tname;
+	}
+
+	public Integer getCount() {
+		return count;
+	}
+
+	public void setCount(Integer count) {
+		this.count = count;
+	}
+
+	public Staff getStaff() {
+		return staff;
+	}
+
+	public void setStaff(Staff staff) {
+		this.staff = staff;
+	}
+
+	public Integer getCid() {
         return cid;
     }
 
@@ -49,11 +88,11 @@ public class Clazz {
         this.tid = tid;
     }
 
-    public Date getStarttime() {
+    public String getStarttime() {
         return starttime;
     }
 
-    public void setStarttime(Date starttime) {
+    public void setStarttime(String starttime) {
         this.starttime = starttime;
     }
 

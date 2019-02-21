@@ -81,7 +81,7 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectBycourseid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from course
@@ -97,7 +97,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.accp.domain.Course">
+  <insert id="insertCourse" parameterType="com.accp.domain.Course" keyProperty="courseid" useGeneratedKeys="true">
     insert into course (courseId, courseName, courseTime
       )
     values (#{courseid,jdbcType=INTEGER}, #{coursename,jdbcType=VARCHAR}, #{coursetime,jdbcType=INTEGER}

@@ -164,63 +164,63 @@ public class ClazzTeacherExample {
             return (Criteria) this;
         }
 
-        public Criteria andTidIsNull() {
-            addCriterion("tid is null");
+        public Criteria andCtidIsNull() {
+            addCriterion("ctid is null");
             return (Criteria) this;
         }
 
-        public Criteria andTidIsNotNull() {
-            addCriterion("tid is not null");
+        public Criteria andCtidIsNotNull() {
+            addCriterion("ctid is not null");
             return (Criteria) this;
         }
 
-        public Criteria andTidEqualTo(Integer value) {
-            addCriterion("tid =", value, "tid");
+        public Criteria andCtidEqualTo(Integer value) {
+            addCriterion("ctid =", value, "ctid");
             return (Criteria) this;
         }
 
-        public Criteria andTidNotEqualTo(Integer value) {
-            addCriterion("tid <>", value, "tid");
+        public Criteria andCtidNotEqualTo(Integer value) {
+            addCriterion("ctid <>", value, "ctid");
             return (Criteria) this;
         }
 
-        public Criteria andTidGreaterThan(Integer value) {
-            addCriterion("tid >", value, "tid");
+        public Criteria andCtidGreaterThan(Integer value) {
+            addCriterion("ctid >", value, "ctid");
             return (Criteria) this;
         }
 
-        public Criteria andTidGreaterThanOrEqualTo(Integer value) {
-            addCriterion("tid >=", value, "tid");
+        public Criteria andCtidGreaterThanOrEqualTo(Integer value) {
+            addCriterion("ctid >=", value, "ctid");
             return (Criteria) this;
         }
 
-        public Criteria andTidLessThan(Integer value) {
-            addCriterion("tid <", value, "tid");
+        public Criteria andCtidLessThan(Integer value) {
+            addCriterion("ctid <", value, "ctid");
             return (Criteria) this;
         }
 
-        public Criteria andTidLessThanOrEqualTo(Integer value) {
-            addCriterion("tid <=", value, "tid");
+        public Criteria andCtidLessThanOrEqualTo(Integer value) {
+            addCriterion("ctid <=", value, "ctid");
             return (Criteria) this;
         }
 
-        public Criteria andTidIn(List<Integer> values) {
-            addCriterion("tid in", values, "tid");
+        public Criteria andCtidIn(List<Integer> values) {
+            addCriterion("ctid in", values, "ctid");
             return (Criteria) this;
         }
 
-        public Criteria andTidNotIn(List<Integer> values) {
-            addCriterion("tid not in", values, "tid");
+        public Criteria andCtidNotIn(List<Integer> values) {
+            addCriterion("ctid not in", values, "ctid");
             return (Criteria) this;
         }
 
-        public Criteria andTidBetween(Integer value1, Integer value2) {
-            addCriterion("tid between", value1, value2, "tid");
+        public Criteria andCtidBetween(Integer value1, Integer value2) {
+            addCriterion("ctid between", value1, value2, "ctid");
             return (Criteria) this;
         }
 
-        public Criteria andTidNotBetween(Integer value1, Integer value2) {
-            addCriterion("tid not between", value1, value2, "tid");
+        public Criteria andCtidNotBetween(Integer value1, Integer value2) {
+            addCriterion("ctid not between", value1, value2, "ctid");
             return (Criteria) this;
         }
 
@@ -341,6 +341,66 @@ public class ClazzTeacherExample {
 
         public Criteria andStatusNotBetween(Integer value1, Integer value2) {
             addCriterion("status not between", value1, value2, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoursescheduleIsNull() {
+            addCriterion("courseSchedule is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoursescheduleIsNotNull() {
+            addCriterion("courseSchedule is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoursescheduleEqualTo(Integer value) {
+            addCriterion("courseSchedule =", value, "courseschedule");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoursescheduleNotEqualTo(Integer value) {
+            addCriterion("courseSchedule <>", value, "courseschedule");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoursescheduleGreaterThan(Integer value) {
+            addCriterion("courseSchedule >", value, "courseschedule");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoursescheduleGreaterThanOrEqualTo(Integer value) {
+            addCriterion("courseSchedule >=", value, "courseschedule");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoursescheduleLessThan(Integer value) {
+            addCriterion("courseSchedule <", value, "courseschedule");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoursescheduleLessThanOrEqualTo(Integer value) {
+            addCriterion("courseSchedule <=", value, "courseschedule");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoursescheduleIn(List<Integer> values) {
+            addCriterion("courseSchedule in", values, "courseschedule");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoursescheduleNotIn(List<Integer> values) {
+            addCriterion("courseSchedule not in", values, "courseschedule");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoursescheduleBetween(Integer value1, Integer value2) {
+            addCriterion("courseSchedule between", value1, value2, "courseschedule");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoursescheduleNotBetween(Integer value1, Integer value2) {
+            addCriterion("courseSchedule not between", value1, value2, "courseschedule");
             return (Criteria) this;
         }
     }

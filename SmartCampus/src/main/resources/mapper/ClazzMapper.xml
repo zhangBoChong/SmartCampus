@@ -10,6 +10,15 @@
     <result column="status" jdbcType="INTEGER" property="status" />
     <result column="majorId" jdbcType="INTEGER" property="majorid" />
   </resultMap>
+  <select id="queryBybid" resultMap="BaseResultMap">
+  	select * from clazz where bid=#{bid}
+  </select>
+  <select id="queryAllclazz" resultMap="BaseResultMap">
+  	select * from clazz where status=0
+  </select>
+  <select id="queryClazzs" resultMap="BaseResultMap">
+  	select * from clazz 
+  </select>
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -85,7 +94,7 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectBycid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from clazz

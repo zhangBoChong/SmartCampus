@@ -16,9 +16,18 @@ public class Staff {
     private String headimg;
 
     private Integer status;
+    private Integer choice;
     
 
-    public Integer getTid() {
+    public Integer getChoice() {
+		return choice;
+	}
+
+	public void setChoice(Integer choice) {
+		this.choice = choice;
+	}
+
+	public Integer getTid() {
         return tid;
     }
 

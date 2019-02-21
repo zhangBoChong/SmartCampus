@@ -3,9 +3,13 @@ package com.accp.mapper;
 import com.accp.domain.Clazzposition;
 import com.accp.domain.ClazzpositionExample;
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+@Mapper
 public interface ClazzpositionMapper {
+	List<Clazzposition> queryAllclazzpositions();
+	Clazzposition queryBypositionid(Integer positionid);
     long countByExample(ClazzpositionExample example);
 
     int deleteByExample(ClazzpositionExample example);

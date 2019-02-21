@@ -3,9 +3,14 @@ package com.accp.mapper;
 import com.accp.domain.Schedule;
 import com.accp.domain.ScheduleExample;
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+@Mapper
 public interface ScheduleMapper {
+	Schedule queryByScheduleid(Integer scheduleid);
+	List<Schedule> queryByTime(Schedule record);
+	int insertSchedule(List<Schedule> list);
     long countByExample(ScheduleExample example);
 
     int deleteByExample(ScheduleExample example);
