@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=emulateIE7" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="css/style.css" />
+<link rel="stylesheet" type="text/css" href="css/WdatePicker.css" />
+<link rel="stylesheet" type="text/css" href="css/skin_/table.css" />
+<link rel="stylesheet" type="text/css" href="css/jquery.grid.css" />
+<title>添加年级</title>
+<style type="text/css">
+	.search-box div{
+		margin-left: 1rem;
+	}
+	.search-button:nth-child(2) input{
+		background: #FF7200;
+	}
+	.iselect-wrapper {
+	    position: relative;
+	    width: 80px;
+	    height: 28px;
+	    padding: 0 20px 0 5px;
+	    line-height: 28px;
+	    border-width: 1px;
+	    border-style: solid;
+	    border-left-color: #c5c5c5;
+	    border-top-color: #c5c5c5;
+	    border-right-color: #e0e0e0;
+	    border-bottom-color: #e0e0e0;
+	    background: url(../img/skin_/select_normal.png) no-repeat right center #fff;
+	    margin-top: 0.3rem;
+	}
+	.CK{
+		position: relative;
+	    width: 12.4rem;	
+	    height: 28px;
+	    padding: 0 20px 0 5px;
+	    line-height: 28px;
+	    border-width: 1px;
+	    border-style: solid;
+	    border-left-color: #c5c5c5;
+	    border-top-color: #c5c5c5;
+	    border-right-color: #e0e0e0;
+	    border-bottom-color: #e0e0e0;
+	   
+	    margin-top: 0.3rem;
+	}
+	.opt select{
+		position: relative;
+	    width: 107px;
+	    height: 28px;
+	    top:0.35rem;
+	}
+	.opt input{
+		width: 5rem;
+		height: 1.9rem;
+		margin-top: 0.3rem;
+		background: #url(../img/skin_/formbtnbg.png);
+	}
+	.tab table tr{
+		height: 2.5rem;
+	}
+	.tab table tr td{
+		border: 0.5px solid #CFCFCF;		
+		width: 12rem;
+		text-align: center;
+	}
+	.tab table tr td:last-child{
+		width: 21rem;
+	}
+	
+	.tab table{
+		font-size: 0.8rem;	
+		margin-left: -0.6rem;
+		width: 105.7rem;	
+	}
+	.teacher tr{
+		display: none;
+	}
+	#addKC{
+		width: 54rem;	
+		border: 3px groove #3EAADD;
+		background: #F5F5F5;
+		z-index: 2;
+		position: absolute;
+		left: 20rem;
+		top:8rem;
+		display: none;
+	    padding-left: 7.5rem;
+	    padding-top: 0.5rem;
+	}
+	#addKC h1{
+		font-family: "楷体";
+		font-size: 2rem;
+		margin-left: 18rem;
+	}
+	#addKC p{
+		display: flex;		
+	}
+	
+	#addKC p select{
+		position: absolute;
+	    width: 227px;
+	    height: 28px;
+	}
+	#addKC p span{
+		margin-top: 0.5rem;
+	}
+	#addKC .iselect-wrapper {
+	    width: 200px;
+	}
+	.tables tr{
+		border-bottom: 1px solid gray;
+	}
+	.tables tr:last-child{
+		
+	}
+	.tables tr td{
+		width: 10rem;
+		text-align: center;
+		border-left: 1px solid gray;
+		border-right: 1px solid gray;
+	}
+	.tables tr td:first-child {
+		border:none;
+	}
+	.tables tr td:last-child {
+		border:none;
+		width: 21.1rem
+	}
+	.tables{
+		font-size: 1rem;
+		font-family: cursive;
+	}
+	td{
+	border:1px solid black;
+	text-align: center;
+	width: 8rem;
+	height: 4rem;
+	}
+	table{
+		margin-left: 0.5rem;
+	}
+</style>
+</head>
+<body>
+	<div class="table" id="container">
+   		<div class="opt ue-clear" style="display: flex;line-height: 2.5rem;">
+       		班级:	
+			<select id="clazz">
+				<option v-for="(item,index) in clazzs" v-bind:value="item.cid">{{item.cname}}</option>
+			</select>
+			<input type="button" id="sure" value="确定" style="height: 2rem"/>		
+			<span>日期:</span>
+	        <input v-for="(item,index) in datetime" v-if="index==6" v-bind:value="item.datetime" type="date" style="width: 8rem;height: 26px" name="" id="xzstart"/>--
+	        <input v-for="(item,index) in datetime" v-if="index==0" v-bind:value="item.datetime" type="date" style="width: 8rem;height: 26px" name="" id="xzend"/>
+	        <input type="button" id="cha" value="查询" style="height: 2rem"/>
+        </div>
+        <table>	     
+       		<tr class="opt" v-if="zhou==1">
+       			<td>节次</td>
+       			<td>周一</td>
+       			<td>周二</td>
+       			<td>周三</td>
+       			<td>周四</td>
+       			<td>周五</td>
+       			<td>周六</td>
+       			<td>周日</td>
+       		</tr>
+       		<tr class="opt" v-if="zhou==2">
+       			<td>节次</td>
+       			<td>周二</td>
+       			<td>周三</td>
+       			<td>周四</td>
+       			<td>周五</td>
+       			<td>周六</td>
+       			<td>周日</td>
+       			<td>周一</td>
+       		</tr>
+       		<tr class="opt" v-if="zhou==3">
+       			<td>节次</td>                			
+       			<td>周三</td>
+       			<td>周四</td>
+       			<td>周五</td>
+       			<td>周六</td>
+       			<td>周日</td>
+       			<td>周一</td>
+       			<td>周二</td>
+       		</tr>
+       		<tr class="opt" v-if="zhou==4">
+       			<td>节次</td>
+       			<td>周四</td>
+       			<td>周五</td>
+       			<td>周六</td>
+       			<td>周日</td>
+       			<td>周一</td>
+   			    <td>周二</td>
+       			<td>周三</td>
+       		</tr>
+       		<tr class="opt" v-if="zhou==5">
+       			<td>节次</td>
+       			<td>周五</td>
+       			<td>周六</td>
+       			<td>周日</td>
+       			<td>周一</td>
+       			<td>周二</td>
+       			<td>周三</td>
+       			<td>周四</td>
+       		</tr>
+       		<tr class="opt" v-if="zhou==6">
+       			<td>节次</td>
+       			<td>周六</td>
+       			<td>周日</td>
+       			<td>周一</td>
+       			<td>周二</td>
+       			<td>周三</td>
+       			<td>周四</td>
+       			<td>周五</td>
+       		</tr>
+       		<tr class="opt" v-if="zhou==7">
+       			<td>节次</td>
+       			<td>周日</td>
+       			<td>周一</td>
+       			<td>周二</td>
+       			<td>周三</td>
+       			<td>周四</td>
+       			<td>周五</td>
+       			<td>周六</td>
+       		</tr>
+       		<tr>
+       			<td v-for="(item,index) in apm" v-if="index==0">上午</td>
+       			<td v-for="(item,index) in apm" v-if="index==0 && item.scheduleid!=0" style="background:#86DB49">日程安排:{{item.schedule.title}}</td>
+       			<td v-for="(item,index) in apm" v-if="index==0 && item.scheduleid==0" style="background:orange;"><p>教室:{{item.classroomname}}</p><p>教员:{{item.tname}}</p><p>课程名称:{{item.coursename}}</p></td>
+       			<td v-for="(item,index) in apm" v-if="index==2 && item.scheduleid!=0" style="background: #86DB49">日程安排:{{item.schedule.title}}</td>
+       			<td v-for="(item,index) in apm" v-if="index==2 && item.scheduleid==0" style="background:orange;"><p>教室:{{item.classroomname}}</p><p>教员:{{item.tname}}</p><p>课程名称:{{item.coursename}}</p></td>
+       			<td v-for="(item,index) in apm" v-if="index==4 && item.scheduleid!=0" style="background: #86DB49">日程安排:{{item.schedule.title}}</td>
+       			<td v-for="(item,index) in apm" v-if="index==4 && item.scheduleid==0" style="background:orange"><p>教室:{{item.classroomname}}</p><p>教员:{{item.tname}}</p><p>课程名称:{{item.coursename}}</p></td>	                			
+       			<td v-for="(item,index) in apm" v-if="index==6 && item.scheduleid!=0" style="background: #86DB49">日程安排:{{item.schedule.title}}</td>
+       			<td v-for="(item,index) in apm" v-if="index==6 && item.scheduleid==0" style="background:orange"><p>教室:{{item.classroomname}}</p><p>教员:{{item.tname}}</p><p>课程名称:{{item.coursename}}</p></td>
+       			<td v-for="(item,index) in apm" v-if="index==8 && item.scheduleid!=0" style="background: #86DB49">日程安排:{{item.schedule.title}}</td>
+       			<td v-for="(item,index) in apm" v-if="index==8 && item.scheduleid==0" style="background:orange"><p>教室:{{item.classroomname}}</p><p>教员:{{item.tname}}</p><p>课程名称:{{item.coursename}}</p></td>
+       			<td v-for="(item,index) in apm" v-if="index==10 && item.scheduleid!=0" style="background: #86DB49">日程安排:{{item.schedule.title}}</td>
+       			<td v-for="(item,index) in apm" v-if="index==10 && item.scheduleid==0" style="background:orange"><p>教室:{{item.classroomname}}</p><p>教员:{{item.tname}}</p><p>课程名称:{{item.coursename}}</p></td>
+       			<td v-for="(item,index) in apm" v-if="index==12 && item.scheduleid!=0" style="background: #86DB49">日程安排:{{item.schedule.title}}</td>
+       			<td v-for="(item,index) in apm" v-if="index==12 && item.scheduleid==0" style="background:orange"><p>教室:{{item.classroomname}}</p><p>教员:{{item.tname}}</p><p>课程名称:{{item.coursename}}</p></td>
+       		</tr>	               		
+       		<tr>
+       			<td v-for="(item,index) in apm" v-if="index==1">下午</td>       	                		
+       			<td v-for="(item,index) in apm" v-if="index==1 && item.scheduleid!=0" style="background:#86DB49">日程安排:{{item.schedule.title}}</td>
+       			<td v-for="(item,index) in apm" v-if="index==1 && item.scheduleid==0" style="background:orange">自习教室:{{item.classroomname}}</td>
+       			<td v-for="(item,index) in apm" v-if="index==3 && item.scheduleid!=0" style="background:#86DB49">日程安排:{{item.schedule.title}}</td>
+       			<td v-for="(item,index) in apm" v-if="index==3 && item.scheduleid==0" style="background:orange">自习教室:{{item.classroomname}}</td>
+       			<td v-for="(item,index) in apm" v-if="index==5 && item.scheduleid!=0" style="background:#86DB49">日程安排:{{item.schedule.title}}</td>
+       			<td v-for="(item,index) in apm" v-if="index==5 && item.scheduleid==0" style="background:orange">自习教室:{{item.classroomname}}</td>
+       			<td v-for="(item,index) in apm" v-if="index==7 && item.scheduleid!=0" style="background:#86DB49">日程安排:{{item.schedule.title}}</td>
+       			<td v-for="(item,index) in apm" v-if="index==7 && item.scheduleid==0" style="background:orange">自习教室:{{item.classroomname}}</td>
+       			<td v-for="(item,index) in apm" v-if="index==9 && item.scheduleid!=0" style="background:#86DB49">日程安排:{{item.schedule.title}}</td>
+       			<td v-for="(item,index) in apm" v-if="index==9 && item.scheduleid==0" style="background:orange">自习教室:{{item.classroomname}}</td>
+       			<td v-for="(item,index) in apm" v-if="index==11 && item.scheduleid!=0" style="background:#86DB49">日程安排:{{item.schedule.title}}</td>
+       			<td v-for="(item,index) in apm" v-if="index==11 && item.scheduleid==0" style="background:orange">自习教室:{{item.classroomname}}</td>
+       			<td v-for="(item,index) in apm" v-if="index==13 && item.scheduleid!=0" style="background:#86DB49">日程安排:{{item.schedule.title}}</td>
+       			<td v-for="(item,index) in apm" v-if="index==13 && item.scheduleid==0" style="background:orange">自习教室:{{item.classroomname}}</td>
+       		</tr> 
+		</table> 
+    </div>
+
+</body>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/global.js"></script>
+<script type="text/javascript" src="js/jquery.select.js"></script>
+<script type="text/javascript" src="js/core.js"></script>
+<script type="text/javascript" src="js/jquery.pagination.js"></script>
+<script type="text/javascript" src="js/jquery.grid.js"></script>
+<script type="text/javascript" src="js/WdatePicker.js"></script>
+<script type="text/javascript" src="js/vue.js"></script>
+<script type="text/javascript">
+	$(function(){
+		var v=new Vue({
+			el:"#container",
+			data:{
+				clazzs:null,
+				datetime:null,
+				zhou:0,
+				apm:null
+			}
+		});
+		
+		 $.ajax({
+				url:'clazzStatus',
+				dataType:'json',
+				type:'post',
+				success:function(data){
+					v.clazzs=data;
+		    	}
+			});
+		 $("#sure").click(function(){			 
+			 var cid=$("#clazz").val();
+			 $.ajax({
+					url:'clazzTime',
+					dataType:'json',
+					data:'cid='+cid,
+					type:'post',
+					success:function(data){
+						v.datetime=data;
+			    	}
+				});
+		 });
+		 $("#cha").click(function(){
+			datestart=$("#xzstart").val();
+			dateend=$("#xzend").val();
+			var cid=$("#clazz").val();
+			var date = new Date(datestart);
+	        var weeknum = date.getDay();     //返回一周的某一天数字。（0-6）
+	        if (weeknum == 0) {
+	          weeknum = 7;
+	        }
+	        v.zhou=weeknum;
+	        $.ajax({
+		    	url:'queryClazzSchedule1',
+				dataType:'json',
+				data:'datetime1='+datestart+'&datetime2='+dateend+'&cid='+cid,
+				type:'post',
+				success:function(data){
+					v.apm=data;
+				}
+		    });
+		 });
+		    
+		
+	})
+</script>
+</html>

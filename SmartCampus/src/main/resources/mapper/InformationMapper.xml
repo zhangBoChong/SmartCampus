@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.accp.mapper.InformationMapper">
+  <resultMap id="BaseResultMap" type="com.accp.domain.Information">
+    <id column="information_id" jdbcType="INTEGER" property="informationId" />
+    <result column="u_id" jdbcType="INTEGER" property="uId" />
+    <result column="information_content" jdbcType="VARCHAR" property="informationContent" />
+    <result column="information_sendee" jdbcType="INTEGER" property="informationSendee" />
+    <result column="information_time" jdbcType="DATE" property="informationTime" />
+    <result column="img_id" jdbcType="INTEGER" property="imgId" />
+    <result column="information_fetch" jdbcType="INTEGER" property="informationFetch" />
+    <result column="information_type" jdbcType="INTEGER" property="informationType" />
+    <result column="delete_id" jdbcType="INTEGER" property="deleteId" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    information_id, u_id, information_content, information_sendee, information_time, 
+    img_id, information_fetch, information_type, delete_id
+  </sql>
+  <select id="selectByExample" parameterType="com.accp.domain.InformationExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from information
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from information
+    where information_id = #{informationId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from information
+    where information_id = #{informationId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.accp.domain.InformationExample">
+    delete from information
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.accp.domain.Information">
+    insert into information (information_id, u_id, information_content, 
+      information_sendee, information_time, img_id, 
+      information_fetch, information_type, delete_id
+      )
+    values (#{informationId,jdbcType=INTEGER}, #{uId,jdbcType=INTEGER}, #{informationContent,jdbcType=VARCHAR}, 
+      #{informationSendee,jdbcType=INTEGER}, #{informationTime,jdbcType=DATE}, #{imgId,jdbcType=INTEGER}, 
+      #{informationFetch,jdbcType=INTEGER}, #{informationType,jdbcType=INTEGER}, #{deleteId,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.accp.domain.Information">
+    insert into information
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="informationId != null">
+        information_id,
+      </if>
+      <if test="uId != null">
+        u_id,
+      </if>
+      <if test="informationContent != null">
+        information_content,
+      </if>
+      <if test="informationSendee != null">
+        information_sendee,
+      </if>
+      <if test="informationTime != null">
+        information_time,
+      </if>
+      <if test="imgId != null">
+        img_id,
+      </if>
+      <if test="informationFetch != null">
+        information_fetch,
+      </if>
+      <if test="informationType != null">
+        information_type,
+      </if>
+      <if test="deleteId != null">
+        delete_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="informationId != null">
+        #{informationId,jdbcType=INTEGER},
+      </if>
+      <if test="uId != null">
+        #{uId,jdbcType=INTEGER},
+      </if>
+      <if test="informationContent != null">
+        #{informationContent,jdbcType=VARCHAR},
+      </if>
+      <if test="informationSendee != null">
+        #{informationSendee,jdbcType=INTEGER},
+      </if>
+      <if test="informationTime != null">
+        #{informationTime,jdbcType=DATE},
+      </if>
+      <if test="imgId != null">
+        #{imgId,jdbcType=INTEGER},
+      </if>
+      <if test="informationFetch != null">
+        #{informationFetch,jdbcType=INTEGER},
+      </if>
+      <if test="informationType != null">
+        #{informationType,jdbcType=INTEGER},
+      </if>
+      <if test="deleteId != null">
+        #{deleteId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.accp.domain.InformationExample" resultType="java.lang.Long">
+    select count(*) from information
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update information
+    <set>
+      <if test="record.informationId != null">
+        information_id = #{record.informationId,jdbcType=INTEGER},
+      </if>
+      <if test="record.uId != null">
+        u_id = #{record.uId,jdbcType=INTEGER},
+      </if>
+      <if test="record.informationContent != null">
+        information_content = #{record.informationContent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.informationSendee != null">
+        information_sendee = #{record.informationSendee,jdbcType=INTEGER},
+      </if>
+      <if test="record.informationTime != null">
+        information_time = #{record.informationTime,jdbcType=DATE},
+      </if>
+      <if test="record.imgId != null">
+        img_id = #{record.imgId,jdbcType=INTEGER},
+      </if>
+      <if test="record.informationFetch != null">
+        information_fetch = #{record.informationFetch,jdbcType=INTEGER},
+      </if>
+      <if test="record.informationType != null">
+        information_type = #{record.informationType,jdbcType=INTEGER},
+      </if>
+      <if test="record.deleteId != null">
+        delete_id = #{record.deleteId,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update information
+    set information_id = #{record.informationId,jdbcType=INTEGER},
+      u_id = #{record.uId,jdbcType=INTEGER},
+      information_content = #{record.informationContent,jdbcType=VARCHAR},
+      information_sendee = #{record.informationSendee,jdbcType=INTEGER},
+      information_time = #{record.informationTime,jdbcType=DATE},
+      img_id = #{record.imgId,jdbcType=INTEGER},
+      information_fetch = #{record.informationFetch,jdbcType=INTEGER},
+      information_type = #{record.informationType,jdbcType=INTEGER},
+      delete_id = #{record.deleteId,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.accp.domain.Information">
+    update information
+    <set>
+      <if test="uId != null">
+        u_id = #{uId,jdbcType=INTEGER},
+      </if>
+      <if test="informationContent != null">
+        information_content = #{informationContent,jdbcType=VARCHAR},
+      </if>
+      <if test="informationSendee != null">
+        information_sendee = #{informationSendee,jdbcType=INTEGER},
+      </if>
+      <if test="informationTime != null">
+        information_time = #{informationTime,jdbcType=DATE},
+      </if>
+      <if test="imgId != null">
+        img_id = #{imgId,jdbcType=INTEGER},
+      </if>
+      <if test="informationFetch != null">
+        information_fetch = #{informationFetch,jdbcType=INTEGER},
+      </if>
+      <if test="informationType != null">
+        information_type = #{informationType,jdbcType=INTEGER},
+      </if>
+      <if test="deleteId != null">
+        delete_id = #{deleteId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where information_id = #{informationId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.accp.domain.Information">
+    update information
+    set u_id = #{uId,jdbcType=INTEGER},
+      information_content = #{informationContent,jdbcType=VARCHAR},
+      information_sendee = #{informationSendee,jdbcType=INTEGER},
+      information_time = #{informationTime,jdbcType=DATE},
+      img_id = #{imgId,jdbcType=INTEGER},
+      information_fetch = #{informationFetch,jdbcType=INTEGER},
+      information_type = #{informationType,jdbcType=INTEGER},
+      delete_id = #{deleteId,jdbcType=INTEGER}
+    where information_id = #{informationId,jdbcType=INTEGER}
+  </update>
+</mapper>

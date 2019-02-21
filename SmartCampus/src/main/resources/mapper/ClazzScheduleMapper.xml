@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.accp.mapper.ClazzScheduleMapper">
+  <resultMap id="BaseResultMap" type="com.accp.domain.ClazzSchedule">
+    <id column="csId" jdbcType="INTEGER" property="csid" />
+    <result column="dateTime" jdbcType="DATE" property="datetime" />
+    <result column="cid" jdbcType="INTEGER" property="cid" />
+    <result column="classroomId" jdbcType="INTEGER" property="classroomid" />
+    <result column="apm" jdbcType="INTEGER" property="apm" />
+    <result column="scheduleid" jdbcType="INTEGER" property="scheduleid" />
+    <result column="status" jdbcType="INTEGER" property="status"/>
+  </resultMap>
+  <select id="selectByClazzSchedulecid" resultMap="BaseResultMap">
+  	SELECT * FROM `clazz_schedule` WHERE cid=(SELECT cid FROM clazz WHERE bid=#{bid} LIMIT 1) ORDER BY `dateTime` DESC LIMIT 1
+  </select>
+  <select id="queryBycids" resultMap="BaseResultMap">
+  	SELECT * FROM `clazz_schedule` WHERE cid=#{cid} AND STATUS=1 AND apm=0 ORDER BY DATETIME DESC LIMIT 7
+  </select>
+  <insert id="insertClazzSchedule">
+  	insert into clazz_schedule (dateTime,cid,apm) values
+	<foreach collection="list" item="l" separator=",">
+		(#{l.datetime},#{l.cid},#{l.apm})
+	</foreach>
+  </insert>  
+  <update id="updateStatus">
+  	UPDATE `clazz_schedule` SET STATUS=1  WHERE cid=#{cid} AND DATETIME&gt;=#{datetime1} AND DATETIME&lt;=#{datetime2}
+  </update>
+  <update id="updateClazzSchedule">
+  	UPDATE `clazz_schedule` SET scheduleId=#{scheduleid} WHERE cid=#{cid} AND apm=#{apm} AND DATETIME=#{datetime}
+  </update>
+  <update id="updateClassroomId">
+  	update clazz_schedule set classroomId=#{classroomid} where cid=#{cid} and apm=#{apm} and DATETIME=#{datetime}
+  </update>
+  <select id="queryClazzSchedule" resultMap="BaseResultMap">
+  	SELECT * FROM `clazz_schedule` WHERE cid=#{cid} AND DATETIME&gt;=#{datetime1} AND DATETIME&lt;=#{datetime2} and status=0
+  </select>
+  <select id="queryClazzSchedule1" resultMap="BaseResultMap">
+  	SELECT * FROM `clazz_schedule` WHERE cid=#{cid} AND DATETIME&gt;=#{datetime1} AND DATETIME&lt;=#{datetime2} and status=1
+  </select>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    csId, dateTime, ccid, classroomId
+  </sql>
+  <select id="selectByExample" parameterType="com.accp.domain.ClazzScheduleExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from clazz_schedule
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from clazz_schedule
+    where csId = #{csid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from clazz_schedule
+    where csId = #{csid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.accp.domain.ClazzScheduleExample">
+    delete from clazz_schedule
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.accp.domain.ClazzSchedule">
+    insert into clazz_schedule (csId, dateTime, ccid, 
+      classroomId)
+    values (#{csid,jdbcType=INTEGER}, #{datetime,jdbcType=DATE}, #{ccid,jdbcType=INTEGER}, 
+      #{classroomid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.accp.domain.ClazzSchedule">
+    insert into clazz_schedule
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="csid != null">
+        csId,
+      </if>
+      <if test="datetime != null">
+        dateTime,
+      </if>
+      <if test="ccid != null">
+        ccid,
+      </if>
+      <if test="classroomid != null">
+        classroomId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="csid != null">
+        #{csid,jdbcType=INTEGER},
+      </if>
+      <if test="datetime != null">
+        #{datetime,jdbcType=DATE},
+      </if>
+      <if test="ccid != null">
+        #{ccid,jdbcType=INTEGER},
+      </if>
+      <if test="classroomid != null">
+        #{classroomid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.accp.domain.ClazzScheduleExample" resultType="java.lang.Long">
+    select count(*) from clazz_schedule
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update clazz_schedule
+    <set>
+      <if test="record.csid != null">
+        csId = #{record.csid,jdbcType=INTEGER},
+      </if>
+      <if test="record.datetime != null">
+        dateTime = #{record.datetime,jdbcType=DATE},
+      </if>
+      <if test="record.ccid != null">
+        ccid = #{record.ccid,jdbcType=INTEGER},
+      </if>
+      <if test="record.classroomid != null">
+        classroomId = #{record.classroomid,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update clazz_schedule
+    set csId = #{record.csid,jdbcType=INTEGER},
+      dateTime = #{record.datetime,jdbcType=DATE},
+      ccid = #{record.ccid,jdbcType=INTEGER},
+      classroomId = #{record.classroomid,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.accp.domain.ClazzSchedule">
+    update clazz_schedule
+    <set>
+      <if test="datetime != null">
+        dateTime = #{datetime,jdbcType=DATE},
+      </if>
+      <if test="ccid != null">
+        ccid = #{ccid,jdbcType=INTEGER},
+      </if>
+      <if test="classroomid != null">
+        classroomId = #{classroomid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where csId = #{csid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.accp.domain.ClazzSchedule">
+    update clazz_schedule
+    set dateTime = #{datetime,jdbcType=DATE},
+      ccid = #{ccid,jdbcType=INTEGER},
+      classroomId = #{classroomid,jdbcType=INTEGER}
+    where csId = #{csid,jdbcType=INTEGER}
+  </update>
+</mapper>

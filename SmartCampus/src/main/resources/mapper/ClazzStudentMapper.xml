@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.accp.mapper.ClazzStudentMapper">
+  <resultMap id="BaseResultMap" type="com.accp.domain.ClazzStudent">
+    <id column="czId" jdbcType="INTEGER" property="czid" />
+    <result column="cid" jdbcType="INTEGER" property="cid" />
+    <result column="sid" jdbcType="INTEGER" property="sid" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="clazzPositionId" jdbcType="INTEGER" property="clazzpositionid" />
+  </resultMap>
+  <select id="countstu"  resultType="Integer">
+  	select count(*) from clazz_student where cid=#{cid}
+  </select>
+  <select id="queryByClzStucid" resultMap="BaseResultMap">
+  	select * from clazz_student where cid=#{cid}
+  </select>
+  <update id="updateclazzStudent">
+  	update clazz_student set clazzPositionId=#{clazzpositionid} where sid=#{sid} and cid=#{cid}
+  </update>
+  <insert id="insertclazzStudentinfos">
+  	insert into clazz_student(cid,sid,status,clazzPositionId)values(#{cid},#{sid},1,0)
+  </insert>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    czId, cid, sid, status, clazzPositionId
+  </sql>
+  <select id="selectByExample" parameterType="com.accp.domain.ClazzStudentExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from clazz_student
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from clazz_student
+    where czId = #{czid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from clazz_student
+    where czId = #{czid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.accp.domain.ClazzStudentExample">
+    delete from clazz_student
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.accp.domain.ClazzStudent">
+    insert into clazz_student (czId, cid, sid, 
+      status, clazzPositionId)
+    values (#{czid,jdbcType=INTEGER}, #{cid,jdbcType=INTEGER}, #{sid,jdbcType=INTEGER}, 
+      #{status,jdbcType=INTEGER}, #{clazzpositionid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.accp.domain.ClazzStudent">
+    insert into clazz_student
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="czid != null">
+        czId,
+      </if>
+      <if test="cid != null">
+        cid,
+      </if>
+      <if test="sid != null">
+        sid,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="clazzpositionid != null">
+        clazzPositionId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="czid != null">
+        #{czid,jdbcType=INTEGER},
+      </if>
+      <if test="cid != null">
+        #{cid,jdbcType=INTEGER},
+      </if>
+      <if test="sid != null">
+        #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="clazzpositionid != null">
+        #{clazzpositionid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.accp.domain.ClazzStudentExample" resultType="java.lang.Long">
+    select count(*) from clazz_student
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update clazz_student
+    <set>
+      <if test="record.czid != null">
+        czId = #{record.czid,jdbcType=INTEGER},
+      </if>
+      <if test="record.cid != null">
+        cid = #{record.cid,jdbcType=INTEGER},
+      </if>
+      <if test="record.sid != null">
+        sid = #{record.sid,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.clazzpositionid != null">
+        clazzPositionId = #{record.clazzpositionid,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update clazz_student
+    set czId = #{record.czid,jdbcType=INTEGER},
+      cid = #{record.cid,jdbcType=INTEGER},
+      sid = #{record.sid,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=INTEGER},
+      clazzPositionId = #{record.clazzpositionid,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.accp.domain.ClazzStudent">
+    update clazz_student
+    <set>
+      <if test="cid != null">
+        cid = #{cid,jdbcType=INTEGER},
+      </if>
+      <if test="sid != null">
+        sid = #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="clazzpositionid != null">
+        clazzPositionId = #{clazzpositionid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where czId = #{czid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.accp.domain.ClazzStudent">
+    update clazz_student
+    set cid = #{cid,jdbcType=INTEGER},
+      sid = #{sid,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      clazzPositionId = #{clazzpositionid,jdbcType=INTEGER}
+    where czId = #{czid,jdbcType=INTEGER}
+  </update>
+</mapper>

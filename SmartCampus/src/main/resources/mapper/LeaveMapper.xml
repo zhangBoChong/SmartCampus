@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.accp.mapper.LeaveMapper">
+  <resultMap id="BaseResultMap" type="com.accp.domain.Leave">
+    <id column="leaveId" jdbcType="INTEGER" property="leaveid" />
+    <result column="studentId" jdbcType="INTEGER" property="studentid" />
+    <result column="studentName" jdbcType="VARCHAR" property="studentname" />
+    <result column="studentGread" jdbcType="INTEGER" property="studentgread" />
+    <result column="studentClass" jdbcType="INTEGER" property="studentclass" />
+    <result column="starTime" jdbcType="TIMESTAMP" property="startime" />
+    <result column="endTime" jdbcType="TIMESTAMP" property="endtime" />
+    <result column="main" jdbcType="VARCHAR" property="main" />
+    <result column="teacher" jdbcType="INTEGER" property="teacher" />
+    <result column="K1" jdbcType="VARCHAR" property="k1" />
+    <result column="K2" jdbcType="VARCHAR" property="k2" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    leaveId, studentId, studentName, studentGread, studentClass, starTime, endTime, main, 
+    teacher, K1, K2
+  </sql>
+  <select id="selectByExample" parameterType="com.accp.domain.LeaveExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from leave
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from leave
+    where leaveId = #{leaveid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from leave
+    where leaveId = #{leaveid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.accp.domain.LeaveExample">
+    delete from leave
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.accp.domain.Leave">
+    insert into leave (leaveId, studentId, studentName, 
+      studentGread, studentClass, starTime, 
+      endTime, main, teacher, 
+      K1, K2)
+    values (#{leaveid,jdbcType=INTEGER}, #{studentid,jdbcType=INTEGER}, #{studentname,jdbcType=VARCHAR}, 
+      #{studentgread,jdbcType=INTEGER}, #{studentclass,jdbcType=INTEGER}, #{startime,jdbcType=TIMESTAMP}, 
+      #{endtime,jdbcType=TIMESTAMP}, #{main,jdbcType=VARCHAR}, #{teacher,jdbcType=INTEGER}, 
+      #{k1,jdbcType=VARCHAR}, #{k2,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.accp.domain.Leave">
+    insert into leave
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="leaveid != null">
+        leaveId,
+      </if>
+      <if test="studentid != null">
+        studentId,
+      </if>
+      <if test="studentname != null">
+        studentName,
+      </if>
+      <if test="studentgread != null">
+        studentGread,
+      </if>
+      <if test="studentclass != null">
+        studentClass,
+      </if>
+      <if test="startime != null">
+        starTime,
+      </if>
+      <if test="endtime != null">
+        endTime,
+      </if>
+      <if test="main != null">
+        main,
+      </if>
+      <if test="teacher != null">
+        teacher,
+      </if>
+      <if test="k1 != null">
+        K1,
+      </if>
+      <if test="k2 != null">
+        K2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="leaveid != null">
+        #{leaveid,jdbcType=INTEGER},
+      </if>
+      <if test="studentid != null">
+        #{studentid,jdbcType=INTEGER},
+      </if>
+      <if test="studentname != null">
+        #{studentname,jdbcType=VARCHAR},
+      </if>
+      <if test="studentgread != null">
+        #{studentgread,jdbcType=INTEGER},
+      </if>
+      <if test="studentclass != null">
+        #{studentclass,jdbcType=INTEGER},
+      </if>
+      <if test="startime != null">
+        #{startime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null">
+        #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="main != null">
+        #{main,jdbcType=VARCHAR},
+      </if>
+      <if test="teacher != null">
+        #{teacher,jdbcType=INTEGER},
+      </if>
+      <if test="k1 != null">
+        #{k1,jdbcType=VARCHAR},
+      </if>
+      <if test="k2 != null">
+        #{k2,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.accp.domain.LeaveExample" resultType="java.lang.Long">
+    select count(*) from leave
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update leave
+    <set>
+      <if test="record.leaveid != null">
+        leaveId = #{record.leaveid,jdbcType=INTEGER},
+      </if>
+      <if test="record.studentid != null">
+        studentId = #{record.studentid,jdbcType=INTEGER},
+      </if>
+      <if test="record.studentname != null">
+        studentName = #{record.studentname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.studentgread != null">
+        studentGread = #{record.studentgread,jdbcType=INTEGER},
+      </if>
+      <if test="record.studentclass != null">
+        studentClass = #{record.studentclass,jdbcType=INTEGER},
+      </if>
+      <if test="record.startime != null">
+        starTime = #{record.startime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.endtime != null">
+        endTime = #{record.endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.main != null">
+        main = #{record.main,jdbcType=VARCHAR},
+      </if>
+      <if test="record.teacher != null">
+        teacher = #{record.teacher,jdbcType=INTEGER},
+      </if>
+      <if test="record.k1 != null">
+        K1 = #{record.k1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.k2 != null">
+        K2 = #{record.k2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update leave
+    set leaveId = #{record.leaveid,jdbcType=INTEGER},
+      studentId = #{record.studentid,jdbcType=INTEGER},
+      studentName = #{record.studentname,jdbcType=VARCHAR},
+      studentGread = #{record.studentgread,jdbcType=INTEGER},
+      studentClass = #{record.studentclass,jdbcType=INTEGER},
+      starTime = #{record.startime,jdbcType=TIMESTAMP},
+      endTime = #{record.endtime,jdbcType=TIMESTAMP},
+      main = #{record.main,jdbcType=VARCHAR},
+      teacher = #{record.teacher,jdbcType=INTEGER},
+      K1 = #{record.k1,jdbcType=VARCHAR},
+      K2 = #{record.k2,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.accp.domain.Leave">
+    update leave
+    <set>
+      <if test="studentid != null">
+        studentId = #{studentid,jdbcType=INTEGER},
+      </if>
+      <if test="studentname != null">
+        studentName = #{studentname,jdbcType=VARCHAR},
+      </if>
+      <if test="studentgread != null">
+        studentGread = #{studentgread,jdbcType=INTEGER},
+      </if>
+      <if test="studentclass != null">
+        studentClass = #{studentclass,jdbcType=INTEGER},
+      </if>
+      <if test="startime != null">
+        starTime = #{startime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null">
+        endTime = #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="main != null">
+        main = #{main,jdbcType=VARCHAR},
+      </if>
+      <if test="teacher != null">
+        teacher = #{teacher,jdbcType=INTEGER},
+      </if>
+      <if test="k1 != null">
+        K1 = #{k1,jdbcType=VARCHAR},
+      </if>
+      <if test="k2 != null">
+        K2 = #{k2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where leaveId = #{leaveid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.accp.domain.Leave">
+    update leave
+    set studentId = #{studentid,jdbcType=INTEGER},
+      studentName = #{studentname,jdbcType=VARCHAR},
+      studentGread = #{studentgread,jdbcType=INTEGER},
+      studentClass = #{studentclass,jdbcType=INTEGER},
+      starTime = #{startime,jdbcType=TIMESTAMP},
+      endTime = #{endtime,jdbcType=TIMESTAMP},
+      main = #{main,jdbcType=VARCHAR},
+      teacher = #{teacher,jdbcType=INTEGER},
+      K1 = #{k1,jdbcType=VARCHAR},
+      K2 = #{k2,jdbcType=VARCHAR}
+    where leaveId = #{leaveid,jdbcType=INTEGER}
+  </update>
+</mapper>

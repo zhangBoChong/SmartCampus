@@ -1,0 +1,35 @@
+package com.accp.mapper;
+
+import com.accp.domain.VessionGrade;
+import com.accp.domain.VessionGradeExample;
+import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+@Mapper
+public interface VessionGradeMapper {
+	int insertVG(VessionGrade vg);
+	List<VessionGrade> queryByVessionGradeVid(Integer vid);
+	VessionGrade queryByVGbid(Integer bid);
+    long countByExample(VessionGradeExample example);
+
+    int deleteByExample(VessionGradeExample example);
+
+    int deleteByPrimaryKey(Integer bid);
+
+    int insert(VessionGrade record);
+
+    int insertSelective(VessionGrade record);
+
+    List<VessionGrade> selectByExample(VessionGradeExample example);
+
+    VessionGrade selectByPrimaryKey(Integer bid);
+
+    int updateByExampleSelective(@Param("record") VessionGrade record, @Param("example") VessionGradeExample example);
+
+    int updateByExample(@Param("record") VessionGrade record, @Param("example") VessionGradeExample example);
+
+    int updateByPrimaryKeySelective(VessionGrade record);
+
+    int updateByPrimaryKey(VessionGrade record);
+}

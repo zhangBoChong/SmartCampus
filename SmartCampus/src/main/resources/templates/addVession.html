@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="css/style.css" />
+<link rel="stylesheet" type="text/css" href="css/WdatePicker.css" />
+<link rel="stylesheet" type="text/css" href="css/skin_/table.css" />
+<link rel="stylesheet" type="text/css" href="css/jquery.grid.css" />
+<title>添加版本</title>
+<style type="text/css">
+	.search-box div{
+		margin-left: 1rem;
+	}
+	.search-button:nth-child(2) input{
+		background: #FF7200;
+	}
+	.iselect-wrapper {
+	    position: relative;
+	    width: 80px;
+	    height: 28px;
+	    padding: 0 20px 0 5px;
+	    line-height: 28px;
+	    border-width: 1px;
+	    border-style: solid;
+	    border-left-color: #c5c5c5;
+	    border-top-color: #c5c5c5;
+	    border-right-color: #e0e0e0;
+	    border-bottom-color: #e0e0e0;
+	    background: url(../img/skin_/select_normal.png) no-repeat right center #fff;
+	    margin-top: 0.3rem;
+	}
+	.CK{
+		position: relative;
+	    width: 12.4rem;	
+	    height: 28px;
+	    padding: 0 20px 0 5px;
+	    line-height: 28px;
+	    border-width: 1px;
+	    border-style: solid;
+	    border-left-color: #c5c5c5;
+	    border-top-color: #c5c5c5;
+	    border-right-color: #e0e0e0;
+	    border-bottom-color: #e0e0e0;
+	   
+	    margin-top: 0.3rem;
+	}
+	.opt select{
+		position: relative;
+	    width: 107px;
+	    height: 28px;
+	    top:0.35rem;
+	}
+	.opt input{
+		width: 5rem;
+		height: 1.9rem;
+		margin-top: 0.3rem;
+		background: #url(../img/skin_/formbtnbg.png);
+	}
+	.tab table tr{
+		height: 2.5rem;
+	}
+	.tab table tr td{
+		border: 0.5px solid #CFCFCF;		
+		width: 12rem;
+		text-align: center;
+	}
+	.tab table tr td:last-child{
+		width: 21rem;
+	}
+	
+	.tab table{
+		font-size: 0.8rem;	
+		margin-left: -0.6rem;
+		width: 105.7rem;	
+	}
+	.teacher tr{
+		display: none;
+	}
+	#addKC{
+		width: 54rem;	
+		border: 3px groove #3EAADD;
+		background: #F5F5F5;
+		z-index: 2;
+		position: absolute;
+		left: 20rem;
+		top:8rem;
+		display: none;
+	    padding-left: 7.5rem;
+	    padding-top: 0.5rem;
+	}
+	#addKC h1{
+		font-family: "楷体";
+		font-size: 2rem;
+		margin-left: 18rem;
+	}
+	#addKC p{
+		display: flex;		
+	}
+	
+	#addKC p select{
+		position: absolute;
+	    width: 227px;
+	    height: 28px;
+	}
+	#addKC p span{
+		margin-top: 0.5rem;
+	}
+	#addKC .iselect-wrapper {
+	    width: 200px;
+	}
+	.tables tr{
+		border-bottom: 1px solid gray;
+	}
+	.tables tr:last-child{
+		
+	}
+	.tables tr td{
+		width: 10rem;
+		text-align: center;
+		border-left: 1px solid gray;
+		border-right: 1px solid gray;
+	}
+	.tables tr td:first-child {
+		border:none;
+	}
+	.tables tr td:last-child {
+		border:none;
+		width: 21.1rem
+	}
+	.tables{
+		font-size: 1rem;
+		font-family: cursive;
+	}
+
+</style>
+</head>
+<body>
+	<div class="table">
+    	<div class="opt ue-clear" style="display: flex;line-height: 2.5rem;">
+        		 <p>添加版本:<input type="text" id="vname" style="height: 1.6rem"/><input type="button" value="提交"  id="sub" style="height: 2rem"/></p>
+        </div>  
+    </div>
+</body>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/global.js"></script>
+<script type="text/javascript" src="js/jquery.select.js"></script>
+<script type="text/javascript" src="js/core.js"></script>
+<script type="text/javascript" src="js/jquery.pagination.js"></script>
+<script type="text/javascript" src="js/jquery.grid.js"></script>
+<script type="text/javascript" src="js/WdatePicker.js"></script>
+<script type="text/javascript" src="js/vue.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$("#sub").click(function(){
+			var vname=$("#vname").val();
+			$.ajax({
+				url:'insertVession',
+				dataType:'json',
+				data:'vname='+vname,
+				type:'post',
+				success:function(data){
+					alert("新增成功");
+					$("#vname").val("");
+		    	}
+			});
+		});
+	})
+</script>
+</html>

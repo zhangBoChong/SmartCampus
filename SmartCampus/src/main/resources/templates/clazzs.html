@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=emulateIE7" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="css/style.css" />
+<link rel="stylesheet" type="text/css" href="css/WdatePicker.css" />
+<link rel="stylesheet" type="text/css" href="css/skin_/table.css" />
+<link rel="stylesheet" type="text/css" href="css/jquery.grid.css" />
+
+
+<title>表格</title>
+<style type="text/css">
+	.search-box div{
+		margin-left: 1rem;
+	}
+	.search-button:nth-child(2) input{
+		background: #FF7200;
+	}
+	.iselect-wrapper {
+	    position: relative;
+	    width: 80px;
+	    height: 28px;
+	    padding: 0 20px 0 5px;
+	    line-height: 28px;
+	    border-width: 1px;
+	    border-style: solid;
+	    border-left-color: #c5c5c5;
+	    border-top-color: #c5c5c5;
+	    border-right-color: #e0e0e0;
+	    border-bottom-color: #e0e0e0;
+	    background: url(../img/skin_/select_normal.png) no-repeat right center #fff;
+	    margin-top: 0.3rem;
+	}
+	.CK{
+		position: relative;
+	    width: 12.4rem;	
+	    height: 28px;
+	    padding: 0 20px 0 5px;
+	    line-height: 28px;
+	    border-width: 1px;
+	    border-style: solid;
+	    border-left-color: #c5c5c5;
+	    border-top-color: #c5c5c5;
+	    border-right-color: #e0e0e0;
+	    border-bottom-color: #e0e0e0;
+	   
+	    margin-top: 0.3rem;
+	}
+	.opt select{
+		position: relative;
+	    width: 107px;
+	    height: 28px;
+	    top:0.35rem;
+	}
+	.opt input{
+		width: 5rem;
+		height: 1.9rem;
+		margin-top: 0.3rem;
+		background: #url(../img/skin_/formbtnbg.png);
+	}
+	.tab table tr{
+		height: 2.5rem;
+	}
+	.tab table tr td{
+		border: 0.5px solid #CFCFCF;		
+		width: 12rem;
+		text-align: center;
+	}
+	.tab table tr td:last-child{
+		width: 21rem;
+	}
+	
+	.tab table{
+		font-size: 0.8rem;	
+		margin-left: -0.6rem;
+		width: 105.7rem;	
+	}
+	.teacher tr{
+		display: none;
+	}
+	#addKC{
+		width: 54rem;	
+		border: 3px groove #3EAADD;
+		background: #F5F5F5;
+		z-index: 2;
+		position: absolute;
+		left: 20rem;
+		top:8rem;
+		display: none;
+	    padding-left: 7.5rem;
+	    padding-top: 0.5rem;
+	}
+	#addSt{
+		width: 30rem;
+		border: 3px groove #3EAADD;
+		background: #F5F5F5;
+		z-index: 3;
+		position: absolute;
+		left: 32rem;
+		top:9rem;
+		display: none;
+	    padding-left: 7.5rem;
+	    padding-top: 0.5rem;
+	    padding-bottom: 1rem
+	}
+	#addKC h1{
+		font-family: "楷体";
+		font-size: 2rem;
+		margin-left: 18rem;
+	}
+	#addSt h1{
+		font-family: "楷体";
+		font-size: 2rem;
+		margin-left: 6rem;
+	}
+	#addSt p{
+		font-family: "楷体";
+		font-size: 1.5rem;
+	}
+	#addSt p select{
+		height: 2rem;
+		width: 6rem;
+	}
+	#addSt p input{
+		height: 1.5rem;
+	}
+	
+	#addKC p{
+		display: flex;		
+	}
+	
+	#addKC p select{
+		position: absolute;
+	    width: 227px;
+	    height: 28px;
+	}
+	#addKC p span{
+		margin-top: 0.5rem;
+	}
+	#addKC .iselect-wrapper {
+	    width: 200px;
+	}
+	.tables tr{
+		border-bottom: 1px solid gray;
+	}
+	.tables tr:last-child{
+		
+	}
+	.tables tr td{
+		width: 10rem;
+		text-align: center;
+		border-left: 1px solid gray;
+		border-right: 1px solid gray;
+	}
+	.tables tr td:first-child {
+		border:none;
+	}
+	.tables tr td:last-child {
+		border:none;
+		width: 21.1rem
+	}
+	.tables{
+		font-size: 1rem;
+		font-family: cursive;
+	}
+	table{
+		margin-left: 0.5rem;
+	}
+	
+	td{
+	border:1px solid black;
+	text-align: center;
+	width: 8rem;
+	height: 2rem;
+	}
+	#addStus h1{
+		font-family: "楷体";
+		font-size: 2rem;
+		margin-left: 6rem;
+	}
+	#addStus p{
+		font-family: "楷体";
+		font-size: 1.5rem;
+	}
+	#addStus p select{
+		height: 2rem;
+		width: 6rem;
+	}
+	#addStus p input{
+		height: 1.5rem;
+	}
+	#addStus{
+		width: 30rem;
+		border: 3px groove #3EAADD;
+		background: #F5F5F5;
+		z-index: 4;
+		position: absolute;
+		left: 32rem;
+		top:9rem;
+		display: none;
+	    padding-left: 7.5rem;
+	    padding-top: 0.5rem;
+	    padding-bottom: 1rem
+	}
+	
+</style>
+</head>
+
+<body>	
+	<div id="container">
+		<div id="addStus">
+			<h1>新增学员</h1>
+			<p>学生姓名:<input type="text" id="addsname"/></p>
+			<p style="padding-left: 3rem">性别:
+				<select id="addsex">
+					<option value="0">男</option>
+					<option value="1">女</option>
+				</select>
+			</p>
+			<p>联系方式:<input type="text" id="addphone"/></p>
+			<p style="padding-left: 3rem">年龄:<input type="text" id="addage"/></p>
+			<p>家庭住址:<input type="text" id="addaddress"/></p>
+			<p style="padding-left: 3rem">学历:<input type="text" id="addeducation"/></p>
+			<p style="padding-left: 3rem">状态:
+				<select id="addstatus">
+					<option v-bind:value="0">正常在读</option>
+					<option v-bind:value="1">休学</option>
+					<option v-bind:value="2">退学</option>
+					<option v-bind:value="3">游离</option>
+				</select>
+			</p>
+			<br/>
+			<input class="button" type="button" value="保存" id="addsub"/> 
+    		<input class="button" type="button" value="取消" id="addres" style="margin-left: 8rem"/>
+			<br/>
+		</div>
+		<div id="addSt">
+			<h1>学员信息</h1>
+			<p style="padding-left: 3rem">学号:<input type="text" id="snumber" v-bind:value="snumber"/></p>
+			<p>学生姓名:<input type="text" id="sname" v-bind:value="sname"/></p>
+			<p style="padding-left: 3rem">性别:<input type="text" v-bind:value="sex"/></p>
+			<p>班级职位:
+				<select id="clazzposition">
+					<option >无</option>
+					<option v-for="(item,index) in clazzpositions" v-bind:value="item.clazzpositionid">{{item.clazzpositionname}}</option>
+				</select>	
+			</p>
+			<p>联系方式:<input type="text" id="phone" v-bind:value="phone"/></p>
+			<p style="padding-left: 3rem">年龄:<input type="text" id="age" v-bind:value="age"/></p>
+			<p>家庭住址:<input type="text" id="address" v-bind:value="address"/></p>
+			<p style="padding-left: 3rem">学历:<input type="text" id="education" v-bind:value="education"/></p>
+			<p style="padding-left: 3rem">状态:
+				<select id="status">
+					<option v-bind:value="0">正常在读</option>
+					<option v-bind:value="1">休学</option>
+					<option v-bind:value="2">退学</option>
+					<option v-bind:value="3">游离</option>
+				</select>
+			</p>
+			<br/>
+			<input class="button" type="button" value="保存" id="sub"/> 
+    		<input class="button" type="button" value="取消" id="res" style="margin-left: 8rem"/>
+			<br/>
+		</div>
+		<div id="addKC">
+    	<h1>班级详情</h1>   	
+    	<div style="background: white;border: 1px solid gray;margin-left:-7.5rem;">       		
+			<table class="tables">
+				<tr class="opt">
+        			<td>学号</td>
+        			<td>学生姓名</td>
+        			<td>性别</td>
+        			<td>班级职位</td>
+        			<td>联系方式</td>
+        			<td>年龄</td>
+        			<td>状态</td>
+        			<td>操作</td>
+        		</tr>     
+        		<tr class="opt" v-for="(item,index) in clazzstu">
+        			<td>{{item.stu.snumber}}</td>
+        			<td>{{item.stu.sname}}</td>
+        			<td v-if="item.stu.sex==0">男</td>
+        			<td v-if="item.stu.sex==1">女</td>
+        			<td>{{item.clazzPositionName}}</td>
+        			<td>{{item.stu.phone}}</td>
+        			<td>{{item.stu.age}}</td>
+        			<td v-if="item.stu.status==0">正常在读</td>
+        			<td v-if="item.stu.status==1">休学</td>
+        			<td v-if="item.stu.status==2">退学</td>
+        			<td v-if="item.stu.status==3">升学</td>
+        			<td style="cursor: pointer;color: blue"  v-on:click="stup(item.stu.sid)">
+        				班委任免/修改信息
+        			</td>
+        		</tr>         		               		
+         	</table>
+         	
+        </div>
+        <p style="margin-top: 2rem;margin-bottom: 2rem;padding-left: 10rem"> 
+    	<input class="button" type="button" value="新增学员" id="submit"/> 
+
+    	<input class="button" type="button" value="取消" id="reset" style="margin-left: 8rem"/>
+    	</p> 
+    </div>
+		 <div class="table">
+		 	<table>
+		 		<tr class="opt">
+		 			<td>班级编号</td>
+		 			<td>年级</td>
+		 			<td>班级名称</td>
+		 			<td>班主任</td>
+		 			<td>当前任课教员</td>
+		 			<td>人数</td>
+		 			<td>开班日期</td>
+		 			<td>班级状态</td>
+		 			<td>操作</td>
+		 		</tr>
+		 		<tr class="opt" v-for="(item,index) in clazzs">
+		 			<td>{{item.cid}}</td>
+		 			<td>{{item.gname}}</td>
+		 			<td>{{item.cname}}</td>
+		 			<td>{{item.staff.tname}}</td>
+		 			<td>{{item.tname}}</td>
+		 			<td>{{item.count}}</td>
+		 			<td>{{item.starttime}}</td>
+		 			<td v-if="item.status==0">正常</td>
+		 			<td v-if="item.status==1">结业</td>
+		 			<td style="cursor: pointer;color: blue" v-on:click="look(item.cid)">查看详情</td>
+		 		</tr>
+		 	</table>
+		 </div>
+	</div>
+</body>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/global.js"></script>
+<script type="text/javascript" src="js/jquery.select.js"></script>
+<script type="text/javascript" src="js/core.js"></script>
+<script type="text/javascript" src="js/jquery.pagination.js"></script>
+<script type="text/javascript" src="js/jquery.grid.js"></script>
+<script type="text/javascript" src="js/WdatePicker.js"></script>
+<script type="text/javascript" src="js/vue.js"></script>
+<script type="text/javascript">
+	$(function(){
+		var v=new Vue({
+			el:"#container",
+			data:{
+				clazzs:null,
+				clazzstu:null,
+				cid:null,
+				clazzpositions:null,
+				snumber:null,
+				sname:null,
+				sex:null,
+				phone:null,
+				address:null,
+				education:null,
+				age:null,
+				status:null,
+				sid:null,
+				look:function(cid){
+					v.cid=cid;
+					$("#addKC").fadeIn();
+					$.ajax({
+						url:'clazzstu',
+						dataType:'json',
+						data:'cid='+cid,
+						type:'post',
+						success:function(data){							
+							v.clazzstu=data;
+							
+				    	}
+					});
+				},
+				stup:function(sid){
+					
+					$.ajax({
+						url:'clazzpositions',
+						dataType:'json',		
+						type:'post',
+						success:function(data){
+							v.clazzpositions=data;						
+				    	}
+					});	
+					
+					$.ajax({
+						url:'stuinfos',
+						dataType:'json',
+						data:'sid='+sid,
+						type:'post',
+						success:function(data){	
+							v.snumber=data.snumber;
+							if(data.sex==0){
+								v.sex="男";
+							}else{
+								v.sex="女";
+							}
+							
+							v.age=data.age;
+							v.education=data.education;
+							v.status=data.status;
+							v.sname=data.sname;
+							v.phone=data.phone;
+							v.address=data.address;
+							v.sid=data.sid;
+				    	}
+					});
+					$("#addSt").fadeIn();
+				}
+			}
+		
+		});			
+		$.ajax({
+			url:'queryClazzs',
+			dataType:'json',		
+			type:'post',
+			success:function(data){
+				v.clazzs=data;
+	    	}
+		});
+		//修改学生信息
+		$("#sub").click(function(){
+			var sname=$("#sname").val();
+			var phone=$("#phone").val();
+			var address=$("#address").val();
+			var education=$("#education").val();
+			var status=$("#status").val();
+			var age=$("#age").val();
+			var clazzposition=$("#clazzposition").val();
+			$.ajax({
+				url:'clazzposition',
+				dataType:'json',		
+				type:'post',
+				data:'clazzpositionid='+clazzposition+'&cid='+v.cid+'&sid='+v.sid,
+				success:function(data){
+			
+		    	}
+			});
+			$.ajax({
+				url:'updatestu',
+				dataType:'json',		
+				type:'post',
+				data:'sname='+sname+'&phone='+phone+'&address='+address+'&education='+education+'&status='+status+'&age='+age+'&sid='+v.sid,
+				success:function(data){
+					alert("修改成功!");
+					$("#addSt").fadeOut();
+		    	}
+			});
+		});
+		//取消隐藏div
+		$("#reset").click(function(){
+			$("#addKC").fadeOut();
+		});
+		//取消隐藏div
+		$("#res").click(function(){
+			$("#addSt").fadeOut();
+		});
+		$("#addres").click(function(){
+			$("#addStus").fadeOut();
+		});
+		$("#submit").click(function(){
+			$("#addStus").fadeIn();
+		});
+		$("#addsub").click(function(){
+			var sname=$("#addsname").val();
+			var sex=$("#addsex").val();
+			var phone=$("#addphone").val();
+			var address=$("#addaddress").val();
+			var education=$("#addeducation").val();
+			var status=$("#addstatus").val();
+			var age=$("#addage").val();
+			$.ajax({
+				url:'addStudent',
+				dataType:'json',		
+				type:'post',
+				data:'sname='+sname+'&phone='+phone+'&address='+address+'&education='+education+'&status='+status+'&age='+age+'&sex='+sex+'&cid='+v.cid,
+				success:function(data){
+					alert("新增成功!");d
+					$("#addsname").val("");
+					$("#addsex").val("");
+					$("#addphone").val("");
+					$("#addaddress").val("");
+					$("#addeducation").val("");
+					$("#addstatus").val("");
+					$("#addage").val("");
+					$("#addStus").fadeOut();
+		    	}
+			});
+		});
+	})
+	
+</script>
+</html>
