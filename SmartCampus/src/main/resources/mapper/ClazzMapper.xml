@@ -10,6 +10,17 @@
     <result column="status" jdbcType="INTEGER" property="status" />
     <result column="majorId" jdbcType="INTEGER" property="majorid" />
   </resultMap>
+  
+  <resultMap type="com.accp.domain.Clazz" id="clazzvessiongrade" extends="BaseResultMap">
+  	<association property="vgobj" column="bid" javaType="com.accp.domain.VessionGrade" 
+  			select="com.accp.mapper.VessionGradeMapper.selectgvBybid"></association>
+  </resultMap>
+  <resultMap type="com.accp.domain.Clazz" id="clazzteacher" extends="clazzvessiongrade">
+  	<association property="tobj" column="tid" javaType="com.accp.domain.Staff">
+  		<result column="tname" jdbcType="VARCHAR" property="tname" />
+  	</association>
+  </resultMap>
+  
   <select id="queryBybid" resultMap="BaseResultMap">
   	select * from clazz where bid=#{bid}
   </select>
@@ -19,6 +30,25 @@
   <select id="queryClazzs" resultMap="BaseResultMap">
   	select * from clazz 
   </select>
+  
+  <select id="selectBytid" resultMap="clazzvessiongrade">
+  	SELECT * FROM clazz WHERE tid=#{tid}
+  </select>
+  
+  
+  <select id="selectclazzvg" resultMap="clazzvessiongrade">
+  	SELECT * FROM clazz 
+  </select>
+  <select id="selectclazzvgBycid" resultMap="clazzvessiongrade">
+  	SELECT * FROM clazz where cid=#{cid}
+  </select>
+  <select id="selectclazzBycid" resultMap="clazzteacher">
+  	SELECT c.*,sta.tname FROM clazz c
+	INNER JOIN staff sta ON c.tid=sta.tid
+	WHERE c.cid=#{cid}
+  </select>
+  
+  
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -249,4 +279,5 @@
       majorId = #{majorid,jdbcType=INTEGER}
     where cid = #{cid,jdbcType=INTEGER}
   </update>
+
 </mapper>

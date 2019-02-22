@@ -1,17 +1,17 @@
 html{*overflow:auto;}
 #main{margin:15px 10px 0 15px;}
 
-/*鎼滅储鍖哄煙*/
+/*閹兼粎鍌ㄩ崠鍝勭厵*/
 .search-box{margin-bottom:15px;}
 .search-box .search-area,.search-box .search-button{ float:left;}
 .search-box .iselect-wrapper{width:100px;}
 .search-box .iselect-wrapper .iselect{width:127px;}
 
-/*鑷畾涔夊尯鍩熸牱寮�*/
+/*閼奉亜鐣炬稊澶婂隘閸╃喐鐗卞锟�*/
 .define-input{display:none;float:left;}
 .define-input input[type=text]{width:80px;}
 
-/*琛ㄦ牸鎿嶄綔鍖哄煙*/
+/*鐞涖劍鐗搁幙宥勭稊閸栧搫鐓�*/
 .table{}
 .table .opt{margin-bottom:10px;height:40px;border:1px solid #cfcfcf; background:url(../../img/skin_/toolbarbg.png);padding-left:10px;}
 .table .opt .optarea a{float:left;margin:12px 20px 0 0;color:#000;}

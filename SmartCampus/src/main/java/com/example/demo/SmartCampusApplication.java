@@ -8,6 +8,5 @@ public class SmartCampusApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(SmartCampusApplication.class, args);
-		System.out.println("111111322222");
 	}
 }

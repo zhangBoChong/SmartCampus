@@ -8,6 +8,8 @@
     <result column="phone" jdbcType="VARCHAR" property="phone" />
     <result column="roleId" jdbcType="INTEGER" property="roleid" />
   </resultMap>
+
+  
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -69,6 +71,7 @@
   <sql id="Base_Column_List">
     pid, sid, pname, phone, roleId
   </sql>
+  
   <select id="selectByExample" parameterType="com.accp.domain.ParentsExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
@@ -208,4 +211,14 @@
       roleId = #{roleid,jdbcType=INTEGER}
     where pid = #{pid,jdbcType=INTEGER}
   </update>
+  
+  
+  <insert id="insertparent" useGeneratedKeys="true" keyProperty="pid">
+  INSERT INTO parents(pname,phone,roleId)VALUES(#{pname},#{phone},null)
+  </insert>
+  <select id="ifphonehave" resultType="com.accp.domain.Parents">
+  	SELECT * FROM parents WHERE phone =#{phone}
+  </select>
+  
+  
 </mapper>

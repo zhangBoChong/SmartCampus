@@ -6,6 +6,30 @@
     <result column="cvgmId" jdbcType="INTEGER" property="cvgmid" />
     <result column="tid" jdbcType="INTEGER" property="tid" />
   </resultMap>
+  
+  <resultMap type="com.accp.domain.CourseTeacher" id="clzteacher" extends="BaseResultMap">
+  	<association property="clzteacherobj" column="ctId" javaType="com.accp.domain.ClazzTeacher">
+  		<result column="cid" jdbcType="INTEGER" property="cid" />
+    	<result column="status" jdbcType="INTEGER" property="status" />
+  	</association>
+  	<association property="stfobj" column="tid" javaType="com.accp.domain.Staff">
+  		<result column="tname" jdbcType="VARCHAR" property="tname" />
+  	</association>
+  </resultMap>
+  <select id="chaclzteacherBytid" resultMap="clzteacher">
+  	SELECT cot.*,ct.cid,staff.tname FROM course_teacher cot
+	INNER JOIN clazz_teacher ct ON cot.ctId=ct.ctid 
+	INNER JOIN staff ON cot.tid=staff.`tid`
+	<where>
+		ct.status=1
+		<if test="tid != null">
+			AND cot.tid=#{tid}
+		</if>
+	</where>
+  </select>
+  
+  
+
   <select id="queryCourseTeacherBycvgmid" resultMap="BaseResultMap">
     SELECT * FROM `course_teacher` WHERE cvgmId=#{cvgmId}
   </select>
@@ -184,4 +208,5 @@
       tid = #{tid,jdbcType=INTEGER}
     where ctId = #{ctid,jdbcType=INTEGER}
   </update>
+
 </mapper>

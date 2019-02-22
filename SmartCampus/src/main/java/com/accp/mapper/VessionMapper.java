@@ -10,6 +10,8 @@ import org.apache.ibatis.annotations.Param;
 public interface VessionMapper {
 	int addVession(String vname);
 	List<Vession> queryVessions();
+	//根据vid查询版本
+	Vession queryByVid(Integer vid);
     long countByExample(VessionExample example);
 
     int deleteByExample(VessionExample example);

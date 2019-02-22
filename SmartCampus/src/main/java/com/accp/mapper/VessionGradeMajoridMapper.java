@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Param;
 @Mapper
 public interface VessionGradeMajoridMapper {
 	List<VessionGradeMajorid> queryVessionGradeMajoridByBid(Integer bid);
+
     long countByExample(VessionGradeMajoridExample example);
 
     int deleteByExample(VessionGradeMajoridExample example);

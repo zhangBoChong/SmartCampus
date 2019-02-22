@@ -6,6 +6,7 @@
     <result column="vname" jdbcType="VARCHAR" property="vname" />
     <result column="creatTime" jdbcType="DATE" property="creattime" />
   </resultMap>
+
   <select id="queryVessions" resultMap="BaseResultMap">
   	select * from vession
   </select>

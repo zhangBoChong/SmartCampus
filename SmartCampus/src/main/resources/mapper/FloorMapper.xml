@@ -161,4 +161,21 @@
     set floorNumber = #{floornumber,jdbcType=INTEGER}
     where floorId = #{floorid,jdbcType=INTEGER}
   </update>
+  
+  <insert id="floornumberinsert" useGeneratedKeys="true" keyColumn="floorId">
+  	INSERT INTO `floor`(floorNumber)VALUES(#{floornumber})
+  </insert>
+  <select id="floorall" resultType="com.accp.domain.Floor">
+  	SELECT * FROM `floor` 
+  </select>
+  <select id="floornubifexist" resultType="com.accp.domain.Floor">
+  	SELECT * FROM `floor` where floorid=#{floorid}
+  </select>
+  <select id="maxfloornumber" resultType="com.accp.domain.Floor">
+  	SELECT floorNumber FROM `floor` 
+  	ORDER BY floorId DESC 
+  	LIMIT 1
+  </select>
+  
+  
 </mapper>

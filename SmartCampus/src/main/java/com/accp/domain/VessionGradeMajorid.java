@@ -7,6 +7,7 @@ public class VessionGradeMajorid {
 
     private Integer majorid;
     
+    
     private Major major;
     
     public Major getMajor() {
@@ -15,6 +16,15 @@ public class VessionGradeMajorid {
 
 	public void setMajor(Major major) {
 		this.major = major;
+	}
+    private VessionGrade vessionGrade;
+    
+    public VessionGrade getVessionGrade() {
+		return vessionGrade;
+	}
+
+	public void setVessionGrade(VessionGrade vessionGrade) {
+		this.vessionGrade = vessionGrade;
 	}
 
 	public Integer getVgmid() {

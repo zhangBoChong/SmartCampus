@@ -3,9 +3,14 @@ package com.accp.mapper;
 import com.accp.domain.Examination;
 import com.accp.domain.ExaminationExample;
 import java.util.List;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-
+@Mapper
 public interface ExaminationMapper {
+	//考试试卷信息（课程+教员）
+	Examination selectexamByexaminationId(Integer examinationId);
+	Examination selectexamByexaminationIdTow(Integer examinationId);
+	
     long countByExample(ExaminationExample example);
 
     int deleteByExample(ExaminationExample example);

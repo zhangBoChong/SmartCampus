@@ -21,7 +21,34 @@ public class Clazz {
     private String gname;//年级名称
     private String tname;//任课教员
     private Integer count;//班级人数
-     
+    
+    private VessionGrade vgobj;
+    private Staff tobj;//班主任
+    private Integer clazzstudentnub;//班级人数
+
+    public Integer getClazzstudentnub() {
+		return clazzstudentnub;
+	}
+
+	public void setClazzstudentnub(Integer clazzstudentnub) {
+		this.clazzstudentnub = clazzstudentnub;
+	}
+
+	public Staff getTobj() {
+		return tobj;
+	}
+
+	public void setTobj(Staff tobj) {
+		this.tobj = tobj;
+	}
+
+	public VessionGrade getVgobj() {
+		return vgobj;
+	}
+
+	public void setVgobj(VessionGrade vgobj) {
+		this.vgobj = vgobj;
+	}
     
 
     public String getGname() {
@@ -93,6 +120,7 @@ public class Clazz {
     }
 
     public void setStarttime(String starttime) {
+
         this.starttime = starttime;
     }
 

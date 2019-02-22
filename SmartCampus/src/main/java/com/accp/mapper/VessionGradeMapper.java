@@ -11,6 +11,11 @@ public interface VessionGradeMapper {
 	int insertVG(VessionGrade vg);
 	List<VessionGrade> queryByVessionGradeVid(Integer vid);
 	VessionGrade queryByVGbid(Integer bid);
+	//查询年级版本（年级名+版本名）
+	VessionGrade selectgvBybid(Integer bid);
+	
+	//根据bid查询版本年级中间表
+	VessionGrade queryByBid(Integer bid);
     long countByExample(VessionGradeExample example);
 
     int deleteByExample(VessionGradeExample example);

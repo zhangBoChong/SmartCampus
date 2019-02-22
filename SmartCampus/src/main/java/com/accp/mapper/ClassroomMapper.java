@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+
 @Mapper
 public interface ClassroomMapper {
 	Classroom queryByroom();
@@ -13,6 +14,11 @@ public interface ClassroomMapper {
 	int updateRoom(Integer classroomId);
 	int updateRooms();
 	Classroom queryByRoomId(Integer classroomid);
+	List<Classroom> classroominfo(Classroom record);//查询教室信息
+	Classroom classroomnameEndByfid(Integer floorid);//根据楼层id查询该层最末一间教室名
+	int classroomnubByfid(Integer floorid);//根据楼层id查询教室数量
+	int classroominsert(Classroom record);
+
     long countByExample(ClassroomExample example);
 
     int deleteByExample(ClassroomExample example);

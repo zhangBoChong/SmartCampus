@@ -1,6 +1,5 @@
 package com.accp.domain;
 
-
 public class Schedule {
     private Integer scheduleid;
 
@@ -83,6 +82,7 @@ public class Schedule {
 
     public void setTname(String tname) {
         this.tname = tname;
+
     }
 
     public String getTitle() {

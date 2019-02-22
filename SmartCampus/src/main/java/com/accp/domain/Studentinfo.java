@@ -1,5 +1,7 @@
 package com.accp.domain;
 
+import java.util.List;
+
 public class Studentinfo {
     private Integer sid;
 
@@ -33,6 +35,59 @@ public class Studentinfo {
 
 	public void setChoice(Integer choice) {
 		this.choice = choice;
+	}
+
+    
+	private Parents pobj;
+	
+	private List<ClazzStudent> clsobj;
+	
+	private List<Havetask> examlist; 
+
+
+	public Studentinfo() {
+		super();
+	}
+
+	public Studentinfo(Integer sid, String sname, Integer sex, String phone, String address, Integer pid,
+			String education, Integer characterid, String snumber, Integer status, String headimg, Integer age) {
+		super();
+		this.sid = sid;
+		this.sname = sname;
+		this.sex = sex;
+		this.phone = phone;
+		this.address = address;
+		this.pid = pid;
+		this.education = education;
+		this.characterid = characterid;
+		this.snumber = snumber;
+		this.status = status;
+		this.headimg = headimg;
+		this.age = age;
+	}
+
+	public List<Havetask> getExamlist() {
+		return examlist;
+	}
+
+	public void setExamlist(List<Havetask> examlist) {
+		this.examlist = examlist;
+	}
+
+	public List<ClazzStudent> getClsobj() {
+		return clsobj;
+	}
+
+	public void setClsobj(List<ClazzStudent> clsobj) {
+		this.clsobj = clsobj;
+	}
+
+	public Parents getPobj() {
+		return pobj;
+	}
+
+	public void setPobj(Parents pobj) {
+		this.pobj = pobj;
 	}
 
 	public Integer getSid() {
@@ -122,12 +177,13 @@ public class Studentinfo {
     public void setHeadimg(String headimg) {
         this.headimg = headimg;
     }
-
+    
     public Integer getAge() {
-        return age;
-    }
+		return age;
+	}
 
-    public void setAge(Integer age) {
-        this.age = age;
-    }
+	public void setAge(Integer age) {
+		this.age = age;
+	}
+
 }

@@ -12,6 +12,15 @@
     <result column="bid" jdbcType="INTEGER" property="bid" />
     <result column="courseId" jdbcType="INTEGER" property="courseid" />
   </resultMap>
+
+  <resultMap type="com.accp.domain.Topic" id="topicsection" extends="BaseResultMap">
+  	<association property="seobj" column="sectionId" javaType="com.accp.domain.Section" 
+  		select="com.accp.mapper.SectionMapper.selectByPrimaryKey"></association>
+  </resultMap>
+  
+  
+  
+  
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -273,4 +282,10 @@
       courseId = #{courseid,jdbcType=INTEGER}
     where topic_id = #{topicId,jdbcType=INTEGER}
   </update>
+  
+  <select id="selecttopicsection" resultMap="topicsection">
+  SELECT * FROM topic WHERE topic_id=#{topicId}
+  </select>
+  
+  
 </mapper>

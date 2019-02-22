@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=emulateIE7" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="css/style.css" />
+<link rel="stylesheet" type="text/css" href="css/skin_/form.css" />
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/jquery.select.js"></script>
+<title>基础信息</title>
+</head>
+
+<body>
+<div id="container">
+	<div id="hd"></div>
+    <div id="bd">
+    	<div id="main">
+            <h2 class="subfild">
+            	<span>学员录入</span>
+            </h2>
+            <div class="subfild-content base-info" style="margin-left: 30px;">
+            	<input type="hidden" name="sid" th:value="${stuobj.sid}" />
+            	<div class="kv-item ue-clear">
+                	<label>姓名</label><div class="kv-item-content"><input type="text" disabled="disabled" name="sname" th:value="${stuobj.sname}"/></div>
+                </div>
+                <div class="kv-item ue-clear">
+                	<label>年龄</label><div class="kv-item-content"><input type="text" disabled="disabled" name="age" th:value="${stuobj.age}"/></div>
+                </div>
+                <div class="kv-item ue-clear">
+                	<input name="stuobjsex" type="hidden" th:value="${stuobj.sex}"/>
+                	<label>性别</label>
+                	<div class="kv-item-content">
+                    	<span class="choose">
+                            <span class="checkboxouter"><input type="radio" disabled="disabled" checked="checked" value="0" name="sex" /><span class="radio"></span></span>
+                            <span class="text">男</span>
+                        </span>
+                    	<span class="choose">
+                            <span class="checkboxouter"><input type="radio" disabled="disabled" value="1" name="sex" /><span class="radio"></span></span>
+                            <span class="text">女</span>
+                       </span>
+                    </div>
+                </div>
+                <div class="kv-item ue-clear">
+                	<input name="stuobjeducation" type="hidden" th:value="${stuobj.education}"/>
+                	<label>学历</label>
+                	<div class="kv-item-content">
+                    	<select name="eduction">
+                        	<option value="初中">初中</option>
+                            <option value="高中">高中</option>
+                            <option value="大专">大专</option>
+                            <option  value="大学">大学</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="kv-item ue-clear">
+                	<label>联系电话</label><div class="kv-item-content"><input type="text" name="phone" th:value="${stuobj.phone}"/></div>
+                </div>
+                <div class="kv-item ue-clear">
+                	<label>家庭住址</label><div class="kv-item-content"><input type="text" name="address" th:value="${stuobj.address}"/></div>
+                </div>
+                <div class="kv-item ue-clear">
+                	<input type="hidden" name="pid" th:value="${stuobj.pobj.pid}"/>
+                	<label>家长姓名</label><div class="kv-item-content"><input type="text" disabled="disabled" name="pname"  th:value="${stuobj.pobj.pname}"/></div>
+                </div>
+                <div class="kv-item ue-clear">
+                	<label>家长电话</label><div class="kv-item-content"><input type="text" name="phone2" th:value="${stuobj.pobj.phone}"/></div>
+                </div>
+            </div>
+            <div class="buttons">
+                <input class="button" type="button" value="修改" />
+            </div>
+        </div>
+    </div>
+</div>
+<script src="js/jquery-1.12.4.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	/* $('select').select();
+	showRemind('input[type=text],textarea','color5');
+	UM.getEditor('content'); */
+	
+	$(function(){
+		//alert("123456");
+		var stuobjsex=$("[name=stuobjsex]").val();
+		var stuobjeducation=$('[name=stuobjeducation]').val();
+		$("[type=radio][value="+stuobjsex+"]").attr("checked",true);
+		$("option[value="+stuobjeducation+"]").attr("selected",true);
+		
+		$(".button").click(function(){
+			var sid=$("[name=sid]").val();
+			var sname=$("[name=sname]").val();
+			var age=$("[name=age]").val();
+			var sex=$("[name=sex]:checked").val();
+			var education=$('[name=eduction]').val();
+			var phone=$("[name=phone]").val();
+			var address=$("[name=address]").val();
+			var pid=$("[name=pid]").val();
+			var pname=$("[name=pname]").val();
+			var phone2=$("[name=phone2]").val();
+			var data="sid="+sid+"&sname="+sname+"&age="+age+"&sex="+sex+"&education="+education+"&phone="+phone+"&address="+address+"&pid="+pid+"&pname="+pname+"&phone2="+phone2;
+			//alert(data);
+			$.ajax({
+				url:"/changeBysid",
+				data:data,
+				success:function(result){
+					alert("success:"+result);
+					window.location.href="/toselectStudentinfo";
+				}
+			});
+			
+		});
+		
+	});
+</script>
+</body>
+</html>

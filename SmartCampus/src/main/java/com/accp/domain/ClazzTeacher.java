@@ -10,6 +10,7 @@ public class ClazzTeacher {
     private Integer status;
 
     private Integer courseschedule;
+
     private Clazz clazz;
     
 

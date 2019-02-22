@@ -2,7 +2,7 @@
 <!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 <generatorConfiguration>
 	<classPathEntry
-		location="D:\MAVEN\mysql\mysql-connector-java\5.1.6\mysql-connector-java-5.1.6.jar" />
+		location="D:\codesoft\mven\repo-by-stuent\mysql\mysql-connector-java\5.1.6\mysql-connector-java-5.1.6.jar" />
 	<context id="context1">
 		<!-- 注释 -->
 		<commentGenerator>
@@ -10,7 +10,7 @@
 			<property name="suppressDate" value="true" /> <!-- 是否生成注释代时间戳 -->
 		</commentGenerator>
 		<jdbcConnection connectionURL="jdbc:mysql://localhost:3306/smartcampus"
-			driverClass="com.mysql.jdbc.Driver" password="123456" userId="root"/>
+			driverClass="com.mysql.jdbc.Driver" password="1234" userId="tyt" />
 		<!-- 实体生成位置 -->
 		<javaModelGenerator targetPackage="com.accp.domain"
 			targetProject="SmartCampus" />
@@ -20,130 +20,31 @@
 		<!-- mapper接口生成 -->
 		<javaClientGenerator targetPackage="com.accp.mapper"
 			targetProject="SmartCampus" type="XMLMAPPER" />
-		<table schema="Classroom" tableName="classroom">
-
-		</table>
-		<table schema="Clazz" tableName="clazz">
-
-		</table>
-		<table schema="Clazz_schedule" tableName="clazz_schedule">
-
-		</table>
-		<table schema="Clazz_teacher" tableName="clazz_teacher">
-
-		</table>
-		<table schema="Course" tableName="course">
-
-		</table>
-		<table schema="Ctc" tableName="ctc">
-
-		</table>
-		<table schema="Exchange" tableName="exchange">
-
-		</table>
-		<table schema="Floor" tableName="floor">
-
-		</table>
-		<table schema="Grade" tableName="grade">
-
-		</table>
-		<table schema="Major" tableName="major">
-
-		</table>
-		<table schema="Post" tableName="post">
-
-		</table>
-		<table schema="Role" tableName="role">
-
-		</table>
-		<table schema="Schedule" tableName="schedule">
-
-		</table>
-		<table schema="Section" tableName="section">
-
-		</table>
-		<table schema="Staff" tableName="staff">
-
-		</table>
-		<table schema="Studentinfo" tableName="studentinfo">
-
-		</table>
-		<table schema="Vession" tableName="vession">
-
-		</table>
-		<table schema="Vession_grade" tableName="vession_grade">
-
-		</table>
-		<table schema="Vession_grade_majorid" tableName="vession_grade_majorid">
-
-		</table>
-		<table schema="Vession_grade_majorid_course" tableName="vession_grade_majorid_course">
-
-		</table>
-		<table schema="Affiche" tableName="affiche">
-
-		</table>	
-		<table schema="Appendix" tableName="appendix">
-
-		</table>
-		<table schema="Attence" tableName="attence">
-
-		</table>	
-		<table schema="Authority" tableName="authority">
-
-		</table>
-		<table schema="Authority_middle" tableName="authority_middle">
-
-		</table>
-		<table schema="Clazz_student" tableName="clazz_student">
-
-		</table>
-		<table schema="Clazzposition" tableName="clazzposition">
-
-		</table>
-		<table schema="Character" tableName="character">
-
-		</table>
-		<table schema="Dccharacter" tableName="dccharacter">
-
-		</table>
-		<table schema="Examination" tableName="examination">
-
-		</table>
-		<table schema="Examination_fb" tableName="examination_fb">
-
-		</table>
-		<table schema="Examination_lx" tableName="examination_lx">
+		<!-- <table schema="Examination" tableName="examination">
 
 		</table>
 		<table schema="Examination_tm" tableName="examination_tm">
 
 		</table>
-		<table schema="Havetask" tableName="havetask">
+		<table schema="Examination_lx" tableName="examination_lx">
 
 		</table>
-		<table schema="Img" tableName="img">
+		<table schema="Examination_fb" tableName="examination_fb">
 
 		</table>
-		<table schema="Img_children" tableName="img_children">
+		<table schema="Clazz_student" tableName="clazz_student">
 
 		</table>
-		<table schema="Information" tableName="information">
+		<table schema="Clazz" tableName="clazz">
 
 		</table>
-		<table schema="Interview" tableName="interview">
+		<table schema="StudentInfo" tableName="studentinfo">
 
 		</table>
-		<table schema="Leave" tableName="leave">
+		<table schema="Topic" tableName="topic">
 
 		</table>
-		<table schema="Login" tableName="login">
-
-		</table>
-		<table schema="Module" tableName="module">
-
-		</table>
-		<table schema="Module_middle" tableName="module_middle">
+		<table schema="Topic_lx" tableName="topic_lx">
 
 		</table>
 		<table schema="Option" tableName="option">
@@ -152,40 +53,17 @@
 		<table schema="Parents" tableName="parents">
 
 		</table>
-		<table schema="Questionnaire" tableName="questionnaire">
+		<table schema="Havetask" tableName="havetask">
 
 		</table>
-		<table schema="Questionnaire_middle" tableName="questionnaire_middle">
+		<table schema="Clazz_teacher" tableName="clazz_teacher">
 
 		</table>
-		<table schema="Questionnaire_topic" tableName="questionnaire_topic">
+		<table schema="Course_teacher" tableName="course_teacher">
 
-		</table>
-		<table schema="Relation" tableName="relation">
-
-		</table>
-		<table schema="Task" tableName="task">
-
-		</table>
-		<table schema="Task_fb" tableName="task_fb">
-
-		</table>
-		<table schema="Task_lx" tableName="task_lx">
-
-		</table>
-		<table schema="Task_middle" tableName="task_middle">
-
-		</table>
-		<table schema="Task_stage" tableName="task_stage">
-
-		</table>
-		<table schema="Task_tm" tableName="task_tm">
-
-		</table>
-		<table schema="Topic" tableName="topic">
-
-		</table>
-		<table schema="Topic_lx" tableName="topic_lx">
+		</table> -->
+		<table schema="Clazz_schedule" tableName="clazz_schedule">
+>>>>>>> refs/heads/tanYiTing
 
 		</table>
 	</context>

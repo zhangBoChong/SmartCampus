@@ -12,8 +12,29 @@ public class Classroom {
     private Integer type;
 
     private Integer accommodate;
+    
+    private Floor fobj;
+    
+    public Floor getFobj() {
+		return fobj;
+	}
 
-    public Integer getClassroomid() {
+	public void setFobj(Floor fobj) {
+		this.fobj = fobj;
+	}
+
+	public Classroom() {
+		super();
+	}
+
+	public Classroom(String classroomname, Integer floorid, Integer type) {
+		super();
+		this.classroomname = classroomname;
+		this.floorid = floorid;
+		this.type = type;
+	}
+
+	public Integer getClassroomid() {
         return classroomid;
     }
 

@@ -80,6 +80,7 @@
       order by ${orderByClause}
     </if>
   </select>
+
   <select id="selectBymajorid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

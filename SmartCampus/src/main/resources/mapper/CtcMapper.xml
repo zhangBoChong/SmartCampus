@@ -9,6 +9,10 @@
     <result column="tid" jdbcType="INTEGER" property="tid" />
     <result column="courseSchedule" jdbcType="INTEGER" property="courseschedule" />
   </resultMap>
+
+  <select id="queryBycourseId" resultMap="BaseResultMap">
+  	  SELECT ctc.`tid` FROM ctc WHERE ctc.`courseId`=#{courseId} AND ctc.`status`=1
+  </select>
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -84,7 +88,7 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="queryBycid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from ctc

@@ -3,9 +3,14 @@ package com.accp.mapper;
 import com.accp.domain.ExaminationFb;
 import com.accp.domain.ExaminationFbExample;
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+@Mapper
 public interface ExaminationFbMapper {
+	//学员参与的所有考试
+	List<ExaminationFb> selectBycsid(Integer csid);
+	
     long countByExample(ExaminationFbExample example);
 
     int deleteByExample(ExaminationFbExample example);

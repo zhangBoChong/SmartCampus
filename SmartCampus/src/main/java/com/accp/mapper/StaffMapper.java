@@ -9,6 +9,10 @@ import org.apache.ibatis.annotations.Param;
 @Mapper
 public interface StaffMapper {
 	Staff selectBytid(Integer tid);
+	Staff queryBytid(Integer tid);
+	//老师以及带的所有班级信息
+	Staff selectstaffclazz(Integer tid);
+	
     long countByExample(StaffExample example);
 
     int deleteByExample(StaffExample example);

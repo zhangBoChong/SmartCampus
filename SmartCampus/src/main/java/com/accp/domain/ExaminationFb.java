@@ -7,7 +7,19 @@ public class ExaminationFb {
 
     private Integer csid;
 
-    public Integer getExaminationFbId() {
+    
+    private Examination examobj;
+
+    
+	public Examination getExamobj() {
+		return examobj;
+	}
+
+	public void setExamobj(Examination examobj) {
+		this.examobj = examobj;
+	}
+
+	public Integer getExaminationFbId() {
         return examinationFbId;
     }
 

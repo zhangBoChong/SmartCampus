@@ -18,6 +18,11 @@ public interface ClazzScheduleMapper {
     long countByExample(ClazzScheduleExample example);   
     List<ClazzSchedule> queryClazzSchedule(@Param("cid") Integer cid,@Param("datetime1") String datetime1,@Param("datetime2") String datetime2);
     List<ClazzSchedule> queryClazzSchedule1(@Param("cid") Integer cid,@Param("datetime1") String datetime1,@Param("datetime2") String datetime2);
+
+	//各班上课的课时
+	ClazzSchedule chateachertimeBymonthandcid(@Param("cid") Integer cid,@Param("datetime") Integer datetime);
+	
+
     int deleteByExample(ClazzScheduleExample example);
 
     int deleteByPrimaryKey(Integer csid);

@@ -6,6 +6,13 @@
     <result column="examination_id" jdbcType="INTEGER" property="examinationId" />
     <result column="csId" jdbcType="INTEGER" property="csid" />
   </resultMap>
+
+  <resultMap type="com.accp.domain.ExaminationFb" id="examinationstudentinfo" extends="BaseResultMap">
+  	<association property="examobj" column="examination_id" javaType="com.accp.domain.Examination" 
+  			select="com.accp.mapper.ExaminationMapper.selectexamByexaminationId"></association>
+  </resultMap>
+  
+  
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -178,4 +185,9 @@
       csId = #{csid,jdbcType=INTEGER}
     where examination_fb_id = #{examinationFbId,jdbcType=INTEGER}
   </update>
+  
+  <select id="selectBycsid" resultMap="examinationstudentinfo">
+  	SELECT * FROM examination_fb WHERE csId=#{csid}
+  </select>
+  
 </mapper>

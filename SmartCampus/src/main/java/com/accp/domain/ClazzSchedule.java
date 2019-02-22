@@ -1,6 +1,5 @@
 package com.accp.domain;
 
-
 public class ClazzSchedule {
     private Integer csid;
 
@@ -20,6 +19,25 @@ public class ClazzSchedule {
     private Integer courseschedule;//课程进度
     private Integer coursetime;//总课时
     
+    private Integer coutime;//课时
+    private Clazz clzobj;//班级名
+    
+    public Integer getCoutime() {
+		return coutime;
+	}
+
+	public void setCoutime(Integer coutime) {
+//		coutime=coutime/2;
+		this.coutime = coutime/2;
+	}
+
+	public Clazz getClzobj() {
+		return clzobj;
+	}
+
+	public void setClzobj(Clazz clzobj) {
+		this.clzobj = clzobj;
+	}
     
     public Integer getStatus() {
 		return status;
@@ -118,7 +136,6 @@ public class ClazzSchedule {
     }
 
    
-
     public Integer getCid() {
 		return cid;
 	}
@@ -133,5 +150,6 @@ public class ClazzSchedule {
 
     public void setClassroomid(Integer classroomid) {
         this.classroomid = classroomid;
+
     }
 }

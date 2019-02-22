@@ -12,6 +12,7 @@ public interface ClazzTeacherMapper {
 	ClazzTeacher queryBycid(Integer cid);
 	ClazzTeacher updatetwo(Integer cid);
 	List<ClazzTeacher> queryClazzTeacherByctid(Integer ctid);
+
     long countByExample(ClazzTeacherExample example);
 
     int deleteByExample(ClazzTeacherExample example);

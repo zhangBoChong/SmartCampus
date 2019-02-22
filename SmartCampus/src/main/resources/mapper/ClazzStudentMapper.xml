@@ -8,6 +8,26 @@
     <result column="status" jdbcType="INTEGER" property="status" />
     <result column="clazzPositionId" jdbcType="INTEGER" property="clazzpositionid" />
   </resultMap>
+  
+  <resultMap type="com.accp.domain.ClazzStudent" id="clazzstudent" extends="BaseResultMap">
+  	<association property="cobj" column="cid" javaType="com.accp.domain.Clazz" 
+  		select="com.accp.mapper.ClazzMapper.selectclazzvgBycid"></association>
+  </resultMap>
+  <resultMap type="com.accp.domain.ClazzStudent" id="clazzallstudent" extends="BaseResultMap">
+  	<association property="stuobj" column="sid" javaType="com.accp.domain.Studentinfo" 
+  		select="com.accp.mapper.StudentinfoMapper.studentexam"></association>
+  </resultMap>
+  <select id="selectclazzBysid" resultMap="clazzstudent">
+  	SELECT * FROM clazz_student WHERE sid=#{sid}
+  </select>
+  <select id="clazzstudentrshu" resultType="int">
+   SELECT COUNT(*) FROM clazz_student WHERE `status`=1 AND cid=#{cid}
+  </select>
+  <select id="clazzallstudentBycid" resultMap="clazzallstudent">
+  	SELECT * FROM clazz_student WHERE `status`=1 AND cid=#{cid}
+  </select>
+  
+  
   <select id="countstu"  resultType="Integer">
   	select count(*) from clazz_student where cid=#{cid}
   </select>
@@ -220,4 +240,5 @@
       clazzPositionId = #{clazzpositionid,jdbcType=INTEGER}
     where czId = #{czid,jdbcType=INTEGER}
   </update>
+
 </mapper>

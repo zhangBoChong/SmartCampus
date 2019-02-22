@@ -30,4 +30,5 @@ public interface VessionGradeMajoridCourseMapper {
     int updateByPrimaryKeySelective(VessionGradeMajoridCourse record);
 
     int updateByPrimaryKey(VessionGradeMajoridCourse record);
+
 }

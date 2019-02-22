@@ -14,6 +14,36 @@ public class ClazzStudent {
     private String clazzPositionName;
     private Studentinfo stu;
     
+ private Clazz cobj;
+    
+    private Studentinfo stuobj;
+    
+    private AttenceCount acountobj;
+   
+
+	public AttenceCount getAcountobj() {
+		return acountobj;
+	}
+
+	public void setAcountobj(AttenceCount acountobj) {
+		this.acountobj = acountobj;
+	}
+
+	public Studentinfo getStuobj() {
+		return stuobj;
+	}
+
+	public void setStuobj(Studentinfo stuobj) {
+		this.stuobj = stuobj;
+	}
+
+	public Clazz getCobj() {
+		return cobj;
+	}
+
+	public void setCobj(Clazz cobj) {
+		this.cobj = cobj;
+	}
     
     public Studentinfo getStu() {
 		return stu;

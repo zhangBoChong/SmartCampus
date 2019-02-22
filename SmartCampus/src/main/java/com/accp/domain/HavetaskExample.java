@@ -224,63 +224,63 @@ public class HavetaskExample {
             return (Criteria) this;
         }
 
-        public Criteria andCsidIsNull() {
-            addCriterion("csId is null");
+        public Criteria andSidIsNull() {
+            addCriterion("sId is null");
             return (Criteria) this;
         }
 
-        public Criteria andCsidIsNotNull() {
-            addCriterion("csId is not null");
+        public Criteria andSidIsNotNull() {
+            addCriterion("sId is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCsidEqualTo(Integer value) {
-            addCriterion("csId =", value, "csid");
+        public Criteria andSidEqualTo(Integer value) {
+            addCriterion("sId =", value, "sid");
             return (Criteria) this;
         }
 
-        public Criteria andCsidNotEqualTo(Integer value) {
-            addCriterion("csId <>", value, "csid");
+        public Criteria andSidNotEqualTo(Integer value) {
+            addCriterion("sId <>", value, "sid");
             return (Criteria) this;
         }
 
-        public Criteria andCsidGreaterThan(Integer value) {
-            addCriterion("csId >", value, "csid");
+        public Criteria andSidGreaterThan(Integer value) {
+            addCriterion("sId >", value, "sid");
             return (Criteria) this;
         }
 
-        public Criteria andCsidGreaterThanOrEqualTo(Integer value) {
-            addCriterion("csId >=", value, "csid");
+        public Criteria andSidGreaterThanOrEqualTo(Integer value) {
+            addCriterion("sId >=", value, "sid");
             return (Criteria) this;
         }
 
-        public Criteria andCsidLessThan(Integer value) {
-            addCriterion("csId <", value, "csid");
+        public Criteria andSidLessThan(Integer value) {
+            addCriterion("sId <", value, "sid");
             return (Criteria) this;
         }
 
-        public Criteria andCsidLessThanOrEqualTo(Integer value) {
-            addCriterion("csId <=", value, "csid");
+        public Criteria andSidLessThanOrEqualTo(Integer value) {
+            addCriterion("sId <=", value, "sid");
             return (Criteria) this;
         }
 
-        public Criteria andCsidIn(List<Integer> values) {
-            addCriterion("csId in", values, "csid");
+        public Criteria andSidIn(List<Integer> values) {
+            addCriterion("sId in", values, "sid");
             return (Criteria) this;
         }
 
-        public Criteria andCsidNotIn(List<Integer> values) {
-            addCriterion("csId not in", values, "csid");
+        public Criteria andSidNotIn(List<Integer> values) {
+            addCriterion("sId not in", values, "sid");
             return (Criteria) this;
         }
 
-        public Criteria andCsidBetween(Integer value1, Integer value2) {
-            addCriterion("csId between", value1, value2, "csid");
+        public Criteria andSidBetween(Integer value1, Integer value2) {
+            addCriterion("sId between", value1, value2, "sid");
             return (Criteria) this;
         }
 
-        public Criteria andCsidNotBetween(Integer value1, Integer value2) {
-            addCriterion("csId not between", value1, value2, "csid");
+        public Criteria andSidNotBetween(Integer value1, Integer value2) {
+            addCriterion("sId not between", value1, value2, "sid");
             return (Criteria) this;
         }
 
@@ -411,6 +411,66 @@ public class HavetaskExample {
 
         public Criteria andHavetaskDafenNotBetween(Double value1, Double value2) {
             addCriterion("havetask_dafen not between", value1, value2, "havetaskDafen");
+            return (Criteria) this;
+        }
+
+        public Criteria andExaminationIdIsNull() {
+            addCriterion("examination_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andExaminationIdIsNotNull() {
+            addCriterion("examination_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andExaminationIdEqualTo(Integer value) {
+            addCriterion("examination_id =", value, "examinationId");
+            return (Criteria) this;
+        }
+
+        public Criteria andExaminationIdNotEqualTo(Integer value) {
+            addCriterion("examination_id <>", value, "examinationId");
+            return (Criteria) this;
+        }
+
+        public Criteria andExaminationIdGreaterThan(Integer value) {
+            addCriterion("examination_id >", value, "examinationId");
+            return (Criteria) this;
+        }
+
+        public Criteria andExaminationIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("examination_id >=", value, "examinationId");
+            return (Criteria) this;
+        }
+
+        public Criteria andExaminationIdLessThan(Integer value) {
+            addCriterion("examination_id <", value, "examinationId");
+            return (Criteria) this;
+        }
+
+        public Criteria andExaminationIdLessThanOrEqualTo(Integer value) {
+            addCriterion("examination_id <=", value, "examinationId");
+            return (Criteria) this;
+        }
+
+        public Criteria andExaminationIdIn(List<Integer> values) {
+            addCriterion("examination_id in", values, "examinationId");
+            return (Criteria) this;
+        }
+
+        public Criteria andExaminationIdNotIn(List<Integer> values) {
+            addCriterion("examination_id not in", values, "examinationId");
+            return (Criteria) this;
+        }
+
+        public Criteria andExaminationIdBetween(Integer value1, Integer value2) {
+            addCriterion("examination_id between", value1, value2, "examinationId");
+            return (Criteria) this;
+        }
+
+        public Criteria andExaminationIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("examination_id not between", value1, value2, "examinationId");
             return (Criteria) this;
         }
     }

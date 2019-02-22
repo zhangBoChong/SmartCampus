@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>试卷数据</title>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
+		<style type="text/css">
+			body{
+				font-size: 15px;
+			}
+			.marginbottom{
+				margin-bottom: 1rem;
+			}
+			.margintop{
+				margin-top: 1rem;
+			}
+			.marginright{
+				margin-right: 10px;
+			}
+			.backgroundtoolbar{
+				background: url(img/skin_/toolbarbg.png);
+			}
+			.fdiv2 .basicInforma{}
+			.fdiv2 .subtitleP{
+				margin-top: 10px;
+				height: 36px;
+			    font-size: 15px;
+			    line-height: 36px;
+			    padding-left: 15px;
+			    background: url(img/skin_/toolbarbg.png);
+			    border-bottom: 1px solid #cfcfcf;
+			    border-top: 1px solid #cfcfcf;
+			    cursor: move;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container-fluid fdiv2">
+			<div class="moreClassExamInforma">
+				<p class="subtitleP">试卷信息</p>
+				<div class="moreClassEDiv">
+					<table class="table table-bordered">
+						<tr class="backgroundtoolbar"><td>题目内容</td><td>所属章节</td><td>做错总次数</td><td>做错的学员名单</td></tr>
+						<tr th:each="e:${etimlist}" th:attr="data-topicid=${e.topicId}">
+							<td th:text="${e.topicobj.topicName}"></td>
+							<td th:text="${e.topicobj.seobj.sectionname}">初识Java</td>
+							<td th:text="${e.mistakecount}"></td>
+							<td><span th:each="es:${e.mistakestu}"  th:text="${es.stuobj.sname}" class="marginright"></span></td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+		<script src="js/jquery-1.12.4.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(function(){
+				
+			});
+		</script>
+	</body>
+</html>

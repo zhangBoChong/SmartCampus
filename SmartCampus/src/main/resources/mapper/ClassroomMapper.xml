@@ -9,6 +9,13 @@
     <result column="type" jdbcType="INTEGER" property="type" />
     <result column="accommodate" jdbcType="INTEGER" property="accommodate" />
   </resultMap>
+  
+  <resultMap type="com.accp.domain.Classroom" id="floorclassroom" extends="BaseResultMap">
+  	<association property="fobj" column="floorId" javaType="com.accp.domain.Floor">
+  		<result column="floorNumber" jdbcType="INTEGER" property="floornumber" />
+  	</association>
+  </resultMap>
+  
   <select id="queryByroom" resultMap="BaseResultMap">
   	select * from classroom where type=1 and status=0 limit 1
   </select>
@@ -24,6 +31,39 @@
   <update id="updateRooms">
   	update classroom set status=0
   </update>
+  
+  <insert id="classroominsert">
+  	INSERT INTO classroom(classroomName,floorId,`status`,`type`,accommodate)VALUES
+  	(#{classroomname},#{floorid},0,#{type},35)
+  </insert>
+  
+  <select id="classroominfo" resultMap="floorclassroom">
+  	SELECT * FROM classroom r
+  	INNER JOIN `floor` f ON r.floorid=f.floorid
+  	<where>
+  		<if test="floorid">
+  			r.`floorid`=#{floorid}
+  		</if>
+  		<if test="type">
+  			AND `type`=#{type}
+  		</if>
+  		<if test="status">
+  			AND `status`=#{status}
+  		</if>
+  	</where>
+  	ORDER BY classroomName
+  </select>
+  
+  <select id="classroomnameEndByfid" resultMap="BaseResultMap">
+  	SELECT * FROM classroom WHERE floorId=#{floorid} 
+  	ORDER BY classroomId DESC 
+  	LIMIT 1
+  </select>
+  
+  <select id="classroomnubByfid" resultType="int">
+  SELECT COUNT(*) FROM classroom WHERE floorId=#{floorid}
+  </select>
+  
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -240,4 +280,5 @@
       accommodate = #{accommodate,jdbcType=INTEGER}
     where classroomId = #{classroomid,jdbcType=INTEGER}
   </update>
+
 </mapper>

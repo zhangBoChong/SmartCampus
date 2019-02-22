@@ -1,5 +1,7 @@
 package com.accp.domain;
 
+import java.util.List;
+
 public class Staff {
     private Integer tid;
 
@@ -25,6 +27,16 @@ public class Staff {
 
 	public void setChoice(Integer choice) {
 		this.choice = choice;
+	}
+    
+    private List<Clazz> clzlist;
+
+    public List<Clazz> getClzlist() {
+		return clzlist;
+	}
+
+	public void setClzlist(List<Clazz> clzlist) {
+		this.clzlist = clzlist;
 	}
 
 	public Integer getTid() {

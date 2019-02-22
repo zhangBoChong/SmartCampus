@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>教员课时统计</title>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
+		<style type="text/css">
+			body{
+				font-size: 15px;
+			}
+			.marginbottom{
+				margin-bottom: 1rem;
+			}
+			.margintop{
+				margin-top: 1rem;
+			}
+			.backgroundtoolbar{
+				background: url(img/skin_/toolbarbg.png);
+			}
+			.fdiv3 .basicInforma{}
+			.fdiv3 .subtitleP{
+				margin-top: 10px;
+				height: 36px;
+			    font-size: 15px;
+			    line-height: 36px;
+			    padding-left: 15px;
+			    background: url(img/skin_/toolbarbg.png);
+			    border-bottom: 1px solid #cfcfcf;
+			    border-top: 1px solid #cfcfcf;
+			    cursor: move;
+			}
+			.fdiv3 .monthinput{
+			    height: 30px;
+			    border-width: 1px;
+			    border-style: solid;
+			    border-left-color: #c5c5c5;
+			    border-top-color: #c5c5c5;
+			    border-right-color: #e0e0e0;
+			    border-bottom-color: #e0e0e0;
+			    outline: none;
+			    padding: 0px 10px;
+			    margin: 0px 0px 10px 0px;
+			}
+			.exporta{
+				padding: 8px 25px;
+				text-decoration: none;
+				color: black;
+				border: solid 1px #ddd;
+				border-radius: 5px;
+				margin-left: 20px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container-fluid fdiv3">
+			<div class="moreClassExamInforma" id="teachercVue">
+				<p class="subtitleP">教员课时统计</p>
+				<div>
+					<input type="text" class="monthinput" v-model="datetime" placeholder="按月查看" />
+					<a class="exporta backgroundtoolbar" href="#" download="教员课时统计.xls" onclick="return ExcellentExport.excel(this, 'teacherclasshour', 'Sheet Name Here');">导 出</a>
+				</div>
+				<div class="moreClassEDiv">
+					<table class="table table-bordered" id="teacherclasshour">
+						<tr class="backgroundtoolbar">
+							<td>教员名称</td>
+							<td>班级名称</td>
+							<td>上课课时</td>
+							<!-- <td>教员编号</td>
+							<td>班级编号</td> -->
+						</tr>
+						<tr v-for="(l,index) in list" >
+							<td>{{l.stfobj.tname}}</td>
+							<td>{{l.clzscheduleobj.clzobj.cname}}</td>
+							<td>{{l.clzscheduleobj.coutime}}</td>
+							<!-- <td>{{l.tid}}</td>
+							<td>{{l.clzteacherobj.cid}}</td> -->
+						</tr>
+					</table>
+				</div>
+				<div class="">
+					
+				</div>
+			</div>
+		</div>
+		<script src="js/jquery-1.12.4.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/excellentexport.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/vue.js" type="text/javascript"></script>
+		<script type="text/javascript">
+			var v=null;
+			$(function(){
+				var date=new Date();
+				var nowmonth=date.getMonth()+1;
+				//alert("当前月："+nowmonth); 
+				v=new Vue({
+					el:"#teachercVue",
+					data:{
+						datetime:null,
+						list:null
+					},watch:{
+						datetime:function(){
+							if(this.datetime>nowmonth){
+								alert("还没有按排！！！");
+								this.datetime=null;
+								return;
+							}
+							//alert(this.datetime);
+							showCoursetime(this.datetime);
+						}
+					}
+				});
+				showCoursetime(null);
+			});
+			
+			function showCoursetime(datetime){
+				var parameter=null;
+				if(datetime!=null){
+					parameter="datetime="+datetime;
+				}
+				//alert("parameter--"+parameter);
+				$.ajax({
+					url:"/teacherCoursetimeInfo",
+					data:parameter,
+					success:function(data){
+						//console.log(data);
+						v.list=data;
+					}
+				});
+			}
+			
+		</script>
+	</body>
+</html>

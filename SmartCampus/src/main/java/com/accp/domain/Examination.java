@@ -21,7 +21,46 @@ public class Examination {
 
     private Date examinationJstime;
 
-    public Integer getExaminationId() {
+    
+    private ExaminationLx examlxtype;
+    private Course coursename;
+    private Staff teachername;
+    private Havetask examscore;
+    
+
+	public Havetask getExamscore() {
+		return examscore;
+	}
+
+	public void setExamscore(Havetask examscore) {
+		this.examscore = examscore;
+	}
+
+	public ExaminationLx getExamlxtype() {
+		return examlxtype;
+	}
+
+	public void setExamlxtype(ExaminationLx examlxtype) {
+		this.examlxtype = examlxtype;
+	}
+
+	public Course getCoursename() {
+		return coursename;
+	}
+
+	public void setCoursename(Course coursename) {
+		this.coursename = coursename;
+	}
+
+	public Staff getTeachername() {
+		return teachername;
+	}
+
+	public void setTeachername(Staff teachername) {
+		this.teachername = teachername;
+	}
+
+	public Integer getExaminationId() {
         return examinationId;
     }
 

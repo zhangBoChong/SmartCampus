@@ -16,6 +16,41 @@
     <result column="age" jdbcType="INTEGER" property="age" />
     <result column="choice" jdbcType="INTEGER" property="choice" />   
   </resultMap>
+  
+  <resultMap type="com.accp.domain.Studentinfo" id="StudentinfoParents" extends="BaseResultMap">
+  	<association property="pobj" column="pid" javaType="com.accp.domain.Parents" 
+  		select="com.accp.mapper.ParentsMapper.selectByPrimaryKey"></association>
+  </resultMap>
+  <resultMap type="com.accp.domain.Studentinfo" id="studentinfoclazz" extends="BaseResultMap">
+  	<collection property="clsobj" column="sid" ofType="com.accp.domain.ClazzStudent" 
+  		select="com.accp.mapper.ClazzStudentMapper.selectclazzBysid"></collection>
+  </resultMap>
+  <select id="selectBystatus" resultMap="BaseResultMap">
+  SELECT * FROM studentinfo WHERE `status`=4
+  </select>
+  
+  <select id="selectBysid" resultMap="StudentinfoParents">
+  SELECT * FROM studentinfo stu INNER JOIN parents p ON stu.pid=p.pid
+  WHERE stu.sid=#{sid}
+  </select>
+  
+  <select id="selectallinfo" resultMap="studentinfoclazz">
+  	SELECT * FROM studentinfo  WHERE sid=#{sid}
+  </select>
+  <select id="studentexam" resultMap="BaseResultMap">
+   	SELECT * FROM studentinfo  WHERE sid=#{sid}
+  </select>
+  <select id="canupclazzBysidArray" resultMap="BaseResultMap">
+  	SELECT * FROM studentinfo 
+  	<where>
+  		sid IN  
+  		<foreach collection="array" item="d" open="(" close=")" separator=",">
+  			#{d}
+  		</foreach>
+  	</where>
+  </select>
+  
+  
   <select id="queryBystusid" resultMap="BaseResultMap">
   	select * from studentinfo where sid=#{sid}
   </select>
@@ -330,4 +365,5 @@
       age = #{age,jdbcType=INTEGER}
     where sid = #{sid,jdbcType=INTEGER}
   </update>
+
 </mapper>

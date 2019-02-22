@@ -12,6 +12,13 @@
     <result column="status" jdbcType="INTEGER" property="status" />
     <result column="choice" jdbcType="INTEGER" property="choice" />   
   </resultMap>
+  
+ <resultMap type="com.accp.domain.Staff" id="staffclazz" extends="BaseResultMap">
+ 	<collection property="clzlist" column="tid" ofType="com.accp.domain.Clazz" 
+ 		select="com.accp.mapper.ClazzMapper.selectBytid"></collection>
+ </resultMap>
+ 
+ 
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -71,7 +78,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    tid, sex, tname, roleId, postId, characterId, headImg, status,choice
+    tid, sex, tname, roleId, postId, characterId, headImg, status
   </sql>
   <select id="selectByExample" parameterType="com.accp.domain.StaffExample" resultMap="BaseResultMap">
     select
@@ -87,7 +94,7 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectBytid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="queryBytid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from staff
@@ -256,4 +263,10 @@
       status = #{status,jdbcType=INTEGER}
     where tid = #{tid,jdbcType=INTEGER}
   </update>
+  
+  <select id="selectstaffclazz" resultMap="staffclazz">
+  	SELECT * FROM staff  WHERE tid=#{tid}
+  </select>
+  
+  
 </mapper>

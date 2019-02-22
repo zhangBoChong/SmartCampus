@@ -10,6 +10,7 @@ import org.apache.ibatis.annotations.Param;
 public interface ClazzpositionMapper {
 	List<Clazzposition> queryAllclazzpositions();
 	Clazzposition queryBypositionid(Integer positionid);
+
     long countByExample(ClazzpositionExample example);
 
     int deleteByExample(ClazzpositionExample example);

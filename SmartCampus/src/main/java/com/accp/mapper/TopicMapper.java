@@ -3,9 +3,15 @@ package com.accp.mapper;
 import com.accp.domain.Topic;
 import com.accp.domain.TopicExample;
 import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+@Mapper
 public interface TopicMapper {
+	//根据题目id查询题目信息（+章节信息）
+	Topic selecttopicsection(Integer topicId);
+	
     long countByExample(TopicExample example);
 
     int deleteByExample(TopicExample example);

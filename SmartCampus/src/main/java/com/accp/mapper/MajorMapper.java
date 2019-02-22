@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Param;
 @Mapper
 public interface MajorMapper {
 	Major selectBymajorid(Integer majorid);
+
     long countByExample(MajorExample example);
 
     int deleteByExample(MajorExample example);

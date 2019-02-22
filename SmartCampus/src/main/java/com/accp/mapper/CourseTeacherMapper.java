@@ -6,10 +6,15 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+
 @Mapper
 public interface CourseTeacherMapper {
 	CourseTeacher queryByctid(Integer ctid);
 	List<CourseTeacher> queryCourseTeacherBycvgmid(Integer cvgmid);
+
+	//班级现任教员信息(教员所带的班级)
+	List<CourseTeacher> chaclzteacherBytid(@Param("tid") Integer tid);
+	
     long countByExample(CourseTeacherExample example);
 
     int deleteByExample(CourseTeacherExample example);

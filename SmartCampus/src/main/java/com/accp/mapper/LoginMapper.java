@@ -3,9 +3,12 @@ package com.accp.mapper;
 import com.accp.domain.Login;
 import com.accp.domain.LoginExample;
 import java.util.List;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-
+@Mapper
 public interface LoginMapper {
+	//新增登录用户
+	int insertloginuser(List<Login> log);
     long countByExample(LoginExample example);
 
     int deleteByExample(LoginExample example);

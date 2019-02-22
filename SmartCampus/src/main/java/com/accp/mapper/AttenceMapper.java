@@ -3,9 +3,15 @@ package com.accp.mapper;
 import com.accp.domain.Attence;
 import com.accp.domain.AttenceExample;
 import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+@Mapper
 public interface AttenceMapper {
+	//查询学员考勤类型次数 
+	int selectattenceBysidlx(@Param("studentid") Integer studentid,@Param("attence") Integer attence);
+	
     long countByExample(AttenceExample example);
 
     int deleteByExample(AttenceExample example);

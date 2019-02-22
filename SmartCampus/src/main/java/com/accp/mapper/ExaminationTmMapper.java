@@ -3,9 +3,16 @@ package com.accp.mapper;
 import com.accp.domain.ExaminationTm;
 import com.accp.domain.ExaminationTmExample;
 import java.util.List;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+@Mapper
 public interface ExaminationTmMapper {
+	//考试所有题目
+	List<ExaminationTm> selectallexamtim();
+	//试卷题目信息（该试卷里的题目信息）
+	List<ExaminationTm> selectexamtimByexamid(Integer examinationId);
+	
     long countByExample(ExaminationTmExample example);
 
     int deleteByExample(ExaminationTmExample example);

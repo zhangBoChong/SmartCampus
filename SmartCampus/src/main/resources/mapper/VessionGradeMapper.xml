@@ -6,6 +6,23 @@
     <result column="vid" jdbcType="INTEGER" property="vid" />
     <result column="gid" jdbcType="INTEGER" property="gid" />
   </resultMap>
+  
+  <resultMap type="com.accp.domain.VessionGrade" id="selectgradevession" extends="BaseResultMap">
+  	<association property="grade" column="gid" javaType="com.accp.domain.Grade">
+  		<result column="gname" jdbcType="VARCHAR" property="gname" />
+  	</association>
+  	<association property="vession" column="vid" javaType="com.accp.domain.Vession">
+  		<result column="vname" jdbcType="VARCHAR" property="vname" />
+  	</association>
+  </resultMap>
+  <select id="selectgvBybid" resultMap="selectgradevession">
+  	SELECT vg.*,g.gname,v.vname FROM vession_grade vg
+	INNER JOIN grade g ON vg.gid=g.gid
+	INNER JOIN vession v ON vg.vid=v.vid
+	where vg.bid=#{bid}
+  </select>
+  
+
   <select id="queryByVessionGradeVid" resultMap="BaseResultMap">
   	SELECT * FROM `vession_grade` WHERE vid=#{vid}
   </select>
@@ -190,4 +207,5 @@
       gid = #{gid,jdbcType=INTEGER}
     where bid = #{bid,jdbcType=INTEGER}
   </update>
+
 </mapper>

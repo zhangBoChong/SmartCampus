@@ -225,4 +225,14 @@
       type = #{type,jdbcType=INTEGER}
     where loginId = #{loginid,jdbcType=INTEGER}
   </update>
+
+  <insert id="insertloginuser">
+  	insert into login(loginName,pwd,roleId)values
+	  <foreach collection="log" item="l" separator=",">
+	  	(#{l.loginName},123456,#{l.roleId})
+	  </foreach>
+  
+  </insert>
+  
+  
 </mapper>

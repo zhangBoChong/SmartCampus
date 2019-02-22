@@ -18,6 +18,16 @@ public class Topic {
     private Integer bid;
 
     private Integer courseid;
+    
+    private Section seobj;
+
+    public Section getSeobj() {
+		return seobj;
+	}
+
+	public void setSeobj(Section seobj) {
+		this.seobj = seobj;
+	}
 
     public Integer getTopicId() {
         return topicId;

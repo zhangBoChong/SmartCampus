@@ -8,6 +8,7 @@
     <result column="status" jdbcType="INTEGER" property="status" />
     <result column="courseSchedule" jdbcType="INTEGER" property="courseschedule" />
   </resultMap>
+
   <select id="queryClazzTeacherByctid" resultMap="BaseResultMap">	
 	SELECT * FROM `clazz_teacher` WHERE ctid=#{ctid}
   </select>
@@ -20,6 +21,7 @@
   <update id="updatecourseschedule">
   	update clazz_teacher set courseSchedule=#{courseschedule},status=#{status} where tcId=#{tcid}
   </update>
+  
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
