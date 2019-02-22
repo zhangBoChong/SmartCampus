@@ -57,7 +57,11 @@ public class CDCTaskController {
 		
 		return "leave";
 	}
-	
+//	进入请假审核页面
+	@RequestMapping("check")
+	public String check() {
+		return "check";
+	}
 	
 //	根据登录人不同所进如不同页面 查看不同数据
 	@RequestMapping("/queryTask")
@@ -215,7 +219,21 @@ public class CDCTaskController {
 			cdcAttenceService.insertLeave(leave);
 		}	
 	}
-//	查询
-	
-	
+//	查询到需要批准的请假条
+	@RequestMapping("queryLeaveByTeaId")
+	@ResponseBody
+	public List<Leave> queryLeaveByTeaId(){
+//		从session获取到当前登录人员Id
+		int ryId = 1;
+		List<Leave> list = cdcAttenceService.queryLeaveByTeaId(ryId);
+		for (Leave l : list) {
+//			0为学员请假 1为员工请假
+			if(l.getType()==0) {
+				l.setStu(taskService.queryStudentinfobyId(l.getStudentid()));
+			}else if(l.getType()==1) {
+				l.setSta(taskService.queryStaffbyId(l.getStudentid()));
+			}
+		}
+		return list;
+	}
 }
