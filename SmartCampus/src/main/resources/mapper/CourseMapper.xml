@@ -6,6 +6,25 @@
     <result column="courseName" jdbcType="VARCHAR" property="coursename" />
     <result column="courseTime" jdbcType="INTEGER" property="coursetime" />
   </resultMap>
+  
+  <select id="queryByVidGid" resultType="com.accp.domain.Course">
+  		SELECT `course`.`courseId`,`course`.`courseName`,`course`.`courseTime` FROM `vession` 
+
+		JOIN `vession_grade` ON (`vession`.vid = `vession_grade`.vid) 
+		
+		JOIN `vession_grade_majorid` ON (`vession_grade`.bid = `vession_grade_majorid`.bid)
+		
+		JOIN `vession_grade_majorid_course` ON (`vession_grade_majorid`.vgmId = `vession_grade_majorid_course`.vgmId)
+		
+		JOIN `course` ON (`vession_grade_majorid_course`.`courseId` = `course`.`courseId`)
+		
+		WHERE 1 = 1
+		
+		AND `vession_grade`.`vid`=#{vid}
+		
+		AND `vession_grade`.`gid`=#{gid}
+  </select>
+  
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">

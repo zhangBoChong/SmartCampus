@@ -3,9 +3,17 @@ package com.accp.mapper;
 import com.accp.domain.Topic;
 import com.accp.domain.TopicExample;
 import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+@Mapper
 public interface TopicMapper {
+	
+	List<Topic> queryTopic();
+	
+	int insertTopic(Topic topic);
+	
     long countByExample(TopicExample example);
 
     int deleteByExample(TopicExample example);

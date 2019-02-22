@@ -3,9 +3,15 @@ package com.accp.mapper;
 import com.accp.domain.Examination;
 import com.accp.domain.ExaminationExample;
 import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+@Mapper
 public interface ExaminationMapper {
+	
+	int insertExa(Examination exa);
+	
     long countByExample(ExaminationExample example);
 
     int deleteByExample(ExaminationExample example);

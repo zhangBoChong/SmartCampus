@@ -5,6 +5,11 @@
     <id column="examination_lx_id" jdbcType="INTEGER" property="examinationLxId" />
     <result column="examination_lx_type" jdbcType="VARCHAR" property="examinationLxType" />
   </resultMap>
+  
+  <select id="queryExaminationLx" resultType="com.accp.domain.ExaminationLx">
+  		SELECT * FROM `examination_lx`
+  </select>
+  
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">

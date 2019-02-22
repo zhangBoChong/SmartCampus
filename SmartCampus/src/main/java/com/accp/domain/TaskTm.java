@@ -1,53 +1,56 @@
 package com.accp.domain;
 
 public class TaskTm {
-    private Integer taskTmId;
+    private Integer task_tm_id;
 
-    private Integer topicId;
+    private Integer topic_id;
 
-    private Integer taskId;
+    private Integer task_id;
 
-    private Integer taskTmXzt;
+    private Integer task_tm_xzt;
 
-    private Integer taskTmWdt;
+    private Integer task_tm_wdt;
 
-    public Integer getTaskTmId() {
-        return taskTmId;
-    }
+	public Integer getTask_tm_id() {
+		return task_tm_id;
+	}
 
-    public void setTaskTmId(Integer taskTmId) {
-        this.taskTmId = taskTmId;
-    }
+	public void setTask_tm_id(Integer task_tm_id) {
+		this.task_tm_id = task_tm_id;
+	}
 
-    public Integer getTopicId() {
-        return topicId;
-    }
+	public Integer getTopic_id() {
+		return topic_id;
+	}
 
-    public void setTopicId(Integer topicId) {
-        this.topicId = topicId;
-    }
+	public void setTopic_id(Integer topic_id) {
+		this.topic_id = topic_id;
+	}
 
-    public Integer getTaskId() {
-        return taskId;
-    }
+	public Integer getTask_id() {
+		return task_id;
+	}
 
-    public void setTaskId(Integer taskId) {
-        this.taskId = taskId;
-    }
+	public void setTask_id(Integer task_id) {
+		this.task_id = task_id;
+	}
 
-    public Integer getTaskTmXzt() {
-        return taskTmXzt;
-    }
+	public Integer getTask_tm_xzt() {
+		return task_tm_xzt;
+	}
 
-    public void setTaskTmXzt(Integer taskTmXzt) {
-        this.taskTmXzt = taskTmXzt;
-    }
+	public void setTask_tm_xzt(Integer task_tm_xzt) {
+		this.task_tm_xzt = task_tm_xzt;
+	}
 
-    public Integer getTaskTmWdt() {
-        return taskTmWdt;
-    }
+	public Integer getTask_tm_wdt() {
+		return task_tm_wdt;
+	}
 
-    public void setTaskTmWdt(Integer taskTmWdt) {
-        this.taskTmWdt = taskTmWdt;
-    }
+	public void setTask_tm_wdt(Integer task_tm_wdt) {
+		this.task_tm_wdt = task_tm_wdt;
+	}
+
+    
+    
 }

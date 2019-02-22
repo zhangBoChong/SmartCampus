@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.accp.mapper.ZuoYeGuanLiMapper">
+	<select id="queryByZuoYeGuanLiByTid" resultType="com.accp.domain.ZuoYeGuanLi">
+		SELECT `grade`.`gname`,`clazz`.`cname`,`staff`.`tid` FROM `staff`
+
+		JOIN `clazz` ON (`staff`.`tid`=`clazz`.`tid`)
+		
+		JOIN `vession_grade` ON (`clazz`.`bid`=`vession_grade`.`bid`)
+		
+		JOIN `grade` ON (`vession_grade`.`gid`=`grade`.`gid`)
+		
+		WHERE `staff`.`tid` = #{tid}
+		
+	</select>
+	
+	<select id="queryXueYuanZuoYeGuanLi" resultType="com.accp.domain.ZuoYeGuanLi" >
+		SELECT `studentinfo`.`sid`,`studentinfo`.`sname`,`clazz`.`cname`,`grade`.`gname`,`staff`.`tid`,`staff`.`tname` FROM `studentinfo`
+
+		JOIN `clazz_student` ON (`studentinfo`.`sid`=`clazz_student`.`sid`)
+		
+		JOIN `clazz` ON (`clazz_student`.`cid`=`clazz`.`cid`)
+		
+		JOIN `vession_grade` ON (`clazz`.`bid`=`vession_grade`.`bid`)
+		 
+		JOIN `grade` ON (`vession_grade`.`gid`=`grade`.`gid`) 
+		
+		JOIN `clazz_teacher` ON (`clazz`.`cid`=`clazz_teacher`.`cid`)
+		
+		JOIN `staff` ON (`clazz_teacher`.`tid`=`staff`.`tid`)
+		
+		WHERE `grade`.`gname` = #{gname} AND `clazz`.`cname` = #{cname}
+	</select>
+	
+</mapper>

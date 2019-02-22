@@ -48,7 +48,7 @@ public class ZBCCourseServiceImpl implements ZBCCourseService{
 			vg.setGrade(grade);
 			Vession vession=vmapper.queryByVid(vg.getVid());
 			vg.setVession(vession);
-			List<Ctc> ctcs=ctcmapper.queryBycourseId(v.getCourse().getCourseid());
+			List<Ctc> ctcs=ctcmapper.queryBycourseId(v.getCourse().getCourseId());
 			for (Ctc ct : ctcs) {
 				Staff staff=smmapper.queryBytid(ct.getTid());
 				Clazz clazz=clzmapper.queryBycid(ct.getTid());

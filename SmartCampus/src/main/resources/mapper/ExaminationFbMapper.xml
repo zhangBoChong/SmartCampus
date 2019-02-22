@@ -6,6 +6,11 @@
     <result column="examination_id" jdbcType="INTEGER" property="examinationId" />
     <result column="csId" jdbcType="INTEGER" property="csid" />
   </resultMap>
+  <insert id="insertExaFb">
+  		INSERT INTO`examination_fb`(`examination_id`,`csId`)
+
+		VALUE  			   (#{examination_id},#{csId})	
+  </insert>
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">

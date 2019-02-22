@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>题库管理</title>
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+<style>
+.toubu { /* 头部 */
+	width: 1102px;
+	height: 85px;
+	border: solid 1px gray;
+}
+
+.zhongbu { /* 中部 */
+	background: #C0C0C0; /* 背景颜色*/
+	width: 1102px;
+	height: 900px;
+	border: solid 1px gray;
+}
+
+.youpang { /* 右旁 */
+	margin: 0 0 0 0;
+	width: 1102px;
+	height: 00px;
+	border: solid 1px gray;
+	background: white;
+}
+
+.tktj { /* 题库条件位置 */
+	width: 1100px;
+	margin: 0 0 0 10px;
+}
+
+.nj { /* 年级、课程、章节、难易度下拉框的大小 */
+	width: 100px;
+	height: 30px;
+}
+
+.xstk { /* 显示题库内容 */
+	border: 1px solid gray;
+	background: white;
+	width: 1100px;
+	height: 450px;
+	margin: 0 0 0 0;
+}
+
+.sxy {
+	margin: 0 0 0 420px;
+}
+
+.stsx { /* 试题筛选 */
+	margin: 0 0 0 500px;
+}
+
+.stnr { /* 试题内容 */
+	border: 1px solid gray;
+	height: 60px;
+	width: 1100px;
+	margin: 0 0 0 0;
+	background: #31B0D5; /* 试题内容背景颜色 */
+}
+
+.nr { /* 试题内容位置 */
+	margin: 0 0 0 450px;
+}
+
+.mtk { /* 模态框位置 */
+	margin: 22px 0 50px 1200px;
+}
+
+.dr { /* 导入位置 */
+	margin: 22px 0 50px 1200px;
+}
+</style>
+</head>
+<body>
+	<div class="toubu">
+		<span><h1>题库管理</h1></span>
+
+		<div class="mtk">
+			<!-- 模态框 -->
+			<!-- Button trigger modal -->
+			<button type="button" class="btn btn-primary btn-lg"
+				data-toggle="modal" data-target="#myModal">新增题目</button>
+
+			<!-- Modal -->
+			<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+				aria-labelledby="myModalLabel">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+							<h4 class="modal-title" id="myModalLabel">新增题目</h4>
+						</div>
+						<div class="modal-body">
+							题目内容``:<input id="mneirong" type="text"
+								style="height: 30px; width: 180px;" /><br /> 题目选项A:<input
+								id="ma" type="text" style="height: 30px; width: 180px;" />是否正确<input
+								id="mxza" type="checkbox" /><br /> 题目选项B:<input id="mb"
+								type="text" style="height: 30px; width: 180px;" />是否正确<input
+								id="mxzb" type="checkbox" /><br /> 题目选项C:<input id="mc"
+								type="text" style="height: 30px; width: 180px;" />是否正确<input
+								id="mxzc" type="checkbox" /><br /> 题目选项D:<input id="md"
+								type="text" style="height: 30px; width: 180px;" />是否正确<input
+								id="mxzd" type="checkbox" /><br /> <span
+								style="margin: 0 0 0 38px;"> 类型:<select id="mleixing"
+								style="height: 30px; width: 180px;">
+									<option value="1">选择题</option>
+									<option value="2">问答题</option>
+							</select><br />
+							</span> <span style="margin: 0 0 0 24px;"> 难易度:<select
+								id="mnanyidu" style="height: 30px; width: 180px;">
+									<option value="中">中</option>
+									<option value="容易">容易</option>
+									<option value="难">难</option>
+							</select><br />
+							</span> <span style="margin: 0 0 0 38px;"> 年级:<select
+								id="mnianji" style="height: 30px; width: 180px;">
+									<option value="1">S1</option>
+									<option value="2">S2</option>
+									<option value="3">Y2</option>
+							</select><br />
+							</span> <span style="margin: 0 0 0 38px;"> 章节:<select
+								id="mzhangjie" style="height: 30px; width: 180px;">
+									<option value="1">章节一</option>
+									<option value="2">章节二</option>
+									<option value="3">章节三</option>
+									<option value="4">章节四</option>
+									<option value="5">章节五</option>
+									<option value="6">章节六</option>
+							</select><br />
+							</span> <span style="margin: 0 0 0 38px;"> 课程:<select
+								id="mkecheng" style="height: 30px; width: 180px;">
+									<option value="1">HTML5</option>
+									<option value="2">JSP</option>
+									<option value="3">servlet</option>
+									<option value="4">mysql</option>
+									<option value="5">Ajax(.net)</option>
+									<option value="6">Ajax(java)</option>
+									<option value="7">spring</option>
+							</select><br />
+							</span>
+
+
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" id="mtijiao">提交</button>
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">Close</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="dr">
+			<!-- 导入 -->
+			<!-- Button trigger modal -->
+		</div>
+
+
+		<!-- 查询题库 -->
+	</div>
+	<div class="zhongbu">
+		<!-- 中部 -->
+		<form action="" method="post">
+			<div>
+				<h4>
+					<span class="stsx" style="color: red;">试题筛选</span>
+				</h4>
+			</div>
+			<!-- 左旁上 -->
+			<div class="zuopang">
+				<!-- 左旁 -->
+				<div class="youpang">
+					<!-- 右旁 -->
+
+				</div>
+				<div class="tktj">
+					<!-- 题库条件 -->
+					<h4>
+						<span id="tktj"> <select class="nj" id="banben"
+							name="banben">
+								<!-- 版本 -->
+								<option v-bind:value="0">版本名</option>
+								<option v-for="item in vessionList" v-bind:value="item.vid">{{item.vname}}</option>
+						</select>
+						</span> <span> <select class="nj" id="nianji">
+								<!-- 年级 -->
+								<option v-bind:value="0">年级</option>
+								<option v-for="item2 in gradeList" v-bind:value="item2.gid">{{item2.gname}}</option>
+						</select>
+						</span> <span> <select class="nj kc" id="kecheng">
+								<!-- 课程 -->
+								<option v-bind:value="0">课程</option>
+								<option v-for="item3 in courseList"
+									v-bind:value="item3.courseId">{{item3.courseName}}</option>
+						</select>
+						</span> <span> <select class="nj zj" id="zhangjie">
+								<!-- 章节 -->
+								<option v-bind:value="0">章节</option>
+								<option v-for="item4 in sectionList"
+									v-bind:value="item4.sectionId">{{item4.sectionName}}</option>
+						</select>
+						</span> <span> <select class="nj tx" id="tixing">
+								<!-- 题型 -->
+								<option v-bind:value="0">题型</option>
+								<option v-for="item5 in topicLxList"
+									v-bind:value="item5.topic_lx_id">{{item5.topic_lx_type}}</option>
+						</select>
+						</span> <span> <select class="nj nyd" id="nanyidu">
+								<!-- 难易度 -->
+								<option v-bind:value="0">难易度</option>
+								<option v-for="item6 in topicList"
+									v-bind:value="item6.topic_level">{{item6.topic_level}}</option>
+						</select>
+						</span>
+
+
+					</h4>
+				</div>
+				<div class="xstk">
+					<!-- 显示题库数据 -->
+					<table border="1" class="table">
+						<tr>
+							<td>题目编号</td>
+							<td>题目</td>
+							<td>课程</td>
+							<td>章节</td>
+							<td>题目类型</td>
+							<td>难易度</td>
+							<td>操作</td>
+						</tr>
+
+						<tr v-for="item7 in pageBean"
+							v-on:click="dianJiXianShi(item7.topic_id)">
+							<td>{{item7.topic_id}}</td>
+							<td>{{item7.topic_name}}</td>
+							<td>{{item7.courseName}}</td>
+							<td>{{item7.sectionName}}</td>
+							<td>{{item7.topic_lx_type}}</td>
+							<td>{{item7.topic_level}}</td>
+							<td><a v-on:click="deleteTopic(item7.topic_id)">删除</a></td>
+						</tr>
+
+					</table>
+					<div class="sxy"></div>
+
+				</div>
+				<div class="xsan">
+					<div class="stnr">
+						<h3>
+							<span class="nr">试题内容</span>
+						</h3>
+					</div>
+					<div>
+						<textarea style="width: 1100px; height: 118px; margin: 0 0 0 0;"
+							readonly="readonly">
+							{{topicNeiRong.topic_name}}
+						</textarea>
+					</div>
+					<div class="stnr">
+						<h3>
+							<span class="nr">试题答案</span>
+						</h3>
+					</div>
+					<div>
+						<textarea style="width: 1100px; height: 114px; margin: 0 0 0 0;"
+							readonly="readonly">
+							{{topicNeiRong.option_xx}}
+						</textarea>
+					</div>
+				</div>
+			</div>
+
+		</form>
+	</div>
+
+</body>
+
+</html>
+<script src="js/jquery-1.12.4.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/vue.js"></script>
+<script src="js/jquery.js"></script>
+<script type="text/javascript">
+	var v = new Vue({
+		el : ".tktj",
+		data : {
+			vessionList : null, //版本
+			gradeList : null, //年级
+			courseList : null, //课程
+			sectionList : null, //章节
+			topicLxList : null, //题型
+			topicList : null
+		//难易度
+		}
+	})
+
+	var v2 = new Vue({
+		el : ".xstk",
+		data : {
+			pageBean : null
+		//题库内容
+		},
+		methods : {
+			deleteTopic : function(topic_id) {
+				deleteTopic1(topic_id);
+			},
+			dianJiXianShi : function(topic_id) {
+				dianJiXianShi1(topic_id);
+			}
+		}
+	})
+
+	var v3 = new Vue({
+		el : ".xsan",
+		data : {
+			topicNeiRong : null
+		}
+	})
+
+	$(function() {
+		vessionList()
+		topicList()
+		topicLxList()
+		topicNeiRong(0, 0, 0, 0, 0, null)
+	})
+
+	function dianJiXianShi1(topic_id) {
+		$.ajax({
+			url : "/wshQueryByTopicId",
+			data : 'topic_id=' + topic_id,
+			dataType : 'json',
+			type : 'post',
+			success : function(data) {
+				v3.topicNeiRong = data;
+			}
+		})
+	}
+
+	function deleteTopic1(topic_id) {
+		$.ajax({
+			url : "/wshTopicDelete",
+			data : 'topic_id=' + topic_id,
+			success : function(data) {
+				if (data > 0) {
+					alert('删除成功！！！')
+					location.reload();
+				} else {
+					alert('删除失败！！！')
+				}
+
+			}
+		})
+	}
+
+	/*版本*/
+	function vessionList() {
+		$.ajax({
+			url : "/wshTiKuTiaoJianChaXun",
+			success : function(data) {
+				v.vessionList = data;
+			}
+		})
+	}
+
+	$("#banben").change(function() {
+		var vid = $(this).val();
+		var gid = $("#nianji").val();
+		var courseId = $("#kecheng").val();
+		var sectionId = $("#zhangjie").val();
+		var topic_lx_id = $("#tixing").val();
+		var topic_level = $("#nanyidu").val();
+		topicNeiRong(vid, gid, courseId, sectionId, topic_lx_id, topic_level)
+		$.ajax({
+			url : "/wshTiKuTiaoJianChaXun2",
+			data : 'vid=' + vid,
+			dataType : 'json',
+			type : 'post',
+			success : function(data) {
+				v.gradeList = data;
+			}
+		})
+	})
+
+	$("#nianji").change(function() {
+		var vid = $("#banben").val();
+		var gid = $(this).val();
+		var courseId = $("#kecheng").val();
+		var sectionId = $("#zhangjie").val();
+		var topic_lx_id = $("#tixing").val();
+		var topic_level = $("#nanyidu").val();
+		topicNeiRong(vid, gid, courseId, sectionId, topic_lx_id, topic_level)
+		$.ajax({
+			url : "/wshTiKuTiaoJianChaXun3",
+			data : 'vid=' + vid + '&gid=' + gid,
+			dataType : 'json',
+			type : 'post',
+			success : function(data) {
+				v.courseList = data;
+			}
+		})
+	})
+
+	$("#kecheng").change(function() {
+		var vid = $("#banben").val();
+		var gid = $("#nianji").val();
+		var courseId = $("#kecheng").val();
+		var sectionId = $("#zhangjie").val();
+		var topic_lx_id = $("#tixing").val();
+		var topic_level = $("#nanyidu").val();
+		topicNeiRong(vid, gid, courseId, sectionId, topic_lx_id, topic_level)
+		$.ajax({
+			url : "/wshTiKuTiaoJianChaXun4",
+			data : 'vid=' + vid + '&gid=' + gid + '&courseId=' + courseId,
+			dataType : 'json',
+			type : 'post',
+			success : function(data) {
+				v.sectionList = data;
+			}
+		})
+	})
+
+	$("#zhangjie").change(function() {
+		var vid = $("#banben").val();
+		var gid = $("#nianji").val();
+		var courseId = $("#kecheng").val();
+		var sectionId = $(this).val();
+		var topic_lx_id = $("#tixing").val();
+		var topic_level = $("#nanyidu").val();
+		topicNeiRong(vid, gid, courseId, sectionId, topic_lx_id, topic_level)
+
+	})
+
+	$("#tixing").change(function() {
+		var vid = $("#banben").val();
+		var gid = $("#nianji").val();
+		var courseId = $("#kecheng").val();
+		var sectionId = $("#zhangjie").val();
+		var topic_lx_id = $(this).val();
+		var topic_level = $("#nanyidu").val();
+		topicNeiRong(vid, gid, courseId, sectionId, topic_lx_id, topic_level)
+
+	})
+
+	$("#nanyidu").change(function() {
+		var vid = $("#banben").val();
+		var gid = $("#nianji").val();
+		var courseId = $("#kecheng").val();
+		var sectionId = $("#zhangjie").val();
+		var topic_lx_id = $("#tixing").val();
+		var topic_level = $(this).val();
+		topicNeiRong(vid, gid, courseId, sectionId, topic_lx_id, topic_level)
+	})
+
+	/*题型*/
+	function topicLxList() {
+		$.ajax({
+			url : "/wshTiKuTiaoJianChaXun5",
+			success : function(data) {
+				v.topicLxList = data;
+			}
+		})
+	}
+
+	/*难易度*/
+	function topicList() {
+		$.ajax({
+			url : "/wshTiKuTiaoJianChaXun6",
+			success : function(data) {
+				v.topicList = data;
+			}
+		}) 
+		
+		
+		
+		
+		
+		 
+	}
+
+	/*查询题库内容*/
+	function topicNeiRong(vid, gid, courseId, sectionId, topic_lx_id,
+			topic_level) {
+		$.ajax({
+			url : "/wshTopicNeiRong",
+			data : 'vid=' + vid + '&gid=' + gid + '&courseId=' + courseId
+					+ '&sectionId=' + sectionId + '&topic_lx_id=' + topic_lx_id
+					+ '&topic_level=' + topic_level,
+			dataType : 'json',
+			type : 'post',
+			success : function(data) {
+				v2.pageBean = data;
+			}
+		})
+	}
+
+	/*新增题目*/
+	/*INSERT INTO `topic`(`topic_name`,`topic_lx_id`,`topic_level`,`sectionId`,`bid`,`courseId`)*/
+	$("#mtijiao").click(
+			function() {
+				var topic_name = $("#mneirong").val();
+				var topic_lx_id = $("#mleixing").val();
+				var sectionId = $("#mzhangjie").val();
+				var courseId = $("#mkecheng").val();
+				var bid = $("#mnianji").val();
+				var topic_level = $("#mnanyidu").val();
+				var option_xxa = $("#ma").val();
+				var mxza = $("#mxza").is(':checked');
+				if (mxza) {
+					mxza1 = 1;
+				} else {
+					mxza1 = 0;
+				}
+				var option_xxb = $("#mb").val();
+				var mxzb = $("#mxzb").is(':checked');
+				if (mxzb) {
+					mxzb1 = 1;
+				} else {
+					mxzb1 = 0;
+				}
+				var option_xxc = $("#mc").val();
+				var mxzc = $("#mxzc").is(':checked');
+				if (mxzc) {
+					mxzc1 = 1;
+				} else {
+					mxzc1 = 0;
+				}
+				var option_xxd = $("#md").val();
+				var mxzd = $("#mxzd").is(':checked');
+				if (mxzd) {
+					mxzd1 = 1;
+				} else {
+					mxzd1 = 0;
+				}
+				var sz1 = [];
+				sz1 = [ mxza1, mxzb1, mxzc1, mxzd1 ];
+				var sz2 = [];
+				sz2 = [ option_xxa, option_xxb, option_xxc, option_xxd ]
+
+				$.ajax({
+					url : "/wshTopicInsert",
+					data : 'topic_name=' + topic_name + "&topic_lx_id="
+							+ topic_lx_id + '&sectionId=' + sectionId
+							+ '&courseId=' + courseId + '&bid=' + bid
+							+ '&topic_level=' + topic_level + '&option_xx='
+							+ sz2 + '&option_pd=' + sz1,
+					dataType : 'json',
+					type : 'post',
+					success : function(data) {
+						if (data > 0) {
+							alert('新增成功！');
+							location.reload();
+						} else {
+							alert('新增失败！');
+						}
+					}
+				})
+
+			})
+</script>
+

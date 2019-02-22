@@ -3,9 +3,15 @@ package com.accp.mapper;
 import com.accp.domain.ExaminationTm;
 import com.accp.domain.ExaminationTmExample;
 import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+@Mapper
 public interface ExaminationTmMapper {
+	
+	int insertExaTm(@Param("topic_id") int topic_id,@Param("examination_id") int examination_id,@Param("examination_tm_xzt") int examination_tm_xzt,@Param("examination_tm_wdt") int examination_tm_wdt);
+	
     long countByExample(ExaminationTmExample example);
 
     int deleteByExample(ExaminationTmExample example);

@@ -12,6 +12,13 @@
     <result column="task_kstime" jdbcType="TIMESTAMP" property="taskKstime" />
     <result column="task_jstime" jdbcType="TIMESTAMP" property="taskJstime" />
   </resultMap>
+  
+  <insert id="insertTask" parameterType="com.accp.domain.Task" useGeneratedKeys="true" keyProperty="task_id">
+  		INSERT INTO `task`(`task_zf`,`task_lx_id`,`task_kstime`,`task_jstime`,`task_mc`)
+
+		VALUE 		      (#{task_zf},#{task_lx_id},#{task_kstime},#{task_jstime},#{task_mc})
+  </insert>
+  
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">

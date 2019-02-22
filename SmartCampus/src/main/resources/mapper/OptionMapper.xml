@@ -7,6 +7,14 @@
     <result column="topic_id" jdbcType="INTEGER" property="topicId" />
     <result column="option_pd" jdbcType="INTEGER" property="optionPd" />
   </resultMap>
+  
+  <insert id="insertOption">
+  		INSERT INTO `option`(`option_xx`,`topic_id`,`option_pd`)
+
+		VALUE  		        (#{option_xx},#{topic_id},#{option_pd})
+  </insert>
+  
+  
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">

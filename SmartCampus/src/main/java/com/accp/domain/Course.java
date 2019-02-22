@@ -1,33 +1,35 @@
 package com.accp.domain;
 
 public class Course {
-    private Integer courseid;
+    private Integer courseId;
 
-    private String coursename;
+    private String courseName;
 
-    private Integer coursetime;
+    private Integer courseTime;
+
+	public Integer getCourseId() {
+		return courseId;
+	}
+
+	public void setCourseId(Integer courseId) {
+		this.courseId = courseId;
+	}
+
+	public String getCourseName() {
+		return courseName;
+	}
+
+	public void setCourseName(String courseName) {
+		this.courseName = courseName;
+	}
+
+	public Integer getCourseTime() {
+		return courseTime;
+	}
+
+	public void setCourseTime(Integer courseTime) {
+		this.courseTime = courseTime;
+	}
     
-    public Integer getCourseid() {
-        return courseid;
-    }
-
-    public void setCourseid(Integer courseid) {
-        this.courseid = courseid;
-    }
-
-    public String getCoursename() {
-        return coursename;
-    }
-
-    public void setCoursename(String coursename) {
-        this.coursename = coursename;
-    }
-
-    public Integer getCoursetime() {
-        return coursetime;
-    }
-
-    public void setCoursetime(Integer coursetime) {
-        this.coursetime = coursetime;
-    }
+   
 }

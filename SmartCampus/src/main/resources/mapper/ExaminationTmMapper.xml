@@ -8,6 +8,11 @@
     <result column="examination_tm_xzt" jdbcType="DOUBLE" property="examinationTmXzt" />
     <result column="examination_tm_wdt" jdbcType="DOUBLE" property="examinationTmWdt" />
   </resultMap>
+  <insert id="insertExaTm">
+  		INSERT INTO`examination_tm`(`topic_id`,`examination_id`,`examination_tm_xzt`,`examination_tm_wdt`)
+
+		VALUE  			   (#{topic_id},#{examination_id},#{examination_tm_xzt},#{examination_tm_wdt})
+  </insert>
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">

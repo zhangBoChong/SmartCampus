@@ -6,6 +6,13 @@
     <result column="task_id" jdbcType="INTEGER" property="taskId" />
     <result column="csId" jdbcType="INTEGER" property="csid" />
   </resultMap>
+  
+  <insert id="insertTaskFb">
+  		INSERT INTO `task_fb`(`task_id`,`csId`)
+
+		VALUE      	     (#{task_id},#{csId})
+  </insert>
+  
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">

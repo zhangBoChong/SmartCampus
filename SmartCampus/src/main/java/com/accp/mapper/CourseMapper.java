@@ -3,9 +3,14 @@ package com.accp.mapper;
 import com.accp.domain.Course;
 import com.accp.domain.CourseExample;
 import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+@Mapper
 public interface CourseMapper {
+	List<Course> queryByVidGid(@Param("vid") Integer vid,@Param("gid")Integer gid);
+	
     long countByExample(CourseExample example);
 
     int deleteByExample(CourseExample example);

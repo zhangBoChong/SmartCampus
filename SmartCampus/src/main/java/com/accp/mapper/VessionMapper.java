@@ -8,6 +8,9 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 @Mapper
 public interface VessionMapper {
+	
+	List<Vession> vessionQuery();
+	
 	//根据vid查询版本
 	Vession queryByVid(Integer vid);
 	

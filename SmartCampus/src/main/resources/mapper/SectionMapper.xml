@@ -8,6 +8,28 @@
     <result column="status" jdbcType="INTEGER" property="status" />
     <result column="courseTime" jdbcType="INTEGER" property="coursetime" />
   </resultMap>
+  
+  <select id="queryByVidGidCourseId" resultType="com.accp.domain.Section">
+  		SELECT `section`.`sectionId`,`section`.`sectionName`,`section`.`cvgmId`,`section`.`status`,`section`.`courseTime` FROM `section`
+
+		JOIN `vession_grade_majorid_course` ON (`section`.`cvgmId` = `vession_grade_majorid_course`.`cvgmId`)
+		
+		JOIN `course` ON (`vession_grade_majorid_course`.`courseId` = `course`.`courseId`)
+		
+		JOIN `vession_grade_majorid` ON (`vession_grade_majorid_course`.`vgmId` = `vession_grade_majorid`.`vgmId`)
+		
+		JOIN `vession_grade` ON (`vession_grade_majorid`.`bid` = `vession_grade`.`bid`)
+		
+		WHERE 1 = 1
+		
+		AND `vession_grade`.`vid` = #{vid}
+		
+		AND `vession_grade`.`gid` =#{gid}
+		
+		AND `vession_grade_majorid_course`.`courseId` = #{courseId}
+  		
+  </select>
+  
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">

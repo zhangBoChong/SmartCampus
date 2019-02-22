@@ -3,93 +3,105 @@ package com.accp.domain;
 import java.util.Date;
 
 public class Task {
-    private Integer taskId;
+    private Integer task_id;
 
     private Integer bid;
 
-    private Integer courseid;
+    private Integer courseId;
 
-    private Integer sectionid;
+    private Integer sectionId;
 
     private Integer tid;
 
-    private Double taskZf;
+    private Double task_zf;
 
-    private Integer taskLxId;
+    private Integer task_lx_id;
 
-    private Date taskKstime;
+    private Date task_kstime;
 
-    private Date taskJstime;
+    private Date task_jstime;
 
-    public Integer getTaskId() {
-        return taskId;
-    }
+    private String task_mc;
+    
+	public String getTask_mc() {
+		return task_mc;
+	}
 
-    public void setTaskId(Integer taskId) {
-        this.taskId = taskId;
-    }
+	public void setTask_mc(String task_mc) {
+		this.task_mc = task_mc;
+	}
 
-    public Integer getBid() {
-        return bid;
-    }
+	public Integer getTask_id() {
+		return task_id;
+	}
 
-    public void setBid(Integer bid) {
-        this.bid = bid;
-    }
+	public void setTask_id(Integer task_id) {
+		this.task_id = task_id;
+	}
 
-    public Integer getCourseid() {
-        return courseid;
-    }
+	public Integer getBid() {
+		return bid;
+	}
 
-    public void setCourseid(Integer courseid) {
-        this.courseid = courseid;
-    }
+	public void setBid(Integer bid) {
+		this.bid = bid;
+	}
 
-    public Integer getSectionid() {
-        return sectionid;
-    }
+	public Integer getCourseId() {
+		return courseId;
+	}
 
-    public void setSectionid(Integer sectionid) {
-        this.sectionid = sectionid;
-    }
+	public void setCourseId(Integer courseId) {
+		this.courseId = courseId;
+	}
 
-    public Integer getTid() {
-        return tid;
-    }
+	public Integer getSectionId() {
+		return sectionId;
+	}
 
-    public void setTid(Integer tid) {
-        this.tid = tid;
-    }
+	public void setSectionId(Integer sectionId) {
+		this.sectionId = sectionId;
+	}
 
-    public Double getTaskZf() {
-        return taskZf;
-    }
+	public Integer getTid() {
+		return tid;
+	}
 
-    public void setTaskZf(Double taskZf) {
-        this.taskZf = taskZf;
-    }
+	public void setTid(Integer tid) {
+		this.tid = tid;
+	}
 
-    public Integer getTaskLxId() {
-        return taskLxId;
-    }
+	public Double getTask_zf() {
+		return task_zf;
+	}
 
-    public void setTaskLxId(Integer taskLxId) {
-        this.taskLxId = taskLxId;
-    }
+	public void setTask_zf(Double task_zf) {
+		this.task_zf = task_zf;
+	}
 
-    public Date getTaskKstime() {
-        return taskKstime;
-    }
+	public Integer getTask_lx_id() {
+		return task_lx_id;
+	}
 
-    public void setTaskKstime(Date taskKstime) {
-        this.taskKstime = taskKstime;
-    }
+	public void setTask_lx_id(Integer task_lx_id) {
+		this.task_lx_id = task_lx_id;
+	}
 
-    public Date getTaskJstime() {
-        return taskJstime;
-    }
+	public Date getTask_kstime() {
+		return task_kstime;
+	}
 
-    public void setTaskJstime(Date taskJstime) {
-        this.taskJstime = taskJstime;
-    }
+	public void setTask_kstime(Date task_kstime) {
+		this.task_kstime = task_kstime;
+	}
+
+	public Date getTask_jstime() {
+		return task_jstime;
+	}
+
+	public void setTask_jstime(Date task_jstime) {
+		this.task_jstime = task_jstime;
+	}
+
+    
 }

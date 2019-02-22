@@ -1,23 +1,27 @@
 package com.accp.domain;
 
 public class TaskLx {
-    private Integer taskLxId;
+    private Integer task_lx_id;
 
-    private String taskLxType;
+    private String task_lx_type;
 
-    public Integer getTaskLxId() {
-        return taskLxId;
-    }
+	public Integer getTask_lx_id() {
+		return task_lx_id;
+	}
 
-    public void setTaskLxId(Integer taskLxId) {
-        this.taskLxId = taskLxId;
-    }
+	public void setTask_lx_id(Integer task_lx_id) {
+		this.task_lx_id = task_lx_id;
+	}
 
-    public String getTaskLxType() {
-        return taskLxType;
-    }
+	public String getTask_lx_type() {
+		return task_lx_type;
+	}
 
-    public void setTaskLxType(String taskLxType) {
-        this.taskLxType = taskLxType;
-    }
+	public void setTask_lx_type(String task_lx_type) {
+		this.task_lx_type = task_lx_type;
+	}
+    
+    
+    
+   
 }

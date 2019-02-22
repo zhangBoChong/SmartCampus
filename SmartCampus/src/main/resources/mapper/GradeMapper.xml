@@ -5,6 +5,20 @@
     <id column="gid" jdbcType="INTEGER" property="gid" />
     <result column="gname" jdbcType="VARCHAR" property="gname" />
   </resultMap>
+  
+  <select id="queryByVid" resultType="com.accp.domain.Grade">
+  		SELECT `grade`.gid,`grade`.gname FROM `vession_grade` 
+
+		JOIN `grade` ON (`vession_grade`.gid = `grade`.gid)
+		
+		WHERE 1 = 1
+		
+		AND `vession_grade`.vid = #{vid}
+		
+		group by `grade`.gname
+  </select>
+  
+  
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">

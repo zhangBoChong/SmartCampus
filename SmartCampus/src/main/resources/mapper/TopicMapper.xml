@@ -2,16 +2,28 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.accp.mapper.TopicMapper">
   <resultMap id="BaseResultMap" type="com.accp.domain.Topic">
-    <id column="topic_id" jdbcType="INTEGER" property="topicId" />
-    <result column="topic_name" jdbcType="VARCHAR" property="topicName" />
-    <result column="topic_lx_id" jdbcType="INTEGER" property="topicLxId" />
-    <result column="topic_level" jdbcType="VARCHAR" property="topicLevel" />
-    <result column="topic_zqcount" jdbcType="INTEGER" property="topicZqcount" />
-    <result column="sectionId" jdbcType="INTEGER" property="sectionid" />
-    <result column="topic_count" jdbcType="INTEGER" property="topicCount" />
+    <id column="topic_id" jdbcType="INTEGER" property="topic_id" />
+    <result column="topic_name" jdbcType="VARCHAR" property="topic_name" />
+    <result column="topic_lx_id" jdbcType="INTEGER" property="topic_lx_id" />
+    <result column="topic_level" jdbcType="VARCHAR" property="topic_level" />
+    <result column="topic_zqcount" jdbcType="INTEGER" property="topic_zqcount" />
+    <result column="sectionId" jdbcType="INTEGER" property="sectionId" />
+    <result column="topic_count" jdbcType="INTEGER" property="topic_count" />
     <result column="bid" jdbcType="INTEGER" property="bid" />
-    <result column="courseId" jdbcType="INTEGER" property="courseid" />
+    <result column="courseId" jdbcType="INTEGER" property="courseId" />
   </resultMap>
+  
+  
+  <select id="queryTopic" resultType="com.accp.domain.Topic">
+  		SELECT `topic_level` FROM `topic` GROUP BY `topic_level`
+  </select>
+  
+  <insert id="insertTopic" parameterType="com.accp.domain.Topic" useGeneratedKeys="true" keyProperty="topic_id">
+  		INSERT INTO `topic`(`topic_name`,`topic_lx_id`,`topic_level`,`sectionId`,`bid`,`courseId`)
+
+		VALUE 		       (#{topic_name},#{topic_lx_id},#{topic_level},#{sectionId},#{bid},#{courseId})
+  </insert>
+  
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">

@@ -12,6 +12,13 @@
     <result column="examination_kstime" jdbcType="TIMESTAMP" property="examinationKstime" />
     <result column="examination_jstime" jdbcType="TIMESTAMP" property="examinationJstime" />
   </resultMap>
+  
+  <insert id="insertExa" parameterType="com.accp.domain.Examination" useGeneratedKeys="true" keyProperty="examination_id">
+  		INSERT INTO`examination`(`examination_zf`,`examination_lx_id`,`examination_kstime`,`examination_jstime`,`examination_mc`)
+
+		VALUE 			(#{examination_zf},#{examination_lx_id},#{examination_kstime},#{examination_jstime},#{examination_mc})
+  </insert>
+  
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">

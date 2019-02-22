@@ -8,6 +8,13 @@
     <result column="task_tm_xzt" jdbcType="INTEGER" property="taskTmXzt" />
     <result column="task_tm_wdt" jdbcType="INTEGER" property="taskTmWdt" />
   </resultMap>
+	
+	<insert id="insertTaskTm">
+		INSERT INTO `task_tm`(`topic_id`,`task_id`,`task_tm_xzt`,`task_tm_wdt`)
+
+		VALUE 	  	     (#{topic_id},#{task_id},#{task_tm_xzt},#{task_tm_wdt})
+	</insert>  
+  
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">

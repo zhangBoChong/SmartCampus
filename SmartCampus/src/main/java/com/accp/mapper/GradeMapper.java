@@ -8,6 +8,9 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 @Mapper
 public interface GradeMapper {
+	
+	List<Grade> queryByVid(Integer vid);
+	
 	//根据gid查询年级
 	Grade queryByGid(Integer gid);
 	
