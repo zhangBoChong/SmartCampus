@@ -12,7 +12,12 @@
     <result column="status" jdbcType="INTEGER" property="status" />
     <result column="choice" jdbcType="INTEGER" property="choice" />   
   </resultMap>
-  
+   <select id="selectBytid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from staff
+    where tid = #{tid,jdbcType=INTEGER}
+  </select>
  <resultMap type="com.accp.domain.Staff" id="staffclazz" extends="BaseResultMap">
  	<collection property="clzlist" column="tid" ofType="com.accp.domain.Clazz" 
  		select="com.accp.mapper.ClazzMapper.selectBytid"></collection>
