@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.accp.mapper.ExaminationMapper">
+  <resultMap id="BaseResultMap" type="com.accp.domain.Examination">
+    <id column="examination_id" jdbcType="INTEGER" property="examinationId" />
+    <result column="bid" jdbcType="INTEGER" property="bid" />
+    <result column="courseId" jdbcType="INTEGER" property="courseid" />
+    <result column="sectionId" jdbcType="INTEGER" property="sectionid" />
+    <result column="tid" jdbcType="INTEGER" property="tid" />
+    <result column="Examination_zf" jdbcType="DOUBLE" property="examinationZf" />
+    <result column="examination_lx_id" jdbcType="INTEGER" property="examinationLxId" />
+    <result column="examination_kstime" jdbcType="TIMESTAMP" property="examinationKstime" />
+    <result column="examination_jstime" jdbcType="TIMESTAMP" property="examinationJstime" />
+  </resultMap>
+  <resultMap type="com.accp.domain.Examination" id="examinationteacher" extends="BaseResultMap">
+  	<association property="examlxtype" column="examination_lx_id" javaType="com.accp.domain.ExaminationLx">
+  		<result column="examination_lx_type" jdbcType="VARCHAR" property="examinationLxType" />
+  	</association>
+  	<association property="coursename" column="courseId" javaType="com.accp.domain.Course">
+  		 <result column="courseName" jdbcType="VARCHAR" property="coursename" />
+  	</association>
+  	<association property="teachername" column="tid" javaType="com.accp.domain.Staff">
+  		<result column="tname" jdbcType="VARCHAR" property="tname" />
+  	</association>
+  </resultMap>
+  
+  
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    examination_id, bid, courseId, sectionId, tid, Examination_zf, examination_lx_id, 
+    examination_kstime, examination_jstime
+  </sql>
+  <select id="selectByExample" parameterType="com.accp.domain.ExaminationExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from examination
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from examination
+    where examination_id = #{examinationId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from examination
+    where examination_id = #{examinationId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.accp.domain.ExaminationExample">
+    delete from examination
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.accp.domain.Examination">
+    insert into examination (examination_id, bid, courseId, 
+      sectionId, tid, Examination_zf, 
+      examination_lx_id, examination_kstime, examination_jstime
+      )
+    values (#{examinationId,jdbcType=INTEGER}, #{bid,jdbcType=INTEGER}, #{courseid,jdbcType=INTEGER}, 
+      #{sectionid,jdbcType=INTEGER}, #{tid,jdbcType=INTEGER}, #{examinationZf,jdbcType=DOUBLE}, 
+      #{examinationLxId,jdbcType=INTEGER}, #{examinationKstime,jdbcType=TIMESTAMP}, #{examinationJstime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.accp.domain.Examination">
+    insert into examination
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="examinationId != null">
+        examination_id,
+      </if>
+      <if test="bid != null">
+        bid,
+      </if>
+      <if test="courseid != null">
+        courseId,
+      </if>
+      <if test="sectionid != null">
+        sectionId,
+      </if>
+      <if test="tid != null">
+        tid,
+      </if>
+      <if test="examinationZf != null">
+        Examination_zf,
+      </if>
+      <if test="examinationLxId != null">
+        examination_lx_id,
+      </if>
+      <if test="examinationKstime != null">
+        examination_kstime,
+      </if>
+      <if test="examinationJstime != null">
+        examination_jstime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="examinationId != null">
+        #{examinationId,jdbcType=INTEGER},
+      </if>
+      <if test="bid != null">
+        #{bid,jdbcType=INTEGER},
+      </if>
+      <if test="courseid != null">
+        #{courseid,jdbcType=INTEGER},
+      </if>
+      <if test="sectionid != null">
+        #{sectionid,jdbcType=INTEGER},
+      </if>
+      <if test="tid != null">
+        #{tid,jdbcType=INTEGER},
+      </if>
+      <if test="examinationZf != null">
+        #{examinationZf,jdbcType=DOUBLE},
+      </if>
+      <if test="examinationLxId != null">
+        #{examinationLxId,jdbcType=INTEGER},
+      </if>
+      <if test="examinationKstime != null">
+        #{examinationKstime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="examinationJstime != null">
+        #{examinationJstime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.accp.domain.ExaminationExample" resultType="java.lang.Long">
+    select count(*) from examination
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update examination
+    <set>
+      <if test="record.examinationId != null">
+        examination_id = #{record.examinationId,jdbcType=INTEGER},
+      </if>
+      <if test="record.bid != null">
+        bid = #{record.bid,jdbcType=INTEGER},
+      </if>
+      <if test="record.courseid != null">
+        courseId = #{record.courseid,jdbcType=INTEGER},
+      </if>
+      <if test="record.sectionid != null">
+        sectionId = #{record.sectionid,jdbcType=INTEGER},
+      </if>
+      <if test="record.tid != null">
+        tid = #{record.tid,jdbcType=INTEGER},
+      </if>
+      <if test="record.examinationZf != null">
+        Examination_zf = #{record.examinationZf,jdbcType=DOUBLE},
+      </if>
+      <if test="record.examinationLxId != null">
+        examination_lx_id = #{record.examinationLxId,jdbcType=INTEGER},
+      </if>
+      <if test="record.examinationKstime != null">
+        examination_kstime = #{record.examinationKstime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.examinationJstime != null">
+        examination_jstime = #{record.examinationJstime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update examination
+    set examination_id = #{record.examinationId,jdbcType=INTEGER},
+      bid = #{record.bid,jdbcType=INTEGER},
+      courseId = #{record.courseid,jdbcType=INTEGER},
+      sectionId = #{record.sectionid,jdbcType=INTEGER},
+      tid = #{record.tid,jdbcType=INTEGER},
+      Examination_zf = #{record.examinationZf,jdbcType=DOUBLE},
+      examination_lx_id = #{record.examinationLxId,jdbcType=INTEGER},
+      examination_kstime = #{record.examinationKstime,jdbcType=TIMESTAMP},
+      examination_jstime = #{record.examinationJstime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.accp.domain.Examination">
+    update examination
+    <set>
+      <if test="bid != null">
+        bid = #{bid,jdbcType=INTEGER},
+      </if>
+      <if test="courseid != null">
+        courseId = #{courseid,jdbcType=INTEGER},
+      </if>
+      <if test="sectionid != null">
+        sectionId = #{sectionid,jdbcType=INTEGER},
+      </if>
+      <if test="tid != null">
+        tid = #{tid,jdbcType=INTEGER},
+      </if>
+      <if test="examinationZf != null">
+        Examination_zf = #{examinationZf,jdbcType=DOUBLE},
+      </if>
+      <if test="examinationLxId != null">
+        examination_lx_id = #{examinationLxId,jdbcType=INTEGER},
+      </if>
+      <if test="examinationKstime != null">
+        examination_kstime = #{examinationKstime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="examinationJstime != null">
+        examination_jstime = #{examinationJstime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where examination_id = #{examinationId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.accp.domain.Examination">
+    update examination
+    set bid = #{bid,jdbcType=INTEGER},
+      courseId = #{courseid,jdbcType=INTEGER},
+      sectionId = #{sectionid,jdbcType=INTEGER},
+      tid = #{tid,jdbcType=INTEGER},
+      Examination_zf = #{examinationZf,jdbcType=DOUBLE},
+      examination_lx_id = #{examinationLxId,jdbcType=INTEGER},
+      examination_kstime = #{examinationKstime,jdbcType=TIMESTAMP},
+      examination_jstime = #{examinationJstime,jdbcType=TIMESTAMP}
+    where examination_id = #{examinationId,jdbcType=INTEGER}
+  </update>
+  
+  <select id="selectexamByexaminationId" resultMap="examinationteacher">
+  	SELECT e.*,elx.examination_lx_type,c.courseName,sta.tname FROM examination e
+	INNER JOIN examination_lx elx ON e.examination_lx_id=elx.examination_lx_id
+	INNER JOIN course c ON e.courseId=c.courseId
+	INNER JOIN staff sta ON e.tid=sta.tid
+	WHERE e.examination_id=#{examinationId}
+  </select>
+  
+  <select id="selectexamByexaminationIdTow" resultMap="examinationteacher">
+  	SELECT e.*,elx.examination_lx_type,c.courseName,sta.tname FROM examination e
+	INNER JOIN examination_lx elx ON e.examination_lx_id=elx.examination_lx_id
+	INNER JOIN course c ON e.courseId=c.courseId
+	INNER JOIN staff sta ON e.tid=sta.tid
+	WHERE e.examination_lx_id!=1 and e.examination_id=#{examinationId}
+  </select>
+  
+</mapper>

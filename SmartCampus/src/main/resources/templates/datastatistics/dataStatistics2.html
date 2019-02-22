@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>班级数据</title>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
+		<style type="text/css">
+			body{
+				font-size: 15px;
+			}
+			.marginbottom{
+				margin-bottom: 1rem;
+			}
+			.margintop{
+				margin-top: 1rem;
+			}
+			.backgroundtoolbar{
+				background: url(img/skin_/toolbarbg.png);
+			}
+			.chartborder{
+				border: solid 1px #cfcfcf;
+				padding: 10px;
+				margin: 15px 0px;
+			}
+			.aclass_fdiv .basicInforma{}
+			.aclass_fdiv .subtitleP{
+				margin-top: 10px;
+				height: 36px;
+			    font-size: 15px;
+			    line-height: 36px;
+			    padding-left: 15px;
+			    background: url(img/skin_/toolbarbg.png);
+			    border-bottom: 1px solid #cfcfcf;
+			    border-top: 1px solid #cfcfcf;
+			    cursor: move;
+			}
+			.aclass_fdiv .bInformaDiv table{
+				width: 480px;
+				margin-left: 1rem;
+			}
+			.aclass_fdiv .eInformaDiv table tr:first-child{
+				text-align: center;
+			}
+			
+		</style>
+	</head>
+	<body>
+		<div class="container-fluid aclass_fdiv">
+			<div class="basicInforma">
+				<p class="subtitleP">班级基本信息</p>
+				<div class="bInformaDiv">
+					<table class="table table-bordered">
+						<tr>
+							<td class="backgroundtoolbar">班级名</td><td th:text="${clzobj.cname}"></td>
+							<td class="backgroundtoolbar">年级</td>
+							<td>
+								<span th:text="${clzobj.vgobj.grade.gname}"></span>
+								<span th:text="${clzobj.vgobj.vession.vname}"></span>
+							</td>
+						</tr>
+						<tr>
+							<td class="backgroundtoolbar">班主任</td><td th:text="${clzobj.tobj.tname}"></td>
+							<td class="backgroundtoolbar">班级人数</td><td th:text="${clzobj.clazzstudentnub}"></td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div class="examInforma">
+				<p class="subtitleP">考试成绩综合信息</p>
+				<div class="eInformaDiv">
+					<div class="eInformaChart3 chartborder" id="containerstu" style="height: 650px;width: 1500px;margin-left: 1.5rem;"></div>
+					<table class="table table-bordered">
+						<tr class="backgroundtoolbar">
+							<td>学号</td>
+							<td class="examnamestu">姓名</td>
+							<td>考试参加次数</td>
+							<td>平均分（总分/考试次数）</td>
+						</tr>
+						<tr th:each="cls:${clslist}" th:attr="data-stuid=${cls.stu.sid}"  class="gomine">
+							<td th:text="${cls.stu.snumber}"></td>
+							<td class="stuname" th:text="${cls.stu.sname}"></td>
+							<td class="hide examname" th:each="esn:${cls.examlist}" th:text="${esn.examobj.coursename.coursename}"></td>
+							<td th:each="es:${cls.examlist}"><span class="ksfshu" th:text="${es.score}"></span></td>
+							<td class="examnub"></td>
+							<td class="meanscore"></td>
+						</tr>
+					</table>
+					<div class="eInformaChart2 chartborder" id="containerks" style="height: 650px;width: 1500px;margin-left: 1.5rem;"></div>
+					
+				</div>
+			</div>
+			<div class="checkingin">
+				<p class="subtitleP">班级出勤统计信息</p>
+				<div class="cInformaDiv">
+					<table class="table table-bordered">
+						<tr class="backgroundtoolbar"><td>学号</td><td>姓名</td><td>迟到早退次数</td><td>旷课次数</td><td>请假次数</td></tr>
+						<tr th:each="clsa:${clsattencelist}">
+							<td th:text="${clsa.stuobj.snumber}"></td>
+							<td th:text=${clsa.stuobj.sname}></td>
+							<td class="lateshu" th:text=${clsa.acountobj.latecount}></td>
+							<td class="truantshu" th:text=${clsa.acountobj.truant}></td>
+							<td class="vacateshu" th:text=${clsa.acountobj.vacate}></td>
+						</tr>
+					</table>
+					<div class="cInformaChart chartborder" id="containerkq" style="height: 650px;width: 1500px;margin-left: 1.5rem;"></div>
+				</div>
+			</div>
+		</div>
+		<script src="js/jquery-1.12.4.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+        <script type="text/javascript" src="js/echarts.js"></script>
+		<script type="text/javascript">
+			$(function(){
+				$(".gomine").click(function(){
+					//获取当前登录用户的id,判断是否可以查看单个学员具体信息 
+					/* if(true){
+						return;
+					} */
+					var stuid=$(this).attr("data-stuid");
+					alert(stuid);
+					window.location.href="/toDataStatistics?sid="+stuid;
+				});
+				//---考试名称---
+				var tdlist="";
+				var tdcnamelist=[];
+				$(".gomine:first .examname").each(function(){
+					var td=$(this).html();
+					tdlist+="<td>"+td+"</td>";
+					tdcnamelist.push(td);
+				});
+				//alert(tdcnamelist);
+				$(".examnamestu").after(tdlist);
+				
+				
+				$(".gomine").each(function(){
+					var nub=0;
+					var pjscore=0;
+					$(this).find(".ksfshu").each(function(){
+						var f=$(this).text();
+						pjscore=Number(pjscore);
+						f=Number(f);
+						pjscore+=f;
+						nub++;
+					});
+					//pjscore=pjscore/nub;
+					//alert("计算平均分："+pjscore+"---"+(pjscore/nub)+"---"+nub);
+					$(this).find(".examnub").text(nub);
+					$(this).find(".meanscore").text(Number(pjscore/nub));
+				});
+				
+				//-------考试柱状图-----------
+				var snamelist=[];
+				$(".stuname").each(function(){
+					var sname=$(this).html();
+					snamelist.push(sname);
+				});
+				//alert("snamelist:"+snamelist);
+				var avgscorelist=[];
+				$(".meanscore").each(function(){
+					var avgscore=$(this).html();
+					avgscorelist.push(avgscore);
+				});
+				//alert("avgscorelist:"+avgscorelist);
+				
+				//------------考勤柱状图-----------------
+				var lateshulist=[];
+				$(".lateshu").each(function(){
+					var lateshu=$(this).html();
+					lateshulist.push(lateshu);
+				});
+				//alert("lateshulist:"+lateshulist);
+				var truantshulist=[];
+				$(".truantshu").each(function(){
+					var truantshu=$(this).html();
+					truantshulist.push(truantshu);
+				});
+				//alert("truantshulist:"+truantshulist);
+				var vacateshulist=[];
+				$(".vacateshu").each(function(){
+					var vacateshu=$(this).html();
+					vacateshulist.push(vacateshu);
+				});
+				//alert("vacateshulist:"+vacateshulist);
+				
+				
+				
+				//--学员考试成绩综合排名柱状图--
+				var domstu = document.getElementById("containerstu");
+				var myChartstu = echarts.init(domstu);
+				var app = {};
+				option = null;
+				option = {
+				    color: ['#3398DB'],
+						title: {
+								text: '班级考试综合成绩',
+								x:'center'
+						},
+				    tooltip : {
+				        trigger: 'axis',
+				        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+				            type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+				        }
+				    },
+				    grid: {
+				        left: '3%',
+				        right: '4%',
+				        bottom: '3%',
+				        containLabel: true
+				    },
+				    xAxis : [
+				        {
+				            type : 'category',
+				            data : snamelist, 
+				            axisTick: {
+				                alignWithLabel: true
+				            }
+				        }
+				    ],
+				    yAxis : [
+				        {
+				            type : 'value'
+				        }
+				    ],
+				    series : [
+				        {
+				            name:'直接访问',
+				            type:'bar',
+				            barWidth: '50%',
+				            data:avgscorelist 
+				        }
+				    ]
+				};
+				if (option && typeof option === "object") {
+				    myChartstu.setOption(option, true);
+				}
+				
+				
+				//----------考试趋势折线图----------
+				var domks = document.getElementById("containerks");
+				var myChartks = echarts.init(domks);
+				var appks = {};
+				option = null;
+				option = {
+					title : {
+				        text: '班级考试趋势',
+				        x:'center'
+				    },
+					tooltip: {
+						trigger: 'item',
+						formatter: '{a} <br/>{b} : {c}'
+					},
+				    xAxis: {
+				        type: 'category',
+				        data: tdcnamelist //['Java逻辑', 'HTML5+CSS3']
+				    },
+				    yAxis: {
+				        type: 'value'
+				    },
+				    series: [{
+						name: '考试分数',
+						type: 'line',
+				        data: [70, 60]
+				    }]
+				};
+				if (option && typeof option === "object") {
+				    myChartks.setOption(option, true);
+				}
+				
+				
+				//--班级考勤异常统计--迟到早退次数、旷课次数、请假次数
+				var domkq = document.getElementById("containerkq");
+				var myChartkq = echarts.init(domkq);
+				var app = {};
+				option = null;
+				app.title = '堆叠柱状图';
+				
+				option = {
+					title : {
+					    text: '考勤异常情况统计',
+					    x:'left'
+					},
+				    tooltip : {
+				        trigger: 'axis',
+				        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+				            type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+				        }
+				    },
+				    legend: {
+				        data:['迟到早退次数','旷课次数','请假次数'] 
+				    },
+				    grid: {
+				        left: '3%',
+				        right: '4%',
+				        bottom: '3%',
+				        containLabel: true
+				    },
+				    xAxis : [
+				        {
+				            type : 'category',
+				            data : snamelist //['张三1','张三2','张三3','张三4']
+				        }
+				    ],
+				    yAxis : [
+				        {
+				            type : 'value'
+				        }
+				    ],
+				    series : [
+				    	{
+				            name:'迟到早退次数',
+				            type:'bar',
+				            stack: '考勤',
+				            barWidth: '40%',
+				            data:lateshulist //[1, 0, 1, 0]
+				        },
+				        {
+				            name:'旷课次数',
+				            type:'bar',
+				            stack: '考勤',
+				            barWidth: '40%',
+				            data:truantshulist //[0, 0, 0, 0]
+				        },
+				        {
+				            name:'请假次数',
+				            type:'bar',
+				            stack: '考勤',
+				            barWidth: '40%',
+				            data:vacateshulist //[0, 0, 2, 0]
+				        }
+				    ]
+				};
+				
+				if (option && typeof option === "object") {
+				    myChartkq.setOption(option, true);
+				}
+				
+				
+				//班级考试统计/最高分、最低分、总分、平均分
+				/* var dom = document.getElementById("containerkshi");
+				var myChart = echarts.init(dom);
+				var app = {};
+				option = null;
+				var seriesLabel = {
+				    normal: {
+				        show: true,
+				        textBorderColor: '#333',
+				        textBorderWidth: 2
+				    }
+				}
+				option = {
+				    title: {
+				        text: '班级考试统计'
+				    },
+				    tooltip: {
+				        trigger: 'axis',
+				        axisPointer: {
+				            type: 'shadow'
+				        }
+				    },
+				    legend: {
+				        data: ['Java逻辑', 'HTML5+CSS3', 'C#']
+				    },
+				    grid: {
+				        left: 100
+				    },
+				    yAxis: {
+				        type: 'value',
+				        axisLabel: {
+				            formatter: '{value}'
+				        }
+				    },
+				    xAxis: {
+				        type: 'category',
+				        inverse: true,
+				        data: ['最高分', '最低分', '平均分'],
+				        axisLabel: {
+							formatter: '{value}',
+				            margin: 20
+				        }
+				    },
+				    series: [
+				        {
+				            name: 'Java逻辑',
+				            type: 'bar',
+				            data: [90, 70, 78.5],
+				            label: seriesLabel
+				        },
+				        {
+				            name: 'HTML5+CSS3',
+				            type: 'bar',
+				            label: seriesLabel,
+				            data: [96, 88, 91.3]
+				        },
+				        {
+				            name: 'C#',
+				            type: 'bar',
+				            label: seriesLabel,
+				            data: [80, 72, 76.2]
+				        }
+				    ]
+				};
+				if (option && typeof option === "object") {
+				    myChart.setOption(option, true);
+				} */
+				
+			});
+		</script>
+	</body>
+</html>

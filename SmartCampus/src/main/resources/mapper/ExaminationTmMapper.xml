@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.accp.mapper.ExaminationTmMapper">
+  <resultMap id="BaseResultMap" type="com.accp.domain.ExaminationTm">
+    <id column="examination_tm_id" jdbcType="INTEGER" property="examinationTmId" />
+    <result column="topic_id" jdbcType="INTEGER" property="topicId" />
+    <result column="examination_id" jdbcType="INTEGER" property="examinationId" />
+    <result column="examination_tm_xzt" jdbcType="DOUBLE" property="examinationTmXzt" />
+    <result column="examination_tm_wdt" jdbcType="DOUBLE" property="examinationTmWdt" />
+  </resultMap>
+  <resultMap type="com.accp.domain.ExaminationTm" id="aexamtiminfo" extends="BaseResultMap">
+  	<association property="topicobj" column="topic_id" javaType="com.accp.domain.Topic" 
+  			select="com.accp.mapper.TopicMapper.selecttopicsection"></association>
+  </resultMap>
+  
+  
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    examination_tm_id, topic_id, examination_id, examination_tm_xzt, examination_tm_wdt
+  </sql>
+  <select id="selectByExample" parameterType="com.accp.domain.ExaminationTmExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from examination_tm
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from examination_tm
+    where examination_tm_id = #{examinationTmId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from examination_tm
+    where examination_tm_id = #{examinationTmId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.accp.domain.ExaminationTmExample">
+    delete from examination_tm
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.accp.domain.ExaminationTm">
+    insert into examination_tm (examination_tm_id, topic_id, examination_id, 
+      examination_tm_xzt, examination_tm_wdt)
+    values (#{examinationTmId,jdbcType=INTEGER}, #{topicId,jdbcType=INTEGER}, #{examinationId,jdbcType=INTEGER}, 
+      #{examinationTmXzt,jdbcType=DOUBLE}, #{examinationTmWdt,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.accp.domain.ExaminationTm">
+    insert into examination_tm
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="examinationTmId != null">
+        examination_tm_id,
+      </if>
+      <if test="topicId != null">
+        topic_id,
+      </if>
+      <if test="examinationId != null">
+        examination_id,
+      </if>
+      <if test="examinationTmXzt != null">
+        examination_tm_xzt,
+      </if>
+      <if test="examinationTmWdt != null">
+        examination_tm_wdt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="examinationTmId != null">
+        #{examinationTmId,jdbcType=INTEGER},
+      </if>
+      <if test="topicId != null">
+        #{topicId,jdbcType=INTEGER},
+      </if>
+      <if test="examinationId != null">
+        #{examinationId,jdbcType=INTEGER},
+      </if>
+      <if test="examinationTmXzt != null">
+        #{examinationTmXzt,jdbcType=DOUBLE},
+      </if>
+      <if test="examinationTmWdt != null">
+        #{examinationTmWdt,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.accp.domain.ExaminationTmExample" resultType="java.lang.Long">
+    select count(*) from examination_tm
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update examination_tm
+    <set>
+      <if test="record.examinationTmId != null">
+        examination_tm_id = #{record.examinationTmId,jdbcType=INTEGER},
+      </if>
+      <if test="record.topicId != null">
+        topic_id = #{record.topicId,jdbcType=INTEGER},
+      </if>
+      <if test="record.examinationId != null">
+        examination_id = #{record.examinationId,jdbcType=INTEGER},
+      </if>
+      <if test="record.examinationTmXzt != null">
+        examination_tm_xzt = #{record.examinationTmXzt,jdbcType=DOUBLE},
+      </if>
+      <if test="record.examinationTmWdt != null">
+        examination_tm_wdt = #{record.examinationTmWdt,jdbcType=DOUBLE},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update examination_tm
+    set examination_tm_id = #{record.examinationTmId,jdbcType=INTEGER},
+      topic_id = #{record.topicId,jdbcType=INTEGER},
+      examination_id = #{record.examinationId,jdbcType=INTEGER},
+      examination_tm_xzt = #{record.examinationTmXzt,jdbcType=DOUBLE},
+      examination_tm_wdt = #{record.examinationTmWdt,jdbcType=DOUBLE}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.accp.domain.ExaminationTm">
+    update examination_tm
+    <set>
+      <if test="topicId != null">
+        topic_id = #{topicId,jdbcType=INTEGER},
+      </if>
+      <if test="examinationId != null">
+        examination_id = #{examinationId,jdbcType=INTEGER},
+      </if>
+      <if test="examinationTmXzt != null">
+        examination_tm_xzt = #{examinationTmXzt,jdbcType=DOUBLE},
+      </if>
+      <if test="examinationTmWdt != null">
+        examination_tm_wdt = #{examinationTmWdt,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where examination_tm_id = #{examinationTmId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.accp.domain.ExaminationTm">
+    update examination_tm
+    set topic_id = #{topicId,jdbcType=INTEGER},
+      examination_id = #{examinationId,jdbcType=INTEGER},
+      examination_tm_xzt = #{examinationTmXzt,jdbcType=DOUBLE},
+      examination_tm_wdt = #{examinationTmWdt,jdbcType=DOUBLE}
+    where examination_tm_id = #{examinationTmId,jdbcType=INTEGER}
+  </update>
+  
+  <select id="selectallexamtim" resultMap="BaseResultMap">
+  SELECT * FROM examination_tm  GROUP BY topic_id
+  </select>
+  
+  <select id="selectexamtimByexamid" resultMap="aexamtiminfo">
+  SELECT * FROM examination_tm WHERE examination_id=#{examinationId}
+  </select>
+  
+  
+</mapper>

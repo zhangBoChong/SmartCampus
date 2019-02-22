@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>数据统计</title>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
+		<style type="text/css">
+			body{
+				font-size: 15px;
+			}
+			.marginbottom{
+				margin-bottom: 1rem;
+			}
+			.margintop{
+				margin-top: 1rem;
+			}
+			.backgroundtoolbar{
+				background: url(img/skin_/toolbarbg.png);
+			}
+			.chartborder{
+				border: solid 1px #cfcfcf;
+				padding: 10px;
+				margin: 15px 0px;
+			}
+			.individual_fdiv .basicInforma{}
+			.individual_fdiv .subtitleP{
+				margin-top: 10px;
+				height: 36px;
+			    font-size: 15px;
+			    line-height: 36px;
+			    padding-left: 15px;
+			    background: url(img/skin_/toolbarbg.png);
+			    border-bottom: 1px solid #cfcfcf;
+			    border-top: 1px solid #cfcfcf;
+			    cursor: move;
+			}
+			.individual_fdiv .basicInforma .bInformaDiv{
+				display: flex;
+			}
+			.individual_fdiv .basicInforma .bInformaDiv>div:nth-child(1){
+				margin-left: 1rem;
+				margin-right: 1.5rem;
+			}
+			.individual_fdiv .basicInforma .bInformaDiv>div:nth-child(2){
+				width: 420px;
+			}
+			.myclassbtn{
+				margin: 5px 0px 20px 40px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container-fluid individual_fdiv">
+			<div class="basicInforma">
+				<p class="subtitleP">基本信息</p>
+				<div class="bInformaDiv">
+					<div><img th:attr="src=${stuobj.headimg}" width="120px"/></div>
+					<div><!-- src="img/yuantiao.jpg" -->
+						<table class="table table-bordered">
+							<tr>
+								<td class="backgroundtoolbar">姓名</td><td th:text="${stuobj.sname}"></td>
+								<td class="backgroundtoolbar">学号</td><td th:text="${stuobj.snumber}"></td>
+							</tr>
+							<tr th:each="c:${stuobj.clsobj}" th:if="${c.status==1}">
+								<td  class="backgroundtoolbar">班级</td><td  th:text="${c.cobj.cname}"></td>
+								<td class="backgroundtoolbar">年级</td>
+								<td>
+									<span th:text="${c.cobj.vgobj.grade.gname}"></span>
+									<span th:text="${c.cobj.vgobj.vession.vname}"></span>
+								</td>
+							</tr>
+						</table>
+					</div>
+					<div class="myclassbtn" style="display: none;">
+						<p> 历史班级</p>
+						<span th:each="c:${stuobj.clsobj}" th:unless="${c.status==1}">
+							<input type="button" class="btn btn-default backgroundtoolbar beferclazz" th:attr="data-cid=${c.cid}" th:value="${c.cobj.cname}" />
+						</span>
+					</div>
+				</div>
+				
+			</div>
+			<div class="examInforma">
+				<p class="subtitleP">考试信息</p>
+				<div class="eInformaDiv ">
+					<table class="table table-bordered" >
+						<!-- data-id:考试id，查看考试详细情况  style="width: 800px;"-->
+						<tr class="backgroundtoolbar"><td>考试类型</td><td>试卷名称</td><td>考试分数</td><td><!-- 考试排名 --></td></tr>
+						<tr th:each="e:${elist}" th:attr="data-id=${e.examinationId}">
+							<!-- <td>考试开始时间</td><td th:text="${e.examobj.examinationKstime}"></td> -->
+							<td th:text="${e.examobj.examlxtype.examinationLxType}"></td>
+							<td class="examcname" th:text="${e.examobj.coursename.coursename}"></td>
+							<td class="exampaim" th:text="${e.score}"></td>
+							<td><!-- <a >3</a> --></td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div class="checkingin">
+				<p class="subtitleP">出勤信息</p>
+				<div class="cInformaDiv">
+					<table class="table table-bordered" ><!-- style="width: 800px;" -->
+						<tr class="backgroundtoolbar"><td>正常出勤次数</td><td>迟到早退次数</td><td>旷课次数</td><td>请假次数</td></tr>
+						<tr>
+							<td class="zhcshu" th:text="${acount.normalcount}"></td>
+							<td class="chdshu" th:text="${acount.latecount}"></td>
+							<td class="kuankshu" th:text="${acount.truant}"></td>
+							<td class="qjiashu" th:text="${acount.vacate}"></td>
+						</tr>
+					</table>
+					<input class="btn btn-default marginbottom backgroundtoolbar showCdetails" style="margin-left: 1.5rem;" type="button" value="查看详细信息" />
+					<input class="btn btn-default marginbottom backgroundtoolbar hideCdetails" style="display: none;margin-left: 1.5rem;" type="button" value="隐藏" />
+					<table class="table table-bordered Cdetails" style="display: none;">
+						<tr class="backgroundtoolbar"><td>时间</td><td>类别</td><td>原因</td></tr>
+						<tr><td>2018-08-06</td><td>迟到早退</td><td>迟到2分钟</td></tr>
+						<tr><td>2018-08-08</td><td>迟到早退</td><td>迟到5分钟</td></tr>
+						<tr><td>2018-08-16</td><td>迟到早退</td><td>迟到2分钟</td></tr>
+					</table>
+				</div>
+			</div>
+			<div class="" style="display: flex;">
+				<div class="eInformaChart chartborder" id="containerks" style="height: 500px;width: 750px;margin-left: 1rem;"></div>
+				<div class="cInformaChart chartborder" id="container" style="height: 500px;width: 750px;margin-left: 1rem;"></div>
+			</div>
+		</div>
+		<script src="js/jquery-1.12.4.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" src="js/echarts.js"></script>
+		<script type="text/javascript">
+			$(function(){
+				var mylshibj=$(".myclassbtn").find("span").size();
+				if(mylshibj!=0){
+					$(".myclassbtn").show();
+				}else{
+					$(".myclassbtn").hide();
+				}
+				$(".showCdetails").click(function(){
+					$(".Cdetails").show();
+					$(".hideCdetails").show();
+					$(".showCdetails").hide();
+				});
+				$(".hideCdetails").click(function(){
+					$(".Cdetails").hide();
+					$(".showCdetails").show();
+					$(".hideCdetails").hide();
+				});
+				
+				/*查看历史班级*/
+				$(".beferclazz").click(function(){
+					var cid=$(this).attr("data-cid");
+					window.location.href="/toshow?cid="+cid;
+				});
+				
+				//-------
+				var zhcshu=$(".zhcshu").html();
+				var chdshu=$(".chdshu").html();
+				var kuankshu=$(".kuankshu").html();
+				var qjiashu=$(".qjiashu").html();
+				
+				//--------
+				var cnamelist=[];
+				$(".examcname").each(function(){
+					var cname=$(this).html();
+					cnamelist.push(cname);
+				});
+				//alert(cnamelist);
+				var paimlist=[];
+				$(".exampaim").each(function(){
+					var paim=$(this).html();
+					paimlist.push(paim);
+				});
+				//alert(paimlist);
+				
+				//----------考试趋势折线图----------
+				var domks = document.getElementById("containerks");
+				var myChartks = echarts.init(domks);
+				var appks = {};
+				option = null;
+				option = {
+					title : {
+				        text: '考试排名趋势',
+				        x:'center'
+				    },
+					// 提示信息:tooltip
+					tooltip: {
+						trigger: 'item',
+						formatter: '{a} <br/>{b} : {c}'
+					},
+				    xAxis: {
+				        type: 'category',
+				        data: cnamelist//['Java逻辑','HTML5+CSS3','C#']
+				    },
+				    yAxis: {
+				        type: 'value'
+				    },
+				    series: [{
+						name: '考试排名',
+						type: 'line',
+				        data: paimlist//[3, 3, 2]
+				    }]
+				};
+				if (option && typeof option === "object") {
+				    myChartks.setOption(option, true);
+				}
+				
+				
+				//----------考勤饼状图----------
+				var dom = document.getElementById("container");
+				var myChart = echarts.init(dom);
+				var app = {};
+				option = null;
+				option = {
+				    title : {
+				        text: '考勤数据统计',
+				        x:'center'
+				    },
+				    tooltip : {
+				        trigger: 'item',
+				        formatter: "{a} <br/>{b} : {c} ({d}%)"
+				    },
+				    legend: {
+				        orient: 'vertical',
+				        left: 'left',
+				        data: ['正常','迟到早退','旷课','请假']
+				    },
+				    series : [
+				        {
+				            name: '类型',
+				            type: 'pie',
+				            radius : '55%',
+				            center: ['50%', '60%'],
+				            data:[
+				                {value:zhcshu, name:'正常'},
+				                {value:chdshu, name:'迟到早退'},
+				                {value:kuankshu, name:'旷课'},
+				                {value:qjiashu, name:'请假'}
+				            ],
+				            itemStyle: {
+				                emphasis: {
+				                    shadowBlur: 10,
+				                    shadowOffsetX: 0,
+				                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+				                }
+				            }
+				        }
+				    ]
+				};
+				if (option && typeof option === "object") {
+				    myChart.setOption(option, true);
+				}
+								
+			});
+		</script>
+	</body>
+</html>

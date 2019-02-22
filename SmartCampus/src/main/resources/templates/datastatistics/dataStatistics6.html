@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>升学鉴定表</title>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
+		<style type="text/css">
+			body{
+				font-size: 15px;
+			}
+			.marginbottom{
+				margin-bottom: 1rem;
+			}
+			.margintop{
+				margin-top: 1rem;
+			}
+			.backgroundtoolbar{
+				background: url(img/skin_/toolbarbg.png);
+			}
+			.fdiv2 .basicInforma{}
+			.fdiv2 .subtitleP{
+				margin-top: 10px;
+				height: 36px;
+			    font-size: 15px;
+			    line-height: 36px;
+			    padding-left: 15px;
+			    background: url(img/skin_/toolbarbg.png);
+			    border-bottom: 1px solid #cfcfcf;
+			    border-top: 1px solid #cfcfcf;
+			    cursor: move;
+			}
+			.exportdiv{
+				height:40px;
+				line-height:40px;
+				padding-left: 20px;
+				margin-bottom: 10px;
+			}
+			.exportdiv a{
+				padding: 8px 25px;
+				text-decoration: none;
+				color: black;
+				border: solid 1px #ddd;
+				border-radius: 5px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container fdiv2"><!-- container-fluid -->
+			<div class="moreClassExamInforma">
+				<p class="subtitleP">升学鉴定表</p>
+				<div class="exportdiv">
+					<a class="exporta backgroundtoolbar" href="#" download="升学鉴定表.xls" onclick="return ExcellentExport.excel(this, 'authentication', 'Sheet Name Here');">导 出</a>
+				</div>
+				<div class="moreClassEDiv" id="authentication">
+					<table class="table table-bordered">
+						<tr class="backgroundtoolbar">
+							<td>学号</td>
+							<td class="examnamestu">姓名</td>
+							<td>班主任</td>
+							<td>教员</td>
+							<td>副校长</td>
+						</tr>
+						<tr th:each="upsx:${uplist}" th:attr="data-stuid=${upsx.stu.sid}" class="gomineup">
+							<td th:text="${upsx.stu.snumber}"></td>
+							<td th:text="${upsx.stu.sname}"></td>
+							<td class="hide examname" th:each="esn:${upsx.examlist}" th:text="${esn.examobj.coursename.coursename}"></td>
+							<td th:each="es:${upsx.examlist}"><span class="ksfshu" th:text="${es.score}"></span></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+		<script src="js/jquery-1.12.4.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/excellentexport.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(function(){
+				//---考试名称---
+				var tdlist="";
+				var tdcnamelist=[];
+				$(".gomineup:first .examname").each(function(){
+					var td=$(this).html();
+					tdlist+="<td>"+td+"</td>";
+					tdcnamelist.push(td);
+				});
+				//alert(tdcnamelist);
+				$(".examnamestu").after(tdlist);
+				
+			});
+		</script>
+	</body>
+</html>

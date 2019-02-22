@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.accp.mapper.ExaminationFbMapper">
+  <resultMap id="BaseResultMap" type="com.accp.domain.ExaminationFb">
+    <id column="examination_fb_id" jdbcType="INTEGER" property="examinationFbId" />
+    <result column="examination_id" jdbcType="INTEGER" property="examinationId" />
+    <result column="csId" jdbcType="INTEGER" property="csid" />
+  </resultMap>
+  <resultMap type="com.accp.domain.ExaminationFb" id="examinationstudentinfo" extends="BaseResultMap">
+  	<association property="examobj" column="examination_id" javaType="com.accp.domain.Examination" 
+  			select="com.accp.mapper.ExaminationMapper.selectexamByexaminationId"></association>
+  </resultMap>
+  
+  
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    examination_fb_id, examination_id, csId
+  </sql>
+  <select id="selectByExample" parameterType="com.accp.domain.ExaminationFbExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from examination_fb
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from examination_fb
+    where examination_fb_id = #{examinationFbId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from examination_fb
+    where examination_fb_id = #{examinationFbId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.accp.domain.ExaminationFbExample">
+    delete from examination_fb
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.accp.domain.ExaminationFb">
+    insert into examination_fb (examination_fb_id, examination_id, csId
+      )
+    values (#{examinationFbId,jdbcType=INTEGER}, #{examinationId,jdbcType=INTEGER}, #{csid,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.accp.domain.ExaminationFb">
+    insert into examination_fb
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="examinationFbId != null">
+        examination_fb_id,
+      </if>
+      <if test="examinationId != null">
+        examination_id,
+      </if>
+      <if test="csid != null">
+        csId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="examinationFbId != null">
+        #{examinationFbId,jdbcType=INTEGER},
+      </if>
+      <if test="examinationId != null">
+        #{examinationId,jdbcType=INTEGER},
+      </if>
+      <if test="csid != null">
+        #{csid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.accp.domain.ExaminationFbExample" resultType="java.lang.Long">
+    select count(*) from examination_fb
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update examination_fb
+    <set>
+      <if test="record.examinationFbId != null">
+        examination_fb_id = #{record.examinationFbId,jdbcType=INTEGER},
+      </if>
+      <if test="record.examinationId != null">
+        examination_id = #{record.examinationId,jdbcType=INTEGER},
+      </if>
+      <if test="record.csid != null">
+        csId = #{record.csid,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update examination_fb
+    set examination_fb_id = #{record.examinationFbId,jdbcType=INTEGER},
+      examination_id = #{record.examinationId,jdbcType=INTEGER},
+      csId = #{record.csid,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.accp.domain.ExaminationFb">
+    update examination_fb
+    <set>
+      <if test="examinationId != null">
+        examination_id = #{examinationId,jdbcType=INTEGER},
+      </if>
+      <if test="csid != null">
+        csId = #{csid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where examination_fb_id = #{examinationFbId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.accp.domain.ExaminationFb">
+    update examination_fb
+    set examination_id = #{examinationId,jdbcType=INTEGER},
+      csId = #{csid,jdbcType=INTEGER}
+    where examination_fb_id = #{examinationFbId,jdbcType=INTEGER}
+  </update>
+  
+  <select id="selectBycsid" resultMap="examinationstudentinfo">
+  	SELECT * FROM examination_fb WHERE csId=#{csid}
+  </select>
+  
+</mapper>

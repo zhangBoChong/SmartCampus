@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.accp.mapper.ClazzMapper">
+  <resultMap id="BaseResultMap" type="com.accp.domain.Clazz">
+    <id column="cid" jdbcType="INTEGER" property="cid" />
+    <result column="cname" jdbcType="VARCHAR" property="cname" />
+    <result column="bid" jdbcType="INTEGER" property="bid" />
+    <result column="tid" jdbcType="INTEGER" property="tid" />
+    <result column="startTime" jdbcType="DATE" property="starttime" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="majorId" jdbcType="INTEGER" property="majorid" />
+  </resultMap>
+  <resultMap type="com.accp.domain.Clazz" id="clazzvessiongrade" extends="BaseResultMap">
+  	<association property="vgobj" column="bid" javaType="com.accp.domain.VessionGrade" 
+  			select="com.accp.mapper.VessionGradeMapper.selectgvBybid"></association>
+  </resultMap>
+  <resultMap type="com.accp.domain.Clazz" id="clazzteacher" extends="clazzvessiongrade">
+  	<association property="tobj" column="tid" javaType="com.accp.domain.Staff">
+  		<result column="tname" jdbcType="VARCHAR" property="tname" />
+  	</association>
+  </resultMap>
+  
+  
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    cid, cname, bid, tid, startTime, status, majorId
+  </sql>
+  <select id="selectByExample" parameterType="com.accp.domain.ClazzExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from clazz
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from clazz
+    where cid = #{cid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from clazz
+    where cid = #{cid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.accp.domain.ClazzExample">
+    delete from clazz
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.accp.domain.Clazz">
+    insert into clazz (cid, cname, bid, 
+      tid, startTime, status, 
+      majorId)
+    values (#{cid,jdbcType=INTEGER}, #{cname,jdbcType=VARCHAR}, #{bid,jdbcType=INTEGER}, 
+      #{tid,jdbcType=INTEGER}, #{starttime,jdbcType=DATE}, #{status,jdbcType=INTEGER}, 
+      #{majorid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.accp.domain.Clazz">
+    insert into clazz
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="cid != null">
+        cid,
+      </if>
+      <if test="cname != null">
+        cname,
+      </if>
+      <if test="bid != null">
+        bid,
+      </if>
+      <if test="tid != null">
+        tid,
+      </if>
+      <if test="starttime != null">
+        startTime,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="majorid != null">
+        majorId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="cid != null">
+        #{cid,jdbcType=INTEGER},
+      </if>
+      <if test="cname != null">
+        #{cname,jdbcType=VARCHAR},
+      </if>
+      <if test="bid != null">
+        #{bid,jdbcType=INTEGER},
+      </if>
+      <if test="tid != null">
+        #{tid,jdbcType=INTEGER},
+      </if>
+      <if test="starttime != null">
+        #{starttime,jdbcType=DATE},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="majorid != null">
+        #{majorid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.accp.domain.ClazzExample" resultType="java.lang.Long">
+    select count(*) from clazz
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update clazz
+    <set>
+      <if test="record.cid != null">
+        cid = #{record.cid,jdbcType=INTEGER},
+      </if>
+      <if test="record.cname != null">
+        cname = #{record.cname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bid != null">
+        bid = #{record.bid,jdbcType=INTEGER},
+      </if>
+      <if test="record.tid != null">
+        tid = #{record.tid,jdbcType=INTEGER},
+      </if>
+      <if test="record.starttime != null">
+        startTime = #{record.starttime,jdbcType=DATE},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.majorid != null">
+        majorId = #{record.majorid,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update clazz
+    set cid = #{record.cid,jdbcType=INTEGER},
+      cname = #{record.cname,jdbcType=VARCHAR},
+      bid = #{record.bid,jdbcType=INTEGER},
+      tid = #{record.tid,jdbcType=INTEGER},
+      startTime = #{record.starttime,jdbcType=DATE},
+      status = #{record.status,jdbcType=INTEGER},
+      majorId = #{record.majorid,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.accp.domain.Clazz">
+    update clazz
+    <set>
+      <if test="cname != null">
+        cname = #{cname,jdbcType=VARCHAR},
+      </if>
+      <if test="bid != null">
+        bid = #{bid,jdbcType=INTEGER},
+      </if>
+      <if test="tid != null">
+        tid = #{tid,jdbcType=INTEGER},
+      </if>
+      <if test="starttime != null">
+        startTime = #{starttime,jdbcType=DATE},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="majorid != null">
+        majorId = #{majorid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where cid = #{cid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.accp.domain.Clazz">
+    update clazz
+    set cname = #{cname,jdbcType=VARCHAR},
+      bid = #{bid,jdbcType=INTEGER},
+      tid = #{tid,jdbcType=INTEGER},
+      startTime = #{starttime,jdbcType=DATE},
+      status = #{status,jdbcType=INTEGER},
+      majorId = #{majorid,jdbcType=INTEGER}
+    where cid = #{cid,jdbcType=INTEGER}
+  </update>
+  
+  <select id="selectBytid" resultMap="clazzvessiongrade">
+  	SELECT * FROM clazz WHERE tid=#{tid}
+  </select>
+  
+  
+  <select id="selectclazzvg" resultMap="clazzvessiongrade">
+  	SELECT * FROM clazz 
+  </select>
+  
+  <select id="selectclazzvgBycid" resultMap="clazzvessiongrade">
+  	SELECT * FROM clazz where cid=#{cid}
+  </select>
+  
+  <select id="selectclazzBycid" resultMap="clazzteacher">
+  	SELECT c.*,sta.tname FROM clazz c
+	INNER JOIN staff sta ON c.tid=sta.tid
+	WHERE c.cid=#{cid}
+  </select>
+  
+</mapper>

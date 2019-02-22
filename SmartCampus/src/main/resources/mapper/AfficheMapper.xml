@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.accp.mapper.AfficheMapper">
+  <resultMap id="BaseResultMap" type="com.accp.domain.Affiche">
+    <id column="affiche_id" jdbcType="INTEGER" property="afficheId" />
+    <result column="affiche_title" jdbcType="VARCHAR" property="afficheTitle" />
+    <result column="affiche_content" jdbcType="VARCHAR" property="afficheContent" />
+    <result column="affiche_draft" jdbcType="INTEGER" property="afficheDraft" />
+    <result column="affiche_time" jdbcType="DATE" property="afficheTime" />
+    <result column="img_id" jdbcType="INTEGER" property="imgId" />
+    <result column="u_id" jdbcType="INTEGER" property="uId" />
+    <result column="affiche_sendee" jdbcType="INTEGER" property="afficheSendee" />
+    <result column="delete_id" jdbcType="INTEGER" property="deleteId" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    affiche_id, affiche_title, affiche_content, affiche_draft, affiche_time, img_id, 
+    u_id, affiche_sendee, delete_id
+  </sql>
+  <select id="selectByExample" parameterType="com.accp.domain.AfficheExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from affiche
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from affiche
+    where affiche_id = #{afficheId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from affiche
+    where affiche_id = #{afficheId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.accp.domain.AfficheExample">
+    delete from affiche
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.accp.domain.Affiche">
+    insert into affiche (affiche_id, affiche_title, affiche_content, 
+      affiche_draft, affiche_time, img_id, 
+      u_id, affiche_sendee, delete_id
+      )
+    values (#{afficheId,jdbcType=INTEGER}, #{afficheTitle,jdbcType=VARCHAR}, #{afficheContent,jdbcType=VARCHAR}, 
+      #{afficheDraft,jdbcType=INTEGER}, #{afficheTime,jdbcType=DATE}, #{imgId,jdbcType=INTEGER}, 
+      #{uId,jdbcType=INTEGER}, #{afficheSendee,jdbcType=INTEGER}, #{deleteId,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.accp.domain.Affiche">
+    insert into affiche
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="afficheId != null">
+        affiche_id,
+      </if>
+      <if test="afficheTitle != null">
+        affiche_title,
+      </if>
+      <if test="afficheContent != null">
+        affiche_content,
+      </if>
+      <if test="afficheDraft != null">
+        affiche_draft,
+      </if>
+      <if test="afficheTime != null">
+        affiche_time,
+      </if>
+      <if test="imgId != null">
+        img_id,
+      </if>
+      <if test="uId != null">
+        u_id,
+      </if>
+      <if test="afficheSendee != null">
+        affiche_sendee,
+      </if>
+      <if test="deleteId != null">
+        delete_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="afficheId != null">
+        #{afficheId,jdbcType=INTEGER},
+      </if>
+      <if test="afficheTitle != null">
+        #{afficheTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="afficheContent != null">
+        #{afficheContent,jdbcType=VARCHAR},
+      </if>
+      <if test="afficheDraft != null">
+        #{afficheDraft,jdbcType=INTEGER},
+      </if>
+      <if test="afficheTime != null">
+        #{afficheTime,jdbcType=DATE},
+      </if>
+      <if test="imgId != null">
+        #{imgId,jdbcType=INTEGER},
+      </if>
+      <if test="uId != null">
+        #{uId,jdbcType=INTEGER},
+      </if>
+      <if test="afficheSendee != null">
+        #{afficheSendee,jdbcType=INTEGER},
+      </if>
+      <if test="deleteId != null">
+        #{deleteId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.accp.domain.AfficheExample" resultType="java.lang.Long">
+    select count(*) from affiche
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update affiche
+    <set>
+      <if test="record.afficheId != null">
+        affiche_id = #{record.afficheId,jdbcType=INTEGER},
+      </if>
+      <if test="record.afficheTitle != null">
+        affiche_title = #{record.afficheTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.afficheContent != null">
+        affiche_content = #{record.afficheContent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.afficheDraft != null">
+        affiche_draft = #{record.afficheDraft,jdbcType=INTEGER},
+      </if>
+      <if test="record.afficheTime != null">
+        affiche_time = #{record.afficheTime,jdbcType=DATE},
+      </if>
+      <if test="record.imgId != null">
+        img_id = #{record.imgId,jdbcType=INTEGER},
+      </if>
+      <if test="record.uId != null">
+        u_id = #{record.uId,jdbcType=INTEGER},
+      </if>
+      <if test="record.afficheSendee != null">
+        affiche_sendee = #{record.afficheSendee,jdbcType=INTEGER},
+      </if>
+      <if test="record.deleteId != null">
+        delete_id = #{record.deleteId,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update affiche
+    set affiche_id = #{record.afficheId,jdbcType=INTEGER},
+      affiche_title = #{record.afficheTitle,jdbcType=VARCHAR},
+      affiche_content = #{record.afficheContent,jdbcType=VARCHAR},
+      affiche_draft = #{record.afficheDraft,jdbcType=INTEGER},
+      affiche_time = #{record.afficheTime,jdbcType=DATE},
+      img_id = #{record.imgId,jdbcType=INTEGER},
+      u_id = #{record.uId,jdbcType=INTEGER},
+      affiche_sendee = #{record.afficheSendee,jdbcType=INTEGER},
+      delete_id = #{record.deleteId,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.accp.domain.Affiche">
+    update affiche
+    <set>
+      <if test="afficheTitle != null">
+        affiche_title = #{afficheTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="afficheContent != null">
+        affiche_content = #{afficheContent,jdbcType=VARCHAR},
+      </if>
+      <if test="afficheDraft != null">
+        affiche_draft = #{afficheDraft,jdbcType=INTEGER},
+      </if>
+      <if test="afficheTime != null">
+        affiche_time = #{afficheTime,jdbcType=DATE},
+      </if>
+      <if test="imgId != null">
+        img_id = #{imgId,jdbcType=INTEGER},
+      </if>
+      <if test="uId != null">
+        u_id = #{uId,jdbcType=INTEGER},
+      </if>
+      <if test="afficheSendee != null">
+        affiche_sendee = #{afficheSendee,jdbcType=INTEGER},
+      </if>
+      <if test="deleteId != null">
+        delete_id = #{deleteId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where affiche_id = #{afficheId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.accp.domain.Affiche">
+    update affiche
+    set affiche_title = #{afficheTitle,jdbcType=VARCHAR},
+      affiche_content = #{afficheContent,jdbcType=VARCHAR},
+      affiche_draft = #{afficheDraft,jdbcType=INTEGER},
+      affiche_time = #{afficheTime,jdbcType=DATE},
+      img_id = #{imgId,jdbcType=INTEGER},
+      u_id = #{uId,jdbcType=INTEGER},
+      affiche_sendee = #{afficheSendee,jdbcType=INTEGER},
+      delete_id = #{deleteId,jdbcType=INTEGER}
+    where affiche_id = #{afficheId,jdbcType=INTEGER}
+  </update>
+</mapper>

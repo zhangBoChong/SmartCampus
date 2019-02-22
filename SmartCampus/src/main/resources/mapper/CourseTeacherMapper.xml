@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.accp.mapper.CourseTeacherMapper">
+  <resultMap id="BaseResultMap" type="com.accp.domain.CourseTeacher">
+    <id column="ctId" jdbcType="INTEGER" property="ctid" />
+    <result column="cvgmId" jdbcType="INTEGER" property="cvgmid" />
+    <result column="tid" jdbcType="INTEGER" property="tid" />
+  </resultMap>
+  
+  <resultMap type="com.accp.domain.CourseTeacher" id="clzteacher" extends="BaseResultMap">
+  	<association property="clzteacherobj" column="ctId" javaType="com.accp.domain.ClazzTeacher">
+  		<result column="cid" jdbcType="INTEGER" property="cid" />
+    	<result column="status" jdbcType="INTEGER" property="status" />
+  	</association>
+  	<association property="stfobj" column="tid" javaType="com.accp.domain.Staff">
+  		<result column="tname" jdbcType="VARCHAR" property="tname" />
+  	</association>
+  </resultMap>
+  
+  
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ctId, cvgmId, tid
+  </sql>
+  <select id="selectByExample" parameterType="com.accp.domain.CourseTeacherExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from course_teacher
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from course_teacher
+    where ctId = #{ctid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from course_teacher
+    where ctId = #{ctid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.accp.domain.CourseTeacherExample">
+    delete from course_teacher
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.accp.domain.CourseTeacher">
+    insert into course_teacher (ctId, cvgmId, tid
+      )
+    values (#{ctid,jdbcType=INTEGER}, #{cvgmid,jdbcType=INTEGER}, #{tid,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.accp.domain.CourseTeacher">
+    insert into course_teacher
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ctid != null">
+        ctId,
+      </if>
+      <if test="cvgmid != null">
+        cvgmId,
+      </if>
+      <if test="tid != null">
+        tid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ctid != null">
+        #{ctid,jdbcType=INTEGER},
+      </if>
+      <if test="cvgmid != null">
+        #{cvgmid,jdbcType=INTEGER},
+      </if>
+      <if test="tid != null">
+        #{tid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.accp.domain.CourseTeacherExample" resultType="java.lang.Long">
+    select count(*) from course_teacher
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update course_teacher
+    <set>
+      <if test="record.ctid != null">
+        ctId = #{record.ctid,jdbcType=INTEGER},
+      </if>
+      <if test="record.cvgmid != null">
+        cvgmId = #{record.cvgmid,jdbcType=INTEGER},
+      </if>
+      <if test="record.tid != null">
+        tid = #{record.tid,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update course_teacher
+    set ctId = #{record.ctid,jdbcType=INTEGER},
+      cvgmId = #{record.cvgmid,jdbcType=INTEGER},
+      tid = #{record.tid,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.accp.domain.CourseTeacher">
+    update course_teacher
+    <set>
+      <if test="cvgmid != null">
+        cvgmId = #{cvgmid,jdbcType=INTEGER},
+      </if>
+      <if test="tid != null">
+        tid = #{tid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ctId = #{ctid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.accp.domain.CourseTeacher">
+    update course_teacher
+    set cvgmId = #{cvgmid,jdbcType=INTEGER},
+      tid = #{tid,jdbcType=INTEGER}
+    where ctId = #{ctid,jdbcType=INTEGER}
+  </update>
+  
+  <select id="chaclzteacherBytid" resultMap="clzteacher">
+  	SELECT cot.*,ct.cid,staff.tname FROM course_teacher cot
+	INNER JOIN clazz_teacher ct ON cot.ctId=ct.ctid 
+	INNER JOIN staff ON cot.tid=staff.`tid`
+	<where>
+		ct.status=1
+		<if test="tid != null">
+			AND cot.tid=#{tid}
+		</if>
+	</where>
+  </select>
+  
+  
+</mapper>
