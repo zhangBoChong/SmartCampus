@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html xmlns:th="http://ww.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>作业管理</title>
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+<style>
+.toubu { /* 头部 */
+	width: 1400px;
+	height: 85px;
+	border: solid 1px gray;
+}
+
+.zhongbu { /* 中部 */
+	background: #C0C0C0; /* 背景颜色*/
+	width: 1400px;
+	height: 750px;
+	border: solid 1px gray;
+}
+
+.zuopang { /* 左旁 */
+	width: 280px;
+	height: 750px;
+	border: solid 1px gray;
+	background: white;
+}
+
+.youpang { /* 右旁 */
+	margin: 0 0 0 293px;
+	width: 1100px;
+	height: 180px;
+	border: solid 1px gray;
+	background: white;
+}
+
+#cjsj { /* 创建时间 */
+	margin: 0 0 0 75px;
+}
+
+.lx { /* 类型 */
+	margin: 15px 0 0 18px;
+}
+
+#zylx { /* 作业类型 */
+	width: 200px;
+	height: 30px;
+}
+
+#zymc { /* 作业名称 */
+	width: 200px;
+	height: 25px;
+}
+
+#zymc { /* 作业名称 */
+	margin: 15px 0 0 0;
+}
+
+#zf { /* 总分 */
+	margin: 0 0 0 123px;
+}
+
+#zfk { /* 总分的控件长度 */
+	width: 200px;
+	height: 25px;
+}
+
+#xztfk { /* 选择题的控件长度 */
+	width: 50px;
+	height: 30px;
+}
+
+#wdtfk { /* 问答题的控件长度 */
+	width: 50px;
+	height: 30px;
+}
+
+#xzt { /* 选择题位置 */
+	margin: 0 0 0 29px;
+}
+
+#wdt { /* 问答题几分一题的位置 */
+	margin: 0 0 0 178px;
+}
+
+.tktj { /* 题库条件位置 */
+	width: 1100px;
+	margin: 0 0 0 293px;
+}
+
+.nj { /* 年级、课程、章节、难易度下拉框的大小 */
+	width: 90px;
+	height: 30px;
+}
+
+.zgxz { /* 总共能选择多少道题的位置 */
+	margin: 0 0 0 50px;
+}
+
+.xstk { /* 显示题库内容 */
+	border: 1px solid gray;
+	background: white;
+	width: 1100px;
+	height: 450px;
+	margin: 0 0 0 293px;
+}
+
+.sxy {
+	margin: 0 0 0 420px;
+}
+
+.fbzy {
+	width: 1100px;
+	height: 66px;
+	margin: 0 0 0 293px;
+}
+
+.cxzy {
+	width: 330px;
+	height: 16px;
+	background-color:;
+	margin: 20px 0 20px 10px;
+}
+
+.cxzy1 {
+	margin: 30px 0 0 10px;
+}
+
+.xzbj {
+	margin: 40px 0 0 10px;
+}
+
+xzbj1 {
+	margin: 40px 0 0 10px;
+}
+</style>
+</head>
+<body>
+	<div class="toubu">
+		<span><h1>作业管理</h1> <!-- 查询作业 -->
+			<!-- <div class="cxzy1">
+				<h2>
+					<a href="jianchazuoye.html">检查作业</a>
+				</h2>
+			</div>
+			<div class="cxzy">
+				<h2>
+					<a href="zuoyechaxun.html">查询作业完成情况</a>
+				</h2>
+			</div> --></span>
+		<h3>
+			<div class="xzbj">
+				<span>年级:<select id="dianjinianji">
+						<option v-for="item8 in zuoYeGuanLiList"
+							v-bind:value="item8.gname">{{item8.gname}}</option>
+				</select>
+
+				</span><br /> <br /> <span> 班级:<select style="width: 130px;"
+					id="dianjibanji">
+						<option v-for="item9 in zuoYeGuanLiList"
+							v-bind:value="item9.cname">{{item9.cname}}</option>
+				</select>
+				</span><br /> <br />
+
+			</div>
+			<span style="margin: 40px 0 0 10px;">学员:<br /> <input
+				style="margin: 0 0 0 10px;" type="checkbox" id="all" />全选<br /></span>
+			<div class="xzbj1" id="list">
+				<span v-for="(item11,index) in zuoYeGuanLiList2"
+					style="margin: 0 0 0 10px;"> <input type="checkbox"
+					name="test" v-on:click="danjixueyuan(item11.sid)"
+					v-bind:value="item11.sid" />{{item11.sname}}<br v-if="index%2==1" />
+
+				</span>
+			</div>
+		</h3>
+	</div>
+	<div class="zhongbu">
+		<!-- 中部 -->
+		<div class="zuopang">
+			<!-- 左旁 -->
+			<div class="youpang">
+				<!-- 右旁 -->
+				<h3 class="lx">
+					<span> 作业类型: <select id="zylx" name="zuoyeleixing">
+							<!-- 作业类型 -->
+							<option v-for="item12 in taskLxList"
+								v-bind:value="item12.task_lx_id">{{item12.task_lx_type}}</option>
+					</select>
+					</span> <span id="cjsj"> <!-- 创建时间 --> 创建时间: <input id="zylx"
+						class="kstime" style="width: 268px;" type="datetime-local"
+						name="kstime" />---<input id="zylx" class="jstime"
+						style="width: 268px;" type="datetime-local" name="jstime" />
+					</span>
+					<p>
+						<span> 作业名称: <input id="zymc" type="text" value="" />
+						</span> <span id="zf"> 总分: <input id="zfk" type="text" value="" />
+						</span>
+					</p>
+					<p>
+						<span id="xzt"> 选择题 <select id="xztfk">
+								<!-- 选择题控件长度 -->
+								<option>2</option>
+								<option>4</option>
+								<option>6</option>
+						</select> 分一题
+						</span> <span id="wdt"> 问答题 <select id="wdtfk">
+								<!-- 问答题控件长度 -->
+								<option>2</option>
+								<option>4</option>
+								<option>6</option>
+						</select> 分一题
+						</span>
+					</p>
+
+				</h3>
+
+			</div>
+			<div class="tktj">
+				<!-- 题库条件 -->
+				<h4>
+					<span id="tktj"> <select class="nj" id="banben"
+						name="banben">
+							<!-- 版本 -->
+							<option v-bind:value="0">版本名</option>
+							<option v-for="item in vessionList" v-bind:value="item.vid">{{item.vname}}</option>
+					</select>
+					</span> <span> <select class="nj" id="nianji">
+							<!-- 年级 -->
+							<option v-bind:value="0">年级</option>
+							<option v-for="item2 in gradeList" v-bind:value="item2.gid">{{item2.gname}}</option>
+					</select>
+					</span> <span> <select class="nj kc" id="kecheng">
+							<!-- 课程 -->
+							<option v-bind:value="0">课程</option>
+							<option v-for="item3 in courseList" v-bind:value="item3.courseId">{{item3.courseName}}</option>
+					</select>
+					</span> <span> <select class="nj zj" id="zhangjie">
+							<!-- 章节 -->
+							<option v-bind:value="0">章节</option>
+							<option v-for="item4 in sectionList"
+								v-bind:value="item4.sectionId">{{item4.sectionName}}</option>
+					</select>
+					</span> <span> <select class="nj tx" id="tixing">
+							<!-- 题型 -->
+							<option v-bind:value="0">题型</option>
+							<option v-for="item5 in topicLxList"
+								v-bind:value="item5.topic_lx_id">{{item5.topic_lx_type}}</option>
+					</select>
+					</span> <span> <select class="nj nyd" id="nanyidu">
+							<!-- 难易度 -->
+							<option v-bind:value="0">难易度</option>
+							<option v-for="item6 in topicList"
+								v-bind:value="item6.topic_level">{{item6.topic_level}}</option>
+					</select>
+					</span>
+
+				</h4>
+			</div>
+			<div class="xstk">
+				<!-- 显示题库数据 -->
+				<table border="1" class="table">
+					<tr>
+						<td><input type="checkbox" id="all2"></td>
+						<td>题目编号</td>
+						<td>题目</td>
+						<td>课程</td>
+						<td>章节</td>
+						<td>题目类型</td>
+						<td>难易度</td>
+						<td>操作</td>
+					</tr>
+
+					<tbody id="list2">
+						<tr v-for="item7 in pageBean"
+							v-on:click="dianJiXianShi(item7.topic_id)">
+							<td><input type="checkbox" name="test2"
+								v-bind:value="item7.topic_id"
+								v-on:click="danjitimu(item7.topic_id)"></td>
+							<td>{{item7.topic_id}}</td>
+							<td>{{item7.topic_name}}</td>
+							<td>{{item7.courseName}}</td>
+							<td>{{item7.sectionName}}</td>
+							<td>{{item7.topic_lx_type}}</td>
+							<td>{{item7.topic_level}}</td>
+							<td><a v-on:click="deleteTopic(item7.topic_id)">删除</a></td>
+						</tr>
+					</tbody>
+				</table>
+
+				<div class="sxy">
+					<!-- <span>上下页
+							<h4><input type="button" value="上一页" />&nbsp;&nbsp;&nbsp;1/2&nbsp;&nbsp;&nbsp;<input type="button" value="下一页" /></h4>
+						</span> -->
+				</div>
+			</div>
+			<div>
+				<input style="background-color:" class="fbzy" type="button"
+					value="发布作业" />
+			</div>
+		</div>
+	</div>
+
+
+
+
+	<script src="js/jquery.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/vue.js"></script>
+	<script type="application/javascript">
+		
+		
+		var v = new Vue({
+			el:".tktj",
+			data:{
+				vessionList:null, //版本
+				gradeList:null,	  //年级
+				courseList:null,  //课程
+				sectionList:null, //章节
+				topicLxList:null, //题型
+				topicList:null    //难易度
+			}
+		})
+		
+		var v2 = new Vue({
+			el:".xstk",
+			data:{
+				pageBean:null
+				//题库内容
+			},methods:{
+				deleteTopic:function(topic_id){
+					deleteTopic1(topic_id);
+				},danjitimu:function(topic_id){
+					danjitimu1(topic_id);
+				}
+			}
+		})
+		
+		var v3 = new Vue({
+			el:".xzbj",
+			data:{
+				zuoYeGuanLiList:null
+			}
+		})
+		
+		
+		var v4 = new Vue({
+			el:".youpang",
+			data:{
+				taskLxList:null
+			}
+		})
+		
+		var v5 = new Vue({
+			el:".xzbj1",
+			data:{
+				zuoYeGuanLiList2:null
+			},methods:{
+				danjixueyuan:function(sid){
+					danjixueyuan1(sid);
+				}
+			}
+		})
+		
+		
+		$(function(){
+			vessionList()
+			topicList()
+			topicLxList()
+			topicNeiRong(0,0,0,0,0,null,1)
+			queryByZuoYeGuanLiByTid()
+			queryZuoYeLeiXing()
+		})
+		
+		function danjixueyuan1(sid){
+			alert(sid)
+			fun()
+		}
+		
+ 		function danjitimu1(topic_id){
+			alert(topic_id)
+			fun2()
+		}
+		
+		function queryZuoYeLeiXing(){
+			$.ajax({
+				url:"/queryZuoYeLeiXing",
+				success:function(data){
+					v4.taskLxList=data;
+				}
+			})
+		}
+		
+		
+		function queryByZuoYeGuanLiByTid(){
+			$.ajax({
+				url:"/queryByZuoYeGuanLiByTid",
+				data:'tid='+6,
+				dataType:'json',
+				Type:'post',
+				success:function(data){
+					v3.zuoYeGuanLiList=data;
+				}
+			})
+		}
+		
+		/*全选学员*/
+		$("#all").click(function(){    
+		    if(this.checked){    
+		        $("#list :checkbox").attr("checked", true);   
+		    }else{    
+		        $("#list :checkbox").attr("checked", false); 
+		    }    
+		    fun()
+		}); 
+		
+		
+		function fun(){
+		    obj = document.getElementsByName("test");
+		    check_val = [];
+		    for(k in obj){
+		        if(obj[k].checked)
+		            check_val.push(obj[k].value);
+		    }
+		}
+		
+		function fun2(){
+			obj = document.getElementsByName("test2");
+		     check_val = []; /*获取的学员编号*/
+		     for(k in obj){
+		        if(obj[k].checked)
+		            check_val.push(obj[k].value);
+			 }
+		}
+		
+		
+	     
+		
+		/*全选题目*/
+		$("#all2").click(function(){    
+		    if(this.checked){    
+		        $("#list2 :checkbox").attr("checked", true);   
+		    }else{    
+		        $("#list2 :checkbox").attr("checked", false); 
+		    }    
+		    fun2()
+		}); 
+		
+		
+		$("#dianjinianji").change(function(){
+			var nianji = $(this).val();
+			var banji = $("#dianjibanji").val();
+			$.ajax({
+				url:"/queryXueYuanZuoYeGuanLi",
+				data:'gname='+nianji+'&cname='+banji,
+				dataType:'json',
+				Type:'post',
+				success:function(data){
+					v5.zuoYeGuanLiList2=data;
+				}
+			})
+		})
+		
+		$("#dianjibanji").change(function(){
+			var banji = $(this).val();
+			var nianji = $("#dianjinianji").val();
+			$.ajax({
+				url:"/queryXueYuanZuoYeGuanLi",
+				data:'gname='+nianji+'&cname='+banji,
+				dataType:'json',
+				Type:'post',
+				success:function(data){
+					v5.zuoYeGuanLiList2=data;
+				}
+			})
+		})
+		
+		
+		function deleteTopic1(topic_id){
+			$.ajax({
+				url:"/wshTopicDelete",
+				data:'topic_id='+topic_id,
+				success:function(data){
+					if(data>0){
+						alert('删除成功！！！')
+						location.reload();
+					}else{
+						alert('删除失败！！！')
+					}
+					
+				}
+			})
+		}
+		
+		/*版本*/
+		function vessionList(){
+			$.ajax({
+				url:"/wshTiKuTiaoJianChaXun",
+				success:function(data){
+					v.vessionList=data;
+				}
+			})
+		}
+		
+		$("#banben").change(function(){
+			var vid = $(this).val();
+			var gid = $("#nianji").val();
+			var courseId = $("#kecheng").val();
+			var sectionId = $("#zhangjie").val();
+			var topic_lx_id = $("#tixing").val();
+			var topic_level = $("#nanyidu").val();
+			topicNeiRong(vid, gid, courseId, sectionId, topic_lx_id, topic_level, 1)
+			$.ajax({
+				url:"wshTiKuTiaoJianChaXun2",
+				data:'vid='+vid,
+				dataType:'json',
+				type:'post',
+				success:function(data){
+					v.gradeList=data;
+				}
+			})
+		})
+		
+		$("#nianji").change(function(){
+			var vid = $("#banben").val();
+			var gid = $(this).val();
+			var courseId = $("#kecheng").val();
+			var sectionId = $("#zhangjie").val();
+			var topic_lx_id = $("#tixing").val();
+			var topic_level = $("#nanyidu").val();
+			topicNeiRong(vid, gid, courseId, sectionId, topic_lx_id, topic_level, 1)
+			$.ajax({
+				url:"/wshTiKuTiaoJianChaXun3",
+				data:'vid='+vid+'&gid='+gid,
+				dataType:'json',
+				type:'post',
+				success:function(data){
+					v.courseList=data;
+				}
+			})
+		})
+		
+		$("#kecheng").change(function(){
+			var vid = $("#banben").val();
+			var gid = $("#nianji").val();
+			var courseId = $("#kecheng").val();
+			var sectionId = $("#zhangjie").val();
+			var topic_lx_id = $("#tixing").val();
+			var topic_level = $("#nanyidu").val();
+			topicNeiRong(vid, gid, courseId, sectionId, topic_lx_id, topic_level, 1)
+			$.ajax({
+				url:"/wshTiKuTiaoJianChaXun4",
+				data:'vid='+vid+'&gid='+gid+'&courseId='+courseId,
+				dataType:'json',
+				type:'post',
+				success:function(data){
+					v.sectionList=data;
+				}
+			})
+		})
+		
+		
+		$("#zhangjie").change(function(){
+			var vid = $("#banben").val();
+			var gid = $("#nianji").val();
+			var courseId = $("#kecheng").val();
+			var sectionId = $(this).val();
+			var topic_lx_id = $("#tixing").val();
+			var topic_level = $("#nanyidu").val();
+			topicNeiRong(vid, gid, courseId, sectionId, topic_lx_id, topic_level, 1)
+			
+		})
+		
+		
+		$("#tixing").change(function(){
+			var vid = $("#banben").val();
+			var gid = $("#nianji").val();
+			var courseId = $("#kecheng").val();
+			var sectionId = $("#zhangjie").val();
+			var topic_lx_id = $(this).val();
+			var topic_level = $("#nanyidu").val();
+			topicNeiRong(vid, gid, courseId, sectionId, topic_lx_id, topic_level, 1)
+			
+		})
+		
+		$("#nanyidu").change(function(){
+			var vid = $("#banben").val();
+			var gid = $("#nianji").val();
+			var courseId = $("#kecheng").val();
+			var sectionId = $("#zhangjie").val();
+			var topic_lx_id = $("#tixing").val();
+			var topic_level = $(this).val();
+			topicNeiRong(vid, gid, courseId, sectionId, topic_lx_id, topic_level, 1)
+		})
+		
+		/*题型*/
+		function topicLxList(){
+			$.ajax({
+				url:"/wshTiKuTiaoJianChaXun5",
+				success:function(data){
+					v.topicLxList=data;
+				}
+			})
+		}
+		
+		/*难易度*/
+		function topicList(){
+			$.ajax({
+				url:"/wshTiKuTiaoJianChaXun6",
+				success:function(data){
+					v.topicList=data;
+				}
+			})
+		}
+		
+		
+		
+		
+		/*查询题库内容*/
+		function topicNeiRong(vid, gid, courseId, sectionId, topic_lx_id, topic_level){
+			$.ajax({
+				url:"/wshTopicNeiRong",
+				data:'vid='+vid+'&gid='+gid+'&courseId='+courseId+'&sectionId='+sectionId+'&topic_lx_id='+topic_lx_id+'&topic_level='+topic_level,
+				dataType:'json',
+				type:'post',
+				success:function(data){
+					v2.pageBean=data;
+				}
+			})
+		} 
+			
+		
+		$(".fbzy").click(function(){
+			 obj = document.getElementsByName("test");
+			    check_val = []; /*获取的学员编号*/
+			    for(k in obj){
+			        if(obj[k].checked)
+			            check_val.push(obj[k].value);
+				}
+			 alert(check_val)
+		     obj2 = document.getElementsByName("test2");
+		     check_val2 = []; /*获取的题目编号*/
+		     for(k2 in obj2){
+		        if(obj2[k2].checked)
+		            check_val2.push(obj2[k2].value);
+			 }
+		     alert(check_val2)
+			 var zylx = $("#zylx").val();  /*获取的作业类型编号*/
+			 var zymc = $("#zymc").val();  /*获取的作业名称*/
+		 	 var zf = $("#zfk").val();     /*获取作业总分*/	
+		 	 var kstime = $(".kstime").val();     /*获取作业开始时间*/
+		 	 var jstime = $(".jstime").val();     /*获取作业结束时间*/
+			 var wdt = $("#wdtfk").val();  /*获取问答题分数*/
+		 	 var xzt = $("#xztfk").val();  /*获取选择题分数*/
+		 	 var kecheng = $("#kecheng").val(); /*获取课程编号*/
+		 	 var zhangjie = $("#zhangjie").val();  /*获取章节编号*/
+		 	 var dianjinianji = $("#dianjinianji").val(); /*获取年级*/
+		 	 var dianjibanji = $("#dianjibanji").val();  /*获取班级*/
+			 
+		 	 
+		 	 $.ajax({
+		 		 url:"/insertTask",
+		 		 data:'task_zf='+zf+'&task_lx_id='+zylx+'&task_mc='+zymc+'&csId='+check_val+'&topic_id='+check_val2+'&task_tm_xzt='+xzt+'&task_tm_wdt='+wdt, //+'&task_kstime='+kstime+'&task_jstime='+jstime
+		 		 dataType:'json',
+		 		 type:'post',
+		 		 success:function(data){
+		 			if(data>0){
+						alert('新增成功！！！')
+						location.reload();
+					}else{
+						alert('新增失败！！！')
+					}
+		 		 }
+		 		 
+		 	 })
+		 	 
+		})
+		
+		
+		
+	
+	</script>
+</body>
+</html>

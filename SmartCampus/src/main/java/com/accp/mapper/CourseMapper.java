@@ -10,6 +10,8 @@ import org.apache.ibatis.annotations.Param;
 public interface CourseMapper {
 	Course selectBycourseid(Integer courseid);
     int insertCourse(Course record);
+	List<Course> queryByVidGid(@Param("vid") Integer vid,@Param("gid")Integer gid);
+	
     long countByExample(CourseExample example);
 
     int deleteByExample(CourseExample example);

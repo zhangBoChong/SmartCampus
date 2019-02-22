@@ -117,7 +117,7 @@ public class ZBCController {
 	public int AddCourse(@Param("course")Course course,@Param("vgmid")Integer vgmid) {
 		zbcService.insertCourse(course);
 		VessionGradeMajoridCourse vgmc=new VessionGradeMajoridCourse();
-		vgmc.setCourseid(course.getCourseid());
+		vgmc.setCourseid(course.getCourseId());
 		vgmc.setVgmid(vgmid);
 		int count1=zbcService.insertVessionGradeMajoridCourse(vgmc);
 		return count1;

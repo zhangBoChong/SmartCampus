@@ -1,33 +1,36 @@
 package com.accp.domain;
 
 public class TaskFb {
-    private Integer taskFbId;
+    private Integer task_fb_id;
 
-    private Integer taskId;
+    private Integer task_id;
 
-    private Integer csid;
+    private Integer csId;
 
-    public Integer getTaskFbId() {
-        return taskFbId;
-    }
+	public Integer getTask_fb_id() {
+		return task_fb_id;
+	}
 
-    public void setTaskFbId(Integer taskFbId) {
-        this.taskFbId = taskFbId;
-    }
+	public void setTask_fb_id(Integer task_fb_id) {
+		this.task_fb_id = task_fb_id;
+	}
 
-    public Integer getTaskId() {
-        return taskId;
-    }
+	public Integer getTask_id() {
+		return task_id;
+	}
 
-    public void setTaskId(Integer taskId) {
-        this.taskId = taskId;
-    }
+	public void setTask_id(Integer task_id) {
+		this.task_id = task_id;
+	}
 
-    public Integer getCsid() {
-        return csid;
-    }
+	public Integer getCsId() {
+		return csId;
+	}
 
-    public void setCsid(Integer csid) {
-        this.csid = csid;
-    }
+	public void setCsId(Integer csId) {
+		this.csId = csId;
+	}
+
+    
+    
 }

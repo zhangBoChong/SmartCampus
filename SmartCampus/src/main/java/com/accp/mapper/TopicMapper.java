@@ -12,6 +12,11 @@ public interface TopicMapper {
 	//根据题目id查询题目信息（+章节信息）
 	Topic selecttopicsection(Integer topicId);
 	
+	
+	List<Topic> queryTopic();
+	
+	int insertTopic(Topic topic);
+	
     long countByExample(TopicExample example);
 
     int deleteByExample(TopicExample example);

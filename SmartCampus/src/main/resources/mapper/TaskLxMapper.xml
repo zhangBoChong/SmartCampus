@@ -5,6 +5,11 @@
     <id column="task_lx_id" jdbcType="INTEGER" property="taskLxId" />
     <result column="task_lx_type" jdbcType="VARCHAR" property="taskLxType" />
   </resultMap>
+  
+  <select id="queryByAll" resultType="com.accp.domain.TaskLx">
+  		SELECT * FROM `task_lx`
+  </select>
+  
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">

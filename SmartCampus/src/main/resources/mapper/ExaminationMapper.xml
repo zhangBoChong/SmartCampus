@@ -25,6 +25,11 @@
   	</association>
   </resultMap>
   
+  <insert id="insertExa" parameterType="com.accp.domain.Examination" useGeneratedKeys="true" keyProperty="examination_id">
+  		INSERT INTO`examination`(`examination_zf`,`examination_lx_id`,`examination_kstime`,`examination_jstime`,`examination_mc`)
+
+		VALUE 			(#{examination_zf},#{examination_lx_id},#{examination_kstime},#{examination_jstime},#{examination_mc})
+  </insert>
   
   <sql id="Example_Where_Clause">
     <where>

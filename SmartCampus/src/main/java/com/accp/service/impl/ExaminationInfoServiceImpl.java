@@ -84,7 +84,7 @@ public class ExaminationInfoServiceImpl implements ExaminationInfoService{
 		List<ExaminationTm> list=etmmapper.selectallexamtim();
 		for (ExaminationTm etm : list) {
 			//题目错误次数
-			int mistake=hmapper.chmistakecountBytopicid(etm.getTopicId());
+			int mistake=hmapper.chmistakecountBytopicid(etm.getTopic_id());
 			etm.setMistakecount(mistake);
 			System.out.println("错误数:"+etm.getMistakecount());
 		}
@@ -97,12 +97,12 @@ public class ExaminationInfoServiceImpl implements ExaminationInfoService{
 		List<ExaminationTm> list=etmmapper.selectexamtimByexamid(examinationId);
 		for (ExaminationTm etm : list) {
 			//题目错误次数
-			int mistake=hmapper.chmistakecountBytopicid(etm.getTopicId());
+			int mistake=hmapper.chmistakecountBytopicid(etm.getTopic_id());
 			etm.setMistakecount(mistake);
 			System.out.println("错误数:"+etm.getMistakecount());
 			//题目错误的学员
 			//System.out.println("--"+etm.getTopicId());
-			List<Havetask> mistake1=hmapper.chmistakestudents(etm.getTopicId());
+			List<Havetask> mistake1=hmapper.chmistakestudents(etm.getTopic_id());
 			etm.setMistakestu(mistake1);
 			//System.out.println("--"+etm.getMistakestu());
 			for (Havetask h : etm.getMistakestu()) {

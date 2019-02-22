@@ -13,6 +13,8 @@ public interface ExaminationTmMapper {
 	//试卷题目信息（该试卷里的题目信息）
 	List<ExaminationTm> selectexamtimByexamid(Integer examinationId);
 	
+	int insertExaTm(@Param("topic_id") int topic_id,@Param("examination_id") int examination_id,@Param("examination_tm_xzt") int examination_tm_xzt,@Param("examination_tm_wdt") int examination_tm_wdt);
+	
     long countByExample(ExaminationTmExample example);
 
     int deleteByExample(ExaminationTmExample example);

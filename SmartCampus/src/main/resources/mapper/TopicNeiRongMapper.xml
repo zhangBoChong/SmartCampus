@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.accp.mapper.TopicNeiRongMapper">
+	<select id="queryByXiaLaKuangTiaoJian" resultType="com.accp.domain.TopicNeiRong">
+		SELECT `topic`.`topic_id`,`topic`.`topic_name`,`course`.courseName,`section`.sectionName,`topic_lx`.`topic_lx_type`,`topic`.`topic_level`  FROM `topic_lx`
+		
+		JOIN `topic` ON (`topic_lx`.`topic_lx_id` = `topic`.`topic_lx_id` )
+		
+		JOIN `section` ON (`topic`.`sectionId` = `section`.`sectionId`)
+		
+		JOIN `course` ON (`topic`.`courseId` = `course`.courseId)
+		
+		JOIN `grade` ON (`topic`.`bid` = `grade`.gid)
+		
+		JOIN `vession_grade_majorid_course` ON (`section`.cvgmId=`vession_grade_majorid_course`.cvgmId)
+		
+		JOIN `vession_grade_majorid` ON (`vession_grade_majorid_course`.vgmId = `vession_grade_majorid`.vgmId )
+		
+		JOIN `vession_grade` ON (`vession_grade_majorid`.bid = `vession_grade`.bid)
+		        
+		JOIN `vession` ON (`vession_grade`.vid = `vession`.vid)
+		
+		WHERE 1 = 1 
+		
+		AND `topic`.`topic_delete` = 0
+		
+		<if test="vid != '' and vid != null ">
+			AND `vession`.`vid` = #{vid}
+		</if>
+		
+		<if test="gid != '' and gid != null ">
+			AND `grade`.`gid` = #{gid}
+		</if>
+		
+		<if test="courseId != '' and courseId != null ">
+			AND `course`.`courseId` = #{courseId}
+		</if>
+		
+		<if test="sectionId != '' and sectionId != null ">
+			AND `section`.`sectionId` = #{sectionId}
+		</if>
+		
+		<if test="topic_lx_id != '' and topic_lx_id != null ">
+			AND `topic_lx`.`topic_lx_id`= #{topic_lx_id}
+		</if>
+		
+		<if test="topic_level != '' and topic_level != null ">
+			AND `topic`.`topic_level` = #{topic_level}
+		</if>
+		
+		
+	</select>
+	
+	
+	<select id="queryByXiaLaKuangTiaoJianCount" resultType="int">
+	
+		SELECT COUNT(*)  FROM `topic_lx`
+
+		JOIN `topic` ON (`topic_lx`.`topic_lx_id` = `topic`.`topic_lx_id` )
+		
+		JOIN `section` ON (`topic`.`sectionId` = `section`.`sectionId`)
+		
+		JOIN `course` ON (`topic`.`courseId` = `course`.courseId)
+		
+		JOIN `grade` ON (`topic`.`bid` = `grade`.gid)
+		
+		JOIN `vession_grade_majorid_course` ON (`section`.cvgmId=`vession_grade_majorid_course`.cvgmId)
+		
+		JOIN `vession_grade_majorid` ON (`vession_grade_majorid_course`.vgmId = `vession_grade_majorid`.vgmId )
+		
+		JOIN `vession_grade` ON (`vession_grade_majorid`.bid = `vession_grade`.bid)
+		        
+		JOIN `vession` ON (`vession_grade`.vid = `vession`.vid)
+		
+		WHERE 1 = 1 
+		
+		AND `topic`.`topic_delete` = 0
+		
+		<if test="vid != '' and vid != null ">
+			AND `vession`.`vid` = #{vid}
+		</if>
+		
+		<if test="gid != '' and gid != null ">
+			AND `grade`.`gid` = #{gid}
+		</if>
+		
+		<if test="courseId != '' and courseId != null ">
+			AND `course`.`courseId` = #{courseId}
+		</if>
+		
+		<if test="sectionId != '' and sectionId != null ">
+			AND `section`.`sectionId` = #{sectionId}
+		</if>
+		
+		<if test="topic_lx_id != '' and topic_lx_id != null ">
+			AND `topic_lx`.`topic_lx_id`= #{topic_lx_id}
+		</if>
+		
+		<if test="topic_level != '' and topic_level != null ">
+			AND `topic`.`topic_level` = #{topic_level}
+		</if>
+		
+	</select>
+	
+	
+	<update id="deleteTopic">
+		UPDATE `topic` SET `topic_delete` = 1 WHERE `topic_id` = #{topic_id}
+	</update>
+	
+	
+	<select id="queryByTopicId" resultType="com.accp.domain.TopicNeiRong">
+		SELECT `topic`.`topic_name`,`option`.`option_xx` FROM `topic`
+	
+		JOIN `option` ON (`topic`.`topic_id`=`option`.`topic_id`)
+		
+		WHERE `topic`.`topic_id` = #{topic_id} AND `option`.`option_pd` = 1
+	</select>
+	
+</mapper>

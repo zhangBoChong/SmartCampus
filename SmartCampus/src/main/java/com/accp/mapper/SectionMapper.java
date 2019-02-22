@@ -3,9 +3,14 @@ package com.accp.mapper;
 import com.accp.domain.Section;
 import com.accp.domain.SectionExample;
 import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+@Mapper
 public interface SectionMapper {
+	List<Section> queryByVidGidCourseId(@Param("vid") Integer vid,@Param("gid") Integer gid,@Param("courseId") Integer courseId);
+	
     long countByExample(SectionExample example);
 
     int deleteByExample(SectionExample example);

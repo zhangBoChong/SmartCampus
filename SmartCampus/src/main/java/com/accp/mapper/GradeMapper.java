@@ -10,6 +10,9 @@ import org.apache.ibatis.annotations.Param;
 public interface GradeMapper {
 	int insertGrade(Grade grade);
 	Grade selectBygid(Integer gid);
+	
+	List<Grade> queryByVid(Integer vid);
+	
 	//根据gid查询年级
 	Grade queryByGid(Integer gid);
 	

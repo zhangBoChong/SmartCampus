@@ -11,6 +11,8 @@ public interface ExaminationMapper {
 	Examination selectexamByexaminationId(Integer examinationId);
 	Examination selectexamByexaminationIdTow(Integer examinationId);
 	
+	int insertExa(Examination exa);
+	
     long countByExample(ExaminationExample example);
 
     int deleteByExample(ExaminationExample example);

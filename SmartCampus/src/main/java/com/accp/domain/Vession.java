@@ -7,7 +7,7 @@ public class Vession {
 
     private String vname;
 
-    private Date creattime;
+    private Date creatTime;
 
     public Integer getVid() {
         return vid;
@@ -25,11 +25,12 @@ public class Vession {
         this.vname = vname;
     }
 
-    public Date getCreattime() {
-        return creattime;
-    }
+	public Date getCreatTime() {
+		return creatTime;
+	}
 
-    public void setCreattime(Date creattime) {
-        this.creattime = creattime;
-    }
+	public void setCreatTime(Date creatTime) {
+		this.creatTime = creatTime;
+	}
+    
 }

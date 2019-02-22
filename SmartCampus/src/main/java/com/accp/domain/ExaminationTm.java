@@ -4,13 +4,13 @@ package com.accp.domain;
 import java.util.List;
 
 public class ExaminationTm {
-    private Integer examinationTmId;
+    private Integer examination_tm_id;
 
-    private Integer topicId;
+    private Integer topic_id;
 
-    private Integer examinationId;
+    private Integer examination_id;
 
-    private Double examinationTmXzt;
+    private Double examination_tm_xzt;
 
     private Double examinationTmWdt;
     
@@ -22,6 +22,7 @@ public class ExaminationTm {
 	public List<Havetask> getMistakestu() {
 		return mistakestu;
 	}
+    private Double examination_tm_wdt;
 
 	public void setMistakestu(List<Havetask> mistakestu) {
 		this.mistakestu = mistakestu;
@@ -43,43 +44,46 @@ public class ExaminationTm {
 		this.mistakecount = mistakecount;
 	}
 
-	public Integer getExaminationTmId() {
-        return examinationTmId;
-    }
+	public Integer getExamination_tm_id() {
+		return examination_tm_id;
+	}
 
-    public void setExaminationTmId(Integer examinationTmId) {
-        this.examinationTmId = examinationTmId;
-    }
+	public void setExamination_tm_id(Integer examination_tm_id) {
+		this.examination_tm_id = examination_tm_id;
+	}
 
-    public Integer getTopicId() {
-        return topicId;
-    }
+	public Integer getTopic_id() {
+		return topic_id;
+	}
 
-    public void setTopicId(Integer topicId) {
-        this.topicId = topicId;
-    }
+	public void setTopic_id(Integer topic_id) {
+		this.topic_id = topic_id;
+	}
 
-    public Integer getExaminationId() {
-        return examinationId;
-    }
+	public Integer getExamination_id() {
+		return examination_id;
+	}
 
-    public void setExaminationId(Integer examinationId) {
-        this.examinationId = examinationId;
-    }
+	public void setExamination_id(Integer examination_id) {
+		this.examination_id = examination_id;
+	}
 
-    public Double getExaminationTmXzt() {
-        return examinationTmXzt;
-    }
+	public Double getExamination_tm_xzt() {
+		return examination_tm_xzt;
+	}
 
-    public void setExaminationTmXzt(Double examinationTmXzt) {
-        this.examinationTmXzt = examinationTmXzt;
-    }
+	public void setExamination_tm_xzt(Double examination_tm_xzt) {
+		this.examination_tm_xzt = examination_tm_xzt;
+	}
 
-    public Double getExaminationTmWdt() {
-        return examinationTmWdt;
-    }
+	public Double getExamination_tm_wdt() {
+		return examination_tm_wdt;
+	}
 
-    public void setExaminationTmWdt(Double examinationTmWdt) {
-        this.examinationTmWdt = examinationTmWdt;
-    }
+	public void setExamination_tm_wdt(Double examination_tm_wdt) {
+		this.examination_tm_wdt = examination_tm_wdt;
+	}
+
+    
+    
 }

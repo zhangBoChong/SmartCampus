@@ -1,53 +1,55 @@
 package com.accp.domain;
 
 public class Section {
-    private Integer sectionid;
+    private Integer sectionId;
 
-    private String sectionname;
+    private String sectionName;
 
-    private Integer ccid;
+    private Integer cvgmId;
 
     private Integer status;
 
-    private Integer coursetime;
+    private Integer courseTime;
 
-    public Integer getSectionid() {
-        return sectionid;
-    }
+	public Integer getSectionId() {
+		return sectionId;
+	}
 
-    public void setSectionid(Integer sectionid) {
-        this.sectionid = sectionid;
-    }
+	public void setSectionId(Integer sectionId) {
+		this.sectionId = sectionId;
+	}
 
-    public String getSectionname() {
-        return sectionname;
-    }
+	public String getSectionName() {
+		return sectionName;
+	}
 
-    public void setSectionname(String sectionname) {
-        this.sectionname = sectionname;
-    }
+	public void setSectionName(String sectionName) {
+		this.sectionName = sectionName;
+	}
 
-    public Integer getCcid() {
-        return ccid;
-    }
+	public Integer getCvgmId() {
+		return cvgmId;
+	}
 
-    public void setCcid(Integer ccid) {
-        this.ccid = ccid;
-    }
+	public void setCvgmId(Integer cvgmId) {
+		this.cvgmId = cvgmId;
+	}
 
-    public Integer getStatus() {
-        return status;
-    }
+	public Integer getStatus() {
+		return status;
+	}
 
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
 
-    public Integer getCoursetime() {
-        return coursetime;
-    }
+	public Integer getCourseTime() {
+		return courseTime;
+	}
 
-    public void setCoursetime(Integer coursetime) {
-        this.coursetime = coursetime;
-    }
+	public void setCourseTime(Integer courseTime) {
+		this.courseTime = courseTime;
+	}
+
+    
 }

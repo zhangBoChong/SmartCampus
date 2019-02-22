@@ -1,43 +1,45 @@
 package com.accp.domain;
 
 public class Option {
-    private Integer optionId;
+    private Integer option_id;
 
-    private String optionXx;
+    private String option_xx;
 
-    private Integer topicId;
+    private Integer topic_id;
 
-    private Integer optionPd;
+    private Integer option_pd;
 
-    public Integer getOptionId() {
-        return optionId;
-    }
+	public Integer getOption_id() {
+		return option_id;
+	}
 
-    public void setOptionId(Integer optionId) {
-        this.optionId = optionId;
-    }
+	public void setOption_id(Integer option_id) {
+		this.option_id = option_id;
+	}
 
-    public String getOptionXx() {
-        return optionXx;
-    }
+	public String getOption_xx() {
+		return option_xx;
+	}
 
-    public void setOptionXx(String optionXx) {
-        this.optionXx = optionXx;
-    }
+	public void setOption_xx(String option_xx) {
+		this.option_xx = option_xx;
+	}
 
-    public Integer getTopicId() {
-        return topicId;
-    }
+	public Integer getTopic_id() {
+		return topic_id;
+	}
 
-    public void setTopicId(Integer topicId) {
-        this.topicId = topicId;
-    }
+	public void setTopic_id(Integer topic_id) {
+		this.topic_id = topic_id;
+	}
 
-    public Integer getOptionPd() {
-        return optionPd;
-    }
+	public Integer getOption_pd() {
+		return option_pd;
+	}
 
-    public void setOptionPd(Integer optionPd) {
-        this.optionPd = optionPd;
-    }
+	public void setOption_pd(Integer option_pd) {
+		this.option_pd = option_pd;
+	}
+
+    
 }

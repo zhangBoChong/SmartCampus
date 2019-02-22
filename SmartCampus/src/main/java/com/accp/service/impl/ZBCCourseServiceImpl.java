@@ -218,7 +218,7 @@ public class ZBCCourseServiceImpl implements ZBCCourseService{
 						CourseTeacher ctt=courseTeacherMapper.queryByctid(ct.getCtid());
 						c.setTname(staffMapper.selectBytid(ctt.getTid()).getTname());
 						VessionGradeMajoridCourse vgmc=vessionGradeMajoridCourseMapper.selectBycvgmid(ctt.getCvgmid());
-						c.setCoursename(courseMapper.selectBycourseid(vgmc.getCourseid()).getCoursename());
+						c.setCoursename(courseMapper.selectBycourseid(vgmc.getCourseid()).getCourseName());
 						c.setCoursetime(courseMapper.selectBycourseid(vgmc.getCourseid()).getCoursetime());
 						
 						ct.setCourseschedule(ct.getCourseschedule()+1);					
@@ -362,7 +362,7 @@ public class ZBCCourseServiceImpl implements ZBCCourseService{
 			if(cs.getScheduleid()==0) {
 				cs.setClassroomname(classroomMapper.queryByRoomId(cs.getClassroomid()).getClassroomname());
 				cs.setTname(staffMapper.selectBytid(ctt.getTid()).getTname());
-				cs.setCoursename(courseMapper.selectBycourseid(vgmc.getCourseid()).getCoursename());
+				cs.setCoursename(courseMapper.selectBycourseid(vgmc.getCourseid()).getCourseName());
 			}else {
 				cs.setSchedule(scheduleMapper.queryByScheduleid(cs.getScheduleid()));
 			}

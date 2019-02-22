@@ -1,15 +1,15 @@
 package com.accp.domain;
 
 public class ExaminationFb {
-    private Integer examinationFbId;
+    private Integer examination_fb_id;
 
-    private Integer examinationId;
+    private Integer examination_id;
 
     private Integer csid;
 
     
     private Examination examobj;
-
+    private Integer csId;
     
 	public Examination getExamobj() {
 		return examobj;
@@ -19,27 +19,29 @@ public class ExaminationFb {
 		this.examobj = examobj;
 	}
 
-	public Integer getExaminationFbId() {
-        return examinationFbId;
-    }
+	public Integer getExamination_fb_id() {
+		return examination_fb_id;
+	}
 
-    public void setExaminationFbId(Integer examinationFbId) {
-        this.examinationFbId = examinationFbId;
-    }
+	public void setExamination_fb_id(Integer examination_fb_id) {
+		this.examination_fb_id = examination_fb_id;
+	}
 
-    public Integer getExaminationId() {
-        return examinationId;
-    }
+	public Integer getExamination_id() {
+		return examination_id;
+	}
 
-    public void setExaminationId(Integer examinationId) {
-        this.examinationId = examinationId;
-    }
+	public void setExamination_id(Integer examination_id) {
+		this.examination_id = examination_id;
+	}
 
-    public Integer getCsid() {
-        return csid;
-    }
+	public Integer getCsId() {
+		return csId;
+	}
 
-    public void setCsid(Integer csid) {
-        this.csid = csid;
-    }
+	public void setCsId(Integer csId) {
+		this.csId = csId;
+	}
+
+    
 }

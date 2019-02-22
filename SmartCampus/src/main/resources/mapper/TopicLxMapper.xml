@@ -2,9 +2,16 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.accp.mapper.TopicLxMapper">
   <resultMap id="BaseResultMap" type="com.accp.domain.TopicLx">
-    <id column="topic_lx_id" jdbcType="INTEGER" property="topicLxId" />
-    <result column="topic_lx_type" jdbcType="VARCHAR" property="topicLxType" />
+    <id column="topic_lx_id" jdbcType="INTEGER" property="topic_lx_id" />
+    <result column="topic_lx_type" jdbcType="VARCHAR" property="topic_lx_type" />
   </resultMap>
+  
+  <select id="queryTopicLx" resultType="com.accp.domain.TopicLx">
+  	SELECT `topic_lx`.`topic_lx_id`,`topic_lx`.`topic_lx_type` FROM  `topic_lx`
+
+	JOIN `topic` ON (`topic_lx`.`topic_lx_id`=`topic`.`topic_id`)
+  </select>
+  
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">

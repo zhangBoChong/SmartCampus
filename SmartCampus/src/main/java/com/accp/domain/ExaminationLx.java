@@ -1,23 +1,26 @@
 package com.accp.domain;
 
 public class ExaminationLx {
-    private Integer examinationLxId;
+    private Integer examination_lx_id;
 
-    private String examinationLxType;
+    private String examination_lx_type;
 
-    public Integer getExaminationLxId() {
-        return examinationLxId;
-    }
+	public Integer getExamination_lx_id() {
+		return examination_lx_id;
+	}
 
-    public void setExaminationLxId(Integer examinationLxId) {
-        this.examinationLxId = examinationLxId;
-    }
+	public void setExamination_lx_id(Integer examination_lx_id) {
+		this.examination_lx_id = examination_lx_id;
+	}
 
-    public String getExaminationLxType() {
-        return examinationLxType;
-    }
+	public String getExamination_lx_type() {
+		return examination_lx_type;
+	}
 
-    public void setExaminationLxType(String examinationLxType) {
-        this.examinationLxType = examinationLxType;
-    }
+	public void setExamination_lx_type(String examination_lx_type) {
+		this.examination_lx_type = examination_lx_type;
+	}
+
+    
+    
 }

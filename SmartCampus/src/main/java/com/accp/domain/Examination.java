@@ -3,30 +3,39 @@ package com.accp.domain;
 import java.util.Date;
 
 public class Examination {
-    private Integer examinationId;
+    private Integer examination_id;
 
     private Integer bid;
 
-    private Integer courseid;
+    private Integer courseId;
 
-    private Integer sectionid;
+    private Integer sectionId;
 
     private Integer tid;
 
-    private Double examinationZf;
+    private Double examination_zf;
 
-    private Integer examinationLxId;
+    private Integer examination_lx_id;
 
-    private Date examinationKstime;
+    private Date examination_kstime;
 
-    private Date examinationJstime;
+
+    private Date examination_jstime;
 
     
-    private ExaminationLx examlxtype;
+    public Date getExamination_jstime() {
+		return examination_jstime;
+	}
+
+	public void setExamination_jstime(Date examination_jstime) {
+		this.examination_jstime = examination_jstime;
+	}
+
+	private ExaminationLx examlxtype;
     private Course coursename;
     private Staff teachername;
     private Havetask examscore;
-    
+
 
 	public Havetask getExamscore() {
 		return examscore;
@@ -60,75 +69,82 @@ public class Examination {
 		this.teachername = teachername;
 	}
 
-	public Integer getExaminationId() {
-        return examinationId;
-    }
+    private String examination_mc;
 
-    public void setExaminationId(Integer examinationId) {
-        this.examinationId = examinationId;
-    }
+	public Integer getExamination_id() {
+		return examination_id;
+	}
 
-    public Integer getBid() {
-        return bid;
-    }
+	public void setExamination_id(Integer examination_id) {
+		this.examination_id = examination_id;
+	}
 
-    public void setBid(Integer bid) {
-        this.bid = bid;
-    }
+	public Integer getBid() {
+		return bid;
+	}
 
-    public Integer getCourseid() {
-        return courseid;
-    }
+	public void setBid(Integer bid) {
+		this.bid = bid;
+	}
 
-    public void setCourseid(Integer courseid) {
-        this.courseid = courseid;
-    }
+	public Integer getCourseId() {
+		return courseId;
+	}
 
-    public Integer getSectionid() {
-        return sectionid;
-    }
+	public void setCourseId(Integer courseId) {
+		this.courseId = courseId;
+	}
 
-    public void setSectionid(Integer sectionid) {
-        this.sectionid = sectionid;
-    }
+	public Integer getSectionId() {
+		return sectionId;
+	}
 
-    public Integer getTid() {
-        return tid;
-    }
+	public void setSectionId(Integer sectionId) {
+		this.sectionId = sectionId;
+	}
 
-    public void setTid(Integer tid) {
-        this.tid = tid;
-    }
+	public Integer getTid() {
+		return tid;
+	}
 
-    public Double getExaminationZf() {
-        return examinationZf;
-    }
+	public void setTid(Integer tid) {
+		this.tid = tid;
+	}
 
-    public void setExaminationZf(Double examinationZf) {
-        this.examinationZf = examinationZf;
-    }
+	public Double getExamination_zf() {
+		return examination_zf;
+	}
 
-    public Integer getExaminationLxId() {
-        return examinationLxId;
-    }
+	public void setExamination_zf(Double examination_zf) {
+		this.examination_zf = examination_zf;
+	}
 
-    public void setExaminationLxId(Integer examinationLxId) {
-        this.examinationLxId = examinationLxId;
-    }
+	public Integer getExamination_lx_id() {
+		return examination_lx_id;
+	}
 
-    public Date getExaminationKstime() {
-        return examinationKstime;
-    }
+	public void setExamination_lx_id(Integer examination_lx_id) {
+		this.examination_lx_id = examination_lx_id;
+	}
 
-    public void setExaminationKstime(Date examinationKstime) {
-        this.examinationKstime = examinationKstime;
-    }
+	public Date getExamination_kstime() {
+		return examination_kstime;
+	}
 
-    public Date getExaminationJstime() {
-        return examinationJstime;
-    }
+	public void setExamination_kstime(Date examination_kstime) {
+		this.examination_kstime = examination_kstime;
+	}
 
-    public void setExaminationJstime(Date examinationJstime) {
-        this.examinationJstime = examinationJstime;
-    }
+	
+
+	public String getExamination_mc() {
+		return examination_mc;
+	}
+
+	public void setExamination_mc(String examination_mc) {
+		this.examination_mc = examination_mc;
+	}
+    
+    
+    
 }

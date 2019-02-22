@@ -13,6 +13,11 @@
   <insert id="addVession">
   	insert into vession (vname, creatTime) values(#{vname,jdbcType=VARCHAR}, now())
   </insert>
+  
+   <select id="vessionQuery" resultType="com.accp.domain.Vession">
+  		SELECT * FROM  `vession`
+   </select>
+  
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -185,4 +190,7 @@
       creatTime = #{creattime,jdbcType=DATE}
     where vid = #{vid,jdbcType=INTEGER}
   </update>
+  
+ 
+  
 </mapper>

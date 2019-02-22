@@ -3,9 +3,15 @@ package com.accp.mapper;
 import com.accp.domain.TopicLx;
 import com.accp.domain.TopicLxExample;
 import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+@Mapper
 public interface TopicLxMapper {
+	
+	List<TopicLx> queryTopicLx();
+	
     long countByExample(TopicLxExample example);
 
     int deleteByExample(TopicLxExample example);

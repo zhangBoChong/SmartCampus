@@ -1,25 +1,28 @@
 package com.accp.domain;
 
 public class Topic {
-    private Integer topicId;
+    private Integer topic_id;
 
-    private String topicName;
+    private String topic_name;
 
-    private Integer topicLxId;
+    private Integer topic_lx_id;
 
-    private String topicLevel;
+    private String topic_level;
 
-    private Integer topicZqcount;
+    private Integer topic_zqcount;
 
-    private Integer sectionid;
+    private Integer sectionId;
 
-    private Integer topicCount;
+    private Integer topic_count;
 
     private Integer bid;
 
     private Integer courseid;
     
     private Section seobj;
+    private Integer courseId;
+    
+    private Integer topic_deete;
 
     public Section getSeobj() {
 		return seobj;
@@ -29,75 +32,88 @@ public class Topic {
 		this.seobj = seobj;
 	}
 
-    public Integer getTopicId() {
-        return topicId;
-    }
+    
+	public Integer getTopic_id() {
+		return topic_id;
+	}
 
-    public void setTopicId(Integer topicId) {
-        this.topicId = topicId;
-    }
+	public void setTopic_id(Integer topic_id) {
+		this.topic_id = topic_id;
+	}
 
-    public String getTopicName() {
-        return topicName;
-    }
+	public String getTopic_name() {
+		return topic_name;
+	}
 
-    public void setTopicName(String topicName) {
-        this.topicName = topicName;
-    }
+	public void setTopic_name(String topic_name) {
+		this.topic_name = topic_name;
+	}
 
-    public Integer getTopicLxId() {
-        return topicLxId;
-    }
+	public Integer getTopic_lx_id() {
+		return topic_lx_id;
+	}
 
-    public void setTopicLxId(Integer topicLxId) {
-        this.topicLxId = topicLxId;
-    }
+	public void setTopic_lx_id(Integer topic_lx_id) {
+		this.topic_lx_id = topic_lx_id;
+	}
 
-    public String getTopicLevel() {
-        return topicLevel;
-    }
+	public String getTopic_level() {
+		return topic_level;
+	}
 
-    public void setTopicLevel(String topicLevel) {
-        this.topicLevel = topicLevel;
-    }
+	public void setTopic_level(String topic_level) {
+		this.topic_level = topic_level;
+	}
 
-    public Integer getTopicZqcount() {
-        return topicZqcount;
-    }
+	public Integer getTopic_zqcount() {
+		return topic_zqcount;
+	}
 
-    public void setTopicZqcount(Integer topicZqcount) {
-        this.topicZqcount = topicZqcount;
-    }
+	public void setTopic_zqcount(Integer topic_zqcount) {
+		this.topic_zqcount = topic_zqcount;
+	}
 
-    public Integer getSectionid() {
-        return sectionid;
-    }
+	
+	public Integer getSectionId() {
+		return sectionId;
+	}
 
-    public void setSectionid(Integer sectionid) {
-        this.sectionid = sectionid;
-    }
+	public void setSectionId(Integer sectionId) {
+		this.sectionId = sectionId;
+	}
 
-    public Integer getTopicCount() {
-        return topicCount;
-    }
+	public Integer getTopic_count() {
+		return topic_count;
+	}
 
-    public void setTopicCount(Integer topicCount) {
-        this.topicCount = topicCount;
-    }
+	public void setTopic_count(Integer topic_count) {
+		this.topic_count = topic_count;
+	}
 
-    public Integer getBid() {
-        return bid;
-    }
+	public Integer getBid() {
+		return bid;
+	}
 
-    public void setBid(Integer bid) {
-        this.bid = bid;
-    }
+	public void setBid(Integer bid) {
+		this.bid = bid;
+	}
 
-    public Integer getCourseid() {
-        return courseid;
-    }
+	public Integer getCourseId() {
+		return courseId;
+	}
 
-    public void setCourseid(Integer courseid) {
-        this.courseid = courseid;
-    }
+	public void setCourseId(Integer courseId) {
+		this.courseId = courseId;
+	}
+
+	public Integer getTopic_deete() {
+		return topic_deete;
+	}
+
+	public void setTopic_deete(Integer topic_deete) {
+		this.topic_deete = topic_deete;
+	}
+    
+    
+   
 }
