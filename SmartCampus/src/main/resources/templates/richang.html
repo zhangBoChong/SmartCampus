@@ -1,0 +1,245 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=emulateIE7" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="css/style.css" />
+<link rel="stylesheet" type="text/css" href="css/WdatePicker.css" />
+<link rel="stylesheet" type="text/css" href="css/skin_/table.css" />
+<link rel="stylesheet" type="text/css" href="css/jquery.grid.css" />
+
+
+<title>表格</title>
+		<style>
+			ul{
+				margin-left: 5rem;
+			}
+			
+			ul li{
+				float: left;
+				list-style-type:none;
+				margin-left: 3rem;
+			}
+			    .page p{
+            		margin-top:-1.5em;
+            		margin-left:5em;
+            	} 
+            	.prev{
+            		width: 4em;
+            		height:2em;
+            		border:0px;
+            		background-color: #0E8BC5;
+            		color: white;
+            		margin-left: 0.5em;
+            		border-radius: 3px;
+            	}
+            	.next{
+            		width: 4em;
+            		height:2em;
+            		border:0px;
+            		background-color: #0E8BC5;
+            		color: white;
+            		border-radius: 3px;
+            		margin-top: -2em;
+            		margin-left: 8em;
+            	}
+            	.page{
+            		float: right;
+            		margin-right: 3em;
+            		margin-top: 2em;
+            	}
+		</style>
+</head>
+
+<body>
+	<h2 style="font-size: 40px; margin-left: 34rem;">日常考勤总表</h2>
+<div id="container">
+	<div id="hd"></div>
+    <div id="bd">
+    	<div id="main">
+        	<div class="search-box ue-clear">
+            	<div class="search-area">
+            		
+                    <div class="kv-item ue-clear">
+                        
+                        </div>
+                    </div>
+                    <div class="kv-item ue-clear">
+        <div class="kv-item-content">
+			<ul>
+			<li>
+				<input class="stuname" placeholder="学生名称" />
+			</li>
+			<li>
+			<span>开始时间:</span>
+				<input class="begintime" type="date"/>
+			</li>
+				<li>
+			<span>结束时间:</span>
+				<input class="endtime" type="date"/>
+			</li>
+			<li>
+				<div class="search-button">
+                	<input class="button btn" type="button" value="搜索一下" />
+                </div>
+			</li>
+		</ul>
+    </div>
+                    </div>
+                </div>
+                <div class="search-button">
+                	
+                </div>
+             </div>
+             
+            <div class="table">
+            	<div class="opt ue-clear">
+                	<span class="sortarea">
+                    	<span class="sort">
+                        	<label>排序：</label>
+                            <span class="name">
+                            	<i class="icon"></i>
+                                <span class="text">名称</span>
+                            </span>
+                        </span>
+                        
+                        <i class="list"></i>
+                        <i class="card"></i>
+                    </span>
+                	<span class="optarea">
+                        <a href="javascript:;" class="add">
+                            <i class="icon"></i>
+                            <span class="text">添加</span>
+                        </a>
+                        <a href="javascript:;" class="delete">
+                            <i class="icon"></i>
+                            <span class="text">删除</span>
+                        </a>
+                        
+                        <a href="javascript:;" class="statistics">
+                            <i class="icon"></i>
+                            <span class="text">统计</span>
+                        </a>
+                        
+                        <a href="javascript:;" class="config">
+                            <i class="icon"></i>
+                            <span class="text">配置</span>
+                        </a>
+                    </span>
+                </div>
+                
+                <div class="grid"></div>
+                
+                <div class="pagination"></div>
+            </div>
+            <style>
+            	table tr td{
+            		border-left: 1px solid #808080;
+            		border-right: 1px solid #808080;
+            		text-align: center;
+            		white-space: nowrap;
+            	}
+            	table .trr{
+            		border-top: 1px solid #808080;
+            		border-bottom: 1px solid #808080;
+            	} 
+            	.span{
+            		cursor: pointer;
+            	}
+            </style>
+            <div id="pagebean">
+            <table border="1px" style="font-size: 17px;font-family:; width: auto;">
+			<tr class="trr" style="background-color: honeydew;">
+				<td width="18.5%">姓名</td>
+				<td width="18.5%">班级</td>
+				<td width="18.5%">班主任</td>
+				<td width="18.5%">时间</td>
+				<td width="18.5%">类型</td>
+				<td width="19%">操作</td>
+			</tr>
+			<tr v-for="item in pagebean.list">
+				<td>{{item.stu.sname}}</td>
+				<td>{{item.stu.clazzStudent.clazz.cname}}</td>
+				<td>申蒙老师</td>
+				<td>{{item.timeStr}}</td>
+				<td v-if="item.attence==0">正常</td>
+				<td v-else="item.attence==1">
+					异常
+				</td>
+				<td style="width: 100px;">修改状态</td>
+			</tr>
+		</table>
+			<div class="page">
+				<span class="span" @click="go(pagebean.currpage-1)">上一页</span>
+				{{pagebean.currpage}}/{{pagebean.pagenum}}					
+				<span class="span" @click="go(pagebean.currpage+1)">下一页</span>
+			</div>            	
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/global.js"></script>
+<script type="text/javascript" src="js/jquery.select.js"></script>
+<script type="text/javascript" src="js/core.js"></script>
+<script type="text/javascript" src="js/jquery.pagination.js"></script>
+<script type="text/javascript" src="js/jquery.grid.js"></script>
+<script type="text/javascript" src="js/WdatePicker.js"></script>
+<script type="text/javascript" src="js/vue.js"></script>
+<script type="text/javascript">
+	var vue=new Vue({
+		el:"#pagebean",
+		data:{
+			pagebean:{
+				list:[]
+			}
+		},methods:{
+			go:function(i){
+    			getPage(i);
+			}
+		}
+	});
+	
+    $(".btn").click(function(){
+    	getPage(vue.pagebean.currpage);
+    });
+    
+    function getPage(i){
+    	$.ajax({
+    		url:"cdcpage",
+    		type:"post",
+    		data:{
+    			currpage:i,
+    			name:$(".stuname").val(),
+    			begin:$(".begintime").val(),
+    			end:$(".endtime").val(),    			
+    		},
+    		success:function(data){
+    			vue.pagebean=data;
+    		}
+    	});
+    }
+    
+    /*当input值改变时触发查询事件*/
+    $("input").change(function(){
+    	getPage(vue.pagebean.currpage);
+    });
+    
+    /*当input框 键盘按下时触发查询事件*/
+    $("input").keyup(function(){
+    	getPage(vue.pagebean.currpage);
+    })
+    
+    $.ajax({
+    	url:"cdcpage",
+    	data:{
+    		currpage:1
+    	},
+    	success:function(data){
+    		vue.pagebean=data;
+    		console.log(data);
+    	}
+    });
+</script>
+</html>

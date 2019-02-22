@@ -1,0 +1,262 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=emulateIE7" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="css/style.css" />
+<link rel="stylesheet" type="text/css" href="css/WdatePicker.css" />
+<link rel="stylesheet" type="text/css" href="css/skin_/table.css" />
+<link rel="stylesheet" type="text/css" href="css/jquery.grid.css" />
+<link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>
+
+
+<title>表格</title>
+
+		<style>
+			ul{
+				margin-left: 5rem;
+			}
+			
+			ul li{
+				float: left;
+				list-style-type:none;
+				margin-left: 3rem;
+			}
+		</style>
+		<style>
+            	table tr td{
+            		border-left: 1px solid #808080;
+            		border-right: 1px solid #808080;
+            		text-align: center;
+            		white-space: nowrap;
+            		width: 190px;
+            	}
+            	table .trr{
+            		border-top: 1px solid #808080;
+            		border-bottom: 1px solid #808080;
+            	} 
+            	.page p{
+            		margin-top:-1.5em;
+            		margin-left:5em;
+            	} 
+            	.prev{
+            		width: 4em;
+            		height:2em;
+            		border:0px;
+            		background-color: #0E8BC5;
+            		color: white;
+            		margin-left: 0.5em;
+            		border-radius: 3px;
+            	}
+            	.next{
+            		width: 4em;
+            		height:2em;
+            		border:0px;
+            		background-color: #0E8BC5;
+            		color: white;
+            		border-radius: 3px;
+            		margin-top: -2em;
+            		margin-left: 8em;
+            	}
+            	.page{
+            		float: right;
+            		margin-right: 3em;
+            		margin-top: 2em;
+            	}
+        </style>
+</head>
+
+<body>
+	<h2 style="font-size: 40px; margin-left: 34rem;">任务管理总表</h2>
+<div id="container">
+	<div id="hd"></div>
+    <div id="bd">
+    	<div id="main">
+        	<div class="search-box ue-clear">
+            	<div class="search-area">
+            		
+                    <div class="kv-item ue-clear">
+                        
+                        </div>
+                    </div>
+                    <div class="kv-item ue-clear">
+                        <label>选择类型:</label>
+        <div class="kv-item-content">
+			<ul>
+			<li>
+			<span>任务名称:</span> 		
+				<input />
+			</li>
+			<li>
+			<span>时间:</span>
+				<input type="datetime-local"/><span>---</span>
+				<input type="datetime-local" />
+			</li>
+			<li>
+				<div class="search-button">
+                	<input class="button" type="button" value="搜索一下" />
+                </div>
+			</li>
+		</ul>
+    </div>
+                </div>
+               </div>
+				<div class="search-button">
+                	<input class="button" type="button" value="发布任务" />
+               </div>
+             </div>
+             
+            <div class="table">
+            	<div class="opt ue-clear">
+                	<span class="sortarea">
+                    	<span class="sort">
+                        	<label>排序：</label>
+                            <span class="name">
+                            	<i class="icon"></i>
+                                <span class="text">名称</span>
+                            </span>
+                        </span>
+                        
+                        <i class="list"></i>
+                        <i class="card"></i>
+                    </span>
+                	<span class="optarea">
+                        <a href="javascript:;" class="add">
+                            <i class="icon"></i>
+                            <span class="text">添加</span>
+                        </a>
+                        <a href="javascript:;" class="delete">
+                            <i class="icon"></i>
+                            <span class="text">删除</span>
+                        </a>
+                        
+                        <a href="javascript:;" class="statistics">
+                            <i class="icon"></i>
+                            <span class="text">统计</span>
+                        </a>
+                        
+                        <a href="javascript:;" class="config">
+                            <i class="icon"></i>
+                            <span class="text">配置</span>
+                        </a>
+                    </span>
+                </div>
+                
+                <div class="grid"></div>
+                
+                <div class="pagination"></div>
+            </div>
+            <table id = "content" border="1px" style="font-size: 17px;font-family:; width: auto;">
+			<tr class="trr" style="background-color: honeydew;">
+				<td>编号</td>
+				<td>任务名称</td>
+				<td>任务内容</td>
+				<td>发布人</td>
+				<td>发布对象</td>
+				<td>开始时间</td>
+				<td>结束时间</td>
+				<td>是否完成(1完成0未完成)</td>
+				<td>操作</td>
+			</tr>
+			<tr v-for = "item in list">
+				<td>{{item.middleId}}</td>
+				<td>{{item.cdcTask.taskName}}</td>
+				<td>{{item.cdcTask.taskContent}}</td>
+				<td>{{item.publisher.tname}}</td>		
+				<td v-if="item.state==0">{{item.studentInfo.sname}}</td>
+				<td v-else>{{item.staff.tname}}</td>
+				<td>{{item.cdcTask.startTime}}</td>
+				<td>{{item.cdcTask.endTime}}</td>
+				<td>{{item.taskstate}}</td>
+				<td><a href="#" class = "rwxq" data-toggle="modal" data-target="#myModal" v-bind:id = "item.cdcTask.taskId" @click="click(item.cdcTask.taskId)">查看详情</a></td>
+			</tr>
+		</table>
+
+        </div> 
+        </div>
+    <!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">任务详情</h4>
+      </div>
+      <div class="modal-body">
+        <table style="align-content: center;">
+        	<tr>
+				<td>阶段开始时间</td>
+				<td>阶段结束时间</td>
+				<td>阶段附件</td>       	
+        	</tr>
+        	<tr v-for = "item in list">
+				<td>{{item.starTtime}}</td>
+				<td>{{item.endTime}}</td>
+				<td>{{item.stageaccessories}}</td>       	
+        	</tr>
+        	
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">确定</button>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+<script src="js/jquery-1.12.4.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/global.js"></script>
+<script type="text/javascript" src="js/jquery.select.js"></script>
+<script type="text/javascript" src="js/core.js"></script>
+<script type="text/javascript" src="js/jquery.pagination.js"></script>
+<script type="text/javascript" src="js/jquery.grid.js"></script>
+<script type="text/javascript" src="js/WdatePicker.js"></script>
+<script type="text/javascript" src="js/vue.js"></script>
+<script type="text/javascript">
+		
+		var v = new Vue({
+			el:"#content",
+			data:{
+				list:[]
+			},methods:{
+				click:function(i){
+					alert(i);
+					$.ajax({
+						  type:"post",
+						  url:"/queryTaskStageByTaskId",
+						  data:"taskId="+i,
+						  dataType:"json",
+						  success:function(result){
+								console.log(result);
+								m.list=result;
+							}
+					})
+				}
+			}
+		})
+		$(function() {
+			$.ajax({
+				  type:"post",
+				  url:"/queryTask",
+				  dataType:"json",
+				  success:function(result){
+						console.log(result);
+						v.list=result;
+					}
+			})
+		});
+		
+ 		var m = new Vue({
+			el:"#myModal",
+			data:{
+				list:[]
+			}
+		}) 
+
+</script>
+
+
+</html>
