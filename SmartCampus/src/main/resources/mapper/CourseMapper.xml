@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.accp.mapper.CourseMapper">
+  <select id="queryAllCourse" resultType="com.accp.domain.Course">
+  	SELECT * FROM `course` WHERE`courseId`IN
+	(SELECT `courseId` FROM `vession_grade_majorid_course` WHERE`vgmId`IN
+	(SELECT `vgmId` FROM `vession_grade_majorid` WHERE`bid`IN
+	(SELECT `bid` FROM `vession_grade` WHERE `vid`=2 AND `gid`=1)))
+  </select>
+</mapper>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.accp.mapper.StudentinfoMapper">
+  <resultMap type="com.accp.domain.Studentinfo" id="queryStudent">
+  	<result property="sid" column="sid" />
+	<result property="sname" column="sname" />
+	<result property="sex" column="sex" />
+	<result property="age" column="age" />
+	<result property="phone" column="phone" />
+	<result property="address" column="address" />
+	<result property="pid" column="pid" />
+	<result property="education" column="education" />
+	<result property="characterid" column="characterid" />
+	<result property="snumber" column="snumber" />
+	<result property="status" column="status" />
+	<result property="headimg" column="headimg" />
+	<result property="choice" column="choice" />
+	<association property="character" column="characterid" select="characterName"></association>
+  </resultMap>
+  
+  <select id="studentQuantity2"  resultType="int">
+  	SELECT COUNT(*) FROM `studentinfo` WHERE`status`=4 AND `age`>17
+  </select>
+  
+  <select id="studentQuantity"  resultType="int">
+  	SELECT COUNT(*) FROM `studentinfo` WHERE`status`=4
+  </select>
+  
+  <select id="queryAllStudent" resultMap="queryStudent" >
+	SELECT * FROM `studentinfo` WHERE `status`=4
+  </select>
+  
+  <select id="characterName" resultType="com.accp.domain.Character">
+  	SELECT * FROM `character` WHERE `characterId`=#{characterId}
+  </select>
+  
+  <select id="queryStudent" resultMap="queryStudent" >
+  	SELECT * FROM `studentinfo`
+  	<where>
+  		`sname`LIKE concat('%',#{sname},'%')
+	  	<if test="age1">
+	  		AND #{age1} &lt;=`age`
+	  	</if>
+	  	<if test="age2">
+	  		AND `age` &lt;=#{age2}
+	  	</if>
+	  	<if test="sex!=null">
+	  		AND `sex`=#{sex}
+	  	</if>
+	  	<if test="characterId">
+	  		AND `characterId`=#{characterId}
+	  	</if>
+  	</where>
+  </select>
+  
+  <update id="updateStudent1">
+  	UPDATE `studentinfo` SET `choice`=1 WHERE `sid`=#{sid}
+  </update>
+  
+  <update id="updateStudent2">
+  	UPDATE `studentinfo` SET `choice`=0 WHERE `sid`=#{sid}
+  </update>
+  
+  <update id="updateStudent3">
+  	UPDATE `studentinfo` SET `choice`=1 WHERE `choice`=0 AND `status`=4
+  </update>
+  
+  <update id="updateStudent4">
+  	UPDATE `studentinfo` SET `choice`=0 WHERE `choice`=1 AND `status`=4
+  </update>
+  
+  <select id="queryStudent2" resultType="com.accp.domain.Studentinfo">
+  	SELECT * FROM `studentinfo` WHERE `choice`=1
+  </select>
+  
+  <update id="updateStudent5">
+  	UPDATE `studentinfo` SET `status`=0 WHERE `choice`=1
+  </update>
+</mapper>

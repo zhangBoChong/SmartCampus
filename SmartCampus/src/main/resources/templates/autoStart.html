@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<style>
+	body{
+		text-align:center;
+		margin:0 auto;
+		padding:0;
+		clear:both;
+	}
+	
+	.ysc{
+		background-color: #EAEAEA;
+		padding: 5px 18px;
+		border: 1px solid #000000;
+		cursor:pointer;
+	}
+</style>
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<link href="css/mui.css" rel="stylesheet" />
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script src="js/vue.js"></script>
+</head>
+
+<body>
+	<h1>自动开班</h1>
+	<span style="font-size: 20px">当前报名学生：<span style="color: red" th:text="${sl}"></span></span>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="ysc" value="预生成班级" type="button" />
+	<table class="table">
+		
+	</table>
+<script src="js/mui.js"></script>
+<script type="text/javascript">
+	window.onload = function(){
+		var v=new Vue({
+			el:".table",
+			data:{
+				list:{}
+			}
+		});
+		
+		$(".ysc").click(function(){
+			$.ajax({
+				url:"automaticClass",
+				dataType:'json',
+				type:'post',
+				timeout:10000,
+				success:function(data){
+					v.list=data;
+				},
+				error:function(xhr,type,errorThrown){
+					alert("生成失败！");
+				},
+			});
+		});
+	}
+</script>
+</body>
+
+</html>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.accp.mapper.ClazzMapper">
+  <insert id="insert" useGeneratedKeys="true" keyProperty="cid" parameterType="com.accp.domain.Clazz">
+	INSERT INTO `clazz`(`cname`,`bid`,`tid`,`startTime`,`introduce`)VALUE(#{cname},'4',#{tid},#{starttime},#{introduce})
+  </insert>
+  
+  <select id="mc" resultType="int">
+  	SELECT COUNT(*) `clazz`
+  </select>
+  
+  <insert id="insert2" useGeneratedKeys="true" keyProperty="cid" parameterType="com.accp.domain.Clazz">
+	INSERT INTO `clazz`(`cname`,`bid`,`startTime`,`status2`)VALUE(#{cname},'4',#{starttime},'1')
+  </insert>
+</mapper>
