@@ -93,7 +93,6 @@ public class LoginController {
 	//登录
 	@RequestMapping("/login")
 	public String login(Model model,HttpSession session,String loginName,String pwd) {
-		System.out.println("进........");
 		Login u = loginService.login(loginName, pwd);
 		List<Information> informationList = new ArrayList<Information>();
 		if(u!=null) {
@@ -160,6 +159,7 @@ public class LoginController {
 	public String initLogin(HttpSession session) {
 		session.invalidate();
 		return "redirect:/toLogin";
+		
 	}
 	
 	//去main.html

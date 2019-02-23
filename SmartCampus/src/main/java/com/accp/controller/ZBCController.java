@@ -34,10 +34,10 @@ import com.accp.service.ZBCCourseService;
 public class ZBCController {
 	@Autowired
 	ZBCCourseService zbcService;
-	@RequestMapping("/Tomain")
+/*	@RequestMapping("/Tomain")
 	public String Tomain() {
 		return "main";
-	}
+	}*/
 	@RequestMapping("/Tonav")
 	public String Tonav() {
 		return "nav";
