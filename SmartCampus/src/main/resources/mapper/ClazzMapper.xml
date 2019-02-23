@@ -11,6 +11,16 @@
     <result column="majorId" jdbcType="INTEGER" property="majorid" />
   </resultMap>
   
+  <!-- 按cid查询班级表 -->
+  <select id="clazzBycid" resultType="com.accp.domain.Clazz">
+  	SELECT * FROM `clazz` WHERE `cid`=#{cid}
+  </select>
+  
+  <!-- 查询所有班级 -->
+  <select id="selectClazz" resultType="com.accp.domain.Clazz">
+  	SELECT * FROM `clazz`
+  </select>
+  
   <resultMap type="com.accp.domain.Clazz" id="clazzvessiongrade" extends="BaseResultMap">
   	<association property="vgobj" column="bid" javaType="com.accp.domain.VessionGrade" 
   			select="com.accp.mapper.VessionGradeMapper.selectgvBybid"></association>

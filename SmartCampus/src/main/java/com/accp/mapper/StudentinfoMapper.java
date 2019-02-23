@@ -23,6 +23,16 @@ public interface StudentinfoMapper {
 	//删除-修改状态 0正常、1删除
 	
 	
+	//按sid查询学生表
+    Studentinfo queryBysid(@Param("sid") Integer sid);
+    
+    //修改学生状态
+    int updatestudentstatus(@Param("status") Integer status,@Param("sid") Integer sid);
+    
+    //
+    List<Studentinfo> queryBysidnnn(@Param("sid") Integer sid);
+	
+	
 	//个人详情页面，个人基本信息（班级、年级、学号）
 	Studentinfo selectallinfo(Integer sid);
 	

@@ -4,8 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -13,7 +11,6 @@ import com.accp.domain.Course;
 import com.accp.domain.Examination;
 import com.accp.domain.ExaminationLx;
 import com.accp.domain.Grade;
-import com.accp.domain.PageBean;
 import com.accp.domain.Section;
 import com.accp.domain.Task;
 import com.accp.domain.TaskLx;
@@ -21,7 +18,6 @@ import com.accp.domain.Topic;
 import com.accp.domain.TopicLx;
 import com.accp.domain.TopicNeiRong;
 import com.accp.domain.Vession;
-import com.accp.domain.VessionGradeMajoridCourseExample;
 import com.accp.domain.ZuoYeGuanLi;
 import com.accp.service.WSHService;
 

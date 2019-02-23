@@ -1,43 +1,35 @@
 package com.accp.domain;
 
 public class Post {
-    private Integer postid;
+    private Integer postId;
 
-    private String postname;
+    private String postName;
 
     private Integer status;
 
-    private Integer parentid;
+   
 
-    public Integer getPostid() {
-        return postid;
-    }
+    public Integer getPostId() {
+		return postId;
+	}
 
-    public void setPostid(Integer postid) {
-        this.postid = postid;
-    }
+	public void setPostId(Integer postId) {
+		this.postId = postId;
+	}
 
-    public String getPostname() {
-        return postname;
-    }
+	public String getPostName() {
+		return postName;
+	}
 
-    public void setPostname(String postname) {
-        this.postname = postname;
-    }
+	public void setPostName(String postName) {
+		this.postName = postName;
+	}
 
-    public Integer getStatus() {
+	public Integer getStatus() {
         return status;
     }
 
     public void setStatus(Integer status) {
         this.status = status;
-    }
-
-    public Integer getParentid() {
-        return parentid;
-    }
-
-    public void setParentid(Integer parentid) {
-        this.parentid = parentid;
     }
 }

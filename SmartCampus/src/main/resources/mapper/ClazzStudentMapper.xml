@@ -17,6 +17,14 @@
   	<association property="stuobj" column="sid" javaType="com.accp.domain.Studentinfo" 
   		select="com.accp.mapper.StudentinfoMapper.studentexam"></association>
   </resultMap>
+  
+   <!-- 按sid查询班级学员中间表 -->
+  <select id="clazz_studentBysid" resultType="com.accp.domain.ClazzStudent">
+  	SELECT * FROM `clazz_student` WHERE sid=#{sid}
+  </select>
+  
+  
+  
   <select id="selectclazzBysid" resultMap="clazzstudent">
   	SELECT * FROM clazz_student WHERE sid=#{sid}
   </select>

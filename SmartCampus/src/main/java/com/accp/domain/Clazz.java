@@ -1,7 +1,5 @@
 package com.accp.domain;
 
-import java.util.Date;
-
 public class Clazz {
     private Integer cid;
 

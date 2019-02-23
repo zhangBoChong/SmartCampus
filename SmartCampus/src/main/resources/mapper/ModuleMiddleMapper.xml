@@ -3,11 +3,17 @@
 <mapper namespace="com.accp.mapper.ModuleMiddleMapper">
   <resultMap id="BaseResultMap" type="com.accp.domain.ModuleMiddle">
     <id column="mrId" jdbcType="INTEGER" property="mrid" />
-    <result column="moduleId" jdbcType="INTEGER" property="moduleid" />
-    <result column="roleId" jdbcType="INTEGER" property="roleid" />
-    <result column="moduleZt" jdbcType="INTEGER" property="modulezt" />
-    <result column="delete_id" jdbcType="INTEGER" property="deleteId" />
+    <result column="moduleId" jdbcType="INTEGER" property="moduleId" />
+    <result column="roleId" jdbcType="INTEGER" property="roleId" />
+    <result column="moduleZt" jdbcType="INTEGER" property="moduleZt" />
+    <result column="delete_id" jdbcType="INTEGER" property="delete_id" />
+    <collection property="list1" column="moduleId" ofType="com.accp.domain.Module" select="com.accp.dao.ModuleMapper.queryBymoduleId"></collection>
   </resultMap>
+  
+  <select id="queryByRoleId" resultType="com.accp.domain.ModuleMiddle">
+  	SELECT * FROM `module_middle` WHERE `delete_id`=#{delete_id} AND `roleId`=#{roleId}
+  </select>
+  
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">

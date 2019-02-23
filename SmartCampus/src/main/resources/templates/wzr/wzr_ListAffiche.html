@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/amazeui/2.7.2/css/amazeui.css"/>
+		<script src="js/jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/amazeui/2.7.2/js/amazeui.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(function() {
+			  $('#my-scrollspy').scrollspy({
+				animation: 'slide-left',
+				delay: 500
+			  })
+			});
+			
+			
+			$(function() {
+			    var $modal = $('#your-modal');
+
+			    $modal.siblings('.am-btn').on('click', function(e) {
+			      var $target = $(e.target);
+			      if (($target).hasClass('js-modal-open')) {
+			        $modal.modal();
+			      } else if (($target).hasClass('js-modal-close')) {
+			        $modal.modal('close');
+			      } else {
+			        $modal.modal('toggle');
+			      }
+			    });
+			  });
+		</script>
+		<link rel="stylesheet" type="text/css" href="css/wzr/bootstrap.min.css"/>
+		<title>公告列表</title>
+		<style type="text/css">
+			.form-control{
+				height: 28px;
+			}
+			.btn-default{
+				height: 28px;
+			}
+			.img-thumbnail{
+				width: 100px;
+				height: 100px;
+			}
+			.am-panel-bd{
+			color: gray;
+			}
+			.am-popup-bd{
+				word-wrap: break-word;word-break: break-all;overflow: hidden;
+			}
+			.am-img-thumbnail{
+				width: 800px;
+			}
+		</style>
+	</head>
+	<body>
+	<div id="pa">
+		<form class="navbar-form navbar-left">
+		<input type="date" class="" id="start" name="startime" autocomplete="off" style="color:#ccc" value="">
+		<em>-</em>
+		<input type="date" class="" id="end" name="endtime" autocomplete="off" style="color: rgb(204, 204, 204);" value="">
+		<button type="button" class="btn btn-default" style="background-color: transparent;line-height: 11px;" v-on:click="go1()">Go!</button>
+		&nbsp;&nbsp;&nbsp;&nbsp;
+		<input type="text" id="title" name="affiche_title" placeholder="公告标题...">
+		<button type="button" class="btn btn-default" style="background-color: transparent;line-height: 11px;" v-on:click="go2()">Go!</button>
+		<!-- <select id='type1' v-on:click="danji(this.type1)"><option v-bind:value="1">班级公告</option>
+		<option v-bind:value="2">年级公告</option>
+		<option v-bind:value="3">全校公告</option></select> -->
+		</form>
+				<h4>公告类型：<select id="id" v-on:click="selectxlk()">
+					<option v-bind:value="-10">班级公告</option>
+					<option v-bind:value="-20">年级公告</option>
+					<option v-bind:value="-30">全校公告</option>
+				</select></h4>
+
+			<br><br><br>
+			
+		&nbsp;&nbsp;&nbsp;&nbsp;<!-- <input type="checkbox" id="chElt" onclick="checkOrCancelAll();"/><span id="mySpan">全选</span>
+		<a href="#" v-on:click="sc()">删除</a><br/> -->
+		<div style="margin-left: 0px;"></div>
+
+		
+		
+		<div class="" data-am-alert v-for="v in ffList">
+		 <!--  <button type="button" class="">&times;</button> -->
+		  
+		  
+		  <div class="am-panel am-panel-primary" id="my-scrollspy">
+		  <div class="am-panel-hd">{{v.tname}}
+		  </div>
+		  <div class="am-panel-bd" v-on:click="cx1(v.affiche_id,v.img_id)" data-am-modal="{target: '#my-popup'}">
+			{{v.affiche_title}}
+		  </div>
+		</div>
+		  
+		  
+		  
+		<!-- <div class="panel panel-info">
+		  <div class="panel-heading">
+			  <h3 class="panel-title"><input type="checkbox" name="interest" v-bind:value="v.affiche_id"/>
+			{{v.tname}}<span class="badge fj" style="color: black;" data-toggle="modal" data-target="#myModal">查看附件</span></h3>
+		  </div>
+		  <a v-on:click="cx1(v.affiche_id,v.img_id)" data-toggle="modal" data-target="#myModal">
+		  <div class="panel-body">
+			{{v.affiche_title}}
+		  </div></a>
+		</div> -->
+		
+		
+		</div>
+		
+		<!-- Model -->
+		<!-- <button
+		  type="button"
+		  class="am-btn am-btn-danger"
+		  data-am-modal="{target: '#my-popup'}">
+		  Popup
+		</button> -->
+
+		<div class="am-popup" id="my-popup">
+		  <div class="am-popup-inner" v-for="s in ssList">
+			<div class="am-popup-hd">
+			  <h4 class="am-popup-title">{{s.affiche_title}}</h4>
+			  <span data-am-modal-close
+					class="am-close">&times;</span>
+			</div>
+			<div class="am-popup-bd">
+			  <p class="am-kai">{{s.affiche_content}}</p>
+			</div>
+			<span v-for="i in imList">
+				<span v-if="imList">
+			  		<img v-bind:src="a+i.img_path" alt="..." class="am-img-thumbnail">
+			  	</span>
+			  </span><br><br><br><br><br><br>
+			<p style="text-align: center;">{{s.affiche_time}}</p>
+		  </div>
+		</div>
+		
+		
+		<!-- Modal -->
+		<!-- <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="modal-dialog" role="document">
+			<div class="modal-content">
+			<div v-for="s in ssList">
+			  <div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">{{s.tname}}</h4>
+			  </div>
+			  <div>
+			  <div class="modal-body">
+				  <h3 style="text-align: center;">{{s.affiche_title}}</h3>
+				<textarea class="form-control" rows="10" readonly="readonly">{{s.affiche_content}}
+				
+				</textarea>
+				<input type="hidden" id="img_id" v-bind:value="s.img_id">
+				<span v-for="i in imList">
+				<span v-if="imList">
+				<img v-bind:src="a+i.img_path" alt="..." class="img-thumbnail">
+				</span>
+				</span>
+				<p>{{s.affiche_time}}</p>
+			  </div>
+			  </div>
+			  <div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary">Save changes</button>
+			  </div>
+			  </div>
+			</div>
+		  </div>
+		</div> -->
+		
+		<!-- <ul class="pager">
+			<li><a v-on:click="go(1)">首页</a></li>
+			<li><a v-on:click="go(pagebean6.prevPage)">上一页</a></li>
+			<li><a v-on:click="go(pagebean6.nextPage)">下一页</a></li>
+			<li><a v-on:click="go(pagebean6.pagecount)">尾页</a></li>
+		</ul> -->
+	</div>
+	</body>
+</html>
+<script src="js/wzr/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/wzr/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/wzr/pace.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/wzr/vue.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+
+
+
+
+
+
+var vm = new Vue({
+	el:"#pa",
+	data:{
+		ffList:null,
+		ssList:null,
+		imList:null,
+		a:"img/wzr/"
+	},created(){
+        this.request();
+    },methods:{
+		request:function(){
+			$.ajax({
+				url:"/selectgonggao",
+				data:"id="+-10,
+				success:function(data){
+					vm.ffList=data;
+				}
+			});
+		},cx1:function(affiche_id,img_id){
+			gonggao1(affiche_id,img_id);
+		},go1:function(){
+			gogogo();
+		},go2:function(){
+			gogo2();
+		},selectxlk:function(){
+			select();
+		},sc:function(){
+			deletegg();
+		}
+	},watch:{
+		
+	}
+});
+
+//删除公告
+function deletegg(){
+	obj = document.getElementsByName("interest");
+	var check_val1 = [];
+	for(k in obj){
+		if(obj[k].checked){
+			var Affiche = {};
+			Affiche.affiche=obj[k].value;
+			check_val1.push(Affiche);
+		}
+	}
+	alert(check_val1);
+	
+	$.ajax({
+		url:"/deleteAffiche",
+		type:"post",
+		dataType:"json",
+		data:JSON.stringify(check_val1),
+		contentType:"application/json;charset=UTF-8",
+		success:function(data){
+			if(data>0){
+				location.reload();
+			}
+		}
+	});
+}
+
+function select(){
+	var id = $('#id option:selected') .val();
+	$.ajax({
+		url:"/selectgonggao",
+		data:"id="+id,
+		success:function(data){
+			vm.ffList=data;
+		}
+	});
+}
+
+function gogo2(){
+	var id = $('#id option:selected') .val();
+	var affiche_title = document.getElementById("title").value; 
+	$.ajax({
+		url:"/selectgonggao",
+		data:"affiche_title="+affiche_title+"&id="+id,
+		success:function(data){
+			vm.ffList=data;
+		}
+	});
+}
+
+
+function gogogo(){
+	var startime = document.getElementById("start").value; 
+	var endtime = document.getElementById("end").value; 
+	$.ajax({
+		url:"/selectgonggao",
+		data:"startime="+startime+"&endtime="+endtime+"&id="+id,
+		success:function(data){
+			vm.ffList=data;
+		}
+	});
+}
+
+
+function gonggao1(affiche_id,img_id){
+	var id = $('#id option:selected').val();
+	$.ajax({
+		url:"/gonggao1",
+		data:"affiche_id="+affiche_id+"&id="+id,
+		success:function(data){
+			vm.ssList=data;
+		}
+	});
+	if(img_id!=null){
+		$.ajax({
+			url:"/cxggtu",
+			data:"img_id="+img_id,
+			success:function(data){
+				vm.imList=data;
+			}
+		});
+	}
+}
+
+/* function page(page,affiche_title){
+	$.ajax({
+		url:"/selectAffiche",
+		data:{
+			page:page,
+			affiche_title:affiche_title
+		},success:function(data){
+			vm.pagebean6=data;
+		}
+	});
+} */
+
+/* page(1,null); */
+
+
+	//页面加载的时候,所有的复选框都是未选中的状态
+	function checkOrCancelAll(){
+	//1.获取checkbo的元素对象
+	var chElt=document.getElementById("chElt");
+	//2.获取选中状态
+	var checkedElt=chElt.checked;
+	//3.若checked=true,将所有的复选框选中,checked=false,将所有的复选框取消
+	var allCheck=document.getElementsByName("interest");
+	//4.循环遍历取出每一个复选框中的元素
+	var mySpan=document.getElementById("mySpan");
+	if(checkedElt){
+	//全选
+	for(var i=0;i<allCheck.length;i++){
+	//设置复选框的选中状态
+	allCheck[i].checked=true;
+	}
+	mySpan.innerHTML="取消全选";
+	}else{
+	//取消全选
+	for(var i=0;i<allCheck.length;i++){
+	allCheck[i].checked=false;
+	}
+	mySpan.innerHTML="全选";
+	}
+	}
+</script>

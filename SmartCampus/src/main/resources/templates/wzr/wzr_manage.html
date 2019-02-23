@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<link rel="stylesheet" type="text/css" href="css/wzr/bootstrap.min.css"/>
+		<title>角色、职位管理</title>
+		<style type="text/css">
+			/* .tab1{
+				margin-top: 100px;
+			} */
+		</style>
+	</head>
+	<body>
+	<!-- <h4><select id="selecttwo"><option value="-20">角色</option><option value="-21">职位</option></select></h4> -->
+	<div id="dd">
+	<table class="table table-hover">
+      <thead>
+        <tr>
+          <th style="width: 200px;" ><!-- <input type="checkbox" id="chElt" onclick="checkOrCancelAll();"/><span id="mySpan">全选</span>
+					&nbsp;&nbsp;&nbsp;<a href="#">删除</a>&nbsp; -->
+					<input type="hidden" id='id6' value='6'>
+					<span v-for="a100 in ButtonmiddleList1" v-if="a100.buttonstatus==0"><a href="" data-toggle="modal" data-target="#myModal1" v-on:click="cxmodule()">添加</a></span></th>
+          <th>角色编号</th>
+          <th>角色名称</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody v-if="pagebean">
+        <tr v-for="(item,index) in pagebean.lists">
+          <th><!-- <input type="checkbox" name="interest" v-model="item.checked" v-on:click="checkedValue1(index)" v-bind:value="item.roleId"/> --></th>
+          <th scope="row">{{item.roleId}}</th>
+          <input type="hidden" id="qq" name="roleId" v-bind:value="item.roleId">
+          <td>{{item.roleName}}</td>
+          <td><input type="hidden" id='id8' value='8'>
+          <input type="hidden" id='id10' value='10'>
+          <span v-for="a101 in ButtonmiddleList8" v-if="a101.buttonstatus==0"><a href="" v-on:click="sc(item.roleId)" data-toggle="modal" data-target="#dModal">删除</a></span>&nbsp;
+		  <span v-for="a102 in ButtonmiddleList10" v-if="a102.buttonstatus==0"><a href="" v-on:click="cxroleid(item.roleId)" data-toggle="modal" data-target="#myModal">修改</a></span>&nbsp;
+		  </td>
+        </tr>
+      </tbody>
+    </table>
+   		<ul class="pager">
+			<li><a v-on:click="go(1)">首页</a></li>
+			<li><a v-on:click="go(pagebean.prevPage)">上一页</a></li>
+			<li id="li2" style="display: none;">{{pagebean.currentPage}}</li>
+			<li><a v-on:click="go(pagebean.nextPage)">下一页</a></li>
+			<li><a v-on:click="go(pagebean.pagecount)">尾页</a></li>
+		</ul>
+		
+		
+		<!-- 删除角色Modal -->
+		<!-- <div class="modal fade" id="dModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">删除角色</h4>
+			</div>
+			<div class="modal-body">
+				确定要删除？
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-warning" data-dismiss="modal" v-on:click="sc()">删除</button>
+			</div>
+			</div>
+		</div>
+		</div> -->
+		
+		
+		<!-- 修改角色Modal -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document" v-for="item1 in roleList1">
+		<div class="modal-content">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<h4 class="modal-title" id="myModalLabel">修改角色</h4>
+		</div>
+		<div class="modal-body">
+			角色名称：<div class="form-group">
+			<span hidden="hiddent">{{item1.roleId}}</span>
+				<input type="text" id="sm" class="form-control" name='roleName' v-bind:value="item1.roleName" size="50" style="color: black;">
+			</div>
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			<a href="" id="xg1" class="btn btn-primary" data-dismiss="modal" v-on:click="xg(item1.roleId)">修改</a>
+		</div>
+		</div>
+	</div>
+	</div>
+	
+	
+	<!-- 添加角色Modal -->
+	<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<h4 class="modal-title" id="myModalLabel">添加角色</h4>
+		</div>
+		<div class="modal-body">
+		<a onclick="zhuijia1()">批量+</a>
+			角色名称：<div class="form-group" id="filediv">
+				<input type='text' class='form-control' name='roleName' value='' size='50'>
+			</div>
+			<!-- 为角色添加模块权限：
+			<label class="checkbox-inline" v-for="items in mdList">
+			<input type="checkbox" id="inlineCheckbox1" value="option1"> {{items.moduleName}}
+			</label> -->
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			<a type="button" class="btn btn-primary" data-dismiss="modal" v-on:click="tjrole()">提交</a>
+		</div>
+		</div>
+	</div>
+	</div>
+	</div>
+	
+	
+	
+	
+	<div id="bb">
+	<table class="table table-hover tab1">
+		<thead>
+			<tr>
+			<th style="width: 200px;"><!-- <input type="checkbox" id="chElt1" onclick="checkOrCancelAll1();"/><span id="mySpan1">全选</span>
+					&nbsp;&nbsp;&nbsp;<a href="#">删除</a>&nbsp; -->
+					<input type="hidden" id='id7' value='7'>
+					<span v-for="a103 in ButtonmiddleList7" v-if="a103.buttonstatus==0"><a href="" data-toggle="modal" data-target="#myModal4" v-on:click="cxpost()">添加</a></span></th>
+			<th>职位编号</th>
+			<th>职位名称</th>
+			<th>操作</th>
+			</tr>
+		</thead>
+		<tbody v-if="pagebean1">
+			<tr v-for="(item2,index) in pagebean1.lists">
+			<th><!-- <input type="checkbox" name="interest1" v-model="item2.checked" v-on:click="checkedValue(index)"  v-bind:value="item2.postId"/> --></th>
+			<th scope="row">{{item2.postId}}</th>
+			<input type="hidden" id='postId' name="postId" v-bind:value="item2.postId">
+			<td>{{item2.postName}}</td>
+			<td><input type="hidden" id='id9' value='9'><input type="hidden" id='id11' value='11'>
+			<span v-for="a104 in ButtonmiddleList9" v-if="a104.buttonstatus==0"><a href="" v-on:click="scpost(item2.postId)" data-toggle="modal" data-target="#deleteModal1">删除</a></span>&nbsp;
+			<span v-for="a105 in ButtonmiddleList11" v-if="a105.buttonstatus==0"><a href="" v-on:click="cxpostId(item2.postId)" data-toggle="modal" data-target="#myModal3">修改</a></span>&nbsp;
+			</td>
+			</tr>
+		</tbody>
+	</table>
+		<ul class="pager">
+			<li><a v-on:click="go1(1)">首页</a></li>
+			<li><a v-on:click="go1(pagebean1.prevPage)">上一页</a></li>
+			<li id="li1" style="display: none;">{{pagebean1.currentPage}}</li>
+			<li><a v-on:click="go1(pagebean1.nextPage)">下一页</a></li>
+			<li><a v-on:click="go1(pagebean1.pagecount)">尾页</a></li>
+		</ul>
+		
+		
+		<!-- 添加职位Modal -->
+		<div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">添加职位</h4>
+			</div>
+			<div class="modal-body">
+			<a onclick="zhuijia2()">批量+</a>
+				职位名称：<div class="form-group" id="papa">
+					<input type='text' class='form-control' name='postName' size='50'>
+				</div>
+				<!-- 为职位添加数据权限：
+				<label class="checkbox-inline" v-for="item3 in authorityList1">
+				<input type="checkbox" id="inlineCheckbox1" value="option1"> <span>{{item3.authority_name}}</span>
+				</label> -->
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<a type="button" class="btn btn-primary" data-dismiss="modal" v-on:click="tjpostName()">添加</a>
+			</div>
+			</div>
+		</div>
+		</div>
+		
+		
+		<!-- 删除职位Modal -->
+		<!-- <div class="modal fade" id="deleteModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">删除职位</h4>
+			</div>
+			<div class="modal-body">
+				确定要删除吗？
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+				<a class="btn btn-primary" data-dismiss="modal" v-on:click="scpost()">删除</a>
+			</div>
+			</div>
+		</div>
+		</div> -->
+		
+		
+		<!-- 修改职位Modal -->
+	<div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content" v-for="item10 in PostList">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<h4 class="modal-title" id="myModalLabel">修改职位</h4>
+		</div>
+		<div class="modal-body">
+			职位名称：<div class="form-group">
+				<input type="text" class="form-control" id="postName" name="postName" v-bind:value="item10.postName" size="50">
+			</div>
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			<a type="button" class="btn btn-primary" data-dismiss="modal" v-on:click="xgPost(item10.postId)">修改</a>
+		</div>
+		</div>
+	</div>
+	</div>
+		
+		
+		
+	</div>
+	
+	</body>
+</html>
+<script src="js/wzr/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/wzr/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/wzr/pace.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/wzr/vue.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+
+function zhuijia1(){
+	$("<input type='text' class='form-control' name='roleName' value='' size='50'>").appendTo("#filediv");
+}
+
+function zhuijia2(){
+	$("<input type='text' class='form-control' name='postName' value='' size='50'>").appendTo("#papa");
+}
+
+$(function(){
+	/*  $("#bb").hide();
+	 $("#dd").hide();
+	$("#selecttwo").change(function(){
+		var select2 = $(this).val();
+		if(select2==-20){
+			$("#dd").show();
+		}else{
+			$("#dd").hide();
+		}
+		if(select2==-21){
+			$("#bb").show();
+		}else{
+			$("#bb").hide();
+		}
+	}) */
+})
+
+/**
+ * 
+ 角色
+ */
+var bean=new Vue({
+	el:"#dd",
+	data:{
+		pagebean:null,
+		roleList1:null,
+		mdList:null,
+		item:null,
+		item1:null,
+		ButtonmiddleList1:null,
+		ButtonmiddleList8:null,
+		ButtonmiddleList10:null
+	},created(){
+		this.cxanniu100();
+		this.cxanniu101();
+		this.cxanniu102();
+	},methods:{
+		go:function(num){
+				page(num)
+			},sc:function(roleId){
+				delete_role(roleId);
+			},cxroleid:function(roleId){
+				queryByroleId(roleId);
+			},xg:function(roleId){
+				updateRole(roleId);
+			},cxmodule:function(){
+				selectModule();
+			},tjrole:function(){
+				insertrole();
+			},cxanniu100:function(){
+				var anniu100 = $("#id6").val();
+				$.ajax({
+					url:"/querybuttonmiddle",
+					data:"buttonid="+anniu100,
+					success:function(data){
+						bean.ButtonmiddleList1=data;
+					}
+				});
+			},cxanniu101:function(){
+				var anniu101 = $("#id8").val();
+				$.ajax({
+					url:"/querybuttonmiddle",
+					data:"buttonid="+anniu101,
+					success:function(data){
+						bean.ButtonmiddleList8=data;
+					}
+				});
+			},cxanniu102:function(){
+				var anniu102 = $("#id10").val();
+				$.ajax({
+					url:"/querybuttonmiddle",
+					data:"buttonid="+anniu102,
+					success:function(data){
+						bean.ButtonmiddleList10=data;
+					}
+				});
+			}
+	},watch:{
+		
+	}
+});
+
+
+//添加角色
+function insertrole(){
+	var obj = document.getElementsByName("roleName");
+	var roleName_val = [];
+	/* alert("1"); */
+	for(k in obj){
+		if(obj[k].value){
+			/* alert("2"); */
+			var Role = {};
+			Role.roleName=obj[k].value;
+			roleName_val.push(Role);
+		}
+	}
+	$.ajax({
+		url:"/insertrole",
+		type:"post",
+		dataType:"json",
+		data:JSON.stringify(roleName_val),
+		contentType:"application/json;charset=UTF-8",
+		success:function(data){
+			if(data>0){
+				alert("添加角色成功！");
+				location.reload();
+			}
+		}
+	});
+}
+
+
+//查询所有模块
+function selectModule(){
+	$.ajax({
+		url:"/selectModule",
+		success:function(data){
+			bean.mdList=data;
+		}
+	});
+}
+
+
+//修改角色名称
+function updateRole(roleId) {
+	var currentpage3=$("#li2").text();
+	var roleName = document.getElementById("sm").value;  
+	$.ajax({
+		url:"/updateRole",
+		data:"roleId="+roleId+"&roleName="+roleName,
+		success:function(data){
+			if(data>0){
+				alert("修改成功！");
+				page(currentpage3);
+				/* location.reload(); */
+			}
+		}
+	});
+}
+
+//按roleId查询角色名称
+function queryByroleId(roleId){
+	$.ajax({
+		url:"/queryByroleId",
+		data:"roleId="+roleId,
+		success:function(data){
+			bean.roleList1=data;
+		}
+	});
+}
+
+//删除角色
+function delete_role(roleId) { 
+	 var r=confirm("确定删除吗？");
+     if (r==true){
+	var currentpage4=$("#li2").text();
+	/* var roleId = document.getElementById("qq").value;   */
+	/* alert(roleId); */
+		$.ajax({
+			url:"/deleteRole",
+			data:"roleId="+roleId,
+			success:function(data){
+				if(data>0){
+					alert("删除成功！");
+					page(currentpage4);
+					/* location.reload(); */
+				}
+			}
+		});
+     }else{
+    	 
+     }
+} 
+
+
+function page(page){
+	$.ajax({
+		url:"/rolePage",
+		data:{
+			page:page
+		},success:function(data){
+			bean.pagebean=data;
+		}
+	});
+}
+
+page(1,null);
+
+
+
+/**
+ * 
+ 职位
+ */
+var bean1=new Vue({
+	el:"#bb",
+	data:{
+		pagebean1:null,
+		authorityList1:null,
+		PostList:null,
+		ButtonmiddleList7:null,
+		ButtonmiddleList9:null,
+		ButtonmiddleList11:null
+	},created(){
+		this.cxanniu103();
+		this.cxanniu104();
+		this.cxanniu105();
+	},methods:{
+		go1:function(num){
+				page1(num)
+			},scpost:function(postId){
+				delete_post(postId);
+			},cxpost:function(){
+				selectPost();
+			},xgPost:function(postId){
+				updatePost(postId);
+			},cxpostId:function(postId){
+				selectPostId(postId);
+			},tjpostName:function(){
+				insertpost();
+			},cxanniu103:function(){
+				var anniu103 = $("#id7").val();
+				$.ajax({
+					url:"/querybuttonmiddle",
+					data:"buttonid="+anniu103,
+					success:function(data){
+						bean1.ButtonmiddleList7=data;
+					}
+				});
+			},cxanniu104:function(){
+				var anniu104 = $("#id9").val();
+				$.ajax({
+					url:"/querybuttonmiddle",
+					data:"buttonid="+anniu104,
+					success:function(data){
+						bean1.ButtonmiddleList9=data;
+					}
+				});
+			},cxanniu105:function(){
+				var anniu105 = $("#id11").val();
+				$.ajax({
+					url:"/querybuttonmiddle",
+					data:"buttonid="+anniu105,
+					success:function(data){
+						bean1.ButtonmiddleList11=data;
+					}
+				});
+			}
+	},watch:{
+		
+	}
+});
+
+//添加职位
+function insertpost(){
+	var object=document.getElementsByName("postName");
+	var postName_val=[];
+	for(p in object){
+		if(object[p].value){
+			var Post={};
+			Post.postName=object[p].value;
+			postName_val.push(Post);
+		}
+	}
+	$.ajax({
+		url:"/insertpost",
+		type:"post",
+		dataType:"json",
+		data:JSON.stringify(postName_val),
+		contentType:"application/json;charset=UTF-8",
+		success:function(data){
+			if(data>0){
+				alert("添加职位成功!");
+				location.reload();
+			}
+		}
+	});
+}
+
+
+//查询postId
+function selectPostId(postId){
+	$.ajax({
+		url:"/selectPostId",
+		data:"postId="+postId,
+		success:function(data){
+			bean1.PostList=data;
+		}
+	});
+}
+
+
+//修改职位
+function updatePost(postId){
+	var currentpage=$("#li1").text();
+	/* alert(currentpage); */
+	postName = $("#postName").val();  
+	/* alert(postName);   */
+	$.ajax({
+		url:"/updatePost",
+		data:"postId="+postId+"&postName="+postName,
+		success:function(data){
+			if(data>0){
+				alert("修改成功！");
+				page1(currentpage);
+				/* location.reload(); */
+			}
+		}
+	});
+}
+
+
+//查询所有权限
+function selectPost(){
+	$.ajax({
+		url:"/queryAuthority",
+		success:function(data){
+			bean1.authorityList1=data;
+		}
+	});
+}
+
+//删除职位
+function delete_post(postId){
+	var r1=confirm("确定删除吗？");
+    if (r1==true){
+	var currentpage1=$("#li1").text();
+	/* postId = $("input[id='postId']").attr("value");   */
+	/* alert(postId); */
+		$.ajax({
+			url:"/deletePost",
+			data:"postId="+postId,
+			success:function(data){
+				if(data>0){
+					alert("删除成功！");
+					page1(currentpage1);
+					/* location.reload(); */
+				}
+			}
+		});
+    }else{
+    	
+    }
+}
+
+function page1(page1){
+	$.ajax({
+		url:"/queryPost",
+		data:{
+			page1:page1
+		},success:function(data){
+			bean1.pagebean1=data;
+		}
+	});
+}
+
+page1(1,null);
+
+</script>

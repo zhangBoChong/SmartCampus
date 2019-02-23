@@ -2,8 +2,6 @@ package com.accp.service;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
-
 import com.accp.domain.Classroom;
 import com.accp.domain.Clazz;
 import com.accp.domain.ClazzSchedule;

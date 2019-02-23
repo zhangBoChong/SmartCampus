@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.accp.mapper.ButtonMapper">
+  <resultMap id="BaseResultMap" type="com.accp.domain.Button">
+    <id column="buttonid" jdbcType="INTEGER" property="buttonid" />
+    <result column="buttonname" jdbcType="VARCHAR" property="buttonname" />
+    <result column="deleteid" jdbcType="INTEGER" property="deleteid" />
+    <result column="buttonreserveone" jdbcType="VARCHAR" property="buttonreserveone" />
+    <result column="buttonreservetwo" jdbcType="VARCHAR" property="buttonreservetwo" />
+  </resultMap>
+  
+  
+   <resultMap id="BaseResultMap1" extends="BaseResultMap" type="com.accp.domain.Button">
+    	<collection property="buttonList11" column="buttonid" ofType="com.accp.domain.Buttonmiddle">
+    		<id column="brid" jdbcType="INTEGER" property="brid" />
+		    <result column="buttonid" jdbcType="INTEGER" property="buttonid" />
+		    <result column="roleId" jdbcType="INTEGER" property="roleId" />
+		    <result column="buttonstatus" jdbcType="INTEGER" property="buttonstatus" />
+		    <result column="delete_id" jdbcType="INTEGER" property="delete_id" />
+		    <result column="buttonmiddlereserveone" jdbcType="VARCHAR" property="buttonmiddlereserveone" />
+		    <result column="buttonmiddlereservetwo" jdbcType="VARCHAR" property="buttonmiddlereservetwo" />
+    	</collection>
+    </resultMap>
+    
+    <!-- 按角色id查询按钮中间表已有的数据 -->
+    <select id="selectbuttonmiddleone" resultMap="BaseResultMap1">
+    	SELECT `button`.`buttonname`,`button`.`buttonid`,`buttonmiddle`.`roleId`,`buttonmiddle`.`buttonstatus`,`buttonmiddle`.`brid` FROM `buttonmiddle`,`button` WHERE `buttonmiddle`.`roleId`=#{roleId} AND `button`.`delete_id`=1 AND `buttonmiddle`.`delete_id`=1
+		AND `buttonmiddle`.`buttonid`=`button`.`buttonid` GROUP BY `button`.`buttonname`
+    </select>
+  
+  
+  <!-- 查询所有未删除的按钮 -->
+  <select id="querybutton1" resultType="com.accp.domain.Button">
+  	SELECT * FROM `button` WHERE `delete_id`=#{delete_id}
+  </select>
+  
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    buttonid, buttonname, delete_id, buttonreserveone, buttonreservetwo
+  </sql>
+  <select id="selectByExample" parameterType="com.accp.domain.ButtonExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from button
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from button
+    where buttonid = #{buttonid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from button
+    where buttonid = #{buttonid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.accp.domain.ButtonExample">
+    delete from button
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.accp.domain.Button">
+    insert into button (buttonid, buttonname, delete_id, 
+      buttonreserveone, buttonreservetwo)
+    values (#{buttonid,jdbcType=INTEGER}, #{buttonname,jdbcType=VARCHAR}, #{deleteId,jdbcType=INTEGER}, 
+      #{buttonreserveone,jdbcType=VARCHAR}, #{buttonreservetwo,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.accp.domain.Button">
+    insert into button
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="buttonid != null">
+        buttonid,
+      </if>
+      <if test="buttonname != null">
+        buttonname,
+      </if>
+      <if test="deleteId != null">
+        delete_id,
+      </if>
+      <if test="buttonreserveone != null">
+        buttonreserveone,
+      </if>
+      <if test="buttonreservetwo != null">
+        buttonreservetwo,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="buttonid != null">
+        #{buttonid,jdbcType=INTEGER},
+      </if>
+      <if test="buttonname != null">
+        #{buttonname,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteId != null">
+        #{deleteId,jdbcType=INTEGER},
+      </if>
+      <if test="buttonreserveone != null">
+        #{buttonreserveone,jdbcType=VARCHAR},
+      </if>
+      <if test="buttonreservetwo != null">
+        #{buttonreservetwo,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.accp.domain.ButtonExample" resultType="java.lang.Long">
+    select count(*) from button
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update button
+    <set>
+      <if test="record.buttonid != null">
+        buttonid = #{record.buttonid,jdbcType=INTEGER},
+      </if>
+      <if test="record.buttonname != null">
+        buttonname = #{record.buttonname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deleteId != null">
+        delete_id = #{record.deleteId,jdbcType=INTEGER},
+      </if>
+      <if test="record.buttonreserveone != null">
+        buttonreserveone = #{record.buttonreserveone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.buttonreservetwo != null">
+        buttonreservetwo = #{record.buttonreservetwo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update button
+    set buttonid = #{record.buttonid,jdbcType=INTEGER},
+      buttonname = #{record.buttonname,jdbcType=VARCHAR},
+      delete_id = #{record.deleteId,jdbcType=INTEGER},
+      buttonreserveone = #{record.buttonreserveone,jdbcType=VARCHAR},
+      buttonreservetwo = #{record.buttonreservetwo,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.accp.domain.Button">
+    update button
+    <set>
+      <if test="buttonname != null">
+        buttonname = #{buttonname,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteId != null">
+        delete_id = #{deleteId,jdbcType=INTEGER},
+      </if>
+      <if test="buttonreserveone != null">
+        buttonreserveone = #{buttonreserveone,jdbcType=VARCHAR},
+      </if>
+      <if test="buttonreservetwo != null">
+        buttonreservetwo = #{buttonreservetwo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where buttonid = #{buttonid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.accp.domain.Button">
+    update button
+    set buttonname = #{buttonname,jdbcType=VARCHAR},
+      delete_id = #{deleteId,jdbcType=INTEGER},
+      buttonreserveone = #{buttonreserveone,jdbcType=VARCHAR},
+      buttonreservetwo = #{buttonreservetwo,jdbcType=VARCHAR}
+    where buttonid = #{buttonid,jdbcType=INTEGER}
+  </update>
+</mapper>

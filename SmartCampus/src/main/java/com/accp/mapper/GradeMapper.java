@@ -13,8 +13,9 @@ public interface GradeMapper {
 	
 	List<Grade> queryByVid(Integer vid);
 	
-	//根据gid查询年级
-	Grade queryByGid(Integer gid);
+	
+	//查询所有年级
+    List<Grade> selectGrade();
 	
     long countByExample(GradeExample example);
 

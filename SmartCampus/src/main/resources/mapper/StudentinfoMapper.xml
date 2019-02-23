@@ -25,6 +25,33 @@
   	<collection property="clsobj" column="sid" ofType="com.accp.domain.ClazzStudent" 
   		select="com.accp.mapper.ClazzStudentMapper.selectclazzBysid"></collection>
   </resultMap>
+  
+  <!-- 修改学生状态 -->
+  <update id="updatestudentstatus">
+  	UPDATE `studentinfo` SET `status`=#{status} WHERE `sid`=#{sid}
+  </update>
+  
+  <!-- 按sid查询学生表 -->
+  <select id="queryBysid1" resultType="com.accp.domain.Studentinfo">
+  	SELECT * FROM `studentinfo` 
+  	<if test="sid">
+  		WHERE `sid`=#{sid}
+  	</if>
+  </select>
+  
+  
+  <!-- 按sid查询学生表 -->
+  <select id="queryBysidnnn" resultType="com.accp.domain.Studentinfo">
+  	SELECT * FROM `studentinfo` 
+  	<if test="sid">
+  		WHERE `sid`=#{sid}
+  	</if>
+  </select>
+  
+  
+  
+  
+  
   <select id="selectBystatus" resultMap="BaseResultMap">
   SELECT * FROM studentinfo WHERE `status`=4
   </select>

@@ -41,4 +41,7 @@ public interface ClazzStudentMapper {
     int updateByPrimaryKeySelective(ClazzStudent record);
 
     int updateByPrimaryKey(ClazzStudent record);
+    
+  //按sid查询班级学员中间表
+    ClazzStudent clazz_studentBysid(@Param("sid") Integer sid);
 }

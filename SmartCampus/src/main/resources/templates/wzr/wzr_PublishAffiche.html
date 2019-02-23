@@ -1,0 +1,214 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=emulateIE7" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="css/style.css" />
+<link rel="stylesheet" type="text/css" href="css/WdatePicker.css" />
+<link rel="stylesheet" type="text/css" href="css/skin_/form.css" />
+<link href="umeditor/themes/default/_css/umeditor.css" type="text/css" rel="stylesheet">
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/global.js"></script>
+<script type="text/javascript" src="js/jquery.select.js"></script>
+<script type="text/javascript" src="js/WdatePicker.js"></script>
+<script type="text/javascript">
+window.UMEDITOR_HOME_URL = 'umeditor/';  // 请换成绝对路径
+
+</script>
+<script type="text/javascript" src="js/umeditor.config.js"></script>
+<script type="text/javascript" src="js/editor_api.js"></script>
+<script type="text/javascript" src="umeditor/lang/zh-cn/zh-cn.js"></script>
+<title>公告发布</title>
+<style type="text/css">
+	.p1{
+		margin-left: 5px;
+	}
+	.p1 input{
+		margin-left: 37px;
+	}
+</style>
+</head>
+
+<body>
+<div id="container">
+    <div id="bd">
+    <form method="post" enctype="multipart/form-data" name="myform1" action="/batch/upload" onSubmit="return checklogin()">
+    	<div id="main">
+            <h2 class="subfild">
+            	<span>发布信息</span>
+            </h2>
+            <div class="subfild-content base-info">
+            	<div class="kv-item ue-clear">
+                	<label><span class="impInfo">*</span>公告标题</label>
+                	<div class="kv-item-content">
+                    	<input type="text" id="affiche_title" name="affiche_title" placeholder="公告标题" />
+                    </div>
+                    <!-- <span class="kv-item-tip">标题字数限制在35个字符</span> -->
+                </div>
+                
+                <div class="kv-item ue-clear">
+                	<label>发送至</label>
+                	<div class="kv-item-content">
+	                    	<select id='id'>
+	                    		<option v-bind:value="0">请选择公告类型</option>
+	                        	<option v-bind:value="1">班级公告</option>
+	                            <option v-bind:value="2">年级公告</option>
+	                            <option v-bind:value="3">全校公告</option>
+	                        </select>
+	                        <div v-if="ttList">
+	                        
+							</div>
+	                        <div v-if="clzList">
+						<label class="checkbox-inline" v-for="m10 in clzList">
+						  <input type="checkbox" id="inlineCheckbox1" v-bind:value="m10.cname" name='affiche_sendee'>{{m10.cname}}
+						</label></div>
+						<div v-if="graList">
+						<label class="checkbox-inline" v-for="m11 in graList">
+						  <input type="checkbox" id="inlineCheckbox2" v-bind:value="m11.gname" name='affiche_sendee'>{{m11.gname}}
+						</label></div>
+						<div v-if="moduleList">
+						<label class="checkbox-inline">
+						  <input type="checkbox" id="inlineCheckbox3" value="全校公告" name='affiche_sendee'>全校公告
+						</label></div>
+                    </div>
+                </div>
+                
+                <div id="filediv" class="kv-item ue-clear">
+                	<p class="p1">文件：<input type="file" name="file"/><img src="img/wzr/QQ图片20181022085843.png" alt="添加文件" onclick="zhuijia1()" width="20px;" height="20px;"/></p><br/>
+                </div>
+            </div>
+			
+            <h2 class="subfild">
+            	<span>公告内容</span>
+            </h2>
+            
+            <div class="subfild-content remarkes-info">
+            	<div class="kv-item ue-clear">
+                	<label><span class="impInfo">*</span>文章内容</label>
+                	<div class="kv-item-content">
+                    	<textarea placeholder="文章内容" id="content" name="affiche_content" style="width:800px;height:240px;"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div v-for="it1 in ButtonmiddleList1" v-if="it1.buttonstatus==0">
+            <div class="buttons">
+            <input type="hidden" id='anniu1' name='buttonid' value='1'/>
+               <input class="button" type="submit" value="确认发布"/>
+				<!-- <input class="button" type="button" value="移入草稿箱" /> -->
+				<!-- <input class="button" type="button" value="发布为附件" /> -->
+            </div>
+            </div>
+        </div>
+        </form>
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="js/wzr/jquery.min.js"></script>
+<script type="text/javascript" src="js/wzr/vue.js"></script>
+<script type="text/javascript">
+var vm = new Vue({
+	el:"#bd",
+	data:{
+		clzList:null,
+		graList:null,
+		moduleList:null,
+		ttList:null,
+		ButtonmiddleList1:null
+	},created(){
+		this.cxanniu1();
+	},methods:{
+		cxanniu1:function(){
+			var buttonid = $("#anniu1").val();
+			/* alert(buttonid); */
+			$.ajax({
+				url:"/querybuttonmiddle",
+				data:"buttonid="+buttonid,
+				success:function(data){
+					vm.ButtonmiddleList1=data;
+				}
+			});
+		}
+	},watch:{
+		
+	}
+});
+
+/* function tj(){
+	var affiche_sendee=$("[name='bb']:checked").val();
+	alert(affiche_sendee);
+	var affiche_title = $("#affiche_title").val();  
+	alert(affiche_title);
+	var affiche_content = $("#content").val();  
+	alert(affiche_content);
+	$.ajax({
+		url:"/batch/upload",
+		data:"affiche_title="+affiche_title+"&affiche_content="+affiche_content+"&affiche_sendee="+affiche_sendee,
+		success:function(data){
+			
+		}
+	});
+} */
+
+
+$("#id").change(function(){
+	
+	var id=$(this).val();
+	$.ajax({
+		url:"/selectgg",
+		data:"id="+id,
+		success:function(data){
+			vm.clzList=data;
+		}
+	});
+	
+	$.ajax({
+		url:"/selectgg1",
+		data:"id="+id,
+		success:function(data){
+			vm.graList=data;
+		}
+	});
+	
+	$.ajax({
+		url:"/selectgg2",
+		data:"id="+id,
+		success:function(data){
+			vm.moduleList=data;
+		}
+	});
+	
+	$.ajax({
+		url:"/selectgg3",
+		data:"id="+id,
+		success:function(data){
+			vm.ttList=data;
+		}
+	});
+})
+
+
+function zhuijia1(){
+	$("<p class='p1'>文件：<input type='file' name='file'/></p><br/>").appendTo("#filediv");
+}
+
+
+//表单验证
+function checklogin() {
+     if((myform1.affiche_title.value != "")) {
+    	 if((myform1.affiche_content.value != "")) {
+             return true
+         } else {
+             alert("公告内容不能为空！");
+             return false
+         }
+     } else {
+         alert("公告标题不能为空！");
+         return false
+     }
+}
+
+	/* $('select').select();
+	showRemind('input[type=text],textarea','color5');
+	UM.getEditor('content');  */
+</script>
+</html>

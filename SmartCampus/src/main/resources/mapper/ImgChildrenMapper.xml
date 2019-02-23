@@ -2,11 +2,22 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.accp.mapper.ImgChildrenMapper">
   <resultMap id="BaseResultMap" type="com.accp.domain.ImgChildren">
-    <id column="picture_id" jdbcType="INTEGER" property="pictureId" />
-    <result column="img_path" jdbcType="VARCHAR" property="imgPath" />
-    <result column="img_id" jdbcType="INTEGER" property="imgId" />
-    <result column="delete_id" jdbcType="INTEGER" property="deleteId" />
+    <id column="picture_id" jdbcType="INTEGER" property="picture_id" />
+    <result column="img_path" jdbcType="VARCHAR" property="img_path" />
+    <result column="img_id" jdbcType="INTEGER" property="img_id" />
+    <result column="delete_id" jdbcType="INTEGER" property="delete_id" />
   </resultMap>
+  
+  <!-- 新增图片子表 -->
+  <insert id="inserttpc">
+  	INSERT INTO `img_children`(`img_path`,`img_id`,`delete_id`)VALUES(#{img_path},#{img_id},#{delete_id});
+  </insert>
+  
+  <!-- 按img_id查询 -->
+  <select id="selectImg_children" resultType="com.accp.domain.ImgChildren">
+  	select * from img_children where img_id=#{img_id}
+  </select>
+  
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">

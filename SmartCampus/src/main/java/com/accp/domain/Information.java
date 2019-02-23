@@ -2,94 +2,102 @@ package com.accp.domain;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class Information {
-    private Integer informationId;
+    private Integer information_id;
 
-    private Integer uId;
+    private Integer u_id;
 
-    private String informationContent;
+    private String information_content;
 
-    private Integer informationSendee;
+    private Integer information_sendee;
 
-    private Date informationTime;
+    @DateTimeFormat(pattern = "yyyy-MM-dd") //入参 
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd") //出参
+    private Date information_time;
 
-    private Integer imgId;
+    private Integer img_id;
 
-    private Integer informationFetch;
+    private Integer information_fetch;
 
-    private Integer informationType;
+    private Integer information_type;
 
-    private Integer deleteId;
+    private Integer delete_id;
 
-    public Integer getInformationId() {
-        return informationId;
-    }
+	public Integer getInformation_id() {
+		return information_id;
+	}
 
-    public void setInformationId(Integer informationId) {
-        this.informationId = informationId;
-    }
+	public void setInformation_id(Integer information_id) {
+		this.information_id = information_id;
+	}
 
-    public Integer getuId() {
-        return uId;
-    }
+	public Integer getU_id() {
+		return u_id;
+	}
 
-    public void setuId(Integer uId) {
-        this.uId = uId;
-    }
+	public void setU_id(Integer u_id) {
+		this.u_id = u_id;
+	}
 
-    public String getInformationContent() {
-        return informationContent;
-    }
+	public String getInformation_content() {
+		return information_content;
+	}
 
-    public void setInformationContent(String informationContent) {
-        this.informationContent = informationContent;
-    }
+	public void setInformation_content(String information_content) {
+		this.information_content = information_content;
+	}
 
-    public Integer getInformationSendee() {
-        return informationSendee;
-    }
+	public Integer getInformation_sendee() {
+		return information_sendee;
+	}
 
-    public void setInformationSendee(Integer informationSendee) {
-        this.informationSendee = informationSendee;
-    }
+	public void setInformation_sendee(Integer information_sendee) {
+		this.information_sendee = information_sendee;
+	}
 
-    public Date getInformationTime() {
-        return informationTime;
-    }
+	public Date getInformation_time() {
+		return information_time;
+	}
 
-    public void setInformationTime(Date informationTime) {
-        this.informationTime = informationTime;
-    }
+	public void setInformation_time(Date information_time) {
+		this.information_time = information_time;
+	}
 
-    public Integer getImgId() {
-        return imgId;
-    }
+	public Integer getImg_id() {
+		return img_id;
+	}
 
-    public void setImgId(Integer imgId) {
-        this.imgId = imgId;
-    }
+	public void setImg_id(Integer img_id) {
+		this.img_id = img_id;
+	}
 
-    public Integer getInformationFetch() {
-        return informationFetch;
-    }
+	public Integer getInformation_fetch() {
+		return information_fetch;
+	}
 
-    public void setInformationFetch(Integer informationFetch) {
-        this.informationFetch = informationFetch;
-    }
+	public void setInformation_fetch(Integer information_fetch) {
+		this.information_fetch = information_fetch;
+	}
 
-    public Integer getInformationType() {
-        return informationType;
-    }
+	public Integer getInformation_type() {
+		return information_type;
+	}
 
-    public void setInformationType(Integer informationType) {
-        this.informationType = informationType;
-    }
+	public void setInformation_type(Integer information_type) {
+		this.information_type = information_type;
+	}
 
-    public Integer getDeleteId() {
-        return deleteId;
-    }
+	public Integer getDelete_id() {
+		return delete_id;
+	}
 
-    public void setDeleteId(Integer deleteId) {
-        this.deleteId = deleteId;
-    }
+	public void setDelete_id(Integer delete_id) {
+		this.delete_id = delete_id;
+	}
+
+   
 }

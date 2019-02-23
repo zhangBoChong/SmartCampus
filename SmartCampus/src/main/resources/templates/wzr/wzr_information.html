@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>消息列表</title>
+		<link rel="stylesheet" type="text/css" href="css/wzr/bootstrap.min.css"/>
+		<style type="text/css">
+			.tz{
+				background-color: red;
+				font-size: 1em;
+			}
+			.form-control{
+				border-color: skyblue;
+			}
+			.img-circle{
+				width: 20px;
+				height: 20px;
+			}
+			.pc{
+				background-color: #0099CC;
+			}
+		</style>
+	</head>
+	<body>
+	<div id="div">
+		<!-- <input type="text" class="form-control" placeholder="姓名..."><br> -->
+		<div class="list-group">
+	        &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" id="chElt" onclick="checkOrCancelAll();"/><span id="mySpan">全选</span>
+			<a v-for="it4 in ButtonmiddleList2" v-if="it4.buttonstatus==0" href="#" v-on:click="sc()">删除</a><input type="hidden" id='anniu2' value='2'>
+			<div v-for="item in infoList" data-toggle="modal">
+			  <button type="button" class="list-group-item"><input type="checkbox" name='interest' v-bind:value="item.information_id"/>&nbsp;&nbsp;
+			  <img src="img/wzr/QQ图片20181022085901.png" alt="..." class="img-circle">&nbsp;&nbsp;
+			  <a href="#" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?" v-if="item.u_id == -1">系统小助手——{{item.information_time}}</a>
+			  <input type="hidden" id='anniu3' value='3'/><span v-for="it2 in ButtonmiddleList1" v-if="it2.buttonstatus==0" class="badge pc" data-toggle="modal" data-target="#myModal" v-on:click="cx(item.information_id)">查看</span>
+			  <span class="badge" v-if="item.information_fetch==1" style="color: red;background-color: white;">未读</span>
+			  </button>
+			</div>
+		</div>
+		<!-- <ul class="pager">
+			<li><a v-on:click="go(1)">首页</a></li>
+			<li><a v-on:click="go(pagebean.prevPage)">上一页</a></li>
+			<li><a v-on:click="go(pagebean.nextPage)">下一页</a></li>
+			<li><a v-on:click="go(pagebean.pagecount)">尾页</a></li>
+		</ul> -->
+		<!-- Modal -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="modal-dialog" role="document">
+			<div class="modal-content" v-for="item2 in infoList2">
+			  <div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel" style="text-align: center;" v-if="item2.u_id == -1">系统小助手</h4>
+			  </div>
+			  <div class="modal-body">
+			  消息内容：
+				<!-- <textarea class="form-control" rows="5" readonly="readonly">{{item2.information_content}}
+				
+				</textarea> -->
+				<div class="panel panel-default panel-defaultone" v-html="item2.information_content">
+				</div><br>
+				<a href="#">{{item2.information_time}}</a>
+			  </div>
+			  <div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+			  </div>
+			</div>
+		  </div>
+		</div>
+	</div>
+</body>
+</html>
+<script type="text/javascript" src="js/wzr/jquery.min.js"></script>
+<script type="text/javascript" src="js/wzr/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/wzr/pace.min.js"></script>
+<script type="text/javascript" src="js/wzr/vue.js"></script>
+<script type="text/javascript">
+var vm = new Vue({
+	el:"#div",
+	data:{
+		infoList:null,
+		infoList2:null,
+		ButtonmiddleList1:null,
+		ButtonmiddleList2:null
+	},created(){
+		this.request();
+		this.cxanniu3();
+		this.cxanniu2();
+	},methods:{
+		request:function(){
+			$.ajax({
+				url:"/selectInformation",
+				success:function(data){
+					vm.infoList=data;
+				}
+			});
+		},cx:function(information_id){
+			queryByinformation_id(information_id);
+		},sc:function(){
+			deletexx();
+		},cxanniu3:function(){
+			var buttonid3= $("#anniu3").val();
+			/* alert(buttonid1); */
+			$.ajax({
+				url:"/querybuttonmiddle",
+				data:"buttonid="+buttonid3,
+				success:function(data){
+					vm.ButtonmiddleList1=data;
+				}
+			});
+		},cxanniu2:function(){
+			var buttonid2 = $("#anniu2").val();
+			/* alert(buttonid2); */
+			$.ajax({
+				url:"/querybuttonmiddle",
+				data:"buttonid="+buttonid2,
+				success:function(data){
+					vm.ButtonmiddleList2=data;
+				}
+			});
+		}
+	}
+});
+
+//删除消息
+function deletexx(){
+	 var r=confirm("确定删除吗？");
+     if (r==true){
+		obj = document.getElementsByName("interest");
+		var check_val = [];
+		for(k in obj){
+			if(obj[k].checked){
+				var Information = {};
+				Information.information_id=obj[k].value;
+				check_val.push(Information);
+			}
+		}
+		/* alert(check_val); */
+		
+		$.ajax({
+			url:"/deleteInformation",
+			type:"post",
+			dataType:"json",
+			data:JSON.stringify(check_val),
+			contentType:"application/json;charset=UTF-8",
+			success:function(data){
+				if(data>0){
+					location.reload();
+				}
+			}
+		});
+     }else{
+    	 
+     }
+}
+
+
+function queryByinformation_id(information_id){
+	$.ajax({
+		url:"/queryByinformation_id",
+		data:"information_id="+information_id,
+		success:function(data){
+			vm.infoList2=data;
+		}
+	});
+	
+	
+	$.ajax({
+		url:"/updateinformation_fetch",
+		data:"information_id="+information_id,
+		success:function(data){
+			if(data>0){
+
+			}
+		}
+	});
+}
+
+//监听模态框关闭后
+$('#myModal').on('hide.bs.modal', function () {
+	 location.reload();
+})
+
+
+$(function () {
+  $('[data-toggle="popover"]').popover();
+})	
+	
+	
+//页面加载的时候,所有的复选框都是未选中的状态
+function checkOrCancelAll(){
+//1.获取checkbo的元素对象
+var chElt=document.getElementById("chElt");
+//2.获取选中状态
+var checkedElt=chElt.checked;
+//3.若checked=true,将所有的复选框选中,checked=false,将所有的复选框取消
+var allCheck=document.getElementsByName("interest");
+//4.循环遍历取出每一个复选框中的元素
+var mySpan=document.getElementById("mySpan");
+if(checkedElt){
+//全选
+for(var i=0;i<allCheck.length;i++){
+//设置复选框的选中状态
+allCheck[i].checked=true;
+}
+mySpan.innerHTML="取消全选";
+}else{
+//取消全选
+for(var i=0;i<allCheck.length;i++){
+allCheck[i].checked=false;
+}
+mySpan.innerHTML="全选";
+}
+}
+	
+	
+/* var bean=new Vue({
+	el:"#dd",
+	data:{
+		sname:null,
+		pagebean:null
+	},methods:{
+		go:function(num){
+				page(num,this.sname)
+			},sc:function(sid){
+				deleteStudent(sid);
+			}
+	},watch:{
+		sname:function(){
+				page(1,this.sname)
+			}
+	}
+});
+
+function deleteStudent(sid) {
+	$.ajax({
+		url:"/deleteStudent",
+		data:"sid="+sid,
+		success:function(data){
+			if(sid>0){
+				location.reload();
+			}
+		}
+	});
+}
+
+function page(page,sname){
+	$.ajax({
+		url:"/query",
+		data:{
+			page:page,
+			sname:sname
+		},success:function(data){
+			bean.pagebean=data;
+		}
+	});
+}
+
+page(1,null); */
+
+
+</script>

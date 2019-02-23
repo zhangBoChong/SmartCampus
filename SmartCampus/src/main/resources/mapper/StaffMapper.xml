@@ -12,6 +12,17 @@
     <result column="status" jdbcType="INTEGER" property="status" />
     <result column="choice" jdbcType="INTEGER" property="choice" />   
   </resultMap>
+  <!-- 修改员工：职位、状态 -->
+  <update id="updatestaff">
+  	UPDATE `staff` SET `roleId`=#{roleId}, `postId`=#{postId},`status`=#{status} WHERE `tid`=#{tid}
+  </update>
+  
+  <!-- 按tid查询 -->
+  <select id="queryBytid1" resultType="com.accp.domain.Staff">
+  	SELECT * FROM `staff` WHERE `tid`=#{tid}
+  </select>
+  
+  
    <select id="selectBytid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

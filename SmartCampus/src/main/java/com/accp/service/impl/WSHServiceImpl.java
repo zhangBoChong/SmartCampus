@@ -9,7 +9,6 @@ import com.accp.domain.Course;
 import com.accp.domain.Examination;
 import com.accp.domain.ExaminationLx;
 import com.accp.domain.Grade;
-import com.accp.domain.PageBean;
 import com.accp.domain.Section;
 import com.accp.domain.Task;
 import com.accp.domain.TaskLx;

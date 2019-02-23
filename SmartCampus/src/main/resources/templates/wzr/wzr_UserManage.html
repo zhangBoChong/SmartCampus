@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<link rel="stylesheet" type="text/css" href="css/wzr/bootstrap.min.css"/>
+		<title>用户管理</title>
+		<style type="text/css">
+			.span1{
+				margin-left: 30px;
+			}
+			.status{
+				color: red;
+			}
+			.sss{
+				color: red;
+			}
+		</style>
+	</head>
+	<body>
+	<h4>人员类型:<select id="selectone"><option value="-10">员工</option><option value="-11">家长</option>
+	<option value="-12">学生</option></select></h4>
+	<div id="xs" style="margin-top: 50px;">
+		<h3 style="text-align: center;">学生:</h3>		
+							
+		<form class="navbar-form navbar-left">
+			学生姓名：<div class="form-group">
+				<input type="text" class="form-control" v-model="sname" placeholder="Search" size="20">
+			</div>
+			<!-- <button type="submit" class="btn btn-default" style="background-color: transparent;">Go!</button> -->
+		</form>
+		
+		<table class="table table-bordered">
+				<tr>
+					<!-- <td style="width: 150px;"><input type="checkbox" id="chElt" onclick="checkOrCancelAll();"/><span id="mySpan">全选</span>
+					&nbsp;&nbsp;&nbsp;<a href="#" data-toggle="modal" data-target="#myModal2">删除</a></td> -->
+					<td>姓名</td>
+					<td>登录用户名</td>
+					<td>登录密码</td>
+					<td>状态</td>
+					<td>人员类型</td>
+					<td>角色</td>
+					<td>操作</td>
+				</tr>
+				<tbody v-if="pagebean4">
+					<tr v-for="item in pagebean4.lists">
+						<!-- <td><input type="checkbox" name="interest" value=""/></td> -->
+						<td>{{item.sname}}</td>
+						<td>{{item.loginName}}</td>
+						<td>{{item.pwd}}</td>
+						<td class="status" v-if="item.status==0">在读</td>
+						<td class="status" v-if="item.status==1">休学</td>
+						<td class="status" v-if="item.status==2">退学</td>
+						<td class="status" v-if="item.status==3">游离</td>
+						<td v-if="item.type==-1">学生</td>
+						<td>{{item.roleName}}</td>
+						<td><a href="" data-toggle="modal" data-target="#myModal10" v-on:click="querybysid(item.sid,item.type)">修改</a>
+						&nbsp;&nbsp;<!-- <a href="" data-toggle="modal" data-target="#myModal2">删除</a> --></td>
+					</tr>
+				</tbody>
+			</table>
+			<ul class="pager">
+				<li><a v-on:click="go4(1)">首页</a></li>
+				<li><a v-on:click="go4(pagebean4.prevPage)">上一页</a></li>
+				<li><a v-on:click="go4(pagebean4.nextPage)">下一页</a></li>
+				<li><a v-on:click="go4(pagebean4.pagecount)">尾页</a></li>
+			</ul>
+			
+			
+			<!-- 修改学生信息Modal -->
+			<div class="modal fade" id="myModal10" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+				<div class="modal-dialog" role="document" v-for="ssi in ssidList">
+					<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="myModalLabel">修改学生信息</h4>
+					</div>
+					<div class="modal-body">
+						登录密码：<div class="form-group">
+							<input type="text" class="form-control" name='pwd1' v-bind:value="ssi.pwd" size="50">
+						</div>
+						<div v-for="ssv1 in sssss" v-if="ssv1.status==0">状态：<select id="status" class="form-control">
+								  <option v-bind:value="0" selected="selected">在读</option>
+								  <option v-bind:value="1">休学</option>
+								  <option v-bind:value="2">退学</option>
+								  <option v-bind:value="3">游离</option>
+								</select></div>
+								<div v-for="ssv2 in sssss" v-if="ssv2.status==1">状态：<select id="status" class="form-control">
+								  <option v-bind:value="0">在读</option>
+								  <option v-bind:value="1" selected="selected">休学</option>
+								  <option v-bind:value="2">退学</option>
+								  <option v-bind:value="3">游离</option>
+								</select></div>
+								<div v-for="ssv3 in sssss" v-if="ssv3.status==2">状态：<select id="status" class="form-control">
+								  <option v-bind:value="0">在读</option>
+								  <option v-bind:value="1">休学</option>
+								  <option v-bind:value="2" selected="selected">退学</option>
+								  <option v-bind:value="3">游离</option>
+								</select></div>
+								<div v-for="ssv4 in sssss" v-if="ssv4.status==3">状态：<select id="status" class="form-control">
+								  <option v-bind:value="0">在读</option>
+								  <option v-bind:value="1">休学</option>
+								  <option v-bind:value="2">退学</option>
+								  <option v-bind:value="3" selected="selected">游离</option>
+								</select></div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+						<button type="button" class="btn btn-primary" data-dismiss="modal" v-on:click="xgxs(ssi.peopleId,ssi.type)">修改</button>
+					</div>
+					</div>
+				</div>
+			</div>
+			</div>
+			
+			
+			
+			
+			
+			<!-- 删除角色Modal -->
+			<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel">删除角色</h4>
+				</div>
+				<div class="modal-body">
+					确定要删除？
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-warning" data-dismiss="modal">删除</button>
+				</div>
+				</div>
+			</div>
+			</div>
+			
+			
+			
+			
+		<div id="jz" style="margin-top: 50px;">
+		<h3 style="text-align: center;">家长:</h3>		
+							
+		<form class="navbar-form navbar-left">
+			家长姓名：<div class="form-group">
+				<input type="text" class="form-control" v-model="pname" placeholder="Search" size="20">
+			</div>
+			<!-- <button type="submit" class="btn btn-default" style="background-color: transparent;">Go!</button> -->
+		</form>
+		
+		<table class="table table-bordered">
+				<tr>
+					<!-- <td style="width: 150px;"><input type="checkbox" id="chElt1" onclick="checkOrCancelAll1();"/><span id="mySpan1">全选</span>
+					&nbsp;&nbsp;&nbsp;<a href="#" data-toggle="modal" data-target="#myModal2">删除</a></td> -->
+					<td>姓名</td>
+					<td>登录用户名</td>
+					<td>登录密码</td>
+					<td>人员类型</td>
+					<td>角色</td>
+					<!-- <td>操作</td> -->
+				</tr>
+				<tbody v-if="pagebean3">
+					<tr v-for="item3 in pagebean3.lists">
+						<!-- <td><input type="checkbox" name="interest1" value=""/></td> -->
+						<td>{{item3.pname}}</td>
+						<td>{{item3.loginName}}</td>
+						<td>{{item3.pwd}}</td>
+						<td v-if="item3.type==-2">家长</td>
+						<td>{{item3.roleName}}</td>
+						<!-- <td><a href="" data-toggle="modal" data-target="#">修改</a>
+						&nbsp;&nbsp;<a href="" data-toggle="modal" data-target="#myModal2">删除</a></td> -->
+					</tr>
+				</tbody>
+			</table>
+			<ul class="pager">
+				<li><a v-on:click="go3(1)">首页</a></li>
+				<li><a v-on:click="go3(pagebean3.prevPage)">上一页</a></li>
+				<li><a v-on:click="go3(pagebean3.nextPage)">下一页</a></li>
+				<li><a v-on:click="go3(pagebean3.pagecount)">尾页</a></li>
+			</ul>
+			</div>
+			
+			
+			
+			
+			
+			
+		<div id="yg" style="margin-top: 50px;">
+			<h3 style="text-align: center;">员工:</h3>		
+								
+			<form class="navbar-form navbar-left">
+				员工姓名：<div class="form-group">
+					<input type="text" class="form-control" v-model="tname" placeholder="Search" size="20">
+				</div>
+				<!-- <button type="submit" class="btn btn-default" style="background-color: transparent;">Go!</button> -->
+			</form>
+			
+			<table class="table table-bordered">
+					<tr>
+						<!-- <td style="width: 150px;"><input type="checkbox" id="chElt2" onclick="checkOrCancelAll2();"/><span id="mySpan2">全选</span>
+						&nbsp;&nbsp;&nbsp;<a href="#" data-toggle="modal" data-target="#myModal2">删除</a></td> -->
+						<td>姓名</td>
+						<td>登录用户名</td>
+						<td>登录密码</td>
+						<td>状态</td>
+						<td>人员类型</td>
+						<td>角色</td>
+						<td>职位</td>
+						<td>操作</td>
+					</tr>
+					<tbody v-if="pagebean2">
+						<tr v-for="(item2,index) in pagebean2.lists">
+							<!-- <td><input type="checkbox" name="interest2" value=""/></td> -->
+							<td>{{item2.tname}}</td>
+							<td>{{item2.loginName}}</td>
+							<td>{{item2.pwd}}</td>
+							<td class="sss" v-if="item2.status==0">任职</td>
+							<td class="sss" v-if="item2.status==1">未任职</td>
+							<td v-if="item2.type==-3">员工</td>
+							<td>{{item2.roleName}}</td>
+							<td>{{item2.postName}}</td>
+							<td v-for="it11 in ButtonmiddleList1" v-if="it11.buttonstatus==0"><input type="hidden" id='anniu11' name='anniu10' value='4'>
+							<a href="" v-on:click="cxjh(item2.tid,item2.type)" data-toggle="modal" data-target="#myModal">修改</a>
+							&nbsp;&nbsp;<!-- <a href="" data-toggle="modal" data-target="#myModal2">删除</a> --></td>
+						</tr>
+					</tbody>
+				</table>
+				<ul class="pager">
+					<li><a v-on:click="go2(1)">首页</a></li>
+					<li><a v-on:click="go2(pagebean2.prevPage)">上一页</a></li>
+					<li id="" style="display: none;">{{pagebean2.currentPage}}</li> 
+					<li><a v-on:click="go2(pagebean2.nextPage)">下一页</a></li>
+					<li><a v-on:click="go2(pagebean2.pagecount)">尾页</a></li>
+				</ul>
+				
+				
+			<!-- 修改员工信息Modal -->
+			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+				<div class="modal-dialog" role="document" v-for="t1 in tidLists">
+					<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="myModalLabel">修改员工信息</h4>
+					</div>
+					<div class="modal-body">
+						<!-- 登录用户名：<div class="form-group">
+							<input type="text" class="form-control" placeholder="Search" size="50">
+						</div> -->
+						登录密码：<div class="form-group">
+							<input type="text" class="form-control" name='pwd' v-bind:value="t1.pwd" size="50">
+						</div>
+						角色：<select class="form-control" id='roleselect' v-for="tt4 in tidList">
+									  <option v-for="t3 in roList" v-bind:value="t3.roleId" v-if="tt4.roleId==t3.roleId" selected="selected">{{t3.roleName}}</option>
+								<option v-for="t14 in roList" v-bind:value="t14.roleId" v-if="tt4.roleId!=t14.roleId">{{t14.roleName}}</option>
+								</select> 
+						职位：<select id="JobIndex" class="form-control" v-for="tt3 in tidList">
+							  <option v-for="t2 in poList" v-bind:value="t2.postId" v-if="tt3.postId==t2.postId" selected="selected">{{t2.postName}}</option>
+							  <option v-for="t13 in poList" v-bind:value="t13.postId" v-if="tt3.postId!=t13.postId">{{t13.postName}}</option>
+								</select> 
+						<div v-for="tt2 in tidList" v-if="tt2.status==0">状态：<select id="renzhi" class="form-control">
+								  <option v-bind:value="0" selected="selected">任职</option>
+								  <option v-bind:value="1">未任职</option>
+								</select></div>
+							<div v-for="tt3 in tidList" v-if="tt3.status==1">	状态：<select id="renzhi" class="form-control">
+								  <option v-bind:value="0">任职</option>
+								  <option v-bind:value="1" selected="selected">未任职</option>
+								</select></div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+						<button type="button" class="btn btn-primary" data-dismiss="modal" v-on:click="xgyg(t1.peopleId)">修改</button>
+					</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+<script src="js/wzr/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/wzr/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/wzr/pace.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/wzr/vue.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+$(function(){
+	$("#xs").hide();
+	$("#jz").hide();
+	$("#yg").hide();
+	$("#selectone").change(function(){
+		var select1 = $(this).val();
+		/* alert(select1); */
+		if(select1==-10){
+			$("#yg").show();
+		}else{
+			$("#yg").hide();
+		}
+		if(select1==-11){
+			$("#jz").show();
+		}else{
+			$("#jz").hide();
+		}
+		if(select1==-12){
+			$("#xs").show();
+		}else{
+			$("#xs").hide();
+		}
+	})
+})
+
+/**
+ * 
+学生
+ */
+var bean4=new Vue({
+	el:"#xs",
+	data:{
+		sname:null,
+		pagebean4:null,
+		ssidList:null,
+		sssss:null
+	},methods:{
+		go4:function(num){
+				page4(num,this.sname)
+			},querybysid:function(sid,type){
+				querysid1(sid,type);
+			},xgxs:function(peopleId,type){
+				updatestudentpwd(peopleId,type);
+			}
+	},watch:{
+		sname:function(){
+			page4(1,this.sname)
+		}
+	}
+});
+
+//修改学生账户密码、及学生状态
+function updatestudentpwd(peopleId,type){
+	var pwd1 = $("[name='pwd1']").val();
+	var status1 = $('#status option:selected').val();
+	/* alert(status1);
+	alert(pwd1); */
+	$.ajax({
+		url:"/updatestudentpwd",
+		data:"peopleId="+peopleId+"&type="+type+"&status="+status1+"&pwd="+pwd1,
+		success:function(data){
+			if(data>0){
+				alert("修改成功!");
+			}
+		}
+	});
+}
+
+//按sid查询登录账户信息
+function querysid1(sid,type){
+	/*alert(sid);
+	 alert(type); */
+	$.ajax({
+		url:"/querysid1",
+		data:"sid="+sid+"&type="+type,
+		success:function(data){
+			bean4.ssidList=data;
+		}
+	});
+	
+	
+	$.ajax({
+		url:"/queryBysidthree",
+		data:"sid="+sid,
+		success:function(data){
+			bean4.sssss=data;
+		}
+	});
+}
+
+function page4(page4,sname){
+	$.ajax({
+		url:"/selectStudentinfo",
+		data:{
+			page4:page4,
+			sname:sname
+		},success:function(data){
+			bean4.pagebean4=data;
+		}
+	});
+}
+
+page4(1,null);
+
+
+
+
+/**
+ * 
+家长
+ */
+var bean3=new Vue({
+	el:"#jz",
+	data:{
+		pname:null,
+		pagebean3:null
+	},methods:{
+		go3:function(num){
+				page3(num,this.pname)
+			}
+	},watch:{
+		pname:function(){
+			page3(1,this.pname)
+		}
+	}
+});
+
+function page3(page3,pname){
+	$.ajax({
+		url:"/selectParents",
+		data:{
+			page3:page3,
+			pname:pname
+		},success:function(data){
+			bean3.pagebean3=data;
+		}
+	});
+}
+
+page3(1,null);
+
+
+
+
+/**
+ * 
+员工
+ */
+var bean2=new Vue({
+	el:"#yg",
+	data:{
+		tname:null,
+		pagebean2:null,
+		tidLists:null,
+		poList:null,
+		roList:null,
+		ButtonmiddleList1:null,
+		tidList:null
+	},created(){
+		this.cxanniu10();
+	},methods:{
+		go2:function(num){
+				page2(num,this.tname)
+			},cxjh:function(tid,type){
+				staffMapper(tid,type);
+			},xgyg:function(tid){
+				updateuserinformation(tid);
+			},cxanniu10:function(){
+				var anniu10 = $("#anniu11").val();
+				/* alert(anniu10); */
+					$.ajax({
+						url:"/querybuttonmiddle",
+						data:"buttonid="+anniu10,
+						success:function(data){
+							bean2.ButtonmiddleList1=data;
+						}
+					});
+			}
+	},watch:{
+		tname:function(){
+			page2(1,this.tname)
+		}
+	}
+});
+
+
+//修改员工表的职位id,任职状态,
+//修改login表(员工)的登录密码
+function updateuserinformation(tid){
+	var pwd = $("[name='pwd']").val();
+	var postId = $('#JobIndex option:selected').val();
+	var status = $('#renzhi option:selected').val();
+	var roleId = $('#roleselect option:selected').val();
+	/*alert(roleId);
+	 alert(pwd);
+	alert(postId);
+	alert(status); */
+	$.ajax({
+		url:"/updateuserinformation",
+		data:"tid="+tid+"&pwd="+pwd+"&status="+status+"&postId="+postId+"&roleId="+roleId,
+		success:function(data){
+			if(data>0){
+				alert("修改成功!");
+				location.reload();
+			}
+		}
+	}); 
+}
+
+
+//按tid查询
+function staffMapper(tid,type){
+	/* alert(type); */
+	$.ajax({
+		url:"/querypeopleId",
+		data:"tid="+tid+"&type="+type,
+		success:function(data){
+			bean2.tidLists=data;
+		}
+	});
+	
+	$.ajax({
+		url:"/queryBytid",
+		data:"tid="+tid,
+		success:function(data){
+			bean2.tidList=data;
+		}
+	});
+	
+	$.ajax({
+		url:"/selectPost",
+		success:function(data){
+				bean2.poList=data;
+		}
+	});
+	
+	$.ajax({
+		url:"/queryRole1",
+		success:function(data){
+			bean2.roList=data;
+		}
+	});
+}
+
+function page2(page2,tname){
+	$.ajax({
+		url:"/selectStaff",
+		data:{
+			page2:page2,
+			tname:tname
+		},success:function(data){
+			bean2.pagebean2=data;
+		}
+	});
+}
+
+page2(1,null);
+
+
+/* 	
+	//页面加载的时候,所有的复选框都是未选中的状态
+	function checkOrCancelAll1(){
+	//1.获取checkbo的元素对象
+	var chElt1=document.getElementById("chElt1");
+	//2.获取选中状态
+	var checkedElt1=chElt1.checked;
+	//3.若checked=true,将所有的复选框选中,checked=false,将所有的复选框取消
+	var allCheck1=document.getElementsByName("interest1");
+	//4.循环遍历取出每一个复选框中的元素
+	var mySpan1=document.getElementById("mySpan1");
+	if(checkedElt1){
+	//全选
+	for(var i=0;i<allCheck1.length;i++){
+	//设置复选框的选中状态
+	allCheck1[i].checked=true;
+	}
+	mySpan1.innerHTML="取消全选";
+	}else{
+	//取消全选
+	for(var i=0;i<allCheck1.length;i++){
+	allCheck1[i].checked=false;
+	}
+	mySpan1.innerHTML="全选";
+	}
+	}
+	*/
+	 
+</script>

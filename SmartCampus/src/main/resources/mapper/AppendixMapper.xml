@@ -2,16 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.accp.mapper.AppendixMapper">
   <resultMap id="BaseResultMap" type="com.accp.domain.Appendix">
-    <id column="appendix_id" jdbcType="INTEGER" property="appendixId" />
-    <result column="affiche_id" jdbcType="INTEGER" property="afficheId" />
-    <result column="appendix_title" jdbcType="VARCHAR" property="appendixTitle" />
-    <result column="appendix_content" jdbcType="VARCHAR" property="appendixContent" />
-    <result column="img_id" jdbcType="INTEGER" property="imgId" />
-    <result column="appendix_time" jdbcType="DATE" property="appendixTime" />
-    <result column="u_id" jdbcType="INTEGER" property="uId" />
-    <result column="appendix_sendee" jdbcType="INTEGER" property="appendixSendee" />
-    <result column="delete_id" jdbcType="INTEGER" property="deleteId" />
+    <id column="appendix_id" jdbcType="INTEGER" property="appendix_id" />
+    <result column="affiche_id" jdbcType="INTEGER" property="affiche_id" />
+    <result column="appendix_title" jdbcType="VARCHAR" property="appendix_title" />
+    <result column="appendix_content" jdbcType="VARCHAR" property="appendix_content" />
+    <result column="img_id" jdbcType="INTEGER" property="img_id" />
+    <result column="appendix_time" jdbcType="DATE" property="appendix_time" />
+    <result column="u_id" jdbcType="INTEGER" property="u_id" />
+    <result column="appendix_sendee" jdbcType="INTEGER" property="appendix_sendee" />
+    <result column="delete_id" jdbcType="INTEGER" property="delete_id" />
   </resultMap>
+  
+  
+  
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">

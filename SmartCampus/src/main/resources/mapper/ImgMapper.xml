@@ -2,9 +2,26 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.accp.mapper.ImgMapper">
   <resultMap id="BaseResultMap" type="com.accp.domain.Img">
-    <id column="img_id" jdbcType="INTEGER" property="imgId" />
-    <result column="delete_id" jdbcType="INTEGER" property="deleteId" />
+    <id column="img_id" jdbcType="INTEGER" property="img_id" />
+    <result column="delete_id" jdbcType="INTEGER" property="delete_id" />
+    <collection property="imgList2" column="img_id" ofType="com.accp.domain.ImgChildren" select="com.accp.dao.ImgChildrenMapper.selectImg_children"></collection>
   </resultMap>
+  
+  <!-- 查询最新的id -->
+  <select id="selectimg_id1" resultType="int">
+  	SELECT `img_id` FROM `img` ORDER BY `img_id` DESC LIMIT 1
+  </select>
+  
+  <!-- 新增图片 -->
+  <insert id="inserttp">
+  	INSERT INTO `img`(`delete_id`)VALUES(#{delete_id});
+  </insert>
+  
+  <!-- 按img_id查询 -->
+  <select id="selectImgid" resultType="com.accp.domain.Img">
+  	select * from img where img_id=#{img_id}
+  </select>
+  
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">

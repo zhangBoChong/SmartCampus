@@ -2,16 +2,61 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.accp.mapper.InformationMapper">
   <resultMap id="BaseResultMap" type="com.accp.domain.Information">
-    <id column="information_id" jdbcType="INTEGER" property="informationId" />
-    <result column="u_id" jdbcType="INTEGER" property="uId" />
-    <result column="information_content" jdbcType="VARCHAR" property="informationContent" />
-    <result column="information_sendee" jdbcType="INTEGER" property="informationSendee" />
-    <result column="information_time" jdbcType="DATE" property="informationTime" />
-    <result column="img_id" jdbcType="INTEGER" property="imgId" />
-    <result column="information_fetch" jdbcType="INTEGER" property="informationFetch" />
-    <result column="information_type" jdbcType="INTEGER" property="informationType" />
-    <result column="delete_id" jdbcType="INTEGER" property="deleteId" />
+    <id column="information_id" jdbcType="INTEGER" property="information_id" />
+    <result column="u_id" jdbcType="INTEGER" property="u_id" />
+    <result column="information_content" jdbcType="VARCHAR" property="information_content" />
+    <result column="information_sendee" jdbcType="INTEGER" property="information_sendee" />
+    <result column="information_time" jdbcType="DATE" property="information_time" />
+    <result column="img_id" jdbcType="INTEGER" property="img_id" />
+    <result column="information_fetch" jdbcType="INTEGER" property="information_fetch" />
+    <result column="information_type" jdbcType="INTEGER" property="information_type" />
+    <result column="delete_id" jdbcType="INTEGER" property="delete_id" />
   </resultMap>
+  
+  <!-- 查询未读消息 -->
+  <select id="selectcountinformation_fetch" resultType="int">
+  	SELECT COUNT(*) FROM `information` WHERE `information_fetch`=1
+  </select>
+  
+  <!-- 修改消息状态 -->
+  <update id="updateinformation_fetch">
+  	UPDATE `information` SET `information_fetch`=0 WHERE `information_id`=#{information_id}
+  </update>
+  
+  <!-- 删除消息 -->
+  <delete id="deleteInformation">
+  	DELETE FROM `information` WHERE `information_id`=#{information_id}
+  </delete>
+  
+  <!-- 按information_id查询消息内容 -->
+  <select id="queryByinformation_id" resultType="com.accp.domain.Information">
+  	SELECT * FROM `information`
+	WHERE `information_id`=#{information_id}
+  </select>
+  
+  <!-- 发布消息 -->
+  <insert id="insertInformation">
+  	INSERT INTO `information`(`u_id`,`information_content`,`information_sendee`,`information_time`,`information_fetch`,`information_type`,`delete_id`)
+  	VALUES
+  		<foreach item="item" index="index" collection="list" separator=",">
+  			(#{item.u_id},#{item.information_content},#{item.information_sendee},#{item.information_time},#{item.information_fetch},#{item.information_type},#{item.delete_id})
+  		</foreach>
+  </insert>
+  
+  <!-- 查询消息 -->
+  <select id="selectInformation" resultType="com.accp.domain.Information">
+  	SELECT * FROM `information`
+	WHERE `information_sendee`=#{information_sendee}
+	AND `delete_id`=#{delete_id}
+	ORDER BY `information_id` DESC
+  </select>
+  
+  <!-- 查询最新一条并且是当前登录用户的登录提示信息 -->
+  <select id="selectinformation_id" resultType="int">
+  	SELECT `information_id` FROM `information` WHERE `information_type`=#{information_type} AND `information_sendee`=#{information_sendee} ORDER BY `information_id` DESC LIMIT 1
+  </select>
+  
+  
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">

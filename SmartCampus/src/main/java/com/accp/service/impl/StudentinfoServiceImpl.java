@@ -25,6 +25,27 @@ public class StudentinfoServiceImpl implements StudentinfoService{
 	@Autowired
 	LoginMapper logmapper;
 	
+	@Autowired
+	StudentinfoMapper studentinfoMapper;
+	
+	@Override
+	public Studentinfo queryBysid(Integer sid) {
+		// TODO Auto-generated method stub
+		return studentinfoMapper.queryBysid(sid);
+	}
+
+	@Override
+	public int updatestudentstatus(Integer status, Integer sid) {
+		// TODO Auto-generated method stub
+		return studentinfoMapper.updatestudentstatus(status, sid);
+	}
+
+	@Override
+	public List<Studentinfo> queryBysidnnn(Integer sid) {
+		// TODO Auto-generated method stub
+		return studentinfoMapper.queryBysidnnn(sid);
+	}
+	
 	@Override
 	public int insertSelective(Studentinfo record,Parents p) {
 		//添加家长学员并同时添加登录用户
@@ -43,12 +64,12 @@ public class StudentinfoServiceImpl implements StudentinfoService{
 		List<Login> log=new ArrayList<Login>();
 		//角色id：3学员、4家长
 		Login l=new Login();
-		l.setLoginname(record.getPhone());
-		l.setRoleid(3);
+		l.setLoginName(record.getPhone());
+		l.setRoleId(3);
 		log.add(l);
 		Login l2=new Login();
-		l2.setLoginname(p.getPhone());
-		l2.setRoleid(4);
+		l2.setLoginName(p.getPhone());
+		l2.setRoleId(4);
 		log.add(l2);
 		int logjg=logmapper.insertloginuser(log);
 		return sresult;

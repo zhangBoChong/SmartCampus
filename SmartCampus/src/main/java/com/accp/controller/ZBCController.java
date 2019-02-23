@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
@@ -28,7 +27,6 @@ import com.accp.domain.Vession;
 import com.accp.domain.VessionGrade;
 import com.accp.domain.VessionGradeMajorid;
 import com.accp.domain.VessionGradeMajoridCourse;
-import com.accp.mapper.ClazzStudentMapper;
 import com.accp.service.ZBCCourseService;
 
 
@@ -388,6 +386,7 @@ public class ZBCController {
 	@RequestMapping("/addStudent")
 	@ResponseBody
 	public int addStudent(Studentinfo stu,int cid) {
+		@SuppressWarnings("unused")
 		int count=zbcService.insertStudentinfo(stu);
 		ClazzStudent cs=new ClazzStudent();
 		cs.setCid(cid);

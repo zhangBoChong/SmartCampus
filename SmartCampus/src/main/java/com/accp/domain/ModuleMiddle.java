@@ -1,53 +1,67 @@
 package com.accp.domain;
 
+import java.util.List;
+
 public class ModuleMiddle {
-    private Integer mrid;
+    private Integer mrId;
 
-    private Integer moduleid;
+    private Integer moduleId;
 
-    private Integer roleid;
+    private Integer roleId;
 
-    private Integer modulezt;
+    private Integer moduleZt;
 
-    private Integer deleteId;
+    private Integer delete_id;
+    
+    public List<Module> list1;
+    
+	public List<Module> getList1() {
+		return list1;
+	}
 
-    public Integer getMrid() {
-        return mrid;
-    }
+	public void setList1(List<Module> list1) {
+		this.list1 = list1;
+	}
 
-    public void setMrid(Integer mrid) {
-        this.mrid = mrid;
-    }
+	public Integer getMrId() {
+		return mrId;
+	}
 
-    public Integer getModuleid() {
-        return moduleid;
-    }
+	public void setMrId(Integer mrId) {
+		this.mrId = mrId;
+	}
 
-    public void setModuleid(Integer moduleid) {
-        this.moduleid = moduleid;
-    }
+	public Integer getModuleId() {
+		return moduleId;
+	}
 
-    public Integer getRoleid() {
-        return roleid;
-    }
+	public void setModuleId(Integer moduleId) {
+		this.moduleId = moduleId;
+	}
 
-    public void setRoleid(Integer roleid) {
-        this.roleid = roleid;
-    }
+	public Integer getRoleId() {
+		return roleId;
+	}
 
-    public Integer getModulezt() {
-        return modulezt;
-    }
+	public void setRoleId(Integer roleId) {
+		this.roleId = roleId;
+	}
 
-    public void setModulezt(Integer modulezt) {
-        this.modulezt = modulezt;
-    }
+	public Integer getModuleZt() {
+		return moduleZt;
+	}
 
-    public Integer getDeleteId() {
-        return deleteId;
-    }
+	public void setModuleZt(Integer moduleZt) {
+		this.moduleZt = moduleZt;
+	}
 
-    public void setDeleteId(Integer deleteId) {
-        this.deleteId = deleteId;
-    }
+	public Integer getDelete_id() {
+		return delete_id;
+	}
+
+	public void setDelete_id(Integer delete_id) {
+		this.delete_id = delete_id;
+	}
+
+    
 }

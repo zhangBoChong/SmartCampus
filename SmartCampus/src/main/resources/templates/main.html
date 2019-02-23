@@ -3,11 +3,11 @@
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=emulateIE7" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" type="text/css" href="css/style.css" />
-<link rel="stylesheet" type="text/css" href="css/skin_/main.css" />
-<link rel="stylesheet" type="text/css" href="css/jquery.dialog.css" />
-<script type="text/javascript" src="js/jquery.js"></script>
-<script type="text/javascript" src="js/global.js"></script>
+<link rel="stylesheet" type="text/css" th:href="@{css/style.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{css/skin_/main.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{css/jquery.dialog.css}" />
+<script type="text/javascript" th:src="@{js/jquery.js}"></script>
+<script type="text/javascript" th:src="@{js/global.js}"></script>
 <title>校园管理系统-主页面</title>
 <style type="text/css">
 	.hd-top .logo {
@@ -20,7 +20,9 @@
     font-size: 28px;
 		color: #FFFFFF;
 	}
-	
+	.ul1{
+		color: gray;
+	}
 </style>
 </head>
 
@@ -31,13 +33,13 @@
             <h1 class="logo">校园管理系统</h1>
             <div class="user-info">
                 <a href="javascript:;" class="user-avatar"><span><i class="info-num">2</i></span></a>
-                <span class="user-name">admin</span>
+                <span class="user-name" th:each="u : ${us}" th:if="u ne null"><span th:text="${u.loginName}"></span></span>
                 <a href="javascript:;" class="more-info"></a>
             </div>
             <div class="setting ue-clear">
                 <ul class="setting-main ue-clear">
                 	<!-- <li><a href="javascript:;">桌面</a></li> -->
-                  <li><span style="color: white;">注销</span></li>
+                  <li><a href="javascript:;">设置</a></li>
                   <!-- <li><a href="javascript:;">帮助</a></li> -->
                   <li><a href="javascript:;" class="close-btn exit"></a></li>
                 </ul>
@@ -61,7 +63,7 @@
         </div>
     </div>
     <div id="bd">
-        <iframe width="100%" height="100%" id="mainIframe" src="Tonav" frameborder="0"></iframe>
+        <iframe width="100%" height="100%" id="mainIframe" src="/toNav" frameborder="0"></iframe>
     </div>
     
 </div>
@@ -99,10 +101,18 @@
     <div class="opt-panel-arrow"></div>
 </div>
 
+	<div th:each="m:${infoList12}">
+		<input type="hidden" id='information_content' th:value="${m.information_content}"/>
+		<input type="hidden" id='information_time' th:value="${m.information_time}"/>
+	</div>
 </body>
-<script type="text/javascript" src="js/core.js"></script>
-<script type="text/javascript" src="js/jquery.dialog.js"></script>
+
+
+</html>
+<script type="text/javascript" th:src="@{js/core.js}"></script>
+<script type="text/javascript" th:src="@{js/jquery.dialog.js}"></script>
 <script type="text/javascript">
+
 $("#bd").height($(window).height()-$("#hd").outerHeight()-26);
 
 $(window).resize(function(e) {
@@ -125,7 +135,7 @@ $('.exitDialog input[type=button]').click(function(e) {
     $('.exitDialog').Dialog('close');
 	
 	if($(this).hasClass('ok')){
-		window.location.href = "login.html"	;
+		window.location.href = "initLogin"	;
 	}
 });
 
@@ -181,6 +191,37 @@ $('.exitDialog input[type=button]').click(function(e) {
 	
 })();
 
-</script>
 
-</html>
+function pop_init(title,content) {
+	//取当前浏览器窗口大小
+	var windowWidth=$(document).width();
+	var windowHeight=$(document).height();
+	//弹窗的大小
+	var weight=320;
+	var height=240;
+	$("body").append(
+	"<div id='pop_div'style='display:none;position:absolute;border:1px solid #e0e0e0;z-index:99;width:"+weight+"px;height:"+height+"px;top:"+(windowHeight-height-10)+"px;left:"+(windowWidth-weight-10)+"px'>"+
+		"<div style='line-height:32px;background:#f6f0f3;border-bottom:1px solid #e0e0e0;font-size:14px;padding:0 0 0 10px;'>" +
+			"<div style='float:left;'><b>"+title+"</b></div><div style='float:right;cursor:pointer;'><b onclick='pop_close()'>×</b></div>" +
+			"<div style='clear:both'></div>"+
+		"</div>" +
+		"<div id='content'>" +
+			 content+
+		"</div>"+
+	"</div>"
+	);
+}
+function pop_close(){
+	$('#pop_div').fadeOut(400);
+}
+//$(document).ready(function(){
+	$(function(){
+	var tt="登录提醒";
+	var nr=$("#information_content").val();
+	//alert(nr);
+	var sj=$("#information_time").val();
+	pop_init(tt,"<ul class='ul1'><li>"+nr+"</li><br/><br/><br/><br/><br/><br/><br/><br/><li>"+sj+"</li></ul>");
+	$('#pop_div').fadeIn(400);	
+	})
+//});
+</script>

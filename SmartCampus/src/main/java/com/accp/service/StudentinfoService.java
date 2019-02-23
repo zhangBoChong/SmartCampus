@@ -13,4 +13,13 @@ public interface StudentinfoService {
 	 //-----------------------
 	 public Studentinfo selectallinfo(Integer sid);
 	 
+	 
+	//按sid查询学生表
+	    Studentinfo queryBysid(Integer sid);
+	    
+	  //修改学生状态
+	    int updatestudentstatus(Integer status,Integer sid);
+	    
+	    //
+	    List<Studentinfo> queryBysidnnn(Integer sid);
 }

@@ -3,8 +3,11 @@ package com.accp.mapper;
 import com.accp.domain.ModuleMiddle;
 import com.accp.domain.ModuleMiddleExample;
 import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+@Mapper
 public interface ModuleMiddleMapper {
     long countByExample(ModuleMiddleExample example);
 
@@ -27,4 +30,7 @@ public interface ModuleMiddleMapper {
     int updateByPrimaryKeySelective(ModuleMiddle record);
 
     int updateByPrimaryKey(ModuleMiddle record);
+    
+    //按roleId查询模块权限
+    ModuleMiddle queryByRoleId(@Param("delete_id") Integer delete_id,@Param("roleId") Integer roleId);
 }

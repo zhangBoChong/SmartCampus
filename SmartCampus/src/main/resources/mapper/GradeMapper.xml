@@ -5,6 +5,11 @@
     <id column="gid" jdbcType="INTEGER" property="gid" />
     <result column="gname" jdbcType="VARCHAR" property="gname" />
   </resultMap>
+  
+  <!-- 查询所有年级 -->
+  <select id="selectGrade" resultType="com.accp.domain.Grade">
+  	SELECT * FROM `grade`
+  </select>
 
   <insert id="insertGrade" keyProperty="gid" useGeneratedKeys="true" parameterType="com.accp.domain.Grade">
   	insert into grade (gid, gname)

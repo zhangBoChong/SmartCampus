@@ -3,8 +3,11 @@ package com.accp.mapper;
 import com.accp.domain.Module;
 import com.accp.domain.ModuleExample;
 import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+@Mapper
 public interface ModuleMapper {
     long countByExample(ModuleExample example);
 
@@ -27,4 +30,9 @@ public interface ModuleMapper {
     int updateByPrimaryKeySelective(Module record);
 
     int updateByPrimaryKey(Module record);
+    
+    List<Module> selectModule();
+    
+    //查询parentId为0的模块
+    List<Module> selectparentIdbyzero(@Param("parentId") Integer parentId);
 }

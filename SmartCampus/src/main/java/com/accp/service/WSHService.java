@@ -16,7 +16,6 @@ import com.accp.domain.TopicLx;
 import com.accp.domain.TopicNeiRong;
 import com.accp.domain.Vession;
 import com.accp.domain.ZuoYeGuanLi;
-import com.accp.domain.PageBean;
 
 public interface WSHService {
 	//版本

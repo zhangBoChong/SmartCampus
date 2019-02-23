@@ -34,4 +34,10 @@ public interface StaffMapper {
     int updateByPrimaryKeySelective(Staff record);
 
     int updateByPrimaryKey(Staff record);
+    
+    //按tid查询
+    List<Staff> queryBytid1(@Param("tid") Integer tid);
+    
+    //修改员工：职位、、状态
+    int updatestaff(@Param("postId") Integer postId,@Param("roleId") Integer roleId,@Param("status") Integer status,@Param("tid") Integer tid);
 }

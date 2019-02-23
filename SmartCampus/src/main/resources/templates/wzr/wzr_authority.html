@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<!-- gt：great than（大于）>
+	ge：great equal（大于等于）>=
+	eq：equal（等于）==
+	lt：less than（小于）<
+	le：less equal（小于等于）<=
+	ne：not equal（不等于）!= -->
+		<meta charset="utf-8">
+		<link rel="stylesheet" type="text/css" href="css/wzr/bootstrap.min.css"/>
+		<title>权限分配</title>
+		<style type="text/css">
+			.form-control{
+				width: 20%;
+			}
+			#div1{
+				text-align: center;
+			}
+			#div2{
+				margin-top: 100px;
+				text-align: center;
+			}
+			.caret{
+				color: red;
+			}
+			.badge{
+				color:blue;
+				background-color: white;
+			}
+			.panel-defaultone{
+				width: 40%;
+			}
+			.panel-defaulttwo{
+				width: 40%;
+				margin-left: 50%;
+				margin-top: -280px;
+			}
+			.panel-defaultthree{
+				margin-top: 240px;
+				width: 40%;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="authority">
+		
+			<div>
+			
+			<h4>角色:</h4><select class="form-control" id='selectrole'>
+				  <option v-for="item1 in roList" v-bind:value="item1.roleId" v-text="item1.roleName"></option>
+				</select>
+			<div>
+				<!-- 模块权限 -->
+				<div>
+				<div class="panel panel-default panel-defaultone">
+				  <!-- Default panel contents -->
+				  <div class="panel-heading">模块权限:</div>
+				  <!-- <div class="panel-body">
+				    <p>...</p>
+				  </div> -->
+				
+				  <!-- List group -->
+				  <ul class="list-group">
+				    <li class="list-group-item" v-for="item2 in parentIdbyzeroList"><input type='checkbox' name='moduleId' v-bind:value='item2.moduleId'> {{item2.moduleName}}
+				    <span class="badge" v-on:click="querybymoduleId(item2.moduleId)">展开子级模块>></span></li>
+				  </ul>
+				</div>
+				
+				
+				<div class="panel panel-default panel-defaulttwo">
+				  <!-- Default panel contents -->
+				  <div class="panel-heading">二级模块:</div>
+				  <!-- <div class="panel-body">
+				    <p>...</p>
+				  </div> -->
+				
+				  <!-- List group -->
+				  <ul class="list-group">
+				    <li class="list-group-item" v-for="item3 in modulechilederList">
+				    <input type='checkbox' name='moduleId' v-bind:value='item3.moduleId'> {{item3.moduleName}}
+				    </li>
+				  </ul>
+				</div>
+				</div>
+				
+			</div>
+			<div>
+				<!-- 功能按钮 -->
+				<div class="panel panel-default panel-defaultthree">
+				  <!-- Default panel contents -->
+				  <div class="panel-heading">功能按钮:</div>
+				  <!-- <div class="panel-body">
+				    <p>...</p>
+				  </div> -->
+				
+				  <!-- List group -->
+				  <ul class="list-group" v-for="item4 in buttonList12">
+				    <li class="list-group-item" v-for="(item5,index) in item4.buttonList11">
+				    <input type="hidden" v-bind:value="item5.brid">
+				    <div v-if="item5.buttonstatus==0">
+					  <input type='checkbox' v-bind:value='item4.buttonid' checked="checked" v-on:click="xg1(this,item5.brid)"> {{item4.buttonname}}
+					</div>
+					<div v-else>
+					  <input type='checkbox' v-bind:value='item4.buttonid' v-on:click="xg2(this,item5.brid)"> {{item4.buttonname}}
+					</div>
+				    </li>
+				  </ul>
+				</div>
+				
+			</div>
+			<div>
+				<!-- 数据权限 -->
+				
+			</div>
+			
+			</div>
+			
+		</div>
+	</body>
+</html>
+<script src="js/wzr/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/wzr/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/wzr/pace.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/wzr/vue.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	
+	
+var v1 = new Vue({
+	el:"#authority",
+	data:{
+		roList:null,
+		parentIdbyzeroList:null,
+		modulechilederList:null,
+		buttonList1:null,
+		buttonmiddleList3:null,
+		buttonList12:null
+	},created(){
+		this.cxjuese();
+		this.cxmoduleone();
+	},methods:{
+		cxjuese:function(){
+			$.ajax({
+				url:"/queryRole1",
+				success:function(data){
+					v1.roList=data;
+				}
+			});
+		},cxmoduleone:function(){
+			$.ajax({
+				url:"/selectparentIdbyzero",
+				success:function(data){
+					v1.parentIdbyzeroList=data;
+				}
+			});
+		},querybymoduleId:function(moduleId){
+			selectbymoduleId(moduleId);
+		},xg1:function(th,brid){
+			xg1(th,brid);
+		},xg2:function(th1,brid1){
+			xg2(th1,brid1);
+		}
+	},watch:{
+		
+	}
+});
+
+
+//修改角色的按钮权限(是否禁用)
+function xg1(th,brid){
+	var buttonstatus1=1;
+	$.ajax({
+		url:"/updatebuttonstatus",
+		data:"buttonstatus="+buttonstatus1+"&brid="+brid,
+		success:function(data){
+			
+		}
+	});
+}
+
+
+//修改角色的按钮权限(是否禁用)
+function xg2(th1,brid1){
+	var buttonstatus2=0;
+	$.ajax({
+		url:"/updatebuttonstatus",
+		data:"buttonstatus="+buttonstatus2+"&brid="+brid1,
+		success:function(data){
+			
+		}
+	});
+}
+
+
+//查询选中的角色选中的按钮权限
+$("#selectrole").change(function(){
+	var roleId = $(this).val();
+	$.ajax({
+		url:"/selectbuttonmiddleone",
+		data:"roleId="+roleId,
+		success:function(data){
+			/* console.log(JSON.stringify(data));  */
+			v1.buttonList12=data;
+		}
+	});
+}) 
+
+
+//按moduleId查询子级模块
+function selectbymoduleId(moduleId){
+	$.ajax({
+		url:"/selectbymoduleId",
+		data:"moduleId="+moduleId,
+		success:function(data){
+			v1.modulechilederList=data;
+		}
+	});
+}
+</script>

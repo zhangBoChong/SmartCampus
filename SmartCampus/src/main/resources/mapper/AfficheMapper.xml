@@ -2,16 +2,83 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.accp.mapper.AfficheMapper">
   <resultMap id="BaseResultMap" type="com.accp.domain.Affiche">
-    <id column="affiche_id" jdbcType="INTEGER" property="afficheId" />
-    <result column="affiche_title" jdbcType="VARCHAR" property="afficheTitle" />
-    <result column="affiche_content" jdbcType="VARCHAR" property="afficheContent" />
-    <result column="affiche_draft" jdbcType="INTEGER" property="afficheDraft" />
-    <result column="affiche_time" jdbcType="DATE" property="afficheTime" />
-    <result column="img_id" jdbcType="INTEGER" property="imgId" />
-    <result column="u_id" jdbcType="INTEGER" property="uId" />
-    <result column="affiche_sendee" jdbcType="INTEGER" property="afficheSendee" />
-    <result column="delete_id" jdbcType="INTEGER" property="deleteId" />
+    <id column="affiche_id" jdbcType="INTEGER" property="affiche_id" />
+    <result column="affiche_title" jdbcType="VARCHAR" property="affiche_title" />
+    <result column="affiche_content" jdbcType="VARCHAR" property="affiche_content" />
+    <result column="affiche_draft" jdbcType="INTEGER" property="affiche_draft" />
+    <result column="affiche_time" jdbcType="DATE" property="affiche_time" />
+    <result column="img_id" jdbcType="INTEGER" property="img_id" />
+    <result column="u_id" jdbcType="INTEGER" property="u_id" />
+    <result column="affiche_sendee" jdbcType="VARCHAR" property="affiche_sendee" />
+    <result column="delete_id" jdbcType="INTEGER" property="delete_id" />
+    <collection property="imgList1" column="img_id" ofType="com.accp.domain.Img" select="com.accp.dao.ImgMapper.selectImgid"></collection>
   </resultMap>
+  
+  <!-- 删除公告 -->
+  <delete id="deleteAffiche">
+  	DELETE FROM `affiche` WHERE `affiche_id`=#{affiche_id}
+  </delete>
+  
+  <!-- 发布公告 -->
+  <insert id="insertgg">
+  	INSERT INTO `affiche`(`affiche_title`,`affiche_content`,`affiche_time`,`img_id`,`u_id`,`affiche_sendee`,`delete_id`)
+  	VALUES
+  	<foreach item="item1" index="index1" collection="list" separator=",">
+  		(#{item1.affiche_title},#{item1.affiche_content},#{item1.affiche_time},#{item1.img_id},#{item1.u_id},#{item1.affiche_sendee},#{item1.delete_id})
+  	</foreach>
+  </insert>
+  
+  <!-- 查询收到的公告 -->
+  <select id="cx_Affiche" resultType="com.accp.domain.Affiche">
+  	SELECT * FROM `affiche`,`staff`
+	WHERE `affiche`.`u_id`=`staff`.`tid`
+	AND `affiche`.`affiche_sendee`=#{affiche_sendee}
+	<if test="affiche_title != null">
+	AND `affiche`.`affiche_title` LIKE concat('%',#{affiche_title},'%')
+	</if>
+	<if test="startime != null and endtime != null">
+	AND `affiche`.`affiche_time` BETWEEN #{startime} AND #{endtime}
+	</if>
+	<if test="affiche_id != null">
+	AND `affiche`.`affiche_id`=#{affiche_id}
+	</if>
+  </select>
+  
+  
+  <select id="selectAffiche" resultType="com.accp.domain.Affiche">
+  	SELECT * FROM `affiche`,`staff` WHERE `affiche`.`affiche_sendee`=#{affiche_sendee}
+  	 AND `affiche`.`delete_id`=1
+  	 AND `affiche`.`affiche_draft`=1
+  	AND `affiche`.`u_id`=`staff`.`tid`
+  	<if test="affiche_title != null">
+  	AND `affiche`.`affiche_title` LIKE concat('%',#{affiche_title},'%')
+  	</if>
+  	<if test="startime != null and endtime != null">
+  	AND `affiche`.`affiche_time` BETWEEN #{startime} AND #{endtime}
+  	</if>
+  	limit #{start},#{size}
+  </select>
+  
+  <select id="affCount" resultType="int">
+  	SELECT count(1) FROM `affiche`,`staff` WHERE `affiche`.`affiche_sendee`=#{affiche_sendee} 
+  	AND `affiche`.`delete_id`=1 
+  	AND `affiche`.`affiche_draft`=1
+  	AND `affiche`.`u_id`=`staff`.`tid`
+  	<if test="affiche_title != null">
+  	AND `affiche`.affiche_title LIKE concat('%',#{affiche_title},'%')
+  	</if>
+  	<if test="startime != null and endtime != null">
+  	AND `affiche`.`affiche_time` BETWEEN #{startime} AND #{endtime}
+  	</if>
+  </select>
+  
+  <!-- 查询员工表即发布公告的人 -->
+  <select id="selectPeople" resultType="com.accp.domain.Affiche">
+  	SELECT * FROM `affiche`,`staff`
+	WHERE `affiche`.`u_id`=`staff`.`tid`
+	AND `affiche`.`affiche_sendee`=#{affiche_sendee}
+  </select>
+  
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">

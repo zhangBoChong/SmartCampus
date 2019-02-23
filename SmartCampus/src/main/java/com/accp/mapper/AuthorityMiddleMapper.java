@@ -3,8 +3,11 @@ package com.accp.mapper;
 import com.accp.domain.AuthorityMiddle;
 import com.accp.domain.AuthorityMiddleExample;
 import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+@Mapper
 public interface AuthorityMiddleMapper {
     long countByExample(AuthorityMiddleExample example);
 

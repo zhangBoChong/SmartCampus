@@ -41,15 +41,15 @@
 										<li class="subnav-li" href="Toclazzs" data-id="32"><a href="javascript:;" class="ue-clear"><i class="subnav-icon"></i><span class="subnav-text">班级查看</span></a></li>			                  			                        
 				                    </ul>
 							    </li>	
-							    <li class="nav-li"><a href="javascript:;" class="ue-clear"><i class="nav-ivon" style="margin-left: 2rem;"></i><span class="nav-text">年级管理</span></a></li>	
+
 							    <li class="nav-li"><a href="javascript:;" class="ue-clear"><i class="nav-ivon" style="margin-left: 2rem;"></i><span class="nav-text">作业管理</span></a>
 							    	<ul class="subnav">
-										<li class="subnav-li" href="wshZuoYeGuanLi" data-id="29"><a href="javascript:;" class="ue-clear"><i class="subnav-icon"></i><span class="subnav-text">作业管理</span></a></li>
+										<li class="subnav-li" href="wshZuoYeGuanLi" data-id="39"><a href="javascript:;" class="ue-clear"><i class="subnav-icon"></i><span class="subnav-text">作业管理</span></a></li>
 				                    </ul>	
 							    </li>
 							    <li class="nav-li"><a href="javascript:;" class="ue-clear"><i class="nav-ivon" style="margin-left: 2rem;"></i><span class="nav-text">考试管理</span></a>
 							    	<ul class="subnav">
-										<li class="subnav-li" href="wshKaoShiGuanLi" data-id="30"><a href="javascript:;" class="ue-clear"><i class="subnav-icon"></i><span class="subnav-text">考试管理</span></a></li>
+										<li class="subnav-li" href="wshKaoShiGuanLi" data-id="40"><a href="javascript:;" class="ue-clear"><i class="subnav-icon"></i><span class="subnav-text">考试管理</span></a></li>
 				                    </ul>	
 							    </li>
 							    <li class="nav-li"><a href="javascript:;" class="ue-clear"><i class="nav-ivon" style="margin-left: 2rem;"></i><span class="nav-text">课程管理</span></a>
@@ -96,29 +96,29 @@
 						</ul>
 				</li>
 				<li class="nav-li">
-						<a href="javascript:;" class="ue-clear"><i class="nav-ivon"></i><span class="nav-text">公告管理</span></a>
-						<ul class="subnav">
-								<li class="subnav-li" data-id="18"><a href="javascript:;" class="ue-clear"><i class="subnav-icon"></i><span class="subnav-text">工作安排查询1</span></a></li>
-								<li class="subnav-li" data-id="19"><a href="javascript:;" class="ue-clear"><i class="subnav-icon"></i><span class="subnav-text">安排管理1</span></a></li>
-								<li class="subnav-li" data-id="20"><a href="javascript:;" class="ue-clear"><i class="subnav-icon"></i><span class="subnav-text">类型选择1</span></a></li>
-						</ul>
-				</li>
-				<li class="nav-li">
-						<a href="javascript:;" class="ue-clear"><i class="nav-ivon"></i><span class="nav-text">消息管理</span></a>
-						<ul class="subnav">
-								<li class="subnav-li" data-id="21"><a href="javascript:;" class="ue-clear"><i class="subnav-icon"></i><span class="subnav-text">工作安排查询1</span></a></li>
-								<li class="subnav-li" data-id="22"><a href="javascript:;" class="ue-clear"><i class="subnav-icon"></i><span class="subnav-text">安排管理1</span></a></li>
-								<li class="subnav-li" data-id="23"><a href="javascript:;" class="ue-clear"><i class="subnav-icon"></i><span class="subnav-text">类型选择1</span></a></li>
-						</ul>
-				</li>
-				<li class="nav-li">
-						<a href="javascript:;" class="ue-clear"><i class="nav-ivon"></i><span class="nav-text">系统设置</span></a>
-						<ul class="subnav">
-								<li class="subnav-li" data-id="24"><a href="javascript:;" class="ue-clear"><i class="subnav-icon"></i><span class="subnav-text">工作安排查询1</span></a></li>
-								<li class="subnav-li" data-id="25"><a href="javascript:;" class="ue-clear"><i class="subnav-icon"></i><span class="subnav-text">安排管理1</span></a></li>
-								<li class="subnav-li" data-id="26"><a href="javascript:;" class="ue-clear"><i class="subnav-icon"></i><span class="subnav-text">类型选择1</span></a></li>
-						</ul>
-				</li>
+										<a href="javascript:;" class="ue-clear"><i class="nav-ivon"></i><span class="nav-text">公告管理</span></a>
+										<ul class="subnav">
+												<li class="subnav-li" href="towzr_PublishAffiche" data-id="18"><a href="javascript:;" class="ue-clear"><i class="subnav-icon"></i><span class="subnav-text">公告发布</span></a></li>
+												<li class="subnav-li" href="towzr_ListAffiche" data-id="19"><a href="javascript:;" class="ue-clear"><i class="subnav-icon"></i><span class="subnav-text">公告列表</span></a></li>
+												<!-- <li class="subnav-li" href="towzr_draft" data-id="20"><a href="javascript:;" class="ue-clear"><i class="subnav-icon"></i><span class="subnav-text">公告草稿箱</span></a></li> -->
+										</ul>
+								</li>
+								<li class="nav-li">
+										<a href="javascript:;" class="ue-clear"><i class="nav-ivon"></i><span class="nav-text">消息管理</span></a>
+										<ul class="subnav" id="li1">
+												<li class="subnav-li" href="towzr_information" data-id="21"><a href="javascript:;" class="ue-clear"><i class="subnav-icon"></i><span class="subnav-text">消息通知 <span style="color: red;" th:text="${countinformation_fetch}"></span></span></a></li>
+												<!-- <li class="subnav-li" href="wzr_contacts.html" data-id="22"><a href="javascript:;" class="ue-clear"><i class="subnav-icon"></i><span class="subnav-text">联系人列表</span></a></li>
+												<li class="subnav-li" data-id="23"><a href="javascript:;" class="ue-clear"><i class="subnav-icon"></i><span class="subnav-text">类型选择1</span></a></li> -->
+										</ul>
+								</li>
+								<li class="nav-li">
+										<a href="javascript:;" class="ue-clear"><i class="nav-ivon"></i><span class="nav-text">系统管理</span></a>
+										<ul class="subnav">
+												<li class="subnav-li" href="towzr_UserManage" data-id="24"><a href="javascript:;" class="ue-clear"><i class="subnav-icon"></i><span class="subnav-text">用户管理</span></a></li>
+												<li class="subnav-li" href="towzr_manage" data-id="25"><a href="javascript:;" class="ue-clear"><i class="subnav-icon"></i><span class="subnav-text">角色、职位管理</span></a></li>
+												<li class="subnav-li" th:href="@{/queryRole}" data-id="26"><a href="javascript:;" class="ue-clear"><i class="subnav-icon"></i><span class="subnav-text">权限分配</span></a></li>
+										</ul>
+								</li> 
             </ul>
             <div class="tree-list outwindow">
             	<div class="tree ztree"></div>

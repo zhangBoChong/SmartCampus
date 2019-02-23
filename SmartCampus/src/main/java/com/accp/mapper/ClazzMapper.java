@@ -12,6 +12,12 @@ public interface ClazzMapper {
 	List<Clazz> queryBybid(Integer bid);
 	Clazz selectBycid(Integer cid);
 	
+	//查询所有班级
+    List<Clazz> selectClazz();
+    
+    //按cid查询班级表
+    Clazz clazzBycid(@Param("cid") Integer cid);
+	
 	//班级信息+年级+版本
 	List<Clazz> selectclazzvg();
 	//根据cid查询班级信息
