@@ -98,6 +98,7 @@ public class ExaminationInfoServiceImpl implements ExaminationInfoService{
 		for (ExaminationTm etm : list) {
 			//题目错误次数
 			int mistake=hmapper.chmistakecountBytopicid(etm.getTopic_id());
+			//System.out.println("题目错误次数:"+mistake);
 			etm.setMistakecount(mistake);
 			System.out.println("错误数:"+etm.getMistakecount());
 			//题目错误的学员

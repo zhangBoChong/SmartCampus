@@ -17,6 +17,9 @@
   	<association property="seobj" column="sectionId" javaType="com.accp.domain.Section" 
   		select="com.accp.mapper.SectionMapper.selectByPrimaryKey"></association>
   </resultMap>
+  <select id="selecttopicsection" resultMap="topicsection">
+  	SELECT * FROM topic WHERE topic_id=#{topic_id}
+  </select>
   
   
   <select id="queryTopic" resultType="com.accp.domain.Topic">
@@ -291,9 +294,7 @@
     where topic_id = #{topicId,jdbcType=INTEGER}
   </update>
   
-  <select id="selecttopicsection" resultMap="topicsection">
-  SELECT * FROM topic WHERE topic_id=#{topicId}
-  </select>
+  
   
   
 </mapper>

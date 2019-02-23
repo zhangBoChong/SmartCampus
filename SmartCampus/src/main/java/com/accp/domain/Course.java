@@ -1,9 +1,9 @@
 package com.accp.domain;
 
 public class Course {
-    private Integer courseId;
+    private Integer courseid;
 
-    private String courseName;
+    private String coursename;
 
     private Integer coursetime;
 
@@ -18,20 +18,20 @@ public class Course {
     }
     private Integer courseTime;
 
-	public Integer getCourseId() {
-		return courseId;
+	public Integer getCourseid() {
+		return courseid;
 	}
 
-	public void setCourseId(Integer courseId) {
-		this.courseId = courseId;
+	public void setCourseid(Integer courseid) {
+		this.courseid = courseid;
 	}
 
-	public String getCourseName() {
-		return courseName;
+	public String getCoursename() {
+		return coursename;
 	}
 
-	public void setCourseName(String courseName) {
-		this.courseName = courseName;
+	public void setCoursename(String coursename) {
+		this.coursename = coursename;
 	}
 
 	public Integer getCourseTime() {

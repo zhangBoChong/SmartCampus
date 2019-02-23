@@ -4,12 +4,11 @@ public class ExaminationFb {
     private Integer examination_fb_id;
 
     private Integer examination_id;
-
-    private Integer csid;
-
+    
+    private Integer csId;
     
     private Examination examobj;
-    private Integer csId;
+    
     
 	public Examination getExamobj() {
 		return examobj;

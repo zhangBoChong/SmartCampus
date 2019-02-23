@@ -40,10 +40,10 @@
 				<p class="subtitleP">试卷信息</p>
 				<div class="moreClassEDiv">
 					<table class="table table-bordered">
-						<tr class="backgroundtoolbar"><td>题目内容</td><td>所属章节</td><td>做错总次数</td><td>做错的学员名单</td></tr>
-						<tr th:each="e:${etimlist}" th:attr="data-topicid=${e.topicId}">
-							<td th:text="${e.topicobj.topicName}"></td>
-							<td th:text="${e.topicobj.seobj.sectionname}">初识Java</td>
+						<tr class="backgroundtoolbar"><td>题目内容</td><!-- <td>所属章节</td> --><td>做错总次数</td><td>做错的学员名单</td></tr>
+						<tr th:each="e:${etimlist}" th:attr="data-topicid=${e.topic_id}">
+							<td th:text="${e.topicobj.topic_name}"></td>
+							<!-- <td th:text="${e.topicobj.seobj.sectionname}"></td> -->
 							<td th:text="${e.mistakecount}"></td>
 							<td><span th:each="es:${e.mistakestu}"  th:text="${es.stuobj.sname}" class="marginright"></span></td>
 						</tr>

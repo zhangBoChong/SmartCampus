@@ -44,14 +44,14 @@ public class TanController {
 	ClassRoomService croomservice;
 	
 	
-	@RequestMapping("/tomain")
+	/*@RequestMapping("/tomain")
 	public String tomain() {
 		return "main";
 	}
 	@RequestMapping("/tonav")
 	public String tonav() {
 		return "nav";
-	}
+	}*/
 	
 	@RequestMapping("/toDataStatistics")
 	public String toDataStatistics(Model model,Integer sid) {
@@ -87,7 +87,7 @@ public class TanController {
 	@RequestMapping("/toupclazzStudent")
 	public String toupclazzStudent(Model model) {
 		//升学鉴定表
-		Integer[] sid2= {1,2,3}; 
+		Integer[] sid2= {104,105,106,107}; 
 		System.out.println("可以升学的sid");
 		/*for (int i = 0; i < sid2.length; i++) {
 			System.out.println(sid2[i]);
@@ -119,6 +119,10 @@ public class TanController {
 			examinationId=1;//默认值
 		}
 		List<ExaminationTm> etimlist=einfoservice.selectexamtimByexamid(examinationId);
+		for (ExaminationTm e : etimlist) {
+			System.out.println("--"+e.getMistakecount()+"-"+e.getTopic_id()+"--"+e.getTopicobj().getTopic_name());
+			//System.out.println(e.getTopicobj().getSeobj().getSectionName());
+		}
 		model.addAttribute("etimlist", etimlist);
 		return "datastatistics/dataStatistics5";
 	}

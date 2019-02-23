@@ -2,17 +2,25 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.accp.mapper.ExaminationTmMapper">
   <resultMap id="BaseResultMap" type="com.accp.domain.ExaminationTm">
-    <id column="examination_tm_id" jdbcType="INTEGER" property="examinationTmId" />
-    <result column="topic_id" jdbcType="INTEGER" property="topicId" />
-    <result column="examination_id" jdbcType="INTEGER" property="examinationId" />
-    <result column="examination_tm_xzt" jdbcType="DOUBLE" property="examinationTmXzt" />
-    <result column="examination_tm_wdt" jdbcType="DOUBLE" property="examinationTmWdt" />
+    <id column="examination_tm_id" jdbcType="INTEGER" property="examination_tm_id" />
+    <result column="topic_id" jdbcType="INTEGER" property="topic_id" />
+    <result column="examination_id" jdbcType="INTEGER" property="examination_id" />
+    <result column="examination_tm_xzt" jdbcType="DOUBLE" property="examination_tm_xzt" />
+    <result column="examination_tm_wdt" jdbcType="DOUBLE" property="examination_tm_wdt" />
   </resultMap>
 
   <resultMap type="com.accp.domain.ExaminationTm" id="aexamtiminfo" extends="BaseResultMap">
   	<association property="topicobj" column="topic_id" javaType="com.accp.domain.Topic" 
   			select="com.accp.mapper.TopicMapper.selecttopicsection"></association>
   </resultMap>
+  
+  <select id="selectallexamtim" resultMap="BaseResultMap">
+  SELECT * FROM examination_tm  GROUP BY topic_id
+  </select>
+  
+  <select id="selectexamtimByexamid" resultMap="aexamtiminfo">
+  SELECT * FROM examination_tm WHERE examination_id=#{examination_id}
+  </select>
   
   
   <insert id="insertExaTm">
@@ -220,14 +228,6 @@
       examination_tm_wdt = #{examinationTmWdt,jdbcType=DOUBLE}
     where examination_tm_id = #{examinationTmId,jdbcType=INTEGER}
   </update>
-  
-  <select id="selectallexamtim" resultMap="BaseResultMap">
-  SELECT * FROM examination_tm  GROUP BY topic_id
-  </select>
-  
-  <select id="selectexamtimByexamid" resultMap="aexamtiminfo">
-  SELECT * FROM examination_tm WHERE examination_id=#{examinationId}
-  </select>
   
   
 </mapper>

@@ -12,7 +12,7 @@ public class ExaminationTm {
 
     private Double examination_tm_xzt;
 
-    private Double examinationTmWdt;
+    private Double examination_tm_wdt;
     
     private Integer mistakecount; //题目做错总次数
     private Topic topicobj;//题目集合
@@ -22,7 +22,6 @@ public class ExaminationTm {
 	public List<Havetask> getMistakestu() {
 		return mistakestu;
 	}
-    private Double examination_tm_wdt;
 
 	public void setMistakestu(List<Havetask> mistakestu) {
 		this.mistakestu = mistakestu;

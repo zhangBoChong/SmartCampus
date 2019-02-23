@@ -10,7 +10,7 @@ import org.apache.ibatis.annotations.Param;
 public interface ClazzTeacherMapper {	
 	int updatecourseschedule(ClazzTeacher record);
 	ClazzTeacher queryBycid(Integer cid);
-	ClazzTeacher updatetwo(Integer cid);
+	int updatetwo(Integer cid);
 	List<ClazzTeacher> queryClazzTeacherByctid(Integer ctid);
 
     long countByExample(ClazzTeacherExample example);

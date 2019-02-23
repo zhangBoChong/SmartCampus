@@ -27,7 +27,7 @@
 		
 		JOIN `clazz_teacher` ON (`clazz`.`cid`=`clazz_teacher`.`cid`)
 		
-		JOIN `staff` ON (`clazz_teacher`.`tid`=`staff`.`tid`)
+		JOIN `staff` ON (`clazz_teacher`.`ctid`=`staff`.`tid`)
 		
 		WHERE `grade`.`gname` = #{gname} AND `clazz`.`cname` = #{cname}
 	</select>

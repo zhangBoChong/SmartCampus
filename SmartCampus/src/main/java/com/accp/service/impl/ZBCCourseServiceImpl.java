@@ -218,7 +218,7 @@ public class ZBCCourseServiceImpl implements ZBCCourseService{
 						CourseTeacher ctt=courseTeacherMapper.queryByctid(ct.getCtid());
 						c.setTname(staffMapper.selectBytid(ctt.getTid()).getTname());
 						VessionGradeMajoridCourse vgmc=vessionGradeMajoridCourseMapper.selectBycvgmid(ctt.getCvgmid());
-						c.setCoursename(courseMapper.selectBycourseid(vgmc.getCourseid()).getCourseName());
+						c.setCoursename(courseMapper.selectBycourseid(vgmc.getCourseid()).getCoursename());
 						c.setCoursetime(courseMapper.selectBycourseid(vgmc.getCourseid()).getCoursetime());
 						
 						ct.setCourseschedule(ct.getCourseschedule()+1);					
@@ -323,8 +323,8 @@ public class ZBCCourseServiceImpl implements ZBCCourseService{
 		return count;
 	}
 	@Override
-	public ClazzTeacher updatetwo(Integer cid) {
-		ClazzTeacher ct=clazzTeacherMapper.updatetwo(cid);
+	public int updatetwo(Integer cid) {
+		int ct=clazzTeacherMapper.updatetwo(cid);
 		return ct;
 	}
 	@Override
@@ -362,7 +362,7 @@ public class ZBCCourseServiceImpl implements ZBCCourseService{
 			if(cs.getScheduleid()==0) {
 				cs.setClassroomname(classroomMapper.queryByRoomId(cs.getClassroomid()).getClassroomname());
 				cs.setTname(staffMapper.selectBytid(ctt.getTid()).getTname());
-				cs.setCoursename(courseMapper.selectBycourseid(vgmc.getCourseid()).getCourseName());
+				cs.setCoursename(courseMapper.selectBycourseid(vgmc.getCourseid()).getCoursename());
 			}else {
 				cs.setSchedule(scheduleMapper.queryByScheduleid(cs.getScheduleid()));
 			}
@@ -378,9 +378,14 @@ public class ZBCCourseServiceImpl implements ZBCCourseService{
 			clazz.setGname(g.getGname());
 			clazz.setStaff(staffMapper.selectBytid(clazz.getTid()));
 			ClazzTeacher ct=clazzTeacherMapper.queryBycid(clazz.getCid());
-			CourseTeacher ctt=courseTeacherMapper.queryByctid(ct.getCtid());
-			clazz.setTname(staffMapper.selectBytid(ctt.getTid()).getTname());
-			clazz.setCount(clazzStudentMapper.countstu(clazz.getCid()));
+			try {
+				CourseTeacher ctt=courseTeacherMapper.queryByctid(ct.getCtid());
+				clazz.setTname(staffMapper.selectBytid(ctt.getTid()).getTname());
+				clazz.setCount(clazzStudentMapper.countstu(clazz.getCid()));
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			
 		}
 		return list;
 	}

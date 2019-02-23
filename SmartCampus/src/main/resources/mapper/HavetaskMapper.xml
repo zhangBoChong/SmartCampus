@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.accp.domain.Havetask">
     <id column="task_id" jdbcType="INTEGER" property="taskId" />
     <result column="topic_id" jdbcType="INTEGER" property="topicId" />
-    <result column="sId" jdbcType="INTEGER" property="sid" />
+    <result column="csId" jdbcType="INTEGER" property="sid" />
     <result column="havetask_xuandaan" jdbcType="VARCHAR" property="havetaskXuandaan" />
     <result column="havetask_dafen" jdbcType="DOUBLE" property="havetaskDafen" />
     <result column="examination_id" jdbcType="INTEGER" property="examinationId" />
@@ -20,9 +20,32 @@
   			select="com.accp.mapper.ExaminationMapper.selectexamByexaminationIdTow"></association>
   </resultMap>
   <resultMap type="com.accp.domain.Havetask" id="mistaketimstudent" extends="BaseResultMap">
-    <association property="stuobj" column="sId" javaType="com.accp.domain.Studentinfo" 
+    <association property="stuobj" column="csId" javaType="com.accp.domain.Studentinfo" 
     		select="com.accp.mapper.StudentinfoMapper.studentexam"></association>
   </resultMap>
+  <select id="examscoreBysid" resultMap="examinfoscore">
+  	SELECT *,SUM(havetask_dafen) AS score FROM havetask 
+	WHERE csId=#{sid}
+	GROUP BY examination_id 
+  </select>
+  <select id="examscoreBysidTow" resultMap="examinfoscoreTow">
+  	SELECT *,SUM(havetask_dafen) AS score FROM havetask 
+	WHERE csId=#{sid}
+	GROUP BY examination_id 
+  </select>
+  <select id="selectexamscore" resultType="double">
+  	SELECT SUM(havetask_dafen) AS score FROM havetask  
+ 	WHERE csid=#{sid} AND examination_id=#{examinationId}
+  </select>
+  <select id="chmistakecountBytopicid" resultType="int">
+  <!-- 当前题目的错误次数 -->
+  	SELECT COUNT(*) FROM havetask  WHERE havetask_dafen=0 AND topic_id=#{topicId}
+  </select>
+  
+  <select id="chmistakestudents" resultMap="mistaketimstudent">
+  	SELECT * FROM havetask  WHERE havetask_dafen=0 AND topic_id=#{topicId}  GROUP BY csid
+  </select>
+  
   
   
   <sql id="Example_Where_Clause">
@@ -84,7 +107,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    task_id, topic_id, sId, havetask_xuandaan, havetask_dafen, examination_id
+    task_id, topic_id, csId, havetask_xuandaan, havetask_dafen, examination_id
   </sql>
   <select id="selectByExample" parameterType="com.accp.domain.HavetaskExample" resultMap="BaseResultMap">
     select
@@ -117,7 +140,7 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.accp.domain.Havetask">
-    insert into havetask (task_id, topic_id, sId, 
+    insert into havetask (task_id, topic_id, csId, 
       havetask_xuandaan, havetask_dafen, examination_id
       )
     values (#{taskId,jdbcType=INTEGER}, #{topicId,jdbcType=INTEGER}, #{sid,jdbcType=INTEGER}, 
@@ -134,7 +157,7 @@
         topic_id,
       </if>
       <if test="sid != null">
-        sId,
+        csId,
       </if>
       <if test="havetaskXuandaan != null">
         havetask_xuandaan,
@@ -183,7 +206,7 @@
         topic_id = #{record.topicId,jdbcType=INTEGER},
       </if>
       <if test="record.sid != null">
-        sId = #{record.sid,jdbcType=INTEGER},
+        csId = #{record.sid,jdbcType=INTEGER},
       </if>
       <if test="record.havetaskXuandaan != null">
         havetask_xuandaan = #{record.havetaskXuandaan,jdbcType=VARCHAR},
@@ -203,7 +226,7 @@
     update havetask
     set task_id = #{record.taskId,jdbcType=INTEGER},
       topic_id = #{record.topicId,jdbcType=INTEGER},
-      sId = #{record.sid,jdbcType=INTEGER},
+      csId = #{record.sid,jdbcType=INTEGER},
       havetask_xuandaan = #{record.havetaskXuandaan,jdbcType=VARCHAR},
       havetask_dafen = #{record.havetaskDafen,jdbcType=DOUBLE},
       examination_id = #{record.examinationId,jdbcType=INTEGER}
@@ -218,7 +241,7 @@
         topic_id = #{topicId,jdbcType=INTEGER},
       </if>
       <if test="sid != null">
-        sId = #{sid,jdbcType=INTEGER},
+        csId = #{sid,jdbcType=INTEGER},
       </if>
       <if test="havetaskXuandaan != null">
         havetask_xuandaan = #{havetaskXuandaan,jdbcType=VARCHAR},
@@ -235,35 +258,13 @@
   <update id="updateByPrimaryKey" parameterType="com.accp.domain.Havetask">
     update havetask
     set topic_id = #{topicId,jdbcType=INTEGER},
-      sId = #{sid,jdbcType=INTEGER},
+      csId = #{sid,jdbcType=INTEGER},
       havetask_xuandaan = #{havetaskXuandaan,jdbcType=VARCHAR},
       havetask_dafen = #{havetaskDafen,jdbcType=DOUBLE},
       examination_id = #{examinationId,jdbcType=INTEGER}
     where task_id = #{taskId,jdbcType=INTEGER}
   </update>
   
-  <select id="examscoreBysid" resultMap="examinfoscore">
-  	SELECT *,SUM(havetask_dafen) AS score FROM havetask 
-	WHERE sId=#{sid}
-	GROUP BY examination_id 
-  </select>
-  <select id="examscoreBysidTow" resultMap="examinfoscoreTow">
-  	SELECT *,SUM(havetask_dafen) AS score FROM havetask 
-	WHERE sId=#{sid}
-	GROUP BY examination_id 
-  </select>
-  <select id="selectexamscore" resultType="double">
-  SELECT SUM(havetask_dafen) AS score FROM havetask  
-  WHERE sid=#{sid} AND examination_id=#{examinationId}
-  </select>
-  <select id="chmistakecountBytopicid" resultType="int">
-  <!-- 当前题目的错误次数 -->
-  SELECT COUNT(*) FROM havetask  WHERE havetask_dafen=0 AND topic_id=#{topicId}
-  </select>
-  
-  <select id="chmistakestudents" resultMap="mistaketimstudent">
-  SELECT * FROM havetask  WHERE havetask_dafen=0 AND topic_id=#{topicId}  GROUP BY sid
-  </select>
   
 
 </mapper>

@@ -92,7 +92,7 @@ public interface ZBCCourseService {
 	 //修改课程进度
 	 int updatecourseschedule(ClazzTeacher record);
 	 //改下一本书的教员的任课状态
-	 ClazzTeacher updatetwo(Integer cid);
+	 int updatetwo(Integer cid);
 	 //新增年级
 	 int insertGrade(Grade grade);
 	 //新增年级版本表

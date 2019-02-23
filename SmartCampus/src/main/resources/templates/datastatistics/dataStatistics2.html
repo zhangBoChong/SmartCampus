@@ -85,8 +85,8 @@
 							<td class="meanscore"></td>
 						</tr>
 					</table>
-					<div class="eInformaChart2 chartborder" id="containerks" style="height: 650px;width: 1500px;margin-left: 1.5rem;"></div>
-					
+					<!-- <div class="eInformaChart2 chartborder" id="containerks" style="height: 650px;width: 1500px;margin-left: 1.5rem;"></div>
+					 -->
 				</div>
 			</div>
 			<div class="checkingin">
@@ -117,7 +117,7 @@
 						return;
 					} */
 					var stuid=$(this).attr("data-stuid");
-					alert(stuid);
+					//alert(stuid);
 					window.location.href="/toDataStatistics?sid="+stuid;
 				});
 				//---考试名称---
@@ -143,9 +143,13 @@
 						nub++;
 					});
 					//pjscore=pjscore/nub;
-					//alert("计算平均分："+pjscore+"---"+(pjscore/nub)+"---"+nub);
+					var avgscore=Number(pjscore/nub);
+					if(pjscore==0&&nub==0){
+						avgscore=0;
+					}
+					//alert("计算平均分："+pjscore+"---"+avgscore+"---"+nub);
 					$(this).find(".examnub").text(nub);
-					$(this).find(".meanscore").text(Number(pjscore/nub));
+					$(this).find(".meanscore").text(avgscore);
 				});
 				
 				//-------考试柱状图-----------

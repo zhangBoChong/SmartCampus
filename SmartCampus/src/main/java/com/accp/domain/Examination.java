@@ -18,19 +18,10 @@ public class Examination {
     private Integer examination_lx_id;
 
     private Date examination_kstime;
-
-
     private Date examination_jstime;
-
+    private String examination_mc;
     
-    public Date getExamination_jstime() {
-		return examination_jstime;
-	}
-
-	public void setExamination_jstime(Date examination_jstime) {
-		this.examination_jstime = examination_jstime;
-	}
-
+    
 	private ExaminationLx examlxtype;
     private Course coursename;
     private Staff teachername;
@@ -68,8 +59,6 @@ public class Examination {
 	public void setTeachername(Staff teachername) {
 		this.teachername = teachername;
 	}
-
-    private String examination_mc;
 
 	public Integer getExamination_id() {
 		return examination_id;
@@ -134,8 +123,14 @@ public class Examination {
 	public void setExamination_kstime(Date examination_kstime) {
 		this.examination_kstime = examination_kstime;
 	}
-
 	
+	public Date getExamination_jstime() {
+		return examination_jstime;
+	}
+
+	public void setExamination_jstime(Date examination_jstime) {
+		this.examination_jstime = examination_jstime;
+	}
 
 	public String getExamination_mc() {
 		return examination_mc;
