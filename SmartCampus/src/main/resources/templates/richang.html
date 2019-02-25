@@ -61,7 +61,7 @@
             	<div class="search-area">
             		
                     <div class="kv-item ue-clear">
-                        
+                        <input type="file" onchange="importXlsx(this)">
                         </div>
                     </div>
                     <div class="kv-item ue-clear">
@@ -177,8 +177,7 @@
             </div>
         </div>
     </div>
-</div>
-</body>
+<script type="text/javascript" src="js/xlsx.core.min.js"></script>
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="js/global.js"></script>
 <script type="text/javascript" src="js/jquery.select.js"></script>
@@ -242,4 +241,79 @@
     	}
     });
 </script>
+<script>
+		function importXlsx(e) {
+
+			const files = e.files;
+
+			let i, f;
+
+			for(i = 0, f = files[i]; i != files.length; ++i) {
+
+				let reader = new FileReader();
+
+				let name = f.name;
+
+				reader.onload = function(e) {
+
+					let data = e.target.result;
+
+					let workbook = XLSX.read(data, {
+
+						type: typeof FileReader !== "undefined" && (FileReader.prototype || {}).readAsBinaryString ?
+
+							'binary' : 'array'
+
+					});
+
+					 
+
+					for(let sheet in workbook.Sheets) {
+
+						if(workbook.Sheets.hasOwnProperty(sheet)) {
+
+							fromTo = workbook.Sheets[sheet]['!ref'];
+
+							let xlsxData = XLSX.utils.sheet_to_json(workbook.Sheets[sheet]);
+
+							for(let i = 0, len = xlsxData.length; i < len; i++) {
+
+								 
+
+								Object.keys(xlsxData[i]).forEach((keys) => {
+
+									// 日期格式会变为数字，所以需要转换一下
+
+									if(typeof xlsxData[i][keys] == 'number') {
+
+										 let date = new Date(timesStamp + 24 * 60 * 60 * 1000 * (i - (currenDay + 6) % 7), 0, xlsxData[i][keys] - 1).toLocaleDateString();
+										
+										xlsxData[i][keys] = date;
+
+									}
+
+								})
+							}
+							// 结果数组
+							console.log(xlsxData);
+							$.ajax({
+			            		url:"insertToAtt",
+			            		type:"post",
+			            		data:JSON.stringify(xlsxData),
+			            		contentType:"application/json;charset=utf-8",
+			            		success:function(data){
+			            		location.reload(); 	
+			            		}
+			            	});
+							
+						}
+					}
+
+				};
+				reader.readAsBinaryString(f);
+			}
+
+		}
+	</script>
+</body>
 </html>

@@ -23,4 +23,9 @@ public interface AttenceMapper {
 	public Clazz queryClazzbysid(int sid);
 	
 	public List<Leave> queryLeaveByTeaId(Integer teacher);
+	
+	public int updateLeave(Leave l);
+	
+//	插入日常表
+	public int insertAtt(Attence att);
 }

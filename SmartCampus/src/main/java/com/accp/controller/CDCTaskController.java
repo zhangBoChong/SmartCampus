@@ -1,5 +1,7 @@
 package com.accp.controller;
 
+import java.lang.reflect.Array;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.accp.domain.AttObject;
 import com.accp.domain.Attence;
 import com.accp.domain.CdcTask;
 import com.accp.domain.Clazz;
@@ -142,6 +145,7 @@ public class CDCTaskController {
 			return list;
 		
 	}
+//	进入日常
 	@RequestMapping("cdcEnterrichang")
 	public String cdcEnterrichang() {
 		return "richang";
@@ -236,4 +240,35 @@ public class CDCTaskController {
 		}
 		return list;
 	}
+	@RequestMapping("/updateLeave")
+	@ResponseBody
+	public void updateLeave(Leave l) {
+		cdcAttenceService.updateLeave(l);
+	}
+	
+	@RequestMapping(value="insertToAtt",produces="application/json;charset=utf-8")
+	@ResponseBody
+	public void insertToAtt(@RequestBody List<AttObject> obj) {
+		System.out.println(obj);
+		for (int i = 0 ;i<obj.size();i++) {
+				if(i!=0) {
+					Attence att = new Attence();
+					Integer sid = Integer.parseInt(obj.get(i).getSid());
+					Integer state;
+					if(obj.get(i).getState().equals("无异常")) {
+						state = 0;
+					}else {
+						state = 1;
+					}
+					att.setStudentid(sid);
+					att.setAttence(state);
+					att.setTime(new Date());
+					cdcAttenceService.insertAtt(att);
+					
+				}
+
+		}
+		
+	}
+	
 }

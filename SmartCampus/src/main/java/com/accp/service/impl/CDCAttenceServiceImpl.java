@@ -56,5 +56,17 @@ public class CDCAttenceServiceImpl implements CDCAttenceService{
 		// TODO Auto-generated method stub
 		return attmapper.queryLeaveByTeaId(teacher);
 	}
+
+	@Override
+	public int updateLeave(Leave l) {
+		// TODO Auto-generated method stub
+		return attmapper.updateLeave(l);
+	}
+
+	@Override
+	public int insertAtt(Attence att) {
+		// TODO Auto-generated method stub
+		return attmapper.insertAtt(att);
+	}
 	
 }

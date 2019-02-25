@@ -52,7 +52,20 @@
 <select id="queryLeaveByTeaId" resultType="com.accp.domain.Leave">
 		SELECT * FROM `leave` WHERE teacher = #{teacher} and state = 0
 </select>
+<!--请假审核  -->
+<update id="updateLeave">
+UPDATE 
+  `smartcampus`.`leave` 
+SET
+  `state` =#{state}
 
+WHERE `leaveId` =#{leaveid} ;
+
+</update>
+
+<insert id="insertAtt">
+	INSERT INTO `attence`(`studentid`,`time`,`attence`) VALUE (#{studentid},#{time},#{attence})
+</insert>
 </mapper>
 
 

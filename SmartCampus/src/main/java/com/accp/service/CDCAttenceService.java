@@ -19,5 +19,9 @@ public interface CDCAttenceService {
 	public Clazz queryClazzbysid(int sid);
 	
 	public List<Leave> queryLeaveByTeaId(Integer teacher);
+	
+	public int updateLeave(Leave l);
+	
+	public int insertAtt(Attence att);
 
 }
