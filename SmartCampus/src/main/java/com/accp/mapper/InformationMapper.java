@@ -3,7 +3,6 @@ package com.accp.mapper;
 import com.accp.domain.Information;
 import com.accp.domain.InformationExample;
 import java.util.List;
-
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

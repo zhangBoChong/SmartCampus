@@ -11,6 +11,7 @@
     <result column="headImg" jdbcType="VARCHAR" property="headimg" />
     <result column="status" jdbcType="INTEGER" property="status" />
     <result column="choice" jdbcType="INTEGER" property="choice" />   
+    <result column="status" jdbcType="INTEGER" property="status" />
   </resultMap>
   <!-- 修改员工：职位、状态 -->
   <update id="updatestaff">
@@ -283,6 +284,4 @@
   <select id="selectstaffclazz" resultMap="staffclazz">
   	SELECT * FROM staff  WHERE tid=#{tid}
   </select>
-  
-  
 </mapper>

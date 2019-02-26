@@ -1,5 +1,6 @@
 html{*overflow:auto;}
 #main{margin:15px 10px 0 15px;}
+<<<<<<< HEAD
 
 /*閹兼粎鍌ㄩ崠鍝勭厵*/
 .search-box{margin-bottom:15px;}
@@ -12,6 +13,20 @@ html{*overflow:auto;}
 .define-input input[type=text]{width:80px;}
 
 /*鐞涖劍鐗搁幙宥勭稊閸栧搫鐓�*/
+=======
+
+/*搜索区域*/
+.search-box{margin-bottom:15px;}
+.search-box .search-area,.search-box .search-button{ float:left;}
+.search-box .iselect-wrapper{width:100px;}
+.search-box .iselect-wrapper .iselect{width:127px;}
+
+/*自定义区域样式*/
+.define-input{display:none;float:left;}
+.define-input input[type=text]{width:80px;}
+
+/*表格操作区域*/
+>>>>>>> refs/heads/chenDongCai
 .table{}
 .table .opt{margin-bottom:10px;height:40px;border:1px solid #cfcfcf; background:url(../../img/skin_/toolbarbg.png);padding-left:10px;}
 .table .opt .optarea a{float:left;margin:12px 20px 0 0;color:#000;}

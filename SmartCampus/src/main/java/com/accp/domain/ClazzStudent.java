@@ -14,12 +14,22 @@ public class ClazzStudent {
     private String clazzPositionName;
     private Studentinfo stu;
     
- private Clazz cobj;
+    private Clazz cobj;
     
     private Studentinfo stuobj;
     
     private AttenceCount acountobj;
+    
+    private Clazz clazz;
    
+
+	public Clazz getClazz() {
+		return clazz;
+	}
+
+	public void setClazz(Clazz clazz) {
+		this.clazz = clazz;
+	}
 
 	public AttenceCount getAcountobj() {
 		return acountobj;

@@ -3,7 +3,6 @@ package com.accp.mapper;
 import com.accp.domain.ImgChildren;
 import com.accp.domain.ImgChildrenExample;
 import java.util.List;
-
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

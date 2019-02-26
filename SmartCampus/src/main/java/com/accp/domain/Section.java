@@ -50,6 +50,4 @@ public class Section {
 	public void setCourseTime(Integer courseTime) {
 		this.courseTime = courseTime;
 	}
-
-    
 }

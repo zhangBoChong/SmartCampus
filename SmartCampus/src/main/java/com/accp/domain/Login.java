@@ -239,6 +239,4 @@ public class Login {
 	public void setPeopleId(Integer peopleId) {
 		this.peopleId = peopleId;
 	}
-    
-    
 }

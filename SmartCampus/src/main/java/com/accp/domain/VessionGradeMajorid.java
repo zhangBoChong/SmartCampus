@@ -7,7 +7,6 @@ public class VessionGradeMajorid {
 
     private Integer majorid;
     
-    
     private Major major;
     
     public Major getMajor() {

@@ -24,12 +24,22 @@ public class Studentinfo {
     private Integer status;
 
     private String headimg;
+    
+    private ClazzStudent clazzStudent;
 
     private Integer age;
     private Integer choice;
     
 
-    public Integer getChoice() {
+    public ClazzStudent getClazzStudent() {
+		return clazzStudent;
+	}
+
+	public void setClazzStudent(ClazzStudent clazzStudent) {
+		this.clazzStudent = clazzStudent;
+	}
+
+	public Integer getChoice() {
 		return choice;
 	}
 
@@ -185,5 +195,4 @@ public class Studentinfo {
 	public void setAge(Integer age) {
 		this.age = age;
 	}
-
 }

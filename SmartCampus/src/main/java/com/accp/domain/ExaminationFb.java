@@ -41,6 +41,4 @@ public class ExaminationFb {
 	public void setCsId(Integer csId) {
 		this.csId = csId;
 	}
-
-    
 }

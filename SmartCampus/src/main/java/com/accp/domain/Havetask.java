@@ -4,7 +4,6 @@ public class Havetask {
     private Integer taskId;
 
     private Integer topicId;
-
     private Integer sid;
 
     private String havetaskXuandaan;

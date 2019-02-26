@@ -1,6 +1,4 @@
 package com.accp.domain;
-
-
 import java.util.List;
 
 public class ExaminationTm {
@@ -82,7 +80,4 @@ public class ExaminationTm {
 	public void setExamination_tm_wdt(Double examination_tm_wdt) {
 		this.examination_tm_wdt = examination_tm_wdt;
 	}
-
-    
-    
 }

@@ -223,7 +223,6 @@ public class HavetaskExample {
             addCriterion("topic_id not between", value1, value2, "topicId");
             return (Criteria) this;
         }
-
         public Criteria andSidIsNull() {
             addCriterion("sId is null");
             return (Criteria) this;

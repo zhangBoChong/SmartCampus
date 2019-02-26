@@ -190,7 +190,4 @@
       creatTime = #{creattime,jdbcType=DATE}
     where vid = #{vid,jdbcType=INTEGER}
   </update>
-  
- 
-  
 </mapper>

@@ -40,6 +40,4 @@ public class Option {
 	public void setOption_pd(Integer option_pd) {
 		this.option_pd = option_pd;
 	}
-
-    
 }

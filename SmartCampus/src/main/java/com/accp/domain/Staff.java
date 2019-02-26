@@ -1,5 +1,4 @@
 package com.accp.domain;
-
 import java.util.List;
 
 public class Staff {

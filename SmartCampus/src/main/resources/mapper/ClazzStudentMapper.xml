@@ -7,6 +7,7 @@
     <result column="sid" jdbcType="INTEGER" property="sid" />
     <result column="status" jdbcType="INTEGER" property="status" />
     <result column="clazzPositionId" jdbcType="INTEGER" property="clazzpositionid" />
+    <association property="clazz" column="cid" javaType="com.accp.domain.Clazz" select="com.accp.mapper.ClazzMapper.queryClazzByCid"></association>
   </resultMap>
   
   <resultMap type="com.accp.domain.ClazzStudent" id="clazzstudent" extends="BaseResultMap">
@@ -248,5 +249,8 @@
       clazzPositionId = #{clazzpositionid,jdbcType=INTEGER}
     where czId = #{czid,jdbcType=INTEGER}
   </update>
-
+  
+    <select id="queryClazzStudentBySid" resultMap="BaseResultMap">
+  		SELECT * FROM `clazz_student` WHERE STATUS = 1 AND sid = #{sid}
+  </select>
 </mapper>

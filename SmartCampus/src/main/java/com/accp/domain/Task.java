@@ -102,6 +102,4 @@ public class Task {
 	public void setTask_jstime(Date task_jstime) {
 		this.task_jstime = task_jstime;
 	}
-
-    
 }

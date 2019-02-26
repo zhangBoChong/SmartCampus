@@ -64,7 +64,4 @@ public class PageBean<E> {
 	public void setPagecount(int pagecount) {
 		this.pagecount = pagecount;
 	}
-	
-	
-	
 }

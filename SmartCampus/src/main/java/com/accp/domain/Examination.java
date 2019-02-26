@@ -139,7 +139,4 @@ public class Examination {
 	public void setExamination_mc(String examination_mc) {
 		this.examination_mc = examination_mc;
 	}
-    
-    
-    
 }

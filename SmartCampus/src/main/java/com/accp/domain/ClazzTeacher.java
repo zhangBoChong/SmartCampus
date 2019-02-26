@@ -5,6 +5,8 @@ public class ClazzTeacher {
 
     private Integer ctid;
 
+	private Integer tid;
+
     private Integer cid;
 
     private Integer status;
@@ -61,4 +63,13 @@ public class ClazzTeacher {
     public void setCourseschedule(Integer courseschedule) {
         this.courseschedule = courseschedule;
     }
+
+	public Integer getTid() {
+		return tid;
+	}
+
+	public void setTid(Integer tid) {
+		this.tid = tid;
+	}
+    
 }

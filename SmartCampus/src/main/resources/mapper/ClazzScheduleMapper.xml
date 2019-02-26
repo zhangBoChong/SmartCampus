@@ -243,5 +243,4 @@
       classroomId = #{classroomid,jdbcType=INTEGER}
     where csId = #{csid,jdbcType=INTEGER}
   </update>
-
 </mapper>

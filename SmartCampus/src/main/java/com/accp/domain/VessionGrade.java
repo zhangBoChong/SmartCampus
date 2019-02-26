@@ -7,7 +7,6 @@ public class VessionGrade {
 
     private Integer gid;
     
-
     private Vession vession;
     
     private Grade grade;

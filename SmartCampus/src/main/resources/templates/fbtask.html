@@ -1,0 +1,444 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=emulateIE7" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="css/style.css" />
+<link rel="stylesheet" type="text/css" href="css/WdatePicker.css" />
+<link rel="stylesheet" type="text/css" href="css/skin_/form.css" />
+<!--<link rel="stylesheet" type="text/css" href="css/bootstrap.css" />-->
+<link href="umeditor/themes/default/_css/umeditor.css" type="text/css" rel="stylesheet">
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/jquery.select.js"></script>
+<script type="text/javascript" src="js/WdatePicker.js"></script>
+
+<script type="text/javascript">
+window.UMEDITOR_HOME_URL = 'umeditor/';  // 请换成绝对路径
+</script>
+<script type="text/javascript" src="js/umeditor.config.js"></script>
+<script type="text/javascript" src="js/editor_api.js"></script>
+<script type="text/javascript" src="umeditor/lang/zh-cn/zh-cn.js"></script>
+<title>基础信息</title>
+</head>
+
+<body>
+<div id="container">
+	<div id="hd">
+    </div>
+    <div id="bd">
+    	<div id="main">
+            <h2 class="subfild">
+            	<span>基本信息</span>
+            </h2>
+            <div class="subfild-content base-info">
+            	<div class="kv-item ue-clear">
+                	<label><span class="impInfo">*</span>任务名称</label>
+                	<div class="kv-item-content">
+                    	<input type="text" class="rwname"/>
+                    </div>
+                    <span class="kv-item-tip">标题字数限制在35个字符</span>
+                </div>
+                <div class="kv-item ue-clear time">
+                	<label><span class="impInfo">*</span>发布时间</label>
+                	<div class="kv-item-content">
+                    	<input type="text" class="fbtime" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" />
+                        <i class="time-icon"></i>
+                   </div>
+                </div>
+                
+                <div class="kv-item ue-clear time">
+                	<label><span class="impInfo">*</span>结束时间</label>
+                	<div class="kv-item-content">
+                    	<input type="text" class="jstime" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" />
+                        <i class="time-icon"></i>
+                   </div>
+                </div>
+                
+                <div id="admin" style="display: none;">
+                <div class="kv-item ue-clear">
+                	<label>发布对象</label>
+                	<div class="kv-item-content">
+                    	<select id="object" class="form-control">
+                    		<option>请选择</option>
+                        	<option value="0">学生</option>
+                            <option value="1">员工</option>
+                        </select>
+                   </div>
+                </div>
+                <div id="student" style="display: none;">
+                <div class="kv-item ue-clear">
+                	<label></label>
+                	<div class="kv-item-content">
+                    	<select  class="form-control" id = "grade">
+                        	<option value="1">S1</option>
+                            <option value="2">S2</option>
+                            <option value="3">Y2</option>
+                        </select>
+                   </div>
+                </div>
+                
+                <div class="kv-item ue-clear" id = "clazzadmin">
+                	<label></label>
+                	<div class="kv-item-content">
+                    	<select  class="form-control" id = "clazzadminId">
+                        	<option v-for = "item in list" v-bind:value="item.cid">{{item.cname}}</option>
+                        </select>
+                   </div>
+                </div>
+                
+                <div class="kv-item ue-clear" id = "stunameadmin">
+                	<label></label>
+                	<div class="kv-item-content">
+                    	<select id="jsname" class="form-control">
+                        	<option v-for = "item in list" v-bind:value="item.sid">{{item.sname}}</option>
+                        </select>
+                   </div>
+                </div>
+                
+            </div>    
+               <div id="yuangong" style="display: none;">
+               	<div class="kv-item ue-clear" id = "staff">
+                	<label></label>
+                	<div class="kv-item-content">
+                    	<select id="ygjsname" class="form-control">
+                        	<option v-for = "item in list" v-bind:value="item.tid">{{item.tname}}</option>
+                        </select>
+                   </div>
+                </div>
+               </div> 
+               </div>
+               
+               <div id="teacher" style="display: none;">
+               	 <div class="kv-item ue-clear" id = "clazzTea">
+                	<label>发布对象</label>
+                	<div class="kv-item-content">
+                    	<select class="form-control" id = "clazzTeaId">
+                    		<option>请选择</option>
+                    		<option v-for = "item in list" v-bind:value="item.cid">{{item.cname}}</option>
+                        	
+                        </select>
+                   </div>
+                </div>
+                <div class="kv-item ue-clear" id = "studentTea">
+                	<label></label>
+                	<div class="kv-item-content">
+                    	<select class="form-control" id="stuid">
+                    		<option v-for = "item in list" v-bind:value="item.sid">{{item.sname}}</option>
+                        </select>
+                   </div>
+                </div>
+               </div>
+                <div class="jieduan">
+                <div class="jie cjie">
+                <form enctype="multipart/form-data">
+                <div class="kv-item ue-clear time">
+                	<label><span class="impInfo"></span>阶段开始时间</label>
+                	<div class="kv-item-content">
+                    	<input class="start" type="date"/>
+                </div>
+                </div>
+                <div class="kv-item ue-clear time">
+                	<label><span class="impInfo"></span>阶段结束时间</label>
+                	<div class="kv-item-content">
+                    	<input class="end" type="date"/>
+                   </div>
+                </div>
+                <div class="kv-item ue-clear">
+                	<label><span class="impInfo">*</span>缩略图</label>
+        			<div>
+            			<p>
+                   图片上传前预览： <input type="file" name="file" class="xdaTanFileImg" onchange="xmTanUploadImg(this)" accept="image/*"/>
+		                <input type="button" class="hide" value="隐藏图片" onclick=""/>
+		                <input type="button" class="show" value="显示图片" onclick=""/>
+		            	<img class="xmTanImg"/>
+            			</p>
+        			</div>
+        			<hr />   
+                </div>
+                </form>
+                	
+                </div>
+
+            </div>
+               	<div class="kv-item ue-clear time">
+                	<label><span class="impInfo">*</span>阶段添加</label>
+                	<div class="kv-item-content">
+                    	<input type="button" id="tjjd" value="添加小阶段"/>
+                       	
+                   </div>
+                </div>
+                
+            </div>
+            
+            <div class="subfild-content remarkes-info">
+            	<div class="kv-item ue-clear">
+                	<label><span class="impInfo">*</span>任务内容</label>
+                	<div class="kv-item-content">
+                    	<textarea placeholder="任务内容" id="content" style="width:800px;height:240px;"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="buttons">
+                <input id="fabu" class="button" type="button" value="确认发布" />
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="js/vue.js"></script>
+<script src="js/jquery-1.12.4.js"></script>
+<script type="text/javascript">
+
+    $("#tjjd").click(function(){
+    		var op=$(".jie").clone(true);
+    		op.removeClass("jie");
+			$(".jieduan").append(op);
+    });
+    
+</script>
+<!--缩略图-->
+<script type="text/javascript">            
+            //判断浏览器是否支持FileReader接口
+            if (typeof FileReader == 'undefined') {
+                document.getElementById("xmTanDiv").InnerHTML = "<h1>当前浏览器不支持FileReader接口</h1>";
+                //使选择控件不可操作
+                document.getElementById("xdaTanFileImg").setAttribute("disabled", "disabled");
+            }
+
+            //选择图片，马上预览
+            function xmTanUploadImg(obj) {
+                var file = obj.files[0];                
+                console.log(obj);
+                console.log(file);
+                console.log("file.size = " + file.size);  //file.size 单位为byte
+                var reader = new FileReader();
+
+                //读取文件过程方法
+                reader.onloadstart = function (e) {
+                    console.log("开始读取....");
+                }
+                reader.onprogress = function (e) {
+                    console.log("正在读取中....");
+                }
+                reader.onabort = function (e) {
+                    console.log("中断读取....");
+                }
+                reader.onerror = function (e) {
+                    console.log("读取异常....");
+                }
+                reader.onload = function (e) {
+                    console.log("成功读取....");
+                    var img=$(obj).nextAll("img")[0];
+                    img.src = e.target.result;
+                    //或者 img.src = this.result;  //e.target == this
+                }
+                reader.readAsDataURL(file);
+            }
+
+            $("#object").change(function(){
+            	var id=$(this).val();
+            	alert(id);
+            	if(id==0){
+            		$("#student").show();
+            		$("#yuangong").hide();
+            	}else if(id==1){
+            		$("#student").hide();
+            		$("#yuangong").show();
+            	}
+            })
+            
+            //登录的类型 1为教员  0为管理员
+            var userType = 1;
+            $(function() {
+            	if (userType==0) {
+            		$("#admin").show();
+            		$("#teacher").hide();
+            	}else{
+            		$("#admin").hide();
+            		$("#teacher").show();
+            	}
+            });
+            
+            $("div").on("click",".hide",function(){
+            	$(this).nextAll("img").hide();
+            });
+
+            $("div").on("click",".show",function(){
+            	$(this).nextAll("img").show();
+            });
+            4
+            $(":file").change(function(){
+            	var data=$(this).parents("form")[0];
+            	var formdata=new FormData(data);
+            	var xhr=new XMLHttpRequest();
+            	xhr.open("post","fileup/io",true);
+            	xhr.send(formdata);
+            });
+            
+            var v = new Vue({
+            	
+            	el:"#clazzadmin",
+            	data:{
+            		list:[]
+            	}
+            	
+            });            
+            
+            $("#grade").change(function(){ 	
+            	var gradeId = $("#grade").val();
+            	$.ajax({
+            		url:"queryClazzByCname",
+            		type:"post",
+            		data:{
+            			gid:gradeId,   			
+            		},
+            		success:function(data){
+            			v.list=data;
+            		}
+            	});
+           	 });
+            
+            
+            var v1 = new Vue({ 	
+            	el:"#stunameadmin",
+            	data:{
+            		list:[]
+            	}
+            	
+            })
+            
+            $("#clazzadminId").change(function(){ 	
+            	var clazzId = $("#clazzadminId").val();
+            	$.ajax({
+            		url:"queryStudentBySid",
+            		type:"post",
+            		data:{
+            			cid:clazzId,   			
+            		},
+            		success:function(data){
+            			v1.list=data;
+            		}
+            	});
+           	 });
+            
+            var v2 = new Vue({ 	
+            	el:"#staff",
+            	data:{
+            		list:[]
+            	}	
+            })
+            $("#object").change(function(){ 	
+            	var objectId = $("#object").val();
+            	if(objectId==1){
+            		$.ajax({
+                		url:"queryStaffNoAdmin",
+                		type:"post",
+                		success:function(data){
+                			v2.list=data;
+                		}
+                	});
+            	}
+           	 });
+            
+            var v3 = new Vue({ 	
+            	el:"#clazzTea",
+            	data:{
+            		list:[]
+            	}	
+            })
+            $(function(){
+            	$.ajax({
+            		url:"queryClazzbytid",
+            		type:"post",
+            		success:function(data){
+            			v3.list=data;
+            		}
+            	});
+            });
+            /* clazzTeaId */
+            var v4 = new Vue({ 	
+            	el:"#studentTea",
+            	data:{
+            		list:[]
+            	}
+            	
+            })
+            
+            
+            $("#clazzTeaId").change(function(){ 	
+            	var clazzId = $("#clazzTeaId").val();
+            	$.ajax({
+            		url:"queryStudentBySid",
+            		type:"post",
+            		data:{
+            			cid:clazzId,   			
+            		},
+            		success:function(data){
+            			v4.list=data;
+            		}
+            	});
+           	 });
+            $("#each").click(function(){
+            	
+            });
+            
+            $("#fabu").click(function(){
+				var taskname = $(".rwname").val();
+				var fbtime= $(".fbtime").val();
+				var jstime = $(".jstime").val();
+				var state = 0;
+				var userId = 0;
+				var textcontent = $("#content").val();
+				if(userType==0){
+				state = $("#object").val();
+				
+				if (state==0) {
+//				获取到接收任务的人0为学生1为教员
+						userId = $("#jsname").val();
+					}else{
+						userId = $("#ygjsname").val();		
+					}
+					
+				}else if(userType==1){
+				state=0;
+				userId = $("#stuid").val();
+				}
+				var lists=[];
+            	$(".cjie").each(function(){
+            		var obj={
+            				stagestarttime:$(this).find(".start").val(),
+            				stageendtime:$(this).find(".end").val(),
+            				stageaccessories:$(this).find(":file").val()
+            				
+            		};
+            		lists.push(obj);
+            	});
+            	
+				alert(JSON.stringify(lists)+"任务名"+taskname+"发布时间"+fbtime+"结束时间"+jstime+"接收任务人类型"+state+"userId"+userId+"文本内容"+textcontent);
+				var middle = {
+						publisherId:1,
+						ryId:userId,
+						state:state
+				};
+				var task={
+					taskName:taskname,
+					taskContent:textcontent,
+					startTime:fbtime,
+					endTime:jstime,
+					lists:lists,
+					middle:middle
+					
+				};
+				$.ajax({
+            		url:"xz",
+            		type:"post",
+            		data:JSON.stringify(task),
+            		contentType:"application/json;charset=utf-8",
+            		success:function(data){
+            			
+            		}
+            	});
+    			});
+            
+        </script>
+</html>

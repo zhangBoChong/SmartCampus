@@ -20,7 +20,4 @@ public class ExaminationLx {
 	public void setExamination_lx_type(String examination_lx_type) {
 		this.examination_lx_type = examination_lx_type;
 	}
-
-    
-    
 }

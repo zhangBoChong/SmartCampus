@@ -289,5 +289,8 @@
       majorId = #{majorid,jdbcType=INTEGER}
     where cid = #{cid,jdbcType=INTEGER}
   </update>
+    <select id="queryClazzByCid" resultMap="BaseResultMap">
+  	SELECT * FROM `clazz` WHERE cid = #{cid}
+  </select>
 
 </mapper>

@@ -228,6 +228,4 @@
       examination_tm_wdt = #{examinationTmWdt,jdbcType=DOUBLE}
     where examination_tm_id = #{examinationTmId,jdbcType=INTEGER}
   </update>
-  
-  
 </mapper>

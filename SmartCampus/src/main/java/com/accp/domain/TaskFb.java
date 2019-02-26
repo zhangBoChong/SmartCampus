@@ -30,7 +30,4 @@ public class TaskFb {
 	public void setCsId(Integer csId) {
 		this.csId = csId;
 	}
-
-    
-    
 }

@@ -13,8 +13,6 @@
 
 		VALUE  		        (#{option_xx},#{topic_id},#{option_pd})
   </insert>
-  
-  
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">

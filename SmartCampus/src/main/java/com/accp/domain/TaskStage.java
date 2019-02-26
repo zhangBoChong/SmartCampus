@@ -1,5 +1,5 @@
 package com.accp.domain;
-
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class TaskStage {
@@ -14,8 +14,28 @@ public class TaskStage {
     private Integer taskid;
 
     private Integer delete;
+    
+    private String starTtime;
+    
+    private String endTime;
 
-    private String k1;
+    public String getStarTtime() {
+		return starTtime;
+	}
+
+	public void setStarTtime(String starTtime) {
+		this.starTtime = starTtime;
+	}
+
+	public String getEndTime() {
+		return endTime;
+	}
+
+	public void setEndTime(String endTime) {
+		this.endTime = endTime;
+	}
+
+	private String k1;
 
     private String k2;
 
@@ -33,6 +53,8 @@ public class TaskStage {
 
     public void setStagestarttime(Date stagestarttime) {
         this.stagestarttime = stagestarttime;
+        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy年MM月dd日");
+        this.starTtime=simpleDateFormat.format(stagestarttime);
     }
 
     public Date getStageendtime() {
@@ -41,6 +63,8 @@ public class TaskStage {
 
     public void setStageendtime(Date stageendtime) {
         this.stageendtime = stageendtime;
+        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy年MM月dd日");
+        this.endTime=simpleDateFormat.format(stageendtime);
     }
 
     public String getStageaccessories() {

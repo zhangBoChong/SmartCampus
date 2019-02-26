@@ -32,5 +32,4 @@ public class Img {
 	public void setImgList2(List<ImgChildren> imgList2) {
 		this.imgList2 = imgList2;
 	}
-   
 }

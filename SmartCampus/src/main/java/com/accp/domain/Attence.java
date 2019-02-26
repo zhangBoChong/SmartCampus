@@ -1,27 +1,44 @@
 package com.accp.domain;
 
 import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 public class Attence {
     private Integer attenceid;
 
     private Integer studentid;
-
-    private String studentname;
-
-    private Integer studentgreadid;
-
-    private Integer studentclassid;
-
-    private Integer studentteacher;
-
+    
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date time;
+    
+    private String timeStr;
+     
+	public String getTimeStr() {
+		return timeStr;
+	}
 
-    private Integer attence;
+	public void setTimeStr(String timeStr) {
+		this.timeStr = timeStr;
+	}
+
+	private Integer attence;
 
     private String k1;
 
-    private String k2;
+    public Studentinfo getStu() {
+		return stu;
+	}
+
+	public void setStu(Studentinfo stu) {
+		this.stu = stu;
+	}
+
+	private String k2;
+    
+    private Studentinfo stu;
 
     public Integer getAttenceid() {
         return attenceid;
@@ -39,44 +56,14 @@ public class Attence {
         this.studentid = studentid;
     }
 
-    public String getStudentname() {
-        return studentname;
-    }
-
-    public void setStudentname(String studentname) {
-        this.studentname = studentname;
-    }
-
-    public Integer getStudentgreadid() {
-        return studentgreadid;
-    }
-
-    public void setStudentgreadid(Integer studentgreadid) {
-        this.studentgreadid = studentgreadid;
-    }
-
-    public Integer getStudentclassid() {
-        return studentclassid;
-    }
-
-    public void setStudentclassid(Integer studentclassid) {
-        this.studentclassid = studentclassid;
-    }
-
-    public Integer getStudentteacher() {
-        return studentteacher;
-    }
-
-    public void setStudentteacher(Integer studentteacher) {
-        this.studentteacher = studentteacher;
-    }
-
     public Date getTime() {
         return time;
     }
 
     public void setTime(Date time) {
         this.time = time;
+        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy年MM月dd日");
+        this.timeStr=simpleDateFormat.format(time);
     }
 
     public Integer getAttence() {

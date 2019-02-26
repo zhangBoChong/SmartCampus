@@ -118,23 +118,24 @@ public class Clazz {
     }
 
     public void setStarttime(String starttime) {
-
-        this.starttime = starttime;
+    	 this.starttime = starttime;
     }
 
-    public Integer getStatus() {
-        return status;
-    }
+	public Integer getStatus() {
+		return status;
+	}
 
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
 
-    public Integer getMajorid() {
-        return majorid;
-    }
+	public Integer getMajorid() {
+		return majorid;
+	}
 
-    public void setMajorid(Integer majorid) {
-        this.majorid = majorid;
-    }
+	public void setMajorid(Integer majorid) {
+		this.majorid = majorid;
+	}
+    
+    
 }

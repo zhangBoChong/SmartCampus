@@ -150,6 +150,5 @@ public class ClazzSchedule {
 
     public void setClassroomid(Integer classroomid) {
         this.classroomid = classroomid;
-
     }
 }

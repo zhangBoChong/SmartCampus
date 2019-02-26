@@ -7,6 +7,8 @@
     <result column="cid" jdbcType="INTEGER" property="cid" />
     <result column="status" jdbcType="INTEGER" property="status" />
     <result column="courseSchedule" jdbcType="INTEGER" property="courseschedule" />
+    <result column="tid" jdbcType="INTEGER" property="tid" />
+    <result column="status" jdbcType="INTEGER" property="status" />
   </resultMap>
 
   <select id="queryClazzTeacherByctid" resultMap="BaseResultMap">	

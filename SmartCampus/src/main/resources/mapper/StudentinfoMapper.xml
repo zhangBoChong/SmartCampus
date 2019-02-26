@@ -15,6 +15,7 @@
     <result column="headImg" jdbcType="VARCHAR" property="headimg" />
     <result column="age" jdbcType="INTEGER" property="age" />
     <result column="choice" jdbcType="INTEGER" property="choice" />   
+    <association property="clazzStudent" column="sid" javaType="com.accp.domain.ClazzStudent" select="com.accp.mapper.ClazzStudentMapper.queryClazzStudentBySid"></association>
   </resultMap>
   
   <resultMap type="com.accp.domain.Studentinfo" id="StudentinfoParents" extends="BaseResultMap">
@@ -392,5 +393,4 @@
       age = #{age,jdbcType=INTEGER}
     where sid = #{sid,jdbcType=INTEGER}
   </update>
-
 </mapper>

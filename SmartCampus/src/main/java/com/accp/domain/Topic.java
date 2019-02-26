@@ -121,7 +121,4 @@ public class Topic {
 	public void setTopic_deete(Integer topic_deete) {
 		this.topic_deete = topic_deete;
 	}
-    
-    
-   
 }
