@@ -9,13 +9,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.accp.domain.VessionGradeMajoridCourse;
-import com.accp.service.ZBCCourseService;
-
 
 @Controller
 public class ZBCController {
-	@Autowired
-	ZBCCourseService zbcService;
 	@RequestMapping("/Tomain")
 	public String Tomain() {
 		return "main";
@@ -23,19 +19,6 @@ public class ZBCController {
 	@RequestMapping("/Tonav")
 	public String Tonav() {
 		return "nav";
-	}
-	//跳入课程查看页面
-	@RequestMapping("/TocourseIndex")
-	public String TocourseIndex(Model model) {
-		List<VessionGradeMajoridCourse> list=zbcService.queryAll();
-		model.addAttribute("Allcourses", list);
-		return "courseIndex";
-	}
-
-	
-	@RequestMapping("/TocourseArrange")
-	public String TocourseArrange() {
-		return "courseArrange";
 	}
 }
 

@@ -15,6 +15,7 @@
 	<result property="status" column="status" />
 	<result property="headimg" column="headimg" />
 	<result property="choice" column="choice" />
+	<result property="status2" column="status2" />
 	<association property="character" column="characterid" select="characterName"></association>
   </resultMap>
   
@@ -75,5 +76,9 @@
   
   <update id="updateStudent5">
   	UPDATE `studentinfo` SET `status`=0 WHERE `choice`=1
+  </update>
+  
+  <update id="updateStudent6">
+  	UPDATE `studentinfo` SET `status2` = 1 WHERE `sid`=#{sid}
   </update>
 </mapper>

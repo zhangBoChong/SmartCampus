@@ -16,6 +16,14 @@
 	<association property="character" column="characterid" select="characterName"></association>
   </resultMap>
   
+  <select id="queryStaff3" resultType="com.accp.domain.Staff">
+  	SELECT * FROM `staff` WHERE `postId`=2 ORDER BY RAND( ) LIMIT 1
+  </select>
+  
+  <select id="queryStaff2" resultType="com.accp.domain.Staff">
+  	SELECT * FROM `staff` WHERE `postId`=3 ORDER BY RAND( ) LIMIT 1
+  </select>
+  
   <select id="queryAllStaff" resultMap="queryAllStaff" >
 	SELECT * FROM `staff` WHERE `postId`=#{postId}
   </select>

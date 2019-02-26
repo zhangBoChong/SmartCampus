@@ -20,4 +20,8 @@ public interface StaffMapper {
     Character characterName(int characterId);
 	
 	List<Staff> queryStaff(@Param("postId")Integer postId,@Param("tid")Integer tid,@Param("tname")String tname,@Param("age1")Integer age1,@Param("age2")Integer age2,@Param("sex")Integer sex,@Param("characterId")Integer characterId);
+	
+	Staff queryStaff2();
+
+	Staff queryStaff3();
 }

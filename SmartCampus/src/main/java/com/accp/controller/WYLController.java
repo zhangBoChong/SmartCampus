@@ -30,10 +30,8 @@ public class WYLController {
 	//自动开班
 	@RequestMapping("/automaticClass")
 	@ResponseBody
-	public List<Clazz> automaticClass(Clazz clazz){
+	public List<Clazz> automaticClass(CourseTeacher courseTeacher,Clazz clazz){
 		System.out.println("预生成班级");
-		//报名学生信息
-		List<Studentinfo> list = wylService.queryAllStudent();
 		//报名人数
 		int sl = wylService.studentQuantity();
 		int cnr = wylService.studentQuantity2();
@@ -42,9 +40,12 @@ public class WYLController {
 		System.out.println(zu);
 		int rs = sl/zu;
 		System.out.println(rs);
-		
-		int count = 0;
 		for (int i = 0; i < zu; i++) {
+			int count = 0;
+			int a = 0;
+			int b = 0;
+			//报名学生信息
+			List<Studentinfo> list = wylService.queryAllStudent();
 			//获取三天后的时间
 			Calendar calendar=Calendar.getInstance();
 			calendar.setTime(new Date());
@@ -59,14 +60,68 @@ public class WYLController {
 	        clazz.setCname(mc2);
 	        clazz.setStarttime(date);
 	        wylService.insert2(clazz);
-			int clazzid=clazz.getCid();
+	        int clazzid=clazz.getCid();
 			System.out.println("班级id："+clazzid);
-			for (int j = 0; j < rs; j++) {
-				
-				count++;
+			if(i==zu-1) {
+				for (int k = 0; k < sl; k++) {
+					if(list.get(count).getStatus2()==0) {
+						wylService.updateStudent6(list.get(count).getSid());
+						wylService.clazzStudentinsert(clazzid, list.get(count).getSid());
+					}
+					count++;
+				}
+			}else {
+				for (int j = 0; j < rs;) {
+					if(list.get(count).getStatus2()==0) {
+						if(list.get(count).getAge()>17) {
+							if(a < cnr/zu) {
+								wylService.updateStudent6(list.get(count).getSid());
+								wylService.clazzStudentinsert(clazzid, list.get(count).getSid());
+								a++;
+								j++;
+								count++;
+								continue;
+							}
+						}else {
+							if(b < wcnr/zu) {
+								wylService.updateStudent6(list.get(count).getSid());
+								wylService.clazzStudentinsert(clazzid, list.get(count).getSid());
+								b++;
+								j++;
+								count++;
+								continue;
+							}
+						}
+						if(a==cnr/zu && b==wcnr/zu) {
+							wylService.updateStudent6(list.get(count).getSid());
+							wylService.clazzStudentinsert(clazzid, list.get(count).getSid());
+							j++;
+						}
+					}
+					count++;
+				}
 			}
+			Staff staff = wylService.queryStaff2();
+			courseTeacher.setTid(staff.getTid());
+			courseTeacher.setCourseid(1);
+			wylService.courseTeacherinsert(courseTeacher);
+			System.out.println(courseTeacher.getCtid());
+			int ctid=courseTeacher.getCtid();
+			
+			wylService.clazzTeacherinsert(ctid, clazzid);
+			
+			staff = wylService.queryStaff2();
+			courseTeacher.setTid(staff.getTid());
+			courseTeacher.setCourseid(12);
+			wylService.courseTeacherinsert(courseTeacher);
+			System.out.println(courseTeacher.getCtid());
+			ctid=courseTeacher.getCtid();
+			
+			wylService.clazzTeacherinsert(ctid, clazzid);
+			
+			staff = wylService.queryStaff3();
+			wylService.updateClazz(staff.getTid(), clazzid);
 		}
-		System.out.println(count);
 		return null;
 	}
 	

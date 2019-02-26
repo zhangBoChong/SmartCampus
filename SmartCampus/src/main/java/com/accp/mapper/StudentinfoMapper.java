@@ -28,4 +28,6 @@ public interface StudentinfoMapper {
     int studentQuantity();
     
     int studentQuantity2();
+
+    int updateStudent6(int sid);
 }

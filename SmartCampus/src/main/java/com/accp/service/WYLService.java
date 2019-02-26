@@ -49,4 +49,12 @@ public interface WYLService {
     int studentQuantity();
     
     int studentQuantity2();
+
+    int updateStudent6(int sid);
+	
+	Staff queryStaff2();
+
+	Staff queryStaff3();
+	
+	int updateClazz(@Param("tid")Integer tid,@Param("cid")Integer cid);
 }

@@ -149,4 +149,28 @@ public class WYLServiceImpl implements WYLService{
 		// TODO Auto-generated method stub
 		return stumapper.studentQuantity2();
 	}
+
+	@Override
+	public int updateStudent6(int sid) {
+		// TODO Auto-generated method stub
+		return stumapper.updateStudent6(sid);
+	}
+
+	@Override
+	public Staff queryStaff2() {
+		// TODO Auto-generated method stub
+		return stfmapper.queryStaff2();
+	}
+
+	@Override
+	public Staff queryStaff3() {
+		// TODO Auto-generated method stub
+		return stfmapper.queryStaff3();
+	}
+
+	@Override
+	public int updateClazz(Integer tid, Integer cid) {
+		// TODO Auto-generated method stub
+		return clzmapper.updateClazz(tid, cid);
+	}
 }

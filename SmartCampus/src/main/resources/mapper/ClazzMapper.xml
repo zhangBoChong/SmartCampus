@@ -6,10 +6,14 @@
   </insert>
   
   <select id="mc" resultType="int">
-  	SELECT COUNT(*) `clazz`
+  	SELECT COUNT(*) FROM `clazz`
   </select>
   
   <insert id="insert2" useGeneratedKeys="true" keyProperty="cid" parameterType="com.accp.domain.Clazz">
 	INSERT INTO `clazz`(`cname`,`bid`,`startTime`,`status2`)VALUE(#{cname},'4',#{starttime},'1')
   </insert>
+  
+  <update id="updateClazz">
+  	UPDATE `clazz` SET`tid`=#{tid} WHERE `cid`=#{cid}
+  </update>
 </mapper>

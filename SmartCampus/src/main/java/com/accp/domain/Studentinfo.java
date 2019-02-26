@@ -28,6 +28,8 @@ public class Studentinfo {
     private Character character;
     
     private String choice;
+    
+    private Integer status2;
 
     public Integer getSid() {
         return sid;
@@ -139,5 +141,13 @@ public class Studentinfo {
 
 	public void setChoice(String choice) {
 		this.choice = choice;
+	}
+
+	public Integer getStatus2() {
+		return status2;
+	}
+
+	public void setStatus2(Integer status2) {
+		this.status2 = status2;
 	}
 }

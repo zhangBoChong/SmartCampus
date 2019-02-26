@@ -15,4 +15,6 @@ public interface ClazzMapper {
 	int mc();
 	
 	int insert2(Clazz clazz);
+	
+	int updateClazz(@Param("tid")Integer tid,@Param("cid")Integer cid);
 }
