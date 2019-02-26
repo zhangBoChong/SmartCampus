@@ -14,14 +14,14 @@ public class ExaminationTm {
     
     private Integer mistakecount; //题目做错总次数
     private Topic topicobj;//题目集合
-    private List<Havetask> mistakestu;//题目做错的学员集合
+    private List<Havetaskexam> mistakestu;//题目做错的学员集合
     
     
-	public List<Havetask> getMistakestu() {
+	public List<Havetaskexam> getMistakestu() {
 		return mistakestu;
 	}
 
-	public void setMistakestu(List<Havetask> mistakestu) {
+	public void setMistakestu(List<Havetaskexam> mistakestu) {
 		this.mistakestu = mistakestu;
 	}
 

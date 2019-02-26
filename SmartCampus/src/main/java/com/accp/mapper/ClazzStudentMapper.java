@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 @Mapper
 public interface ClazzStudentMapper {
+	ClazzStudent clazz_studentBysid(Integer sid);
 	int insertclazzStudentinfos(ClazzStudent stu);
 	int countstu(Integer cid);
 	int updateclazzStudent(ClazzStudent record);
@@ -19,6 +20,8 @@ public interface ClazzStudentMapper {
 	//根据学员id查询班级 一个学员可能有多个班级
 	//ClazzStudent selectclazzBysid(Integer sid);
 	List<ClazzStudent> selectclazzBysid(Integer sid);
+	ClazzStudent selectclazzstudentBysidtan(Integer sid);
+	ClazzStudent selectclazzstudentByczidtan(Integer czid);
 	
     long countByExample(ClazzStudentExample example);
 
@@ -41,7 +44,4 @@ public interface ClazzStudentMapper {
     int updateByPrimaryKeySelective(ClazzStudent record);
 
     int updateByPrimaryKey(ClazzStudent record);
-    
-  //按sid查询班级学员中间表
-    ClazzStudent clazz_studentBysid(@Param("sid") Integer sid);
 }

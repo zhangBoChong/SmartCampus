@@ -79,7 +79,7 @@
 						<tr th:each="cls:${clslist}" th:attr="data-stuid=${cls.stu.sid}"  class="gomine">
 							<td th:text="${cls.stu.snumber}"></td>
 							<td class="stuname" th:text="${cls.stu.sname}"></td>
-							<td class="hide examname" th:each="esn:${cls.examlist}" th:text="${esn.examobj.coursename.coursename}"></td>
+							<!-- <td class="hide examname" th:each="esn:${cls.examlist}" th:text="${esn.examobj.coursename.coursename}"></td> -->
 							<td th:each="es:${cls.examlist}"><span class="ksfshu" th:text="${es.score}"></span></td>
 							<td class="examnub"></td>
 							<td class="meanscore"></td>

@@ -12,11 +12,12 @@ import com.accp.domain.ClazzStudentExamInfo;
 import com.accp.domain.ExaminationFb;
 import com.accp.domain.ExaminationTm;
 import com.accp.domain.Havetask;
+import com.accp.domain.Havetaskexam;
 import com.accp.domain.Studentinfo;
 import com.accp.mapper.ClazzStudentMapper;
 import com.accp.mapper.ExaminationFbMapper;
 import com.accp.mapper.ExaminationTmMapper;
-import com.accp.mapper.HavetaskMapper;
+import com.accp.mapper.HavetaskexamMapper;
 import com.accp.mapper.StudentinfoMapper;
 import com.accp.service.ExaminationInfoService;
 
@@ -26,7 +27,7 @@ public class ExaminationInfoServiceImpl implements ExaminationInfoService{
 	@Autowired
 	ExaminationFbMapper efbmapper; 
 	@Autowired
-	HavetaskMapper hmapper;
+	HavetaskexamMapper hmapper;
 	@Autowired
 	ClazzStudentMapper clsmapper;
 	@Autowired
@@ -41,9 +42,11 @@ public class ExaminationInfoServiceImpl implements ExaminationInfoService{
 	}
 
 	@Override
-	public List<Havetask> examscoreBysid(Integer sid) {
+	public List<Havetaskexam> examscoreBysid(Integer sid) {
 		//考试信息（分数、考试名称）
-		List<Havetask> list=hmapper.examscoreBysid(sid);
+		ClazzStudent csobj=clsmapper.selectclazzstudentBysidtan(sid);
+		System.out.println("考试信息sid:"+csobj.getCzid());
+		List<Havetaskexam> list=hmapper.examscoreBysid(csobj.getCzid());
 		return list;
 	}
 	
@@ -54,7 +57,7 @@ public class ExaminationInfoServiceImpl implements ExaminationInfoService{
 		List<ClazzStudentExamInfo> elist=new ArrayList<ClazzStudentExamInfo>();
 		for (ClazzStudent c : list) {
 			//一个学员的所有考试信息
-			List<Havetask> hlist=hmapper.examscoreBysid(c.getSid());
+			List<Havetaskexam> hlist=hmapper.examscoreBysid(c.getCzid());
 			ClazzStudentExamInfo cse=new ClazzStudentExamInfo();
 			cse.setStu(c.getStuobj());
 			cse.setExamlist(hlist);
@@ -69,12 +72,23 @@ public class ExaminationInfoServiceImpl implements ExaminationInfoService{
 		List<ClazzStudentExamInfo> list=new ArrayList<ClazzStudentExamInfo>();
 		for (Studentinfo s : slist) {
 			//一个学员的考试信息(交班考试 结业考试)
-			List<Havetask> hlist=hmapper.examscoreBysidTow(s.getSid());
+			System.out.println("sid:"+s.getSid());
+			ClazzStudent csobj=clsmapper.selectclazzstudentBysidtan(s.getSid());
+			System.out.println("czid:"+csobj.getCzid());
+			List<Havetaskexam> hlist=hmapper.examscoreBysidTow(csobj.getCzid());
 			ClazzStudentExamInfo cse=new ClazzStudentExamInfo();
 			cse.setStu(s);
 			cse.setExamlist(hlist);
 			list.add(cse);
 		}
+		for (ClazzStudentExamInfo e : list) {
+			System.out.println(e.getStu().getSnumber()+"--"+e.getStu().getSname());
+			for (Havetaskexam h : e.getExamlist()) {
+				//System.out.println(h.getExamobj().getCoursename().getCoursename());
+				System.out.println(h.getScore());
+			}
+		}
+		
 		return list;
 	}
 	
@@ -103,15 +117,11 @@ public class ExaminationInfoServiceImpl implements ExaminationInfoService{
 			System.out.println("错误数:"+etm.getMistakecount());
 			//题目错误的学员
 			//System.out.println("--"+etm.getTopicId());
-			List<Havetask> mistake1=hmapper.chmistakestudents(etm.getTopic_id());
+			List<Havetaskexam> mistake1=hmapper.chmistakestudents(etm.getTopic_id());
 			etm.setMistakestu(mistake1);
 			//System.out.println("--"+etm.getMistakestu());
-			for (Havetask h : etm.getMistakestu()) {
-				/*int id=h.getSid();
-				if() {
-					
-				}*/
-				System.out.println("题目错误的学员--"+h.getStuobj().getSname());
+			for (Havetaskexam h : etm.getMistakestu()) {
+				System.out.println("题目错误的学员--"+h.getCstuobj().getStuobj().getSname());
 			}
 		}
 		return list;

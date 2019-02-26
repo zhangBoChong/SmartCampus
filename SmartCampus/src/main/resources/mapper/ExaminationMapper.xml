@@ -2,20 +2,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.accp.mapper.ExaminationMapper">
   <resultMap id="BaseResultMap" type="com.accp.domain.Examination">
-    <id column="examination_id" jdbcType="INTEGER" property="examinationId" />
+    <id column="examination_id" jdbcType="INTEGER" property="examination_id" />
     <result column="bid" jdbcType="INTEGER" property="bid" />
-    <result column="courseId" jdbcType="INTEGER" property="courseid" />
-    <result column="sectionId" jdbcType="INTEGER" property="sectionid" />
+    <result column="courseId" jdbcType="INTEGER" property="courseId" />
+    <result column="sectionId" jdbcType="INTEGER" property="sectionId" />
     <result column="tid" jdbcType="INTEGER" property="tid" />
-    <result column="Examination_zf" jdbcType="DOUBLE" property="examinationZf" />
-    <result column="examination_lx_id" jdbcType="INTEGER" property="examinationLxId" />
-    <result column="examination_kstime" jdbcType="TIMESTAMP" property="examinationKstime" />
-    <result column="examination_jstime" jdbcType="TIMESTAMP" property="examinationJstime" />
+    <result column="examination_zf" jdbcType="DOUBLE" property="examination_zf" />
+    <result column="examination_lx_id" jdbcType="INTEGER" property="examination_lx_id" />
+    <result column="examination_kstime" jdbcType="TIMESTAMP" property="examination_kstime" />
+    <result column="examination_jstime" jdbcType="TIMESTAMP" property="examination_jstime" />
   </resultMap>
 
   <resultMap type="com.accp.domain.Examination" id="examinationteacher" extends="BaseResultMap">
   	<association property="examlxtype" column="examination_lx_id" javaType="com.accp.domain.ExaminationLx">
-  		<result column="examination_lx_type" jdbcType="VARCHAR" property="examinationLxType" />
+  		<result column="examination_lx_type" jdbcType="VARCHAR" property="examination_lx_type" />
   	</association>
   	<association property="coursename" column="courseId" javaType="com.accp.domain.Course">
   		 <result column="courseName" jdbcType="VARCHAR" property="coursename" />
@@ -295,17 +295,19 @@
   
   <select id="selectexamByexaminationId" resultMap="examinationteacher">
   	SELECT e.*,elx.examination_lx_type,c.courseName,sta.tname FROM examination e
-	INNER JOIN examination_lx elx ON e.examination_lx_id=elx.examination_lx_id
-	INNER JOIN course c ON e.courseId=c.courseId
-	INNER JOIN staff sta ON e.tid=sta.tid
+	left JOIN examination_lx elx ON e.examination_lx_id=elx.examination_lx_id
+	left JOIN course c ON e.courseId=c.courseId
+	left JOIN staff sta ON e.tid=sta.tid
 	WHERE e.examination_id=#{examinationId}
   </select>
   
   <select id="selectexamByexaminationIdTow" resultMap="examinationteacher">
   	SELECT e.*,elx.examination_lx_type,c.courseName,sta.tname FROM examination e
-	INNER JOIN examination_lx elx ON e.examination_lx_id=elx.examination_lx_id
-	INNER JOIN course c ON e.courseId=c.courseId
-	INNER JOIN staff sta ON e.tid=sta.tid
+	left JOIN examination_lx elx ON e.examination_lx_id=elx.examination_lx_id
+	left JOIN course c ON e.courseId=c.courseId
+	left JOIN staff sta ON e.tid=sta.tid
 	WHERE e.examination_lx_id!=1 and e.examination_id=#{examinationId}
   </select>
+  
+  
 </mapper>

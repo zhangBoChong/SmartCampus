@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.accp.mapper.AttenceMapper">
+<select id="queryBywhereForPageCount" resultType="int">
+	SELECT count(*) FROM `attence` 
+	where studentid in ( select sid from studentinfo where sname LIKE  concat('%',#{name},'%'))
+	<!-- 判断开始时间是否为空 -->
+	<if test="begin !=null and end!=null">
+		AND date(`time`) BETWEEN date(#{begin}) AND date(#{end})
+	</if>
+	<if test="begin !=null and end==null">
+		and date(`time`) >= date(#{begin})
+	</if>
+	<if test="begin==null and end!=null">
+		and date(`time`) &lt;= date(#{end})
+	</if>
+</select>
+<select id="queryByWhereForPage" resultMap="attence">	
+	SELECT * FROM `attence` 
+	where studentid in ( select sid from studentinfo where sname LIKE  concat('%',#{name},'%'))
+	<!-- 判断开始时间是否为空 -->
+	<if test="begin !=null and end!=null">
+		AND date(`time`) BETWEEN date(#{begin}) AND date(#{end})
+	</if>
+	<if test="begin !=null and end==null">
+		and date(`time`) >= date(#{begin})
+	</if>
+	<if test="begin==null and end!=null">
+		and date(`time`) &lt;= date(#{end})
+	</if>
+	LIMIT #{start},#{pagesize}		
+</select>
+<resultMap type="com.accp.domain.Attence" id="attence">
+	<result property="attenceid" column="attenceid" />
+	<result property="time" column="time" />
+	<result property="attence" column="attence" />
+	<association property="stu" column="studentid" javaType="com.accp.domain.Studentinfo" select="com.accp.mapper.StudentinfoMapper.selectByPrimaryKey"></association>	
+</resultMap>
+
+<select id="queryClazzByCid" resultType="com.accp.domain.Clazz">
+		SELECT * FROM `clazz` WHERE cid = #{cid}
+</select>
+<!-- 请假表的新增 -->
+<insert id="insertLeave">
+		INSERT INTO `leave`(`studentId`,`starTime`,`endTime`,`main`,`teacher`,`type`)VALUE(#{studentid},#{startime},#{endtime},#{main},#{teacher},#{type})
+</insert>
+<!-- 通过学生id查询到当前班主任id -->
+<select id="queryClazzbysid" resultType="com.accp.domain.Clazz">
+		SELECT tid FROM `clazz` WHERE tid = (SELECT cid FROM `clazz_student` WHERE sid = #{sid})
+</select>
+<!-- 查询需要审核的请假条 -->
+<select id="queryLeaveByTeaId" resultType="com.accp.domain.Leave">
+		SELECT * FROM `leave` WHERE teacher = #{teacher} and state = 0
+</select>
+<!--请假审核  -->
+<update id="updateLeave">
+UPDATE 
+  `smartcampus`.`leave` 
+SET
+  `state` =#{state}
+
+WHERE `leaveId` =#{leaveid} ;
+
+</update>
+
+<insert id="insertAtt">
+	INSERT INTO `attence`(`studentid`,`time`,`attence`) VALUE (#{studentid},#{time},#{attence})
+</insert>
+</mapper>
+
+
+

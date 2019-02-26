@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -14,9 +15,11 @@ import com.accp.domain.Clazz;
 import com.accp.domain.ClazzStudent;
 import com.accp.domain.ClazzStudentExamInfo;
 import com.accp.domain.CourseTeacher;
+import com.accp.domain.ExaminationFb;
 import com.accp.domain.ExaminationTm;
 import com.accp.domain.Floor;
 import com.accp.domain.Havetask;
+import com.accp.domain.Havetaskexam;
 import com.accp.domain.Parents;
 import com.accp.domain.Studentinfo;
 import com.accp.service.AttenceInfoService;
@@ -62,7 +65,7 @@ public class TanController {
 		Studentinfo stuobj=stuservice.selectallinfo(sid);
 		model.addAttribute("stuobj", stuobj);
 		//参与的考试信息
-		List<Havetask> elist=einfoservice.examscoreBysid(sid);
+		List<Havetaskexam> elist=einfoservice.examscoreBysid(sid);
 		model.addAttribute("elist", elist);
 		AttenceCount acount=ainfoservice.selectattenceBysidlx(sid);
 		model.addAttribute("acount", acount);
@@ -70,17 +73,17 @@ public class TanController {
 		return "datastatistics/dataStatistics";
 	}
 	
-	@RequestMapping("/test")
+	/*@RequestMapping("/test")
 	public String test(Model model) {
 		//测试
-		/*if(sid==null) {
+		if(sid==null) {
 			sid=1;//默认值
-		}*/
+		}
 //		einfoservice.examscoreBysid(sid);
 //		List<ExaminationTm> etimlist=einfoservice.selectexamtimByexamid(examinationId);
 //		model.addAttribute("etimlist", etimlist);
 		return "datastatistics/dataStatistics3";
-	}
+	}*/
 	
 	@RequestMapping("/toupclazzStudent")
 	public String toupclazzStudent(Model model) {

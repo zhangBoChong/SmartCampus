@@ -35,6 +35,17 @@
   <select id="clazzallstudentBycid" resultMap="clazzallstudent">
   	SELECT * FROM clazz_student WHERE `status`=1 AND cid=#{cid}
   </select>
+  <select id="selectclazzstudentBysidtan" resultMap="BaseResultMap">
+  	SELECT * FROM clazz_student WHERE `status`=1 AND sid=#{sid}
+  </select>
+  <select id="selectclazzstudentByczidtan" resultMap="clazzallstudent">
+  	SELECT * FROM clazz_student WHERE czid=#{czid}
+  </select>
+  
+  <!-- 
+  ClazzStudent selectclazzstudentBysidtan(Integer sid);
+	ClazzStudent selectclazzstudentByczidtan(Integer czid);
+   -->
   
   
   <select id="countstu"  resultType="Integer">

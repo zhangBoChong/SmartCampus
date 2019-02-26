@@ -88,7 +88,7 @@
 						<tr class="backgroundtoolbar"><td>考试类型</td><td>试卷名称</td><td>考试分数</td><td><!-- 考试排名 --></td></tr>
 						<tr th:each="e:${elist}" th:attr="data-id=${e.examinationId}">
 							<!-- <td>考试开始时间</td><td th:text="${e.examobj.examinationKstime}"></td> -->
-							<td th:text="${e.examobj.examlxtype.examinationLxType}"></td>
+							<td th:text="${e.examobj.examlxtype.examination_lx_type}"></td>
 							<td class="examcname" th:text="${e.examobj.coursename.coursename}"></td>
 							<td class="exampaim" th:text="${e.score}"></td>
 							<td><!-- <a >3</a> --></td>

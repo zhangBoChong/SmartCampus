@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.accp.mapper.ExaminationLxMapper">
   <resultMap id="BaseResultMap" type="com.accp.domain.ExaminationLx">
-    <id column="examination_lx_id" jdbcType="INTEGER" property="examinationLxId" />
-    <result column="examination_lx_type" jdbcType="VARCHAR" property="examinationLxType" />
+    <id column="examination_lx_id" jdbcType="INTEGER" property="examination_lx_id" />
+    <result column="examination_lx_type" jdbcType="VARCHAR" property="examination_lx_type" />
   </resultMap>
   
   <select id="queryExaminationLx" resultType="com.accp.domain.ExaminationLx">
@@ -89,11 +89,11 @@
     select 
     <include refid="Base_Column_List" />
     from examination_lx
-    where examination_lx_id = #{examinationLxId,jdbcType=INTEGER}
+    where examination_lx_id = #{examination_lx_id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from examination_lx
-    where examination_lx_id = #{examinationLxId,jdbcType=INTEGER}
+    where examination_lx_id = #{examination_lx_id,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="com.accp.domain.ExaminationLxExample">
     delete from examination_lx
@@ -104,25 +104,25 @@
   <insert id="insert" parameterType="com.accp.domain.ExaminationLx">
     insert into examination_lx (examination_lx_id, examination_lx_type
       )
-    values (#{examinationLxId,jdbcType=INTEGER}, #{examinationLxType,jdbcType=VARCHAR}
+    values (#{examination_lx_id,jdbcType=INTEGER}, #{examination_lx_type,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.accp.domain.ExaminationLx">
     insert into examination_lx
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="examinationLxId != null">
+      <if test="examination_lx_id != null">
         examination_lx_id,
       </if>
-      <if test="examinationLxType != null">
+      <if test="examination_lx_type != null">
         examination_lx_type,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="examinationLxId != null">
-        #{examinationLxId,jdbcType=INTEGER},
+      <if test="examination_lx_id != null">
+        #{examination_lx_id,jdbcType=INTEGER},
       </if>
-      <if test="examinationLxType != null">
-        #{examinationLxType,jdbcType=VARCHAR},
+      <if test="examination_lx_type != null">
+        #{examination_lx_type,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -135,11 +135,11 @@
   <update id="updateByExampleSelective" parameterType="map">
     update examination_lx
     <set>
-      <if test="record.examinationLxId != null">
-        examination_lx_id = #{record.examinationLxId,jdbcType=INTEGER},
+      <if test="record.examination_lx_id != null">
+        examination_lx_id = #{record.examination_lx_id,jdbcType=INTEGER},
       </if>
-      <if test="record.examinationLxType != null">
-        examination_lx_type = #{record.examinationLxType,jdbcType=VARCHAR},
+      <if test="record.examination_lx_type != null">
+        examination_lx_type = #{record.examination_lx_type,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -148,8 +148,8 @@
   </update>
   <update id="updateByExample" parameterType="map">
     update examination_lx
-    set examination_lx_id = #{record.examinationLxId,jdbcType=INTEGER},
-      examination_lx_type = #{record.examinationLxType,jdbcType=VARCHAR}
+    set examination_lx_id = #{record.examination_lx_id,jdbcType=INTEGER},
+      examination_lx_type = #{record.examination_lx_type,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -157,15 +157,15 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.accp.domain.ExaminationLx">
     update examination_lx
     <set>
-      <if test="examinationLxType != null">
-        examination_lx_type = #{examinationLxType,jdbcType=VARCHAR},
+      <if test="examination_lx_type != null">
+        examination_lx_type = #{examination_lx_type,jdbcType=VARCHAR},
       </if>
     </set>
-    where examination_lx_id = #{examinationLxId,jdbcType=INTEGER}
+    where examination_lx_id = #{examination_lx_id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.accp.domain.ExaminationLx">
     update examination_lx
-    set examination_lx_type = #{examinationLxType,jdbcType=VARCHAR}
-    where examination_lx_id = #{examinationLxId,jdbcType=INTEGER}
+    set examination_lx_type = #{examination_lx_type,jdbcType=VARCHAR}
+    where examination_lx_id = #{examination_lx_id,jdbcType=INTEGER}
   </update>
 </mapper>

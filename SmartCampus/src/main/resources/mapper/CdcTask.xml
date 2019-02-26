@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.accp.mapper.CdcTaskMapper">
+		
+<select id="querytask_Middle1" resultType="com.accp.domain.TaskMiddle">
+		SELECT * FROM `task_middle` WHERE `ryId` = #{ryId} AND state = 0 ORDER BY middleId DESC  
+</select>
+<select id="querytask_Middle2" resultType="com.accp.domain.TaskMiddle">
+SELECT * FROM `task_middle` WHERE publisherId = #{publisherId} AND state = 0	ORDER BY middleId DESC 
+</select>
+<select id="querytask_Middle3" resultType="com.accp.domain.TaskMiddle">
+		SELECT * FROM `task_middle` WHERE state = 1 AND ryId = #{ryId}
+</select>
+<select id="querytask_Middle" resultType="com.accp.domain.TaskMiddle">
+		SELECT * FROM `task_middle`	ORDER BY middleId DESC 
+</select>
+<select id="queryCdcTaskbyId" resultType="com.accp.domain.CdcTask">
+		SELECT * FROM `cdctask` WHERE  taskId=#{taskId}
+</select>
+<select id="queryStaffbyId" resultType="com.accp.domain.Staff">
+		SELECT * FROM staff WHERE tid = #{tid}
+</select>
+<select id="queryStudentinfobyId" resultType="com.accp.domain.Studentinfo">
+		SELECT * FROM `studentinfo` WHERE sid = #{sid}
+</select>
+
+<select id="queryTaskStageByTaskId" resultType="com.accp.domain.TaskStage">
+		SELECT * FROM `task_stage` WHERE taskId = #{taskId}
+</select>
+
+<!-- 通过年级Id到中间表查询到班级Id,通过班级Id查询到班级 -->
+<select id="queryClazzByCname" resultType="com.accp.domain.Clazz">
+	select * from `clazz` where bid in (select bid from `vession_grade` where gid = #{gid})
+</select>
+<!-- 通过班级Id到中间表查询到学生Id，学生Id到学生表查询学生 -->
+<select id="queryStudentBySid" resultType="com.accp.domain.Studentinfo">
+	 SELECT * FROM `studentinfo` WHERE sid IN (SELECT sid FROM `clazz_student` WHERE cid = #{cid})
+</select>
+<!-- 查询到所有不为管理员的员工  -->
+<select id="queryStaffNoAdmin" resultType="com.accp.domain.Staff">
+	 select * from `staff` where postId != 4
+</select>
+<select id="queryClazzbytid" resultType="com.accp.domain.Clazz">
+	select * FROM clazz where cid in (SELECT cid FROM `clazz_teacher` WHERE tid = #{tid})
+</select>
+<!-- 插入任务主表 -->
+<insert id="insertCdcTask" useGeneratedKeys="true" keyProperty="taskId">
+		INSERT INTO `cdctask`(`taskName`,`taskContent`,`publisherId`,`startTime`,`endTime`,`delete`)VALUES(#{taskName},#{taskContent},#{publisherId},#{startTime},#{endTime},0)
+</insert>
+
+<!-- 插入任务阶段表 -->
+<insert id="insertTaskStage">
+		INSERT INTO `task_stage`(`stageStartTime`,`stageEndTime`,`stageAccessories`,`taskId`,`delete`)VALUE(#{stagestarttime},#{stageendtime},#{stageaccessories},#{taskid},0)
+</insert>
+<!-- 插入任务中间表 决定发给哪些人 -->
+<insert id="insertTaskMiddle">
+		INSERT INTO task_middle(`publisherId`,`taskId`,`ryId`,`state`,`taskstate`)VALUES(#{publisherId},#{taskId},#{ryId},#{state},0)
+</insert>
+
+</mapper>

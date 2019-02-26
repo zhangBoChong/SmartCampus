@@ -4,17 +4,17 @@ import java.util.List;
 
 public class ClazzStudentExamInfo {
 	private Studentinfo stu;
-	private List<Havetask> examlist;
+	private List<Havetaskexam> examlist;
 	public Studentinfo getStu() {
 		return stu;
 	}
 	public void setStu(Studentinfo stu) {
 		this.stu = stu;
 	}
-	public List<Havetask> getExamlist() {
+	public List<Havetaskexam> getExamlist() {
 		return examlist;
 	}
-	public void setExamlist(List<Havetask> examlist) {
+	public void setExamlist(List<Havetaskexam> examlist) {
 		this.examlist = examlist;
 	}
 }
