@@ -11,7 +11,7 @@
   <select id="queryAuthority" resultType="com.accp.domain.Authority">
   	SELECT * FROM `authority`
   </select>
-  
+
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">

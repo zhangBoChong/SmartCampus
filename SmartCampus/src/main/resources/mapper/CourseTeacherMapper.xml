@@ -208,5 +208,9 @@
       tid = #{tid,jdbcType=INTEGER}
     where ctId = #{ctid,jdbcType=INTEGER}
   </update>
+  <insert id="courseTeacherinsert" useGeneratedKeys="true" keyProperty="ctid" parameterType="com.accp.domain.CourseTeacher">
+		INSERT INTO `course_teacher`(`tid`,`courseId`)VALUE(#{tid},#{courseid})
+  </insert>
+
 
 </mapper>

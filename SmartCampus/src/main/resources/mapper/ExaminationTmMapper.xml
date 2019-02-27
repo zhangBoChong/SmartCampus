@@ -28,6 +28,7 @@
 
 		VALUE  			   (#{topic_id},#{examination_id},#{examination_tm_xzt},#{examination_tm_wdt})
   </insert>
+
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">

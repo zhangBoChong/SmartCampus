@@ -9,6 +9,7 @@
     <result column="type" jdbcType="INTEGER" property="type" />
     <result column="accommodate" jdbcType="INTEGER" property="accommodate" />
   </resultMap>
+  
   <resultMap type="com.accp.domain.Classroom" id="floorclassroom" extends="BaseResultMap">
   	<association property="fobj" column="floorId" javaType="com.accp.domain.Floor">
   		<result column="floorNumber" jdbcType="INTEGER" property="floornumber" />
@@ -279,5 +280,6 @@
       accommodate = #{accommodate,jdbcType=INTEGER}
     where classroomId = #{classroomid,jdbcType=INTEGER}
   </update>
+
 
 </mapper>

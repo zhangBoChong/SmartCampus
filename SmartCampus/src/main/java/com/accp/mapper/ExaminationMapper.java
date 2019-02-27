@@ -13,6 +13,7 @@ public interface ExaminationMapper {
 	
 	int insertExa(Examination exa);
 	
+
     long countByExample(ExaminationExample example);
 
     int deleteByExample(ExaminationExample example);

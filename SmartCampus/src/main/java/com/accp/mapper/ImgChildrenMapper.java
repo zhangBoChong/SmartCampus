@@ -35,4 +35,5 @@ public interface ImgChildrenMapper {
     
     //新增图片子表
     int inserttpc(ImgChildren ic);
+
 }

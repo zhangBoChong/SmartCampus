@@ -32,4 +32,5 @@ public interface ModuleMiddleMapper {
     
     //按roleId查询模块权限
     ModuleMiddle queryByRoleId(@Param("delete_id") Integer delete_id,@Param("roleId") Integer roleId);
+
 }

@@ -402,7 +402,6 @@ public class ClazzTeacherExample {
 
         public Criteria andCoursescheduleNotBetween(Integer value1, Integer value2) {
             addCriterion("courseSchedule not between", value1, value2, "courseschedule");
-
             return (Criteria) this;
         }
     }

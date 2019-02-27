@@ -2,7 +2,6 @@ package com.accp.mapper;
 
 import com.accp.domain.Affiche;
 import com.accp.domain.AfficheExample;
-
 import java.util.Date;
 import java.util.List;
 
@@ -51,4 +50,5 @@ public interface AfficheMapper {
     
     //查询公告列表
     List<Affiche> cx_Affiche(@Param("startime") Date startime,@Param("endtime") Date endtime,@Param("affiche_title") String affiche_title,@Param("affiche_sendee") String affiche_sendee,@Param("affiche_id") Integer affiche_id);
+
 }

@@ -12,6 +12,7 @@ public interface ScheduleMapper {
 	List<Schedule> queryByTime(Schedule record);
 	int insertSchedule(List<Schedule> list);
 
+
     long countByExample(ScheduleExample example);
 
     int deleteByExample(ScheduleExample example);

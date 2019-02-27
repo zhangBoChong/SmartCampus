@@ -73,13 +73,13 @@ public class CDCTaskController {
 	public List<TaskMiddle> queryTask(Model model) {	
 		System.out.println("进入方法");
 		List<TaskMiddle> list = null;
-//		Login login = (Login)session.getAttribute("");
+		Login login = (Login)session.getAttribute("u");
 //	先进行人员类型判断 判断为员工还是学员 0为学员 1为员工
-		int type = 1;
+		int type = login.getType();
 //		int ryid = login.getPeopleid();
-		int ryid = 2;
+		int ryid = login.getRoleId();
 //		当他是学员登录时
-		if(type==0) {
+		if(type==-1) {
 			System.out.println("进入学员");
 			list = taskService.querytask_Middle1(ryid);
 			for (TaskMiddle t : list) {
@@ -97,7 +97,7 @@ public class CDCTaskController {
 			}
 		}
 //			否则都是员工登录
-		else if(type==1) {
+		else if(type==-3) {
 			System.out.println("进入员工");
 //			员工 的类型 教员 班主任 管理员 门卫
 			Staff staff = taskService.queryStaffbyId(ryid);
@@ -191,7 +191,8 @@ public class CDCTaskController {
 	@RequestMapping("queryClazzbytid")
 	@ResponseBody
 	public List<Clazz> queryClazzbytid(){
-		int tid = 1;
+		Login login = (Login)session.getAttribute("u");
+		int tid = login.getRoleId();
 //		tid是获取当前登录教师的用户对象的Id
 		List<Clazz> list = taskService.queryClazzbytid(tid);
 		return list;
@@ -206,12 +207,13 @@ public class CDCTaskController {
 	@RequestMapping("insertLeave")
 	@ResponseBody
 	public void insertLeave(Leave leave) {
+		Login login = (Login)session.getAttribute("u");
 //		从登陆获取到当前登录人员类型
-		int type = 1;
+		int type = login.getType();
 //		从session获取到当前登录人员Id
-		int ryId = 1;
+		int ryId = login.getRoleId();
 //		0为学员请假，其他为员工请假
-		if(type==0) {
+		if(type==-1) {
 			leave.setStudentid(ryId);
 			leave.setTeacher(cdcAttenceService.queryClazzbysid(ryId).getTid());
 			leave.setType(0);
@@ -228,8 +230,9 @@ public class CDCTaskController {
 	@RequestMapping("queryLeaveByTeaId")
 	@ResponseBody
 	public List<Leave> queryLeaveByTeaId(){
+		Login login = (Login)session.getAttribute("u");
 //		从session获取到当前登录人员Id
-		int ryId = 1;
+		int ryId = login.getRoleId();
 		List<Leave> list = cdcAttenceService.queryLeaveByTeaId(ryId);
 		for (Leave l : list) {
 //			0为学员请假 1为员工请假

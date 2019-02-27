@@ -12,9 +12,7 @@
     <result column="appendix_sendee" jdbcType="INTEGER" property="appendix_sendee" />
     <result column="delete_id" jdbcType="INTEGER" property="delete_id" />
   </resultMap>
-  
-  
-  
+
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">

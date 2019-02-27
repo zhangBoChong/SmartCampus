@@ -32,4 +32,5 @@ public interface AuthorityMapper {
     
     //查询所有权限
     List<Authority> queryAuthority();
+
 }

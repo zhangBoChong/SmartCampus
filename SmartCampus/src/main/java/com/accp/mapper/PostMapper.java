@@ -50,4 +50,5 @@ public interface PostMapper {
     
     //添加职位
     int insertpost(List<Post> postLists);
+
 }

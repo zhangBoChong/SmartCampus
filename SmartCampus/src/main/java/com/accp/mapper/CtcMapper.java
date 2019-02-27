@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Param;
 @Mapper
 public interface CtcMapper {
 	List<Ctc> queryBycourseId(Integer courseid);
+	
     long countByExample(CtcExample example);
 
     int deleteByExample(CtcExample example);

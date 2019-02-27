@@ -13,7 +13,7 @@
   <select id="queryByRoleId" resultType="com.accp.domain.ModuleMiddle">
   	SELECT * FROM `module_middle` WHERE `delete_id`=#{delete_id} AND `roleId`=#{roleId}
   </select>
-  
+
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">

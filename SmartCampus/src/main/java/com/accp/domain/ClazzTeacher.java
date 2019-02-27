@@ -71,5 +71,4 @@ public class ClazzTeacher {
 	public void setTid(Integer tid) {
 		this.tid = tid;
 	}
-    
 }

@@ -1,0 +1,453 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=emulateIE7" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="css/style.css" />
+<link rel="stylesheet" type="text/css" href="css/WdatePicker.css" />
+<link rel="stylesheet" type="text/css" href="css/skin_/table.css" />
+<link rel="stylesheet" type="text/css" href="css/jquery.grid.css" />
+
+
+<title>表格</title>
+<style>
+	
+	*{
+		margin: 0;
+		padding: 0;
+	}
+	.table td{
+		padding: 10px 10px;
+		border-left: 1px solid #999999;
+		border-right: 1px solid #999999;
+	}
+	table thead,
+	tbody tr{
+		display: table;
+		width: 100%;
+		table-layout: fixed;
+    }
+    .thead1{
+		width: calc( 100% - 17.5px)
+	}
+	.tbody1{
+		border: 1px solid #999999;
+		display: block;
+		max-height: 300px;
+		width: 100%;
+		overflow-y: scroll;
+	}
+	.thead{
+		width: calc( 120% - 17.5px)
+	}
+	.tbody{
+		border: 1px solid #999999;
+		display: block;
+		max-height: 300px;
+		width: 120%;
+		overflow-y: scroll;
+	}
+	.ss{
+		background-color: #66F4DF;
+		padding: 5px 18px;
+		border: 1px solid #0099CC;
+		cursor:pointer;
+	}
+	.ss1{
+		background-color: #66F4DF;
+		padding: 5px 18px;
+		border: 1px solid #0099CC;
+		cursor:pointer;
+	}
+	.jy{
+		background-color: #66F4DF;
+		padding: 5px 5px;
+		border: 1px solid #0099CC;
+		cursor:pointer;
+	}
+	.tj{
+		background-color: #66F4DF;
+		padding: 5px 18px;
+		border: 1px solid #0099CC;
+		cursor:pointer;
+	}
+	.tbody tr{
+		cursor:pointer;
+	}
+    body{
+        font-family: "Microsoft YaHei" ! important;
+    }
+    /*灰色遮罩层*/
+    .fade{
+        width:100%;
+        height:100%;
+        background:rgba(0, 0, 0, 0.3);
+        position: fixed;
+        left: 0;
+        top: 0;
+        z-index: 99;
+    }
+    /*弹出层*/
+    .succ-pop{
+        width: 900px;
+        height: 450px;
+        background: #fff;
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        margin-left: -500px;
+        margin-top: -250px;
+        z-index: 999;
+        border: 8px solid #808080;
+    }
+    .gb{
+    	position: relative;
+		left: 869px;
+    }
+    .gb:hover{
+    	cursor:pointer;
+   }
+</style>
+
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/global.js"></script>
+<script type="text/javascript" src="js/jquery.select.js"></script>
+<script type="text/javascript" src="js/core.js"></script>
+<script src="js/vue.js"></script>
+<script type="text/javascript" src="js/jquery.grid.js"></script>
+<script type="text/javascript" src="js/WdatePicker.js"></script>
+</head>
+
+<body>
+<div id="container">
+	<div id="hd"></div>
+    <div id="bd">
+    	<div id="main">
+        	<div class="search-box ue-clear">
+            	<div class="search-area">
+                    <div class="kv-item ue-clear">
+	                    <div v-for="(item,index) in list3">
+	                    	<label class="label" v-bind:data-id="item.courseid">{{item.coursename}}教员:</label>
+	                        <div class="kv-item-content">
+	                            <input data-id="" readonly="readonly" style="width: 100px;" v-bind:data-jy1="item.courseid" type="text" placeholder="请选择教员" />
+	                        </div>&nbsp;&nbsp;<input v-bind:data-jy="item.courseid" class="jy" type="button" onclick="ss(this)" value="选择教员" /><br /><br /><br />
+	                    </div>
+                    </div>
+                </div>
+             </div>
+             
+             <div class="tk" style="display:none;">
+	        <div class="fade"></div>
+			<div class="succ-pop">
+	    		<img class="gb" src="img/gb.png" />
+	    		<div class="kv-item ue-clear"><br />
+                      <div class="kv-item ue-clear">
+                      	<div class="kv-item-content">
+                      		ID： <input class="tid" style="height: 25px;width: 100px;" />
+                      	</div>
+                      	<div class="kv-item-content">
+                      		姓名： <input class="tname" style="height: 25px;width: 100px;" />
+                      	</div>
+					<div class="kv-item-content">
+						年龄：<input class="age1" style="height: 25px;width: 100px;" />~<input class="age2" style="height: 25px;width: 100px;"/>
+					</div>
+					<div class="kv-item-content">
+						性别：
+						<select class="sex" style="height: 29px;width: 100px;">
+                               <option value="">全部</option>
+                               <option value="0">男</option>
+                               <option value="1">女</option>
+                           </select>
+                          </div>
+                          <div class="kv-item-content">
+						性格：
+						<select class="characterId" style="height: 29px;width: 100px;">
+							<option value="">全选</option><option value="1">老实</option><option value="2">乐观</option><option value="3">冲动</option>
+							<option value="4">积极</option><option value="5">胆小</option><option value="6">活泼</option><option value="7">沉稳</option>
+						</select>
+                          </div>
+                      	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="ss" type="button" value="搜索" />
+                      </div>
+                  </div>
+           	<span style="color: red">教员信息：</span>
+           	
+            <div class="table">
+				
+				<table width="80%">
+					<thead class="thead">
+						<tr style="border-bottom: 2px solid #999999;background-color: #F0F0F0;">
+							<td>id</td>
+							<td>姓名</td>
+							<td>性别</td>
+							<td>年龄</td>
+							<td>性格</td>
+							<td>所教课程</td>
+							<td>操作</td>
+						</tr>
+					</thead>
+					<tbody class="tbody">
+						<tr v-on:click="tr(item.tname,item.tid)" v-for="item in list1">
+							<td>{{item.tid}}</td>
+							<td>{{item.tname}}</td>
+							<td v-if="item.sex==0">男</td>
+							<td v-if="item.sex==1">女</td>
+							<td v-if="item.sex==2">不明性别</td>
+							<td>{{item.age}}</td>
+							<td>{{item.character.charactername}}</td>
+							<td>{{item.sl}}</td>
+							<td><a>查看</a></td>
+						</tr>
+					</tbody>
+				</table>
+				
+			</div>
+				</div>
+			</div>
+			
+			<div class="search-box ue-clear">
+				<div class="search-area">
+					<div class="kv-item ue-clear">
+                        <div class="kv-item ue-clear">
+                        	<div class="kv-item-content">
+                        		姓名： <input class="tname1" style="height: 25px;width: 100px;" />
+                        	</div>
+							<div class="kv-item-content">
+								年龄：<input class="age11" style="height: 25px;width: 100px;" />~<input class="age21" style="height: 25px;width: 100px;"/>
+							</div>
+							<div class="kv-item-content">
+								性别：
+								<select class="sex1" style="height: 29px;width: 100px;">
+	                                <option value="">全部</option>
+	                                <option value="0">男</option>
+	                                <option value="1">女</option>
+	                            </select>
+                            </div>
+                            <div class="kv-item-content">
+								性格：
+								<select class="characterId1" style="height: 29px;width: 100px;">
+									<option value="">全选</option><option value="1">老实</option><option value="2">乐观</option><option value="3">冲动</option>
+									<option value="4">积极</option><option value="5">胆小</option><option value="6">活泼</option><option value="7">沉稳</option>
+								</select>
+                            </div>
+                        	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="ss1" type="button" value="搜索" />
+                        </div>
+                    </div>
+             	<span style="color: red">请选择班主任：</span>
+				</div>
+			</div>
+			<div class="table">
+				
+				<table width="80%">
+					<thead class="thead1">
+						<tr style="border-bottom: 2px solid #999999;background-color: #F0F0F0;">
+							<td></td>
+							<td>姓名</td>
+							<td>性别</td>
+							<td>年龄</td>
+							<td>性格</td>
+							<td>所带班级</td>
+							<td>操作</td>
+						</tr>
+					</thead>
+					<tbody class="tbody1">
+						<tr v-for="item in list2">
+							<td><input v-bind:data-id="item.tid" onclick="box(this)" name="box" type="checkbox"/></td>
+							<td class="stunames">{{item.tname}}</td>
+							<td v-if="item.sex==0">男</td>
+							<td v-if="item.sex==1">女</td>
+							<td v-if="item.sex==2">不明性别</td>
+							<td>{{item.age}}</td>
+							<td>{{item.character.charactername}}</td>
+							<td>{{item.sl2}}</td>
+							<td><a>查看</a></td>
+						</tr>
+					</tbody>
+				</table>
+				
+			</div>
+			<br />
+			
+			<input class="tj" value="提交" type="button" /><br /><br /><br />
+        </div>
+    </div>
+</div>
+<script type="text/javascript" th:inline="javascript">
+
+var clickobj='';
+
+function ss(t){
+	clickobj=$(t).attr("data-jy");
+	$(".tk").show();
+}
+
+window.onload = function(){
+	
+	var v=new Vue({
+		el:"#main",
+		data:{
+			list1:{},
+			list2:{},
+			list3:{}
+		},
+		methods: {
+		    tr: function (message1,message2) {
+		    	$("[data-jy1="+clickobj+"]").attr("value",message1);
+		    	$("[data-jy1="+clickobj+"]").attr("data-id",message2);
+				$(".tk").hide();
+		    }
+		}
+	});
+	
+	$.ajax({
+		url:"queryAllCourse",
+		dataType:'json',
+		type:'post',
+		timeout:10000,
+		cache:false,
+		async:false,
+		success:function(data){
+			v.list3=data;
+		},
+		error:function(xhr,type,errorThrown){
+			alert("刷新失败！");
+		},
+	});
+
+	$.ajax({
+		data:{
+			postId:3
+		},
+		url:"queryAllStaff",
+		dataType:'json',
+		type:'post',
+		timeout:10000,
+		cache:false,
+		async:false,
+		success:function(data){
+			v.list1=data;
+		},
+		error:function(xhr,type,errorThrown){
+			alert("刷新失败！");
+		},
+	});
+	
+	$(".ss").click(function(){
+		var tid = $(".tid").val().trim();
+		var tname = $(".tname").val().trim();
+		var age1 = $(".age1").val().trim();
+		var age2 = $(".age2").val().trim();
+		var sex = $(".sex").val().trim();
+		var characterId = $(".characterId").val().trim();
+		$.ajax({
+			data:{
+				postId:3,
+				tid:tid,
+				tname:tname,
+				age1:age1,
+				age2:age2,
+				sex:sex,
+				characterId:characterId
+			},
+			url:"queryStaff",
+			dataType:'json',
+			type:'post',
+			timeout:10000,
+			success:function(data){
+				v.list1=data;
+			},
+			error:function(xhr,type,errorThrown){
+				alert("刷新失败！");
+			},
+		});
+	});
+	
+	$.ajax({
+		data:{
+			postId:2
+		},
+		url:"queryAllStaff",
+		dataType:'json',
+		type:'post',
+		timeout:10000,
+		cache:false,
+		async:false,
+		success:function(data){
+			v.list2=data;
+		},
+		error:function(xhr,type,errorThrown){
+			alert("刷新失败！");
+		},
+	});
+
+	$(".ss1").click(function(){
+		var tname = $(".tname1").val().trim();
+		var age1 = $(".age11").val().trim();
+		var age2 = $(".age21").val().trim();
+		var sex = $(".sex1").val().trim();
+		var characterId = $(".characterId1").val().trim();
+		$.ajax({
+			data:{
+				postId:2,
+				tname:tname,
+				age1:age1,
+				age2:age2,
+				sex:sex,
+				characterId:characterId
+			},
+			url:"queryStaff",
+			dataType:'json',
+			type:'post',
+			timeout:10000,
+			success:function(data){
+				v.list2=data;
+			},
+			error:function(xhr,type,errorThrown){
+				alert("刷新失败！");
+			},
+		});
+	});
+	
+	$(".tj").click(function(){
+		var length=$("input[name=box]:checked").length;
+		var name1=$(".kv-item-content:eq(0) input").val();
+		var name2=$(".kv-item-content:eq(1) input").val();
+		var id=$(".kv-item-content:eq(0) input").attr("data-id");
+		var id2=$(".kv-item-content:eq(1) input").attr("data-id");
+		var id3=$("input[name=box]:checked").attr("data-id");
+		var id11=$(".label:eq(0)").attr("data-id");
+		var id22=$(".label:eq(1)").attr("data-id");
+		var mc=[[${mc}]];
+		var rq=[[${rq}]];
+		var js=[[${js}]];
+		if(name1==""||name2==""){
+			alert("请选择教员！");
+		}else if(length<1){
+			alert("请选择班主任！");
+		}else{
+			alert([[${mc}]]);
+			alert([[${rq}]]);
+			alert([[${js}]]);
+			alert("提交成功！");
+			window.location.href='offerAcourse?id='+id+'&id2='+id2+'&id3='+id3+'&mc='+mc+'&rq='+rq+'&js='+js+'&id11='+id11+'&id22='+id22+'';
+		}
+	});
+	
+	//关闭弹窗
+    $(".gb").click(function(){
+		$(".tk").hide();
+	});
+}
+
+function box(b){
+	if(b.checked==true){
+		$("input[name=box]").each(function(){
+	        this.checked=false;
+	    });
+		b.checked=true;
+	}else{
+		b.checked=false;
+	}
+}
+</script>
+</body>
+</html>

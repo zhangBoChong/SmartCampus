@@ -57,6 +57,7 @@
   <select id="queryClazzSchedule1" resultMap="BaseResultMap">
   	SELECT * FROM `clazz_schedule` WHERE cid=#{cid} AND DATETIME&gt;=#{datetime1} AND DATETIME&lt;=#{datetime2} and status=1
   </select>
+
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">

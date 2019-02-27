@@ -1,25 +1,20 @@
 package com.accp.domain;
 
+import java.util.Date;
+
 public class Clazz {
     private Integer cid;
-
     private String cname;
-
     private Integer bid;
-
     private Integer tid;
-
-    private String starttime;
-
+    private Date starttime;
     private Integer status;
-
     private Integer majorid;
-    
+    private String introduce;
     private Staff staff;
     private String gname;//年级名称
     private String tname;//任课教员
     private Integer count;//班级人数
-    
     private VessionGrade vgobj;
     private Staff tobj;//班主任
     private Integer clazzstudentnub;//班级人数
@@ -113,13 +108,21 @@ public class Clazz {
         this.tid = tid;
     }
 
-    public String getStarttime() {
-        return starttime;
-    }
+	public Date getStarttime() {
+		return starttime;
+	}
 
-    public void setStarttime(String starttime) {
-    	 this.starttime = starttime;
-    }
+	public void setStarttime(Date starttime) {
+		this.starttime = starttime;
+	}
+
+	public String getIntroduce() {
+		return introduce;
+	}
+
+	public void setIntroduce(String introduce) {
+		this.introduce = introduce;
+	}
 
 	public Integer getStatus() {
 		return status;
@@ -136,6 +139,4 @@ public class Clazz {
 	public void setMajorid(Integer majorid) {
 		this.majorid = majorid;
 	}
-    
-    
 }

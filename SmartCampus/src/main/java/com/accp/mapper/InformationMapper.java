@@ -50,4 +50,5 @@ public interface InformationMapper {
     
     //查询最新一条并且是当前登录用户的登录提示信息
     int selectinformation_id(@Param("information_type") Integer information_type,@Param("information_sendee") Integer information_sendee);
+
 }

@@ -1,0 +1,313 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=emulateIE7" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="css/style.css" />
+<link rel="stylesheet" type="text/css" href="css/WdatePicker.css" />
+<link rel="stylesheet" type="text/css" href="css/skin_/table.css" />
+<link rel="stylesheet" type="text/css" href="css/jquery.grid.css" />
+
+
+<title>表格</title>
+<style>
+	* {
+		margin: 0;
+		padding: 0;
+	}
+	.table td{
+		padding: 10px 10px;
+		border-left: 1px solid #999999;
+		border-right: 1px solid #999999;
+	}
+	table thead,
+	tbody tr {
+		display: table;
+		width: 100%;
+		table-layout: fixed;
+    }
+    table thead {
+		width: calc( 100% - 17.5px)
+	}
+	.table tbody{
+		border: 1px solid #999999;
+		display: block;
+		max-height: 300px;
+		overflow-y: scroll;
+	}
+	.ss{
+		background-color: #66F4DF;
+		padding: 5px 18px;
+		border: 1px solid #0099CC;
+		cursor:pointer;
+	}
+	.xyb{
+		background-color: #66F4DF;
+		padding: 5px 18px;
+		border: 1px solid #0099CC;
+		cursor:pointer;
+	}
+</style>
+
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/global.js"></script>
+<script type="text/javascript" src="js/jquery.select.js"></script>
+<script type="text/javascript" src="js/core.js"></script>
+<script src="js/vue.js"></script>
+<script type="text/javascript" src="js/jquery.grid.js"></script>
+<script type="text/javascript" src="js/WdatePicker.js"></script>
+</head>
+
+<body>
+<div id="container">
+	<div id="hd"></div>
+    <div id="bd">
+    	<div id="main">
+        	<div class="search-box ue-clear">
+            	<div class="search-area">
+					<div class="kv-item ue-clear">
+						<label>班级名称:</label>
+						<div class="kv-item-content">
+							<input class="mc" type="text" placeholder="请输入班级名称" />
+						</div>
+					</div>
+					<div class="kv-item ue-clear">
+						<label>开课日期:</label>
+						<div class="kv-item-content">
+							<input class="rq" type="text" placeholder="请选择时间" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" />
+						</div>
+					</div>
+					<div class="kv-item ue-clear">
+						<label>班级介绍:</label>
+						<div class="kv-item-content">
+							<textarea class="js" placeholder="请输入……"></textarea>
+						</div>
+					</div><br /><br />
+                    <div class="kv-item ue-clear">
+                        <div class="kv-item ue-clear">
+                        	<div class="kv-item-content">
+                        		姓名： <input class="sname" style="height: 25px;width: 100px;" />
+                        	</div>
+							<div class="kv-item-content">
+								年龄：<input class="age1" style="height: 25px;width: 100px;" />~<input class="age2" style="height: 25px;width: 100px;"/>
+							</div>
+							<div class="kv-item-content">
+								性别：
+								<select class="sex" style="height: 29px;width: 100px;">
+	                                <option value="">全部</option>
+	                                <option value="0">男</option>
+	                                <option value="1">女</option>
+	                            </select>
+                            </div>
+                            <div class="kv-item-content">
+								性格：
+								<select class="characterId" style="height: 29px;width: 100px;">
+									<option value="">全选</option><option value="1">老实</option><option value="2">乐观</option><option value="3">冲动</option>
+									<option value="4">积极</option><option value="5">胆小</option><option value="6">活泼</option><option value="7">沉稳</option>
+								</select>
+                            </div>
+                        	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="ss" type="button" value="搜索" />
+                        </div>
+                    </div>
+                </div>
+             </div>
+            <div class="table">
+				
+				<table width="80%">
+					<thead>
+						<tr style="border-bottom: 2px solid #999999;background-color: #F0F0F0;">
+							<td><input id="all" type="checkbox" /></td>
+							<td>id</td>
+							<td>姓名</td>
+							<td>性别</td>
+							<td>年龄</td>
+							<td>性格</td>
+							<td>学历</td>
+							<td>家庭住址</td>
+							<td>联系方式</td>
+							<td>操作</td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr v-for="item in list">
+							<td v-if="item.choice==0"><input v-bind:sid="item.sid" onclick="box(this)" name="box" type="checkbox"/></td>
+							<td v-if="item.choice==1"><input v-bind:sid="item.sid" onclick="box(this)" name="box" type="checkbox" checked="checked"/></td>
+							<td>{{item.sid}}</td>
+							<td>{{item.sname}}</td>
+							<td v-if="item.sex==0">男</td>
+							<td v-if="item.sex==1">女</td>
+							<td v-if="item.sex==2">不明性别</td>
+							<td>{{item.age}}</td>
+							<td>{{item.character.charactername}}</td>
+							<td>{{item.education}}</td>
+							<td>{{item.address}}</td>
+							<td>{{item.phone}}</td>
+							<td><a>查看</a></td>
+						</tr>
+					</tbody>
+				</table>
+				
+			</div><br />
+			
+			<input class="xyb" value="下一步" type="button" />
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+window.onload = function(){
+	
+	var v=new Vue({
+		el:".table",
+		data:{
+			list:{}
+		}
+	});
+	
+	$.ajax({
+		url:"queryAllStudent",
+		dataType:'json',
+		type:'post',
+		timeout:10000,
+		cache:false,
+		async:false,
+		success:function(data){
+			v.list=data;
+			setTimeout("fd()","1");
+		},
+		error:function(xhr,type,errorThrown){
+			alert("刷新失败！");
+		},
+	});
+
+	$(".ss").click(function(){
+		var sname = $(".sname").val().trim();
+		var age1 = $(".age1").val().trim();
+		var age2 = $(".age2").val().trim();
+		var sex = $(".sex").val().trim();
+		var characterId = $(".characterId").val().trim();
+		$.ajax({
+			data:{
+				sname:sname,
+				age1:age1,
+				age2:age2,
+				sex:sex,
+				characterId:characterId
+			},
+			url:"queryStudent",
+			dataType:'json',
+			type:'post',
+			timeout:10000,
+			success:function(data){
+				v.list=data;
+				setTimeout("fd()","1");
+			},
+			error:function(xhr,type,errorThrown){
+				alert("刷新失败！");
+			},
+		});
+	});
+	
+	//给全选的复选框添加事件
+    $("#all").click(function(){
+        // this 全选的复选框
+        var userids=this.checked;
+        //获取name=box的复选框 遍历输出复选框
+        $("input[name=box]").each(function(){
+            this.checked=userids;
+        });
+        if($(this).get(0).checked){
+        	$.ajax({
+        		url:"updateStudent3",
+        		dataType:'json',
+        		type:'post',
+        		timeout:10000,
+        		error:function(xhr,type,errorThrown){
+        			alert("刷新失败！");
+        		},
+        	});
+        }else{
+        	$.ajax({
+        		url:"updateStudent4",
+        		dataType:'json',
+        		type:'post',
+        		timeout:10000,
+        		error:function(xhr,type,errorThrown){
+        			alert("刷新失败！");
+        		},
+        	});
+        }
+    });
+	
+	$(".xyb").click(function(){
+		var length=$("input[name=box]:checked").length;
+		var mc = $(".mc").val().trim();
+		var rq = $(".rq").val().trim();
+		var js = $(".js").val().trim();
+		if(mc==""||mc==null){
+			alert("请填写班级名称！");
+		}else if(rq==""||rq==null){
+			alert("请填写开班日期！");
+		}else if(length<25){
+			alert("请至少选择25名学生！");
+		}else if(length>35){
+			alert("最多只能选择35名学生！");
+		}else{
+			window.location.href='TomanualOperation2?mc='+mc+'&rq='+rq+'&js='+js+'';
+		}
+	});
+    
+}
+//给name=box的复选框绑定单击事件
+function box(b){
+	//获取选中复选框长度
+    var length=$("input[name=box]:checked").length;
+    //未选中的长度
+    var len=$("input[name=box]").length;
+    if(length==len){
+        $("#all").get(0).checked=true;
+    }else{
+        $("#all").get(0).checked=false;
+    }
+	if(b.checked==true){
+		$.ajax({
+			data:{
+				sid:b.getAttribute("sid")
+			},
+			url:"updateStudent1",
+			dataType:'json',
+			type:'post',
+			timeout:10000,
+			error:function(xhr,type,errorThrown){
+				
+			},
+		});
+	}else if(b.checked==false){
+		$.ajax({
+			data:{
+				sid:b.getAttribute("sid")
+			},
+			url:"updateStudent2",
+			dataType:'json',
+			type:'post',
+			timeout:10000,
+			error:function(xhr,type,errorThrown){
+				
+			},
+		});
+	}
+}
+//判断全选框
+function fd(){
+	//获取选中复选框长度
+    var length=$("input[name=box]:checked").length;
+    //未选中的长度
+    var len=$("input[name=box]").length;
+    if(length==len){
+        $("#all").get(0).checked=true;
+    }else{
+        $("#all").get(0).checked=false;
+    }
+}
+</script>
+</body>
+</html>

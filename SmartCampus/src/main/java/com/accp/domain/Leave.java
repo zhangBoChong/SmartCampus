@@ -129,5 +129,6 @@ public class Leave {
 
     public void setStudentid(Integer studentid) {
         this.studentid = studentid;
+
     }
 }

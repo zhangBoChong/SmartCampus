@@ -36,4 +36,6 @@ public interface CourseTeacherMapper {
     int updateByPrimaryKeySelective(CourseTeacher record);
 
     int updateByPrimaryKey(CourseTeacher record);
+
+	int courseTeacherinsert(CourseTeacher courseTeacher);
 }

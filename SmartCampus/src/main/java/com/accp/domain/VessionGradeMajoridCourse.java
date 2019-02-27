@@ -46,6 +46,7 @@ public class VessionGradeMajoridCourse {
 
 	public void setVgjd(VessionGradeMajorid vgjd) {
 		this.vgjd = vgjd;
+
 	}
 
 	public Integer getCvgmid() {

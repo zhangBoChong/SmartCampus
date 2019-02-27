@@ -18,6 +18,7 @@ public interface ClassroomMapper {
 	int classroomnubByfid(Integer floorid);//根据楼层id查询教室数量
 	int classroominsert(Classroom record);
 
+
     long countByExample(ClassroomExample example);
 
     int deleteByExample(ClassroomExample example);

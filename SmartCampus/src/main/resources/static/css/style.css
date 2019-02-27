@@ -92,14 +92,9 @@ textarea{height:80px; background:none;}
 .kv-item .choose{position:relative;top:6px;float:left;margin-right:15px;white-space:nowrap;}
 .kv-item .choose .text{float:left;padding-left:5px;*padding-left:5px;white-space:nowrap;}
 .kv-item .choose input[type=radio],.kv-item .choose input[type=checkbox]{position:relative;*position:static;float:left;margin-right:-16px;}
-<<<<<<< HEAD
 
-=======
-/*下拉框样式*/
-.iselect-wrapper{position:relative;width:370px;height:28px;padding:0 20px 0 5px;line-height:28px;border-width:1px;border-style:solid;border-left-color:#c5c5c5;border-top-color:#c5c5c5;border-right-color:#e0e0e0;border-bottom-color:#e0e0e0;background:url(../img/skin_/select_normal.png) no-repeat right center #fff;}
-.iselect-wrapper:hover{background:url(../img/skin_/select_hover.png) no-repeat right center #fff;}
-.iselect-wrapper .iselect{position:absolute;top:-2px;*top:3px;left:-1px;opacity:0;filter:alpha(opacity=0);outline:0 none;z-index:2;}
->>>>>>> refs/heads/chenDongCai
+
+
 /*一段区域数值输入（比如时间段，数字段等）*/
 .kv-item.interval input[type=text],.kv-item .interval input[type=text]{float:left;width:100px;}
 .kv-item .division{float:left;margin:0 5px;color:#666;}

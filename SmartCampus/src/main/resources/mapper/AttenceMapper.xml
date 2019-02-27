@@ -288,7 +288,9 @@
       K2 = #{k2,jdbcType=VARCHAR}
     where attenceId = #{attenceid,jdbcType=INTEGER}
   </update>
+  
   <select id="selectattenceBysidlx" resultType="int">
   SELECT COUNT(*) FROM attence WHERE studentid=#{studentid} AND attence=#{attence}
   </select>
+  
 </mapper>

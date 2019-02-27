@@ -6,10 +6,18 @@ public class Post {
     private String postName;
 
     private Integer status;
-
+    private Integer parentid;
    
 
-    public Integer getPostId() {
+    public Integer getParentid() {
+		return parentid;
+	}
+
+	public void setParentid(Integer parentid) {
+		this.parentid = parentid;
+	}
+
+	public Integer getPostId() {
 		return postId;
 	}
 

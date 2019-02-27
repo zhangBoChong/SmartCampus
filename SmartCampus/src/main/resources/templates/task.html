@@ -79,31 +79,6 @@
                         
                         </div>
                     </div>
-                    <div class="kv-item ue-clear">
-                        <label>选择类型:</label>
-        <div class="kv-item-content">
-			<ul>
-			<li>
-			<span>任务名称:</span> 		
-				<input />
-			</li>
-			<li>
-			<span>时间:</span>
-				<input type="datetime-local"/><span>---</span>
-				<input type="datetime-local" />
-			</li>
-			<li>
-				<div class="search-button">
-                	<input class="button" type="button" value="搜索一下" />
-                </div>
-			</li>
-		</ul>
-    </div>
-                </div>
-               </div>
-				<div class="search-button">
-                	<input class="button" type="button" value="发布任务" />
-               </div>
              </div>
              
             <div class="table">
@@ -192,7 +167,7 @@
         	<tr v-for = "item in list">
 				<td>{{item.starTtime}}</td>
 				<td>{{item.endTime}}</td>
-				<td>{{item.stageaccessories}}</td>       	
+				<td><img v-bind:src="item.stageaccessories"></td>       	
         	</tr>
         	
         </table>

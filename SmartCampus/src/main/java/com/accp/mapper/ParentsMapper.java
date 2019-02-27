@@ -30,6 +30,7 @@ public interface ParentsMapper {
 
     int updateByExample(@Param("record") Parents record, @Param("example") ParentsExample example);
     //修改信息
+
     int updateByPrimaryKeySelective(Parents record);
 
     int updateByPrimaryKey(Parents record);

@@ -28,4 +28,5 @@ public class TopicLx {
 	public void setTopic_lx_type(String topic_lx_type) {
 		this.topic_lx_type = topic_lx_type;
 	}
+
 }

@@ -34,4 +34,5 @@ public interface ModuleMapper {
     
     //查询parentId为0的模块
     List<Module> selectparentIdbyzero(@Param("parentId") Integer parentId);
+
 }

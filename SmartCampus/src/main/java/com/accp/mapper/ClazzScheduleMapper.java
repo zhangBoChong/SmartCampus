@@ -23,6 +23,7 @@ public interface ClazzScheduleMapper {
 	ClazzSchedule chateachertimeBymonthandcid(@Param("cid") Integer cid,@Param("datetime") Integer datetime);
 	
 
+
     int deleteByExample(ClazzScheduleExample example);
 
     int deleteByPrimaryKey(Integer csid);

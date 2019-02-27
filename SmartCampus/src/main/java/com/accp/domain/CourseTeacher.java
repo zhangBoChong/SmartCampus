@@ -6,6 +6,8 @@ public class CourseTeacher {
     private Integer cvgmid;
 
     private Integer tid;
+	
+	private Integer courseid;
     
     private Staff staff;
     
@@ -13,6 +15,14 @@ public class CourseTeacher {
 	private Staff stfobj;//获得教员信息
 	private ClazzSchedule clzscheduleobj;//班级名+上课课时
 	
+	public Integer getCourseid() {
+		return courseid;
+	}
+
+	public void setCourseid(Integer courseid) {
+		this.courseid = courseid;
+	}
+
 	public ClazzSchedule getClzscheduleobj() {
 		return clzscheduleobj;
 	}

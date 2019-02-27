@@ -15,6 +15,7 @@ public interface ExaminationTmMapper {
 	
 	int insertExaTm(@Param("topic_id") int topic_id,@Param("examination_id") int examination_id,@Param("examination_tm_xzt") int examination_tm_xzt,@Param("examination_tm_wdt") int examination_tm_wdt);
 	
+
     long countByExample(ExaminationTmExample example);
 
     int deleteByExample(ExaminationTmExample example);

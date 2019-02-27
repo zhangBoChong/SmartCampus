@@ -123,4 +123,5 @@ public interface ZBCCourseService {
 	 int insertStudentinfo(Studentinfo stu);
 	 //新增班级学生表
 	 int insertclazzStudentinfos(ClazzStudent stu);
+
 }

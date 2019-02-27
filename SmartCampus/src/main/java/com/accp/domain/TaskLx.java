@@ -20,4 +20,5 @@ public class TaskLx {
 	public void setTask_lx_type(String task_lx_type) {
 		this.task_lx_type = task_lx_type;
 	}
+
 }

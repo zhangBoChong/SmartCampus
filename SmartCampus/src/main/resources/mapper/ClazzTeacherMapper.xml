@@ -224,4 +224,8 @@
       courseSchedule = #{courseschedule,jdbcType=INTEGER}
     where tcId = #{tcid,jdbcType=INTEGER}
   </update>
+  
+  <insert id="clazzTeacherinsert">
+  	INSERT INTO `clazz_teacher`(`ctid`,`cid`,`status`)VALUE(#{ctid},#{cid},'1')
+  </insert>
 </mapper>

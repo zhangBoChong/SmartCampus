@@ -1,4 +1,5 @@
 package com.accp.domain;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -65,6 +66,7 @@ public class TaskStage {
         this.stageendtime = stageendtime;
         SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy年MM月dd日");
         this.endTime=simpleDateFormat.format(stageendtime);
+
     }
 
     public String getStageaccessories() {

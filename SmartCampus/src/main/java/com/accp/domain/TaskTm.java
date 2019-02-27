@@ -50,4 +50,5 @@ public class TaskTm {
 	public void setTask_tm_wdt(Integer task_tm_wdt) {
 		this.task_tm_wdt = task_tm_wdt;
 	}
+
 }

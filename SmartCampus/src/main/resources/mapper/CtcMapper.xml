@@ -13,6 +13,7 @@
   <select id="queryBycourseId" resultMap="BaseResultMap">
   	  SELECT ctc.`tid` FROM ctc WHERE ctc.`courseId`=#{courseId} AND ctc.`status`=1
   </select>
+  
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">

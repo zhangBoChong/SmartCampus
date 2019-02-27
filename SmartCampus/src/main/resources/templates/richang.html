@@ -151,17 +151,15 @@
             <div id="pagebean">
             <table border="1px" style="font-size: 17px;font-family:; width: auto;">
 			<tr class="trr" style="background-color: honeydew;">
-				<td width="18.5%">姓名</td>
-				<td width="18.5%">班级</td>
-				<td width="18.5%">班主任</td>
-				<td width="18.5%">时间</td>
-				<td width="18.5%">类型</td>
-				<td width="19%">操作</td>
+				<td width="23.5%">姓名</td>
+				<td width="23.5%">班级</td>
+				<td width="23.5%">时间</td>
+				<td width="23.5%">类型</td>
+				<td width="23%">操作</td>
 			</tr>
 			<tr v-for="item in pagebean.list">
 				<td>{{item.stu.sname}}</td>
 				<td>{{item.stu.clazzStudent.clazz.cname}}</td>
-				<td>申蒙老师</td>
 				<td>{{item.timeStr}}</td>
 				<td v-if="item.attence==0">正常</td>
 				<td v-else="item.attence==1">

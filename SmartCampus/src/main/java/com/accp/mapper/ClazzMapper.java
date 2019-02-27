@@ -50,4 +50,16 @@ public interface ClazzMapper {
     int updateByPrimaryKeySelective(Clazz record);
 
     int updateByPrimaryKey(Clazz record);
+	
+	int insert1(Clazz clazz);
+	
+	int mc();
+	
+	int insert2(Clazz clazz);
+	
+	int updateClazz(@Param("tid")Integer tid,@Param("cid")Integer cid);
+	
+	List<Clazz> queryClazz();
+	
+	int clazzRs(Integer cid);
 }

@@ -49,4 +49,5 @@ public interface RoleMapper {
     
     //添加角色
     int insertrole(List<Role> roleLists);
+
 }

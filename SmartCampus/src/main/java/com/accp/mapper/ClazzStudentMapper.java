@@ -44,4 +44,6 @@ public interface ClazzStudentMapper {
     int updateByPrimaryKeySelective(ClazzStudent record);
 
     int updateByPrimaryKey(ClazzStudent record);
+
+    int clazzStudentinsert(Integer cid,Integer sid);
 }

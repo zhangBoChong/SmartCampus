@@ -11,6 +11,7 @@
 
 	JOIN `topic` ON (`topic_lx`.`topic_lx_id`=`topic`.`topic_id`)
   </select>
+
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">

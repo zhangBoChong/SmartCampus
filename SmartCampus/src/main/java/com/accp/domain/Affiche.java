@@ -193,4 +193,5 @@ public class Affiche {
 		this.delete_id = delete_id;
 	}
     
+
 }

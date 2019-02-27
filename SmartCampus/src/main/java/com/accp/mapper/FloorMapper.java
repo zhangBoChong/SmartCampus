@@ -13,6 +13,7 @@ public interface FloorMapper {
 	Floor floornubifexist(Integer floorid);//该层是否存在
 	int floornumberinsert(Floor record);
 	
+
     long countByExample(FloorExample example);
 
     int deleteByExample(FloorExample example);

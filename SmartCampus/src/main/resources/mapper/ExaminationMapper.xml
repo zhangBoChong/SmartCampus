@@ -309,5 +309,5 @@
 	WHERE e.examination_lx_id!=1 and e.examination_id=#{examinationId}
   </select>
   
-  
+ 
 </mapper>

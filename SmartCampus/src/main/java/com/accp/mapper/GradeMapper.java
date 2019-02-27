@@ -16,7 +16,8 @@ public interface GradeMapper {
 	
 	//查询所有年级
     List<Grade> selectGrade();
-	
+
+	Grade queryByGid(Integer gid);
     long countByExample(GradeExample example);
 
     int deleteByExample(GradeExample example);

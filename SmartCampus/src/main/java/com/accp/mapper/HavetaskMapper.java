@@ -31,4 +31,5 @@ public interface HavetaskMapper {
     int updateByPrimaryKeySelective(Havetask record);
 
     int updateByPrimaryKey(Havetask record);
+
 }

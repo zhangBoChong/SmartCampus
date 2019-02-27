@@ -22,6 +22,7 @@
   	select * from img where img_id=#{img_id}
   </select>
   
+
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">

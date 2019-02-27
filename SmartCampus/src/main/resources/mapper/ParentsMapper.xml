@@ -220,5 +220,4 @@
   	SELECT * FROM parents WHERE phone =#{phone}
   </select>
   
-  
 </mapper>

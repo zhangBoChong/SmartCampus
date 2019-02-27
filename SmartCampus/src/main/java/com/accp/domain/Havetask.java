@@ -53,5 +53,4 @@ public class Havetask {
         this.havetaskDafen = havetaskDafen;
     }
 
-    
 }

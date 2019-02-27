@@ -62,4 +62,5 @@ public class ModuleMiddle {
 	public void setDelete_id(Integer delete_id) {
 		this.delete_id = delete_id;
 	}
+
 }

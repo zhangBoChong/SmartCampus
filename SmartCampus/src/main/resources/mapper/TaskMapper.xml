@@ -18,6 +18,7 @@
 
 		VALUE 		      (#{task_zf},#{task_lx_id},#{task_kstime},#{task_jstime},#{task_mc})
   </insert>
+  
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">

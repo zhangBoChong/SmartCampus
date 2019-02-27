@@ -294,4 +294,5 @@
     where topic_id = #{topicId,jdbcType=INTEGER}
   </update>
   
+
 </mapper>

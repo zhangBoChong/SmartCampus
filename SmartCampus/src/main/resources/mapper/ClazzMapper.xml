@@ -11,6 +11,10 @@
     <result column="majorId" jdbcType="INTEGER" property="majorid" />
   </resultMap>
   
+  <select id="queryClazz" resultMap="BaseResultMap">
+  	SELECT * FROM `clazz` WHERE`status2`=1
+  </select>
+  
   <!-- 按cid查询班级表 -->
   <select id="clazzBycid" resultType="com.accp.domain.Clazz">
   	SELECT * FROM `clazz` WHERE `cid`=#{cid}
@@ -293,4 +297,20 @@
   	SELECT * FROM `clazz` WHERE cid = #{cid}
   </select>
 
+  <insert id="insert1" useGeneratedKeys="true" keyProperty="cid" parameterType="com.accp.domain.Clazz">
+	INSERT INTO `clazz`(`cname`,`bid`,`tid`,`startTime`,`introduce`)VALUE(#{cname},'4',#{tid},#{starttime},#{introduce})
+  </insert>
+  
+  <select id="mc" resultType="int">
+  	SELECT COUNT(*) FROM `clazz`
+  </select>
+  
+  <insert id="insert2" useGeneratedKeys="true" keyProperty="cid" parameterType="com.accp.domain.Clazz">
+	INSERT INTO `clazz`(`cname`,`bid`,`startTime`,`status2`)VALUE(#{cname},'4',#{starttime},'1')
+  </insert>
+  
+  <update id="updateClazz">
+  	UPDATE `clazz` SET`tid`=#{tid} WHERE `cid`=#{cid}
+  </update>
+  
 </mapper>

@@ -3,6 +3,11 @@ package com.accp.domain;
 import java.util.List;
 
 public class Studentinfo {
+    
+    private Character character;
+    
+    private Integer status2;
+    
     private Integer sid;
 
     private String sname;
@@ -195,4 +200,22 @@ public class Studentinfo {
 	public void setAge(Integer age) {
 		this.age = age;
 	}
+
+	public Character getCharacter() {
+		return character;
+	}
+
+	public void setCharacter(Character character) {
+		this.character = character;
+	}
+
+	public Integer getStatus2() {
+		return status2;
+	}
+
+	public void setStatus2(Integer status2) {
+		this.status2 = status2;
+	}
+	
+	
 }

@@ -14,11 +14,51 @@ public class Staff {
 
     private Integer characterid;
 
-    private String headimg;
+    
+	private String headimg;
 
     private Integer status;
     private Integer choice;
     
+    private int age;
+    
+    private int sl;
+    
+    private int sl2;
+    
+    private Character character;
+    private List<Clazz> clzlist;
+    public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+
+	public int getSl() {
+		return sl;
+	}
+
+	public void setSl(int sl) {
+		this.sl = sl;
+	}
+
+	public int getSl2() {
+		return sl2;
+	}
+
+	public void setSl2(int sl2) {
+		this.sl2 = sl2;
+	}
+
+	public Character getCharacter() {
+		return character;
+	}
+
+	public void setCharacter(Character character) {
+		this.character = character;
+	}
 
     public Integer getChoice() {
 		return choice;
@@ -27,8 +67,6 @@ public class Staff {
 	public void setChoice(Integer choice) {
 		this.choice = choice;
 	}
-    
-    private List<Clazz> clzlist;
 
     public List<Clazz> getClzlist() {
 		return clzlist;
@@ -101,4 +139,5 @@ public class Staff {
     public void setStatus(Integer status) {
         this.status = status;
     }
+
 }

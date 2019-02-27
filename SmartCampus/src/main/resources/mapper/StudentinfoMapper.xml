@@ -40,7 +40,6 @@
   	</if>
   </select>
   
-  
   <!-- 按sid查询学生表 -->
   <select id="queryBysidnnn" resultType="com.accp.domain.Studentinfo">
   	SELECT * FROM `studentinfo` 
@@ -48,10 +47,6 @@
   		WHERE `sid`=#{sid}
   	</if>
   </select>
-  
-  
-  
-  
   
   <select id="selectBystatus" resultMap="BaseResultMap">
   SELECT * FROM studentinfo WHERE `status`=4
@@ -78,7 +73,6 @@
   	</where>
   </select>
   
-  
   <select id="queryBystusid" resultMap="BaseResultMap">
   	select * from studentinfo where sid=#{sid}
   </select>
@@ -88,6 +82,91 @@
   <insert id="insertStudentinfo" keyProperty="sid" useGeneratedKeys="true">
   	insert into studentinfo(sname,sex,phone,address,education,snumber,status,age,choice)values(#{sname},#{sex},#{phone},#{address},#{education},#{snumber},#{status},#{age},1)
   </insert>
+  
+  
+  <resultMap type="com.accp.domain.Studentinfo" id="queryStudent">
+  	<result property="sid" column="sid" />
+	<result property="sname" column="sname" />
+	<result property="sex" column="sex" />
+	<result property="age" column="age" />
+	<result property="phone" column="phone" />
+	<result property="address" column="address" />
+	<result property="pid" column="pid" />
+	<result property="education" column="education" />
+	<result property="characterid" column="characterid" />
+	<result property="snumber" column="snumber" />
+	<result property="status" column="status" />
+	<result property="headimg" column="headimg" />
+	<result property="choice" column="choice" />
+	<result property="status2" column="status2" />
+	<association property="character" column="characterid" select="characterName"></association>
+  </resultMap>
+  
+  <select id="studentQuantity2"  resultType="int">
+  	SELECT COUNT(*) FROM `studentinfo` WHERE`status`=4 AND `age`>17
+  </select>
+  
+  <select id="studentQuantity"  resultType="int">
+  	SELECT COUNT(*) FROM `studentinfo` WHERE`status`=4
+  </select>
+  
+  <select id="queryAllStudent" resultMap="queryStudent" >
+	SELECT * FROM `studentinfo` WHERE `status`=4
+  </select>
+  
+  <select id="characterName" resultType="com.accp.domain.Character">
+  	SELECT * FROM `character` WHERE `characterId`=#{characterId}
+  </select>
+  
+  <select id="queryStudent" resultMap="queryStudent" >
+  	SELECT * FROM `studentinfo`
+  	<where>
+  		`sname`LIKE concat('%',#{sname},'%')
+	  	<if test="age1">
+	  		AND #{age1} &lt;=`age`
+	  	</if>
+	  	<if test="age2">
+	  		AND `age` &lt;=#{age2}
+	  	</if>
+	  	<if test="sex!=null">
+	  		AND `sex`=#{sex}
+	  	</if>
+	  	<if test="characterId">
+	  		AND `characterId`=#{characterId}
+	  	</if>
+  	</where>
+  </select>
+  
+  <update id="updateStudent1">
+  	UPDATE `studentinfo` SET `choice`=1 WHERE `sid`=#{sid}
+  </update>
+  
+  <update id="updateStudent2">
+  	UPDATE `studentinfo` SET `choice`=0 WHERE `sid`=#{sid}
+  </update>
+  
+  <update id="updateStudent3">
+  	UPDATE `studentinfo` SET `choice`=1 WHERE `choice`=0 AND `status`=4
+  </update>
+  
+  <update id="updateStudent4">
+  	UPDATE `studentinfo` SET `choice`=0 WHERE `choice`=1 AND `status`=4
+  </update>
+  
+  <select id="queryStudent2" resultType="com.accp.domain.Studentinfo">
+  	SELECT * FROM `studentinfo` WHERE `choice`=1
+  </select>
+  
+  <update id="updateStudent5">
+  	UPDATE `studentinfo` SET `status`=0 WHERE `choice`=1
+  </update>
+  
+  <update id="updateStudent6">
+  	UPDATE `studentinfo` SET `status2` = 1 WHERE `sid`=#{sid}
+  </update>
+  
+  
+  
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -392,5 +471,6 @@
       headImg = #{headimg,jdbcType=VARCHAR},
       age = #{age,jdbcType=INTEGER}
     where sid = #{sid,jdbcType=INTEGER}
-  </update>
+   </update>
+  
 </mapper>

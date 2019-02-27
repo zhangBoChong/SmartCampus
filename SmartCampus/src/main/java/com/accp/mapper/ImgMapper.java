@@ -38,4 +38,5 @@ public interface ImgMapper {
     
     //新增图片
     int inserttp(@Param("delete_id") Integer delete_id);
+
 }

@@ -67,4 +67,5 @@ public interface LoginMapper {
     
     //修改学生账户密码
     int updatestudentpwd(@Param("pwd") String pwd,@Param("peopleId") Integer peopleId,@Param("type") Integer type);
+
 }

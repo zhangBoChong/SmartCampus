@@ -40,6 +40,10 @@
   <select id="selectBycvgmid" resultMap="BaseResultMap">
  	 SELECT * FROM `vession_grade_majorid_course` WHERE cvgmId=#{cvgmid}
   </select>
+  
+  
+  
+  
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -212,5 +216,6 @@
       courseId = #{courseid,jdbcType=INTEGER}
     where cvgmId = #{cvgmid,jdbcType=INTEGER}
   </update>
+
 
 </mapper>

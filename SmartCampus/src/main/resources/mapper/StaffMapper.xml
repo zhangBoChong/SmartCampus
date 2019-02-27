@@ -36,6 +36,69 @@
  </resultMap>
  
  
+ <resultMap type="com.accp.domain.Staff" id="queryAllStaff">
+  	<result property="tid" column="tid" />
+	<result property="sex" column="sex" />
+	<result property="tname" column="tname" />
+	<result property="age" column="age" />
+	<result property="roleid" column="roleid" />
+	<result property="postid" column="postid" />
+	<result property="characterid" column="characterid" />
+	<result property="headimg" column="headimg" />
+	<result property="status" column="status" />
+	<association property="sl" column="tid" select="sl"></association>
+	<association property="sl2" column="tid" select="sl2"></association>
+	<association property="character" column="characterid" select="characterName"></association>
+  </resultMap>
+  
+  <select id="queryStaff3" resultType="com.accp.domain.Staff">
+  	SELECT * FROM `staff` WHERE `postId`=2 ORDER BY RAND( ) LIMIT 1
+  </select>
+  
+  <select id="queryStaff2" resultType="com.accp.domain.Staff">
+  	SELECT * FROM `staff` WHERE `postId`=3 ORDER BY RAND( ) LIMIT 1
+  </select>
+  
+  <select id="queryAllStaff" resultMap="queryAllStaff" >
+	SELECT * FROM `staff` WHERE `postId`=#{postId}
+  </select>
+  
+  <select id="sl" resultType="int">
+  	SELECT COUNT(*) FROM `course_teacher` WHERE `tid`=#{tid}
+  </select>
+  
+  <select id="sl2" resultType="int">
+  	SELECT COUNT(*) FROM `clazz` WHERE `tid`=#{tid}
+  </select>
+  
+  <select id="characterName" resultType="com.accp.domain.Character">
+  	SELECT * FROM `character` WHERE `characterId`=#{characterId}
+  </select>
+  
+  <select id="queryStaff" resultMap="queryAllStaff" >
+  	SELECT * FROM `staff`
+  	<where>
+  		`tname`LIKE concat('%',#{tname},'%')
+  		<if test="tid">
+	  		AND `tid`=#{tid}
+	  	</if>
+	  	<if test="age1">
+	  		AND #{age1} &lt;=`age`
+	  	</if>
+	  	<if test="age2">
+	  		AND `age` &lt;=#{age2}
+	  	</if>
+	  	<if test="sex!=null">
+	  		AND `sex`=#{sex}
+	  	</if>
+	  	<if test="characterId">
+	  		AND `characterId`=#{characterId}
+	  	</if>
+  	</where>
+  	AND `postId`=#{postId}
+  </select>
+ 
+ 
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -284,4 +347,5 @@
   <select id="selectstaffclazz" resultMap="staffclazz">
   	SELECT * FROM staff  WHERE tid=#{tid}
   </select>
+  
 </mapper>

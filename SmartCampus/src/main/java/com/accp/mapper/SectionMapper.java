@@ -10,6 +10,7 @@ import org.apache.ibatis.annotations.Param;
 public interface SectionMapper {
 	List<Section> queryByVidGidCourseId(@Param("vid") Integer vid,@Param("gid") Integer gid,@Param("courseId") Integer courseId);
 	
+
     long countByExample(SectionExample example);
 
     int deleteByExample(SectionExample example);

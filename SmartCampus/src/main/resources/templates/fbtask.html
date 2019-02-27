@@ -197,7 +197,7 @@ window.UMEDITOR_HOME_URL = 'umeditor/';  // 请换成绝对路径
     
 </script>
 <!--缩略图-->
-<script type="text/javascript">            
+<script type="text/javascript" th:inline = "javascript">            
             //判断浏览器是否支持FileReader接口
             if (typeof FileReader == 'undefined') {
                 document.getElementById("xmTanDiv").InnerHTML = "<h1>当前浏览器不支持FileReader接口</h1>";
@@ -248,7 +248,7 @@ window.UMEDITOR_HOME_URL = 'umeditor/';  // 请换成绝对路径
             })
             
             //登录的类型 1为教员  0为管理员
-            var userType = 1;
+            var userType = [[session.u.type]];
             $(function() {
             	if (userType==0) {
             		$("#admin").show();
@@ -416,7 +416,7 @@ window.UMEDITOR_HOME_URL = 'umeditor/';  // 请换成绝对路径
             	
 				alert(JSON.stringify(lists)+"任务名"+taskname+"发布时间"+fbtime+"结束时间"+jstime+"接收任务人类型"+state+"userId"+userId+"文本内容"+textcontent);
 				var middle = {
-						publisherId:1,
+						publisherId:[[session.u.roleId]],
 						ryId:userId,
 						state:state
 				};

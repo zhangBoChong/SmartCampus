@@ -449,7 +449,5 @@ public class ZBCCourseServiceImpl implements ZBCCourseService{
 		int count=clazzStudentMapper.insertclazzStudentinfos(stu);
 		return count;
 	}
-	
-	
 
 }

@@ -2,11 +2,8 @@ package com.accp.domain;
 
 public class ClazzSchedule {
     private Integer csid;
-
     private String datetime;
-    
     private Integer cid;
-
     private Integer classroomid;
     private Integer apm;
     private Integer scheduleid;
@@ -18,7 +15,6 @@ public class ClazzSchedule {
     private String coursename;//课程名称
     private Integer courseschedule;//课程进度
     private Integer coursetime;//总课时
-    
     private Integer coutime;//课时
     private Clazz clzobj;//班级名
     

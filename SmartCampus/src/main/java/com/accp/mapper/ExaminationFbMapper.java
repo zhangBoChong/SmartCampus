@@ -12,6 +12,7 @@ public interface ExaminationFbMapper {
 	
 	int insertExaFb(@Param("examination_id") int examination_id,@Param("csId") int csId);
 	
+
     long countByExample(ExaminationFbExample example);
 
     int deleteByExample(ExaminationFbExample example);

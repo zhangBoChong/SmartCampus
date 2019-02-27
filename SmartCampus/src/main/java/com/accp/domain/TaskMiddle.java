@@ -73,4 +73,5 @@ public class TaskMiddle {
 	public void setTaskstate(int taskstate) {
 		this.taskstate = taskstate;
 	}
+
 }

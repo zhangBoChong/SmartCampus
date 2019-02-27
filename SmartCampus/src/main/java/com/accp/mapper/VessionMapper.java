@@ -15,6 +15,7 @@ public interface VessionMapper {
 	
 	//根据vid查询版本
 	Vession queryByVid(Integer vid);
+
     long countByExample(VessionExample example);
 
     int deleteByExample(VessionExample example);

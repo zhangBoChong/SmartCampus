@@ -11,7 +11,7 @@ import org.apache.ibatis.annotations.Param;
 public interface TaskLxMapper {
 	
 	List<TaskLx> queryByAll();
-	
+
     long countByExample(TaskLxExample example);
 
     int deleteByExample(TaskLxExample example);

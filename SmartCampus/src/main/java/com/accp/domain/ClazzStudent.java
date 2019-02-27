@@ -10,18 +10,12 @@ public class ClazzStudent {
     private Integer status;
 
     private Integer clazzpositionid;
-    
     private String clazzPositionName;
     private Studentinfo stu;
-    
     private Clazz cobj;
-    
     private Studentinfo stuobj;
-    
     private AttenceCount acountobj;
-    
     private Clazz clazz;
-   
 
 	public Clazz getClazz() {
 		return clazz;

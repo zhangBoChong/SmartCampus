@@ -12,6 +12,7 @@ public interface ExaminationLxMapper {
 	
 	List<ExaminationLx> queryExaminationLx();
 	
+
     long countByExample(ExaminationLxExample example);
 
     int deleteByExample(ExaminationLxExample example);

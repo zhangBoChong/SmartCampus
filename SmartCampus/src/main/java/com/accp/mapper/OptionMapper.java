@@ -11,6 +11,7 @@ public interface OptionMapper {
 	
 	int insertOption(@Param("option_xx")String option_xx,@Param("option_pd")int option_pd,@Param("topic_id")int topic_id);
 	
+
     long countByExample(OptionExample example);
 
     int deleteByExample(OptionExample example);

@@ -24,6 +24,7 @@ public class VessionGradeMajorid {
 
 	public void setVessionGrade(VessionGrade vessionGrade) {
 		this.vessionGrade = vessionGrade;
+
 	}
 
 	public Integer getVgmid() {

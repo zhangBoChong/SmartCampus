@@ -11,6 +11,7 @@ public interface ClazzpositionMapper {
 	List<Clazzposition> queryAllclazzpositions();
 	Clazzposition queryBypositionid(Integer positionid);
 
+
     int deleteByExample(ClazzpositionExample example);
 
     int deleteByPrimaryKey(Integer clazzpositionid);
