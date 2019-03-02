@@ -12,7 +12,27 @@
     <result column="status" jdbcType="INTEGER" property="status" />
     <result column="choice" jdbcType="INTEGER" property="choice" />   
     <result column="status" jdbcType="INTEGER" property="status" />
+     <result column="age" jdbcType="INTEGER" property="age" />
+    
   </resultMap>
+  <delete id="deleteStaffs">
+  	delete from staff where tid=#{tid}
+  </delete>
+  <update id="updateStaffs">
+  	update staff set sex=#{sex},tname=#{tname},postId=#{postid},characterId=#{characterid},status=#{status},age=#{age} where tid=#{tid}
+  </update>
+  <insert id="addStaff">
+  	insert into staff (sex,tname,postId,characterId,status,choice,age) values (#{sex},#{tname},#{postid},#{characterid},#{status},0,#{age})
+  </insert>
+  <select id="queryBySStatus" resultMap="BaseResultMap">
+  	select * from staff where status=#{status}
+  </select>
+  <select id="queryBypostIdss" resultMap="BaseResultMap">
+  	select * from staff where postId=#{postid}
+  </select>
+  <select id="queryAllStaffs" resultMap="BaseResultMap">
+  	select * from staff
+  </select>
   <!-- 修改员工：职位、状态 -->
   <update id="updatestaff">
   	UPDATE `staff` SET `roleId`=#{roleId}, `postId`=#{postId},`status`=#{status} WHERE `tid`=#{tid}

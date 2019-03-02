@@ -2,10 +2,11 @@ package com.accp.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -15,13 +16,15 @@ import com.accp.domain.Clazz;
 import com.accp.domain.ClazzStudent;
 import com.accp.domain.ClazzStudentExamInfo;
 import com.accp.domain.CourseTeacher;
-import com.accp.domain.ExaminationFb;
 import com.accp.domain.ExaminationTm;
 import com.accp.domain.Floor;
-import com.accp.domain.Havetask;
 import com.accp.domain.Havetaskexam;
+import com.accp.domain.Login;
 import com.accp.domain.Parents;
+import com.accp.domain.Staff;
 import com.accp.domain.Studentinfo;
+import com.accp.domain.TanClassinfo;
+import com.accp.domain.TanStudentinfo;
 import com.accp.service.AttenceInfoService;
 import com.accp.service.ClassRoomService;
 import com.accp.service.ClazzInfoService;
@@ -44,17 +47,52 @@ public class TanController {
 	@Autowired
 	ClassRoomService croomservice;
 	
-	
-	/*@RequestMapping("/tomain")
-	public String tomain() {
-		return "main";
+	@RequestMapping("/tomyindex")
+	public String tomyindex(Model model,HttpSession session) {
+		String path="";
+		Login login=(Login)session.getAttribute("u");
+		
+		if(login.getType()==-3) {
+			//tid教的班级
+			System.out.println("员工登录用户id--"+login.getPeopleId());
+			Staff staffobj=cservice.selectstaffclazz(login.getPeopleId());
+			model.addAttribute("staffobj", staffobj);
+			//班级
+			path="datastatistics/dataStatistics2";
+		}else if(login.getType()==-1) {
+			System.out.println("学生登录用户id--"+login.getPeopleId());
+			//学生
+			path="datastatistics/dataStatistics";
+		}
+		System.out.println("path--"+path);
+		return path;
 	}
-	@RequestMapping("/tonav")
-	public String tonav() {
-		return "nav";
-	}*/
 	
-	@RequestMapping("/toDataStatistics")
+	@RequestMapping("/toshowstudentinfoshuju")
+	@ResponseBody
+	public TanStudentinfo toshowstudentinfoshuju(HttpSession session) {
+		//学员考试考勤数据
+		Login login=(Login)session.getAttribute("u");
+		Integer sid=login.getPeopleId();
+		System.out.println("进入学生页面-sid--"+sid);
+		if(sid==null) {
+			sid=1;//默认值
+		}
+		//基本信息 班级+年级
+		Studentinfo stuobj=stuservice.selectallinfo(sid);
+		//参与的考试信息
+		List<Havetaskexam> elist=einfoservice.examscoreBysid(sid);
+		AttenceCount acount=ainfoservice.selectattenceBysidlx(sid);
+		
+		TanStudentinfo tans=new TanStudentinfo();
+		tans.setStuobj(stuobj);
+		tans.setElist(elist);
+		tans.setAcount(acount);
+		
+		return tans;
+	}
+	
+	/*@RequestMapping("/toDataStatistics")
 	public String toDataStatistics(Model model,Integer sid) {
 		//学员考试考勤数据
 		if(sid==null) {
@@ -70,20 +108,61 @@ public class TanController {
 		AttenceCount acount=ainfoservice.selectattenceBysidlx(sid);
 		model.addAttribute("acount", acount);
 		//System.out.println("进入MyController");
+		
+		TanStudentinfo tans=new TanStudentinfo();
+		tans.setStuobj(stuobj);
+		tans.setElist(elist);
+		tans.setAcount(acount);
+		
 		return "datastatistics/dataStatistics";
+	}*/
+	
+	@RequestMapping("/toshowaclazzinfo")
+	@ResponseBody
+	public TanClassinfo toshow(Integer cid) {
+		//班级考试考勤数据
+		if(cid==null) {
+			cid=1;//默认值
+		}
+		Clazz clzobj=cservice.selectclazzBycid(cid);
+		//学员考试
+		List<ClazzStudentExamInfo> clslist=einfoservice.selectstudentexamBycid(cid);
+		//学员考勤
+		List<ClazzStudent> clsattencelist=ainfoservice.selectallstuattenceBycid(cid);
+		
+		TanClassinfo tanc=new TanClassinfo();
+		tanc.setClzobj(clzobj);
+		tanc.setClslist(clslist);
+		tanc.setClsattencelist(clsattencelist);
+		
+		return tanc;
 	}
 	
-	/*@RequestMapping("/test")
-	public String test(Model model) {
-		//测试
-		if(sid==null) {
-			sid=1;//默认值
+	/*@RequestMapping("/toshowaclazzinfo")
+	public String toshow(Model model,Integer cid) {
+		//班级考试考勤数据
+		if(cid==null) {
+			cid=1;//默认值
 		}
-//		einfoservice.examscoreBysid(sid);
-//		List<ExaminationTm> etimlist=einfoservice.selectexamtimByexamid(examinationId);
-//		model.addAttribute("etimlist", etimlist);
-		return "datastatistics/dataStatistics3";
+		//System.out.println("班级主页---cid:"+cid);
+		Clazz clzobj=cservice.selectclazzBycid(cid);
+		model.addAttribute("clzobj", clzobj);
+		//学员考试
+		List<ClazzStudentExamInfo> clslist=einfoservice.selectstudentexamBycid(cid);
+		model.addAttribute("clslist", clslist);
+		//学员考勤
+		List<ClazzStudent> clsattencelist=ainfoservice.selectallstuattenceBycid(cid);
+		model.addAttribute("clsattencelist", clsattencelist);
+		
+		TanClassinfo tanc=new TanClassinfo();
+		tanc.setClzobj(clzobj);
+		tanc.setClslist(clslist);
+		tanc.setClsattencelist(clsattencelist);
+		
+		//System.out.println("进入MyController");
+		return "datastatistics/dataStatistics2";
 	}*/
+	
 	
 	@RequestMapping("/toupclazzStudent")
 	public String toupclazzStudent(Model model) {
@@ -128,26 +207,9 @@ public class TanController {
 		return "datastatistics/dataStatistics5";
 	}
 	
-	@RequestMapping("/toshow")
-	public String toshow(Model model,Integer cid) {
-		//班级考试考勤数据
-		if(cid==null) {
-			cid=1;//默认值
-		}
-		//System.out.println("班级主页---cid:"+cid);
-		Clazz clzobj=cservice.selectclazzBycid(cid);
-		model.addAttribute("clzobj", clzobj);
-		//学员考试
-		List<ClazzStudentExamInfo> clslist=einfoservice.selectstudentexamBycid(cid);
-		model.addAttribute("clslist", clslist);
-		//学员考勤
-		List<ClazzStudent> clsattencelist=ainfoservice.selectallstuattenceBycid(cid);
-		model.addAttribute("clsattencelist", clsattencelist);
-		//System.out.println("进入MyController");
-		return "datastatistics/dataStatistics2";
-	}
 	
 	
+	/*-------------------------*/
 	@RequestMapping("/toselectStudentinfo")
 	public String toselectStudentinfo(Model model) {
 		//查询所有新生

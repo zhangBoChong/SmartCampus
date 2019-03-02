@@ -2,38 +2,12 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/amazeui/2.7.2/css/amazeui.css"/>
-		<script src="js/jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/amazeui/2.7.2/js/amazeui.js" type="text/javascript" charset="utf-8"></script>
-		<script type="text/javascript">
-			$(function() {
-			  $('#my-scrollspy').scrollspy({
-				animation: 'slide-left',
-				delay: 500
-			  })
-			});
-			
-			
-			$(function() {
-			    var $modal = $('#your-modal');
-
-			    $modal.siblings('.am-btn').on('click', function(e) {
-			      var $target = $(e.target);
-			      if (($target).hasClass('js-modal-open')) {
-			        $modal.modal();
-			      } else if (($target).hasClass('js-modal-close')) {
-			        $modal.modal('close');
-			      } else {
-			        $modal.modal('toggle');
-			      }
-			    });
-			  });
-		</script>
+		<link rel="stylesheet" type="text/css" href="css/wzr/amazeui.css">
 		<link rel="stylesheet" type="text/css" href="css/wzr/bootstrap.min.css"/>
 		<title>公告列表</title>
 		<style type="text/css">
 			.form-control{
-				height: 28px;
+				height: 33px;
 			}
 			.btn-default{
 				height: 28px;
@@ -63,15 +37,17 @@
 		&nbsp;&nbsp;&nbsp;&nbsp;
 		<input type="text" id="title" name="affiche_title" placeholder="公告标题...">
 		<button type="button" class="btn btn-default" style="background-color: transparent;line-height: 11px;" v-on:click="go2()">Go!</button>
-		<!-- <select id='type1' v-on:click="danji(this.type1)"><option v-bind:value="1">班级公告</option>
-		<option v-bind:value="2">年级公告</option>
-		<option v-bind:value="3">全校公告</option></select> -->
+		&nbsp;&nbsp;<select class="form-control" id="id" v-on:click="selectxlk()">
+		  <option v-bind:value="-10">班级公告</option>
+		  <option v-bind:value="-20">年级公告</option>
+		  <option v-bind:value="-30">全校公告</option>
+		</select>
 		</form>
-				<h4>公告类型：<select id="id" v-on:click="selectxlk()">
+				<!-- <h4>公告类型：<select id="id" v-on:click="selectxlk()">
 					<option v-bind:value="-10">班级公告</option>
 					<option v-bind:value="-20">年级公告</option>
 					<option v-bind:value="-30">全校公告</option>
-				</select></h4>
+				</select></h4> -->
 
 			<br><br><br>
 			
@@ -92,30 +68,9 @@
 			{{v.affiche_title}}
 		  </div>
 		</div>
-		  
-		  
-		  
-		<!-- <div class="panel panel-info">
-		  <div class="panel-heading">
-			  <h3 class="panel-title"><input type="checkbox" name="interest" v-bind:value="v.affiche_id"/>
-			{{v.tname}}<span class="badge fj" style="color: black;" data-toggle="modal" data-target="#myModal">查看附件</span></h3>
-		  </div>
-		  <a v-on:click="cx1(v.affiche_id,v.img_id)" data-toggle="modal" data-target="#myModal">
-		  <div class="panel-body">
-			{{v.affiche_title}}
-		  </div></a>
-		</div> -->
 		
 		
 		</div>
-		
-		<!-- Model -->
-		<!-- <button
-		  type="button"
-		  class="am-btn am-btn-danger"
-		  data-am-modal="{target: '#my-popup'}">
-		  Popup
-		</button> -->
 
 		<div class="am-popup" id="my-popup">
 		  <div class="am-popup-inner" v-for="s in ssList">
@@ -136,55 +91,37 @@
 		  </div>
 		</div>
 		
-		
-		<!-- Modal -->
-		<!-- <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-		  <div class="modal-dialog" role="document">
-			<div class="modal-content">
-			<div v-for="s in ssList">
-			  <div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="myModalLabel">{{s.tname}}</h4>
-			  </div>
-			  <div>
-			  <div class="modal-body">
-				  <h3 style="text-align: center;">{{s.affiche_title}}</h3>
-				<textarea class="form-control" rows="10" readonly="readonly">{{s.affiche_content}}
-				
-				</textarea>
-				<input type="hidden" id="img_id" v-bind:value="s.img_id">
-				<span v-for="i in imList">
-				<span v-if="imList">
-				<img v-bind:src="a+i.img_path" alt="..." class="img-thumbnail">
-				</span>
-				</span>
-				<p>{{s.affiche_time}}</p>
-			  </div>
-			  </div>
-			  <div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-primary">Save changes</button>
-			  </div>
-			  </div>
-			</div>
-		  </div>
-		</div> -->
-		
-		<!-- <ul class="pager">
-			<li><a v-on:click="go(1)">首页</a></li>
-			<li><a v-on:click="go(pagebean6.prevPage)">上一页</a></li>
-			<li><a v-on:click="go(pagebean6.nextPage)">下一页</a></li>
-			<li><a v-on:click="go(pagebean6.pagecount)">尾页</a></li>
-		</ul> -->
 	</div>
 	</body>
 </html>
 <script src="js/wzr/jquery.min.js" type="text/javascript" charset="utf-8"></script>
-<script src="js/wzr/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+<!-- <script src="js/wzr/bootstrap.min.js" type="text/javascript" charset="utf-8"></script> -->
 <script src="js/wzr/pace.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="js/wzr/vue.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/wzr/amazeui.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
+$(function() {
+	  $('#my-scrollspy').scrollspy({
+		animation: 'slide-left',
+		delay: 500
+	  })
+	});
+	
+	
+	$(function() {
+	    var $modal = $('#your-modal');
 
+	    $modal.siblings('.am-btn').on('click', function(e) {
+	      var $target = $(e.target);
+	      if (($target).hasClass('js-modal-open')) {
+	        $modal.modal();
+	      } else if (($target).hasClass('js-modal-close')) {
+	        $modal.modal('close');
+	      } else {
+	        $modal.modal('toggle');
+	      }
+	    });
+	  });
 
 
 
@@ -307,20 +244,6 @@ function gonggao1(affiche_id,img_id){
 		});
 	}
 }
-
-/* function page(page,affiche_title){
-	$.ajax({
-		url:"/selectAffiche",
-		data:{
-			page:page,
-			affiche_title:affiche_title
-		},success:function(data){
-			vm.pagebean6=data;
-		}
-	});
-} */
-
-/* page(1,null); */
 
 
 	//页面加载的时候,所有的复选框都是未选中的状态

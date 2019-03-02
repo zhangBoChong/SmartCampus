@@ -50,32 +50,32 @@
 		</style>
 	</head>
 	<body>
-		<div class="container-fluid individual_fdiv">
+		<div class="container-fluid individual_fdiv" id="studentinfo">
 			<div class="basicInforma">
 				<p class="subtitleP">基本信息</p>
 				<div class="bInformaDiv">
-					<div><img th:attr="src=${stuobj.headimg}" width="120px"/></div>
+					<div><img   width="120px"/></div>
 					<div><!-- src="img/yuantiao.jpg" -->
 						<table class="table table-bordered">
 							<tr>
-								<td class="backgroundtoolbar">姓名</td><td th:text="${stuobj.sname}"></td>
-								<td class="backgroundtoolbar">学号</td><td th:text="${stuobj.snumber}"></td>
+								<td class="backgroundtoolbar">姓名</td><td v-if="stuobj">{{stuobj.sname}}</td>
+								<td class="backgroundtoolbar">学号</td><td v-if="stuobj">{{stuobj.snumber}}</td>
 							</tr>
-							<tr th:each="c:${stuobj.clsobj}" th:if="${c.status==1}">
-								<td  class="backgroundtoolbar">班级</td><td  th:text="${c.cobj.cname}"></td>
+							<tr v-for="(c,index) in stuobj.clsobj" v-if="c.status==1" >
+								<td  class="backgroundtoolbar">班级</td><td>{{c.cobj.cname}}</td>
 								<td class="backgroundtoolbar">年级</td>
 								<td>
-									<span th:text="${c.cobj.vgobj.grade.gname}"></span>
-									<span th:text="${c.cobj.vgobj.vession.vname}"></span>
+									<span>{{c.cobj.vgobj.grade.gname}}</span>
+									<span>{{c.cobj.vgobj.vession.vname}}</span>
 								</td>
 							</tr>
 						</table>
 					</div>
 					<div class="myclassbtn" style="display: none;">
 						<p> 历史班级</p>
-						<span th:each="c:${stuobj.clsobj}" th:unless="${c.status==1}">
-							<input type="button" class="btn btn-default backgroundtoolbar beferclazz" th:attr="data-cid=${c.cid}" th:value="${c.cobj.cname}" />
-						</span>
+						<!-- <span v-for="(c,index) in stuobj.clsobj" v-else-if="c.status==1" >
+							<input type="button" class="btn btn-default backgroundtoolbar beferclazz" v-bind:data-cid="c.cid" v-bind:value="c.cobj.cname"  />
+						</span> -->
 					</div>
 				</div>
 				
@@ -85,13 +85,13 @@
 				<div class="eInformaDiv ">
 					<table class="table table-bordered" >
 						<!-- data-id:考试id，查看考试详细情况  style="width: 800px;"-->
-						<tr class="backgroundtoolbar"><td>考试类型</td><td>试卷名称</td><td>考试分数</td><td><!-- 考试排名 --></td></tr>
-						<tr th:each="e:${elist}" th:attr="data-id=${e.examinationId}">
+						<tr class="backgroundtoolbar"><td>考试类型</td><td>试卷名称</td><td>考试分数</td><!-- <td>考试排名</td> --></tr>
+						<tr v-for="(e,index) in listexam" v-bind:data-id="e.examinationId" >
 							<!-- <td>考试开始时间</td><td th:text="${e.examobj.examinationKstime}"></td> -->
-							<td th:text="${e.examobj.examlxtype.examination_lx_type}"></td>
-							<td class="examcname" th:text="${e.examobj.coursename.coursename}"></td>
-							<td class="exampaim" th:text="${e.score}"></td>
-							<td><!-- <a >3</a> --></td>
+							<td>{{e.examobj.examlxtype.examination_lx_type}}</td>
+							<td class="examcname">{{e.examobj.coursename.coursename}}</td>
+							<td class="exampaim">{{e.score}}</td>
+							<!-- <td><a >3</a></td> -->
 						</tr>
 					</table>
 				</div>
@@ -102,20 +102,20 @@
 					<table class="table table-bordered" ><!-- style="width: 800px;" -->
 						<tr class="backgroundtoolbar"><td>正常出勤次数</td><td>迟到早退次数</td><td>旷课次数</td><td>请假次数</td></tr>
 						<tr>
-							<td class="zhcshu" th:text="${acount.normalcount}"></td>
-							<td class="chdshu" th:text="${acount.latecount}"></td>
-							<td class="kuankshu" th:text="${acount.truant}"></td>
-							<td class="qjiashu" th:text="${acount.vacate}"></td>
+							<td class="zhcshu" >{{stuattenobj.normalcount}}</td>
+							<td class="chdshu" >{{stuattenobj.latecount}}</td>
+							<td class="kuankshu" >{{stuattenobj.truant}}</td>
+							<td class="qjiashu" >{{stuattenobj.vacate}}</td>
 						</tr>
 					</table>
-					<input class="btn btn-default marginbottom backgroundtoolbar showCdetails" style="margin-left: 1.5rem;" type="button" value="查看详细信息" />
+					<!-- <input class="btn btn-default marginbottom backgroundtoolbar showCdetails" style="margin-left: 1.5rem;" type="button" value="查看详细信息" />
 					<input class="btn btn-default marginbottom backgroundtoolbar hideCdetails" style="display: none;margin-left: 1.5rem;" type="button" value="隐藏" />
 					<table class="table table-bordered Cdetails" style="display: none;">
 						<tr class="backgroundtoolbar"><td>时间</td><td>类别</td><td>原因</td></tr>
 						<tr><td>2018-08-06</td><td>迟到早退</td><td>迟到2分钟</td></tr>
 						<tr><td>2018-08-08</td><td>迟到早退</td><td>迟到5分钟</td></tr>
 						<tr><td>2018-08-16</td><td>迟到早退</td><td>迟到2分钟</td></tr>
-					</table>
+					</table> -->
 				</div>
 			</div>
 			<div class="" style="display: flex;">
@@ -125,8 +125,37 @@
 		</div>
 		<script src="js/jquery-1.12.4.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/vue.js" type="text/javascript"></script>
 		<script type="text/javascript" src="js/echarts.js"></script>
 		<script type="text/javascript">
+			var v=null;
+			$(function(){
+				v=new Vue({
+					el:"#studentinfo",
+					data:{
+						stuobj:null,
+						listexam:[],
+						stuattenobj:null
+					}
+				});
+				showStudentInfor();
+			});
+			
+			function showStudentInfor(){
+				
+				$.ajax({
+					url:"/toshowstudentinfoshuju",
+					success:function(result){
+						console.log(result.elist);
+						v.stuobj=result.stuobj;
+						v.listexam=result.elist;
+						v.stuattenobj=result.acount;
+					}
+				});
+			}
+		
+		
+		
 			$(function(){
 				var mylshibj=$(".myclassbtn").find("span").size();
 				if(mylshibj!=0){
@@ -202,7 +231,6 @@
 				if (option && typeof option === "object") {
 				    myChartks.setOption(option, true);
 				}
-				
 				
 				//----------考勤饼状图----------
 				var dom = document.getElementById("container");

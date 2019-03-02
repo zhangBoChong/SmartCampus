@@ -11,6 +11,10 @@ public class Staff {
     private Integer roleid;
 
     private Integer postid;
+    
+    private Integer roleId;
+
+    private Integer postId;
 
     private Integer characterid;
 
@@ -25,10 +29,45 @@ public class Staff {
     private int sl;
     
     private int sl2;
+    private String postName;
+    private String characterName;
     
     private Character character;
     private List<Clazz> clzlist;
-    public int getAge() {
+    
+    public Integer getRoleId() {
+		return roleId;
+	}
+
+	public void setRoleId(Integer roleId) {
+		this.roleId = roleId;
+	}
+
+	public Integer getPostId() {
+		return postId;
+	}
+
+	public void setPostId(Integer postId) {
+		this.postId = postId;
+	}
+
+	public String getPostName() {
+		return postName;
+	}
+
+	public void setPostName(String postName) {
+		this.postName = postName;
+	}
+
+	public String getCharacterName() {
+		return characterName;
+	}
+
+	public void setCharacterName(String characterName) {
+		this.characterName = characterName;
+	}
+
+	public int getAge() {
 		return age;
 	}
 

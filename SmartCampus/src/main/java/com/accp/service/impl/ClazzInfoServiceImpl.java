@@ -8,8 +8,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.accp.domain.Clazz;
 import com.accp.domain.ClazzStudent;
+import com.accp.domain.Staff;
 import com.accp.mapper.ClazzMapper;
 import com.accp.mapper.ClazzStudentMapper;
+import com.accp.mapper.StaffMapper;
 import com.accp.service.ClazzInfoService;
 
 @Service
@@ -19,6 +21,8 @@ public class ClazzInfoServiceImpl implements ClazzInfoService{
 	ClazzMapper cmapper;
 	@Autowired
 	ClazzStudentMapper clsmapper;
+	@Autowired
+	StaffMapper staffmapper;
 	
 	/**
 	 * 班级信息（班级名、班主任、年级+版本、班级总人数）
@@ -41,6 +45,12 @@ public class ClazzInfoServiceImpl implements ClazzInfoService{
 		// TODO Auto-generated method stub
 		List<ClazzStudent> list=clsmapper.clazzallstudentBycid(cid);
 		return list;
+	}
+
+	@Override
+	public Staff selectstaffclazz(Integer tid) {
+		// TODO Auto-generated method stub
+		return staffmapper.selectstaffclazz(tid);
 	}
 
 }

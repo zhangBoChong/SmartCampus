@@ -258,6 +258,7 @@ xzbj1 {
 			</div>
 			<div class="xstk">
 				<!-- 显示题库数据 -->
+				<input type="hidden" id="id17" value="17">
 				<table border="1" class="table">
 					<tr>
 						<td><input type="checkbox" id="all2"></td>
@@ -269,7 +270,7 @@ xzbj1 {
 						<td>难易度</td>
 						<td>操作</td>
 					</tr>
-
+					
 					<tbody id="list2">
 						<tr v-for="item7 in pageBean"
 							v-on:click="dianJiXianShi(item7.topic_id)">
@@ -282,7 +283,7 @@ xzbj1 {
 							<td>{{item7.sectionName}}</td>
 							<td>{{item7.topic_lx_type}}</td>
 							<td>{{item7.topic_level}}</td>
-							<td><a v-on:click="deleteTopic(item7.topic_id)">删除</a></td>
+							<td><span v-for="i17 in ButtonmiddleList1" v-if="i17.buttonstatus==0"><a v-on:click="deleteTopic(item7.topic_id)">删除</a></span></td>
 						</tr>
 					</tbody>
 				</table>
@@ -293,9 +294,12 @@ xzbj1 {
 						</span> -->
 				</div>
 			</div>
-			<div>
-				<input style="background-color:" class="fbzy" type="button"
-					value="发布作业" />
+			<div id="div18">
+			<input type="hidden" id="id18" value="18">
+				<span v-for="i18 in ButtonmiddleList18" v-if="i18.buttonstatus == 0"> 
+				<input class="fbzy" type="button" v-on:click="addinfor()"
+					value="发布作业"/> 
+					</span>
 			</div>
 		</div>
 	</div>
@@ -303,10 +307,10 @@ xzbj1 {
 
 
 
-	<script src="js/jquery.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/vue.js"></script>
-	<script type="application/javascript">
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/vue.js"></script>
+<script type="text/javascript">
 		
 		
 		var v = new Vue({
@@ -324,13 +328,25 @@ xzbj1 {
 		var v2 = new Vue({
 			el:".xstk",
 			data:{
-				pageBean:null
+				pageBean:null,
+				ButtonmiddleList1:null
 				//题库内容
+			},created(){
+				this.cx17();
 			},methods:{
 				deleteTopic:function(topic_id){
 					deleteTopic1(topic_id);
 				},danjitimu:function(topic_id){
 					danjitimu1(topic_id);
+				},cx17:function(){
+					var id17 = $("#id17").val();
+					$.ajax({
+						url:"/querybuttonmiddle",
+						data:"buttonid="+id17,
+						success:function(data){
+							v2.ButtonmiddleList1=data;
+						}
+					});
 				}
 			}
 		})
@@ -627,30 +643,31 @@ xzbj1 {
 		} 
 			
 		
-		$(".fbzy").click(function(){
+		/* $(".fbzy").click(function(){
+			alert("jin");
 			 obj = document.getElementsByName("test");
-			    check_val = []; /*获取的学员编号*/
+			    check_val = []; 
 			    for(k in obj){
 			        if(obj[k].checked)
 			            check_val.push(obj[k].value);
 				}
 		     obj2 = document.getElementsByName("test2");
-		     check_val2 = []; /*获取的题目编号*/
+		     check_val2 = []; 
 		     for(k2 in obj2){
 		        if(obj2[k2].checked)
 		            check_val2.push(obj2[k2].value);
 			 }
-			 var zylx = $("#zylx").val();  /*获取的作业类型编号*/
-			 var zymc = $("#zymc").val();  /*获取的作业名称*/
-		 	 var zf = $("#zfk").val();     /*获取作业总分*/	
-		 	 var kstime = $(".kstime").val();     /*获取作业开始时间*/
-		 	 var jstime = $(".jstime").val();     /*获取作业结束时间*/
-			 var wdt = $("#wdtfk").val();  /*获取问答题分数*/
-		 	 var xzt = $("#xztfk").val();  /*获取选择题分数*/
-		 	 var kecheng = $("#kecheng").val(); /*获取课程编号*/
-		 	 var zhangjie = $("#zhangjie").val();  /*获取章节编号*/
-		 	 var dianjinianji = $("#dianjinianji").val(); /*获取年级*/
-		 	 var dianjibanji = $("#dianjibanji").val();  /*获取班级*/
+			 var zylx = $("#zylx").val(); 
+			 var zymc = $("#zymc").val(); 
+		 	 var zf = $("#zfk").val();    
+		 	 var kstime = $(".kstime").val(); 
+		 	 var jstime = $(".jstime").val();   
+			 var wdt = $("#wdtfk").val();  
+		 	 var xzt = $("#xztfk").val();
+		 	 var kecheng = $("#kecheng").val(); 
+		 	 var zhangjie = $("#zhangjie").val();  
+		 	 var dianjinianji = $("#dianjinianji").val(); 
+		 	 var dianjibanji = $("#dianjibanji").val(); 
 			 
 		 	 
 		 	 $.ajax({
@@ -668,12 +685,71 @@ xzbj1 {
 		 		 }
 		 		 
 		 	 })
-		 	 
-		})
+		}) */
 		
 		
 		
-	
+	var vm1 = new Vue({
+			el:"#div18",
+			data:{
+				ButtonmiddleList18:null
+			},created(){
+				this.cx18();
+			},methods:{
+				cx18:function(){
+					var id18 = $("#id18").val();
+					//alert(id18);
+					$.ajax({
+						url:"/querybuttonmiddle",
+						data:"buttonid="+id18,
+						success:function(data){
+							vm1.ButtonmiddleList18=data;
+						}
+					});
+				},addinfor:function(){
+					obj = document.getElementsByName("test");
+				    check_val = []; /*获取的学员编号*/
+				    for(k in obj){
+				        if(obj[k].checked)
+				            check_val.push(obj[k].value);
+					}
+			     obj2 = document.getElementsByName("test2");
+			     check_val2 = []; /*获取的题目编号*/
+			     for(k2 in obj2){
+			        if(obj2[k2].checked)
+			            check_val2.push(obj2[k2].value);
+				 }
+				 var zylx = $("#zylx").val();  /*获取的作业类型编号*/
+				 var zymc = $("#zymc").val();  /*获取的作业名称*/
+			 	 var zf = $("#zfk").val();     /*获取作业总分*/	
+			 	 var kstime = $(".kstime").val();     /*获取作业开始时间*/
+			 	 var jstime = $(".jstime").val();     /*获取作业结束时间*/
+				 var wdt = $("#wdtfk").val();  /*获取问答题分数*/
+			 	 var xzt = $("#xztfk").val();  /*获取选择题分数*/
+			 	 var kecheng = $("#kecheng").val(); /*获取课程编号*/
+			 	 var zhangjie = $("#zhangjie").val();  /*获取章节编号*/
+			 	 var dianjinianji = $("#dianjinianji").val(); /*获取年级*/
+			 	 var dianjibanji = $("#dianjibanji").val();  /*获取班级*/
+				 
+			 	 
+			 	 $.ajax({
+			 		 url:"/insertTask",
+			 		 data:'task_zf='+zf+'&task_lx_id='+zylx+'&task_mc='+zymc+'&csId='+check_val+'&topic_id='+check_val2+'&task_tm_xzt='+xzt+'&task_tm_wdt='+wdt, //+'&task_kstime='+kstime+'&task_jstime='+jstime
+			 		 dataType:'json',
+			 		 type:'post',
+			 		 success:function(data){
+			 			if(data>0){
+							alert('新增成功！！！')
+							location.reload();
+						}else{
+							alert('新增失败！！！')
+						}
+			 		 }
+			 		 
+			 	 })
+				}
+			}
+		});
 	</script>
 </body>
 </html>

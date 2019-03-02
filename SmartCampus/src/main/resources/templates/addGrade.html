@@ -143,7 +143,8 @@
 			</select>	
 			新增年级:
 			<input type="text" id="grade" style="height: 1.6rem"/>
-			<input type="button" id="addGrade" value="提交" style="height: 2rem"/>
+			<input type="hidden" id='id13' value="13">
+			<span v-for="item in ButtonmiddleList1" v-if="item.buttonstatus==0"><input type="button" id="addGrade" value="提交" style="height: 2rem" v-on:click="add1()"/></span>
        </div>  
     </div>
 
@@ -161,7 +162,34 @@
 		var v=new Vue({
 			el:"#container",
 			data:{
-				vessions:null
+				vessions:null,
+				ButtonmiddleList1:null
+			},created(){
+				this.cx13();
+			},methods:{
+				add1:function(){
+					var vid=$("#vession").val();
+					var gname=$("#grade").val();
+					$.ajax({
+						url:'insertVG',
+						dataType:'json',
+						type:'post',
+						data:'vid='+vid+'&gname='+gname,
+						success:function(data){
+							$("#grade").val("");
+							alert("新增成功!");					
+				    	}
+					});
+				},cx13:function(){
+					var id13 = $("#id13").val();
+					$.ajax({
+						url:"/querybuttonmiddle",
+						data:"buttonid="+id13,
+						success:function(data){
+							v.ButtonmiddleList1=data;
+						}
+					});
+				}
 			}
 		});
 		$.ajax({
@@ -172,7 +200,7 @@
 				v.vessions=data;
 	    	}
 		});
-		$("#addGrade").click(function(){
+		/* $("#addGrade").click(function(){
 			var vid=$("#vession").val();
 			var gname=$("#grade").val();
 			$.ajax({
@@ -185,7 +213,7 @@
 					alert("新增成功!");					
 		    	}
 			});
-		});
+		}); */
 	})
 </script>
 </html>

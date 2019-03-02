@@ -31,4 +31,7 @@ public interface LoginService {
     
   //修改学生账户密码
     int updatestudentpwd(String pwd,Integer peopleId,Integer type);    
+    
+  //查询学员loginId
+  	Login queryloginIds(Integer peopleId,Integer type);
 }

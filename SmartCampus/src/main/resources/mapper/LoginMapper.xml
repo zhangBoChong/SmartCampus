@@ -10,6 +10,11 @@
     <result column="type" jdbcType="INTEGER" property="type" />
   </resultMap>
   
+  <!-- 查询学员loginId -->
+  <select id="queryloginIds" resultType="com.accp.domain.Login">
+  	SELECT * FROM `login` WHERE `peopleId`=#{peopleId} AND `type`=#{type}
+  </select>
+  
   <!-- 修改学生账户密码 -->
   <update id="updatestudentpwd">
   	UPDATE `login` SET `pwd`=#{pwd} WHERE `peopleId`=#{peopleId} AND `type`=#{type}

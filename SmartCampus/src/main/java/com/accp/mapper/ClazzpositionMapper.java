@@ -8,6 +8,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 @Mapper
 public interface ClazzpositionMapper {
+	int insertClazzposition(Clazzposition record);
+
 	List<Clazzposition> queryAllclazzpositions();
 	Clazzposition queryBypositionid(Integer positionid);
 

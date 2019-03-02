@@ -21,7 +21,7 @@
                 <li class="nav-li current">
                 	<a href="javascript:;" class="ue-clear"><i class="nav-ivon"></i><span class="nav-text">用户信息设置</span></a>
                 	<ul class="subnav">
-						<li class="subnav-li current" href="index.html" data-id="1"><a href="javascript:;" class="ue-clear"><i class="subnav-icon"></i><span class="subnav-text">首页</span></a></li>
+						<li class="subnav-li current" href="tomyindex" data-id="1"><a href="javascript:;" class="ue-clear"><i class="subnav-icon"></i><span class="subnav-text">首页</span></a></li>
                         <li class="subnav-li" href="form.html" data-id="2"><a href="javascript:;" class="ue-clear"><i class="subnav-icon"></i><span class="subnav-text">表单</span></a></li>
                         <li class="subnav-li" href="table.html" data-id="3"><a href="javascript:;" class="ue-clear"><i class="subnav-icon"></i><span class="subnav-text">表格</span></a></li>
                         <li class="subnav-li" data-id="4"><a href="javascript:;" class="ue-clear"><i class="subnav-icon"></i><span class="subnav-text">自定义设置2</span></a></li>
@@ -97,6 +97,12 @@
                         <li class="subnav-li" data-id="13" href = "fbTask"><a href="javascript:;" class="ue-clear"><i class="subnav-icon"></i><span class="subnav-text">任务发布</span></a></li>
                     </ul>
                 </li>
+				<li class="nav-li">
+						<a href="javascript:;" class="ue-clear"><i class="nav-ivon"></i><span class="nav-text">员工管理</span></a>
+						<ul class="subnav">
+								<li class="subnav-li" href="toStaffs" data-id="115"><a href="javascript:;" class="ue-clear"><i class="subnav-icon"></i><span class="subnav-text">员工查看</span></a><li>								
+						</ul>
+				</li>
 								
 				<li class="nav-li">
 						<a href="javascript:;" class="ue-clear"><i class="nav-ivon"></i><span class="nav-text">数据汇总</span></a>
@@ -115,9 +121,9 @@
 										</ul>
 								</li>
 								<li class="nav-li">
-										<a href="javascript:;" class="ue-clear"><i class="nav-ivon"></i><span class="nav-text">消息管理</span></a>
+										<a href="javascript:;" class="ue-clear"><i class="nav-ivon"></i><span class="nav-text">消息管理<span style="color: red;" th:if="${countinformation_fetch>0}">(<span th:text="${countinformation_fetch}"></span>)</span></span></a>
 										<ul class="subnav" id="li1">
-												<li class="subnav-li" href="towzr_information" data-id="21"><a href="javascript:;" class="ue-clear"><i class="subnav-icon"></i><span class="subnav-text">消息通知 <span style="color: red;" th:text="${countinformation_fetch}"></span></span></a></li>
+												<li class="subnav-li" href="towzr_information" data-id="21"><a href="javascript:;" class="ue-clear"><i class="subnav-icon"></i><span class="subnav-text">消息通知 <span style="color: red;" th:if="${countinformation_fetch>0}">(<span th:text="${countinformation_fetch}"></span>)</span></span></a></li>
 												<!-- <li class="subnav-li" href="wzr_contacts.html" data-id="22"><a href="javascript:;" class="ue-clear"><i class="subnav-icon"></i><span class="subnav-text">联系人列表</span></a></li>
 												<li class="subnav-li" data-id="23"><a href="javascript:;" class="ue-clear"><i class="subnav-icon"></i><span class="subnav-text">类型选择1</span></a></li> -->
 										</ul>
@@ -129,7 +135,7 @@
 												<li class="subnav-li" href="towzr_manage" data-id="25"><a href="javascript:;" class="ue-clear"><i class="subnav-icon"></i><span class="subnav-text">角色、职位管理</span></a></li>
 												<li class="subnav-li" th:href="@{/queryRole}" data-id="26"><a href="javascript:;" class="ue-clear"><i class="subnav-icon"></i><span class="subnav-text">权限分配</span></a></li>
 										</ul>
-								</li> 
+								</li>  
 
             </ul>
             <div class="tree-list outwindow">

@@ -7,6 +7,13 @@
     <result column="status" jdbcType="INTEGER" property="status" />
     <result column="parentId" jdbcType="INTEGER" property="parentid" />
   </resultMap>
+  <insert id="addPost">
+  	insert into `post`(`postName`,`status`,`parentid`)values(#{postName},0,1)
+  </insert>
+  <select id="selectqueryPostid" resultMap="BaseResultMap">
+  		SELECT * FROM `post`
+  		where postId=#{postId}
+  </select>
   
   
   <!-- 批量添加职位 -->

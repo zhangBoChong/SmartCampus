@@ -24,7 +24,7 @@ public interface StudentinfoMapper {
 	
 	
 	//按sid查询学生表
-    Studentinfo queryBysid(@Param("sid") Integer sid);
+    Studentinfo queryBysid1(@Param("sid") Integer sid);
     
     //修改学生状态
     int updatestudentstatus(@Param("status") Integer status,@Param("sid") Integer sid);

@@ -51,7 +51,6 @@
 		position: relative;
 	    width: 107px;
 	    height: 28px;
-<<<<<<< HEAD
 	    top:0.35rem;
 	}
 	.opt input{
@@ -250,7 +249,8 @@
 	            		<input type="date" style="width: 8rem;height: 26px" name="" id="xzstart" v-bind:value="nextTime"/>--
 	            		<input type="date" style="width: 8rem;height: 26px" name="" id="xzend" v-bind:value="nextEndTime"/>
 	            		<div class="search-button" style="margin-left:1.5rem;">
-		                	<input class="button" id="AddCourse" style="width: 7rem" type="button" value="自动生成课表" />
+	            		<input type="hidden" id="id23" value="23">
+		                	<span v-for="it23 in ButtonmiddleList1" v-if="it23.buttonstatus==0"><input class="button" id="AddCourse" style="width: 7rem" type="button" value="自动生成课表" v-on:click="cxn()"/></span>
 		                </div>
                 </div>  
             </div>
@@ -519,8 +519,8 @@
 	                	
 	                	<br/>
                 	</div>
-                	
-                	<input class="button" id="fb" type="button" value="发 布" style="margin-left: 94rem;width: 10rem;height: 2.2rem;margin-top: 1rem"/>	                	 	
+                	<input type="hidden" id="id24" value="24">
+                	<span v-for="i24 in ButtonmiddleList24" v-if="i24.buttonstatus==0"><input class="button" id="fb" type="button" value="发 布" style="margin-left: 94rem;width: 10rem;height: 2.2rem;margin-top: 1rem" v-on:click="fabu()"/></span>	                	 	
                 </div>
                 
             
@@ -552,14 +552,82 @@
 				zhou:0,
 				nextTime:null,
 				nextEndTime:null,
-				apm:[]
+				apm:[],
+				ButtonmiddleList1:null,
+				ButtonmiddleList24:null
+			},created(){
+				this.cx23();
+				this.cx24();
+			},methods:{
+				cxn:function(){
+					$("#addKC").fadeIn();
+					v.richeng=[];
+					datestart=$("#xzstart").val();
+					dateend=$("#xzend").val();
+					$("#xzstart").attr("value",datestart);
+					$("#xzend").attr("value",dateend);
+					var date = new Date(datestart);
+			        var weeknum = date.getDay();     //返回一周的某一天数字。（0-6）
+			        if (weeknum == 0) {
+			          weeknum = 7;
+			        }
+			        v.zhou=weeknum;
+					$.each(v.clazzs, function(){ 
+					    $.ajax({
+							url:'SelectSchedule',
+							dataType:'json',
+							data:'datestart='+datestart+'&dateend='+dateend+'&clazzs='+this.cid,
+							type:'post',
+							success:function(data){
+								v.richeng.push(data);
+					    	}
+						});
+					   
+					 });
+				},fabu:function(){
+					$.each(v.clazzs, function(){
+						$.ajax({
+					    	url:'updateStatus',
+							dataType:'json',
+							data:'datetime1='+datestart+'&datetime2='+dateend+'&cid='+this.cid,
+							type:'post',
+							success:function(data){
+								alert("发布成功!");
+							}
+					    }); 			    
+					 });
+				},cx23:function(){
+					var clzss=[];
+					var datestart;
+					var dateend;
+					
+					var id23 = $("#id23").val();
+					//alert(id23);
+					$.ajax({
+						url:"/querybuttonmiddle",
+						data:"buttonid="+id23,
+						success:function(data){
+							v.ButtonmiddleList1=data;
+						}
+					});
+				},cx24:function(){
+					var id24 = $("#id24").val();
+					//alert(id24);
+					$.ajax({
+						url:"/querybuttonmiddle",
+						data:"buttonid="+id24,
+						success:function(data){
+							v.ButtonmiddleList24=data;
+						}
+					});
+				}
 			}
 		});
-		var clzss=[];
+		/* var clzss=[];
 		var datestart;
-		var dateend;
+		var dateend; */
 		//显示隐藏新增课程
-		$("#AddCourse").click(function(){	
+		/* $("#AddCourse").click(function(){	
 			$("#addKC").fadeIn();
 			v.richeng=[];
 			datestart=$("#xzstart").val();
@@ -584,7 +652,7 @@
 				});
 			   
 			 });						
-		});
+		}); */
 		//提交日程
 		$("#submit").click(function(){
 			//重置教室状态
@@ -622,7 +690,7 @@
 			$("#addKC").fadeOut();
 		});
 		//发布日程
-		$("#fb").click(function(){
+		/* $("#fb").click(function(){
 			$.each(v.clazzs, function(){
 				$.ajax({
 			    	url:'updateStatus',
@@ -635,7 +703,7 @@
 			    }); 			    
 			 });
 			
-		});
+		}); */
 		//保存隐藏div
 		$("#save").click(function(){
 			$("#addKC").fadeOut();
@@ -770,7 +838,6 @@
 			    	}
 				});
 			 });
-
 		});
 	})
 </script>

@@ -25,7 +25,7 @@
 		 
 		JOIN `grade` ON (`vession_grade`.`gid`=`grade`.`gid`) 
 		
-		JOIN `clazz_teacher` ON (`clazz`.`cid`=`clazz_teacher`.`cid`)
+		JOIN `clazz_teacher` ON (`clazz`.`cid`=`clazz_teacher`.`ctid`)
 		
 		JOIN `staff` ON (`clazz_teacher`.`ctid`=`staff`.`tid`)
 		

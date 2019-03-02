@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.accp.domain.Classroom;
 import com.accp.domain.Clazz;
+import com.accp.domain.Character;
 import com.accp.domain.ClazzSchedule;
 import com.accp.domain.ClazzStudent;
 import com.accp.domain.ClazzTeacher;
@@ -123,5 +124,11 @@ public interface ZBCCourseService {
 	 int insertStudentinfo(Studentinfo stu);
 	 //新增班级学生表
 	 int insertclazzStudentinfos(ClazzStudent stu);
+	 //根据编号查性格
+	 Character queryByCharacterId(Integer characterId);
+	 //查所有性格
+	 List<Character> queryAllCharacters();
+	//新增班委职位
+	 int insertClazzposition(Clazzposition record);
 
 }

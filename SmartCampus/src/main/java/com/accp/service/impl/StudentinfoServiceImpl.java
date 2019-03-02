@@ -29,9 +29,9 @@ public class StudentinfoServiceImpl implements StudentinfoService{
 	StudentinfoMapper studentinfoMapper;
 	
 	@Override
-	public Studentinfo queryBysid(Integer sid) {
+	public Studentinfo queryBysid1(Integer sid) {
 		// TODO Auto-generated method stub
-		return studentinfoMapper.queryBysid(sid);
+		return studentinfoMapper.queryBysid1(sid);
 	}
 
 	@Override

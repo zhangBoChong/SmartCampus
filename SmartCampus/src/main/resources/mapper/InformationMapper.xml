@@ -15,7 +15,7 @@
   
   <!-- 查询未读消息 -->
   <select id="selectcountinformation_fetch" resultType="int">
-  	SELECT COUNT(*) FROM `information` WHERE `information_fetch`=1
+  	SELECT COUNT(*) FROM `information` WHERE `information_fetch`=#{information_fetch} AND `information_sendee`=#{information_sendee}
   </select>
   
   <!-- 修改消息状态 -->
@@ -31,7 +31,10 @@
   <!-- 按information_id查询消息内容 -->
   <select id="queryByinformation_id" resultType="com.accp.domain.Information">
   	SELECT * FROM `information`
-	WHERE `information_id`=#{information_id}
+	WHERE 
+	<if test="information_id">
+		`information_id`=#{information_id}
+	</if>
   </select>
   
   <!-- 发布消息 -->
@@ -52,12 +55,15 @@
   </select>
   
   <!-- 查询最新一条并且是当前登录用户的登录提示信息 -->
-  <select id="selectinformation_id" resultType="int">
-  	SELECT `information_id` FROM `information` WHERE `information_type`=#{information_type} AND `information_sendee`=#{information_sendee} ORDER BY `information_id` DESC LIMIT 1
+  <select id="selectinformation_id" resultType="com.accp.domain.Information">
+  	SELECT `information_id` FROM `information` WHERE `information_type`=#{information_type} AND
+  	<if test="information_sendee">
+  		`information_sendee`=#{information_sendee} 
+  	</if>
+  	 ORDER BY `information_id` DESC LIMIT 1
   </select>
   
   
-
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">

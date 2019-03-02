@@ -55,5 +55,16 @@ public class PostServiceImpl implements PostService{
 		// TODO Auto-generated method stub
 		return postMapper.insertpost(postLists);
 	}
-	
+	@Override
+	public Post selectqueryPostid(Integer postid) {
+		Post p=postMapper.selectqueryPostid(postid);
+		return p;
+	}
+
+	@Override
+	public int addPost(Post post) {
+		int count=postMapper.addPost(post);
+		return count;
+	}
+
 }

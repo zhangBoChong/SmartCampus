@@ -23,4 +23,10 @@ public interface PostService {
     
   //添加职位
     int insertpost(List<Post> postLists);
+
+
+ //添加职位
+    int addPost(Post post);
+    Post selectqueryPostid(Integer postid);
+
 }

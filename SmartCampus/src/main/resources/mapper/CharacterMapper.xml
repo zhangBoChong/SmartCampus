@@ -5,6 +5,12 @@
     <id column="characterId" jdbcType="INTEGER" property="characterid" />
     <result column="characterName" jdbcType="VARCHAR" property="charactername" />
   </resultMap>
+  <select id="queryAllCharacters" resultMap="BaseResultMap">
+  	select * from `character` 
+  </select>
+  <select id="queryByCharacterId" resultMap="BaseResultMap">
+  	select * from `character` where characterId=#{characterid}
+  </select>
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">

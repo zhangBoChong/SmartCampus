@@ -32,7 +32,7 @@
     	<div class="hd-top">
             <h1 class="logo">校园管理系统</h1>
             <div class="user-info">
-                <a href="javascript:;" class="user-avatar"><span><i class="info-num">2</i></span></a>
+                <a href="javascript:;" class="user-avatar"><span><!-- <i class="info-num"></i> --></span></a>
                 <span class="user-name" th:each="u : ${us}" th:if="u ne null"><span th:text="${u.loginName}"></span></span>
                 <a href="javascript:;" class="more-info"></a>
             </div>
@@ -84,11 +84,11 @@
 
 <div class="opt-panel user-opt" style="top:52px;left:330px;">
 	<ul>
-    	<li><a class="text">用户资料</a></li>
-        <li><a class="text">短消息<span class="num">(2)</span></a></li>
-        <li><a class="text">资料信息</a></li>
-        <li><a class="text">注销</a></li>
-        <li><a class="text">自定义</a></li>
+    	<li><a href="towzr_information" class="text">我的资料</a></li>
+        <li><a href='towzr_information' class="text">短消息<span class="num"></span></a></li>
+        <!-- <li><a class="text">资料信息</a></li> -->
+        <li><a href='initLogin' class="text">注销</a></li>
+        <!-- <li><a class="text">自定义</a></li> -->
     </ul>
     <div class="opt-panel-tl"></div>
     <div class="opt-panel-tc"></div>
@@ -105,6 +105,8 @@
 		<input type="hidden" id='information_content' th:value="${m.information_content}"/>
 		<input type="hidden" id='information_time' th:value="${m.information_time}"/>
 	</div>
+	
+	
 </body>
 
 
@@ -225,4 +227,3 @@ function pop_close(){
 	})
 //});
 </script>
-

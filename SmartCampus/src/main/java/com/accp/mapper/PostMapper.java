@@ -8,6 +8,8 @@ import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface PostMapper {
+	int addPost(Post post);
+	Post selectqueryPostid(Integer postid);
     long countByExample(PostExample example);
 
     int deleteByExample(PostExample example);

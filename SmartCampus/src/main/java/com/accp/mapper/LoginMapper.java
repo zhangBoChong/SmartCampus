@@ -11,6 +11,9 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 @Mapper
 public interface LoginMapper {
+	//查询学员loginId
+	Login queryloginIds(@Param("peopleId") Integer peopleId,@Param("type") Integer type);
+	
 	//新增登录用户
 	int insertloginuser(List<Login> log);
     long countByExample(LoginExample example);
@@ -67,5 +70,4 @@ public interface LoginMapper {
     
     //修改学生账户密码
     int updatestudentpwd(@Param("pwd") String pwd,@Param("peopleId") Integer peopleId,@Param("type") Integer type);
-
 }

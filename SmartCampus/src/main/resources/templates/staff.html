@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=emulateIE7" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="css/style.css" />
+<link rel="stylesheet" type="text/css" href="css/WdatePicker.css" />
+<link rel="stylesheet" type="text/css" href="css/skin_/table.css" />
+<link rel="stylesheet" type="text/css" href="css/jquery.grid.css" />
+
+
+<title>表格</title>
+<style type="text/css">
+	.search-box div{
+		margin-left: 1rem;
+	}
+	.search-button:nth-child(2) input{
+		background: #FF7200;
+	}
+	.iselect-wrapper {
+	    position: relative;
+	    width: 80px;
+	    height: 28px;
+	    padding: 0 20px 0 5px;
+	    line-height: 28px;
+	    border-width: 1px;
+	    border-style: solid;
+	    border-left-color: #c5c5c5;
+	    border-top-color: #c5c5c5;
+	    border-right-color: #e0e0e0;
+	    border-bottom-color: #e0e0e0;
+	    background: url(../img/skin_/select_normal.png) no-repeat right center #fff;
+	    margin-top: 0.3rem;
+	}
+	.CK{
+		position: relative;
+	    width: 12.4rem;	
+	    height: 28px;
+	    padding: 0 20px 0 5px;
+	    line-height: 28px;
+	    border-width: 1px;
+	    border-style: solid;
+	    border-left-color: #c5c5c5;
+	    border-top-color: #c5c5c5;
+	    border-right-color: #e0e0e0;
+	    border-bottom-color: #e0e0e0;
+	   
+	    margin-top: 0.3rem;
+	}
+	.opt select{
+		position: relative;
+	    width: 107px;
+	    height: 28px;
+	    top:0.35rem;
+	}
+	.opt input{
+		width: 5rem;
+		height: 1.9rem;
+		margin-top: 0.3rem;
+		background: #url(../img/skin_/formbtnbg.png);
+	}
+	.tab table tr{
+		height: 2.5rem;
+	}
+	.tab table tr td{
+		border: 0.5px solid #CFCFCF;		
+		width: 12rem;
+		text-align: center;
+	}
+	.tab table tr td:last-child{
+		width: 21rem;
+	}
+	
+	.tab table{
+		font-size: 0.8rem;	
+		margin-left: -0.6rem;
+		width: 105.7rem;	
+	}
+	.teacher tr{
+		display: none;
+	}
+	#addKC{
+		width: 54rem;	
+		border: 3px groove #3EAADD;
+		background: #F5F5F5;
+		z-index: 2;
+		position: absolute;
+		left: 20rem;
+		top:8rem;
+		display: none;
+	    padding-left: 7.5rem;
+	    padding-top: 0.5rem;
+	}
+	#addSt{
+		width: 30rem;
+		border: 3px groove #3EAADD;
+		background: #F5F5F5;
+		z-index: 3;
+		position: absolute;
+		left: 32rem;
+		top:9rem;
+		display: none;
+	    padding-left: 7.5rem;
+	    padding-top: 0.5rem;
+	    padding-bottom: 1rem
+	}
+	#addKC h1{
+		font-family: "楷体";
+		font-size: 2rem;
+		margin-left: 18rem;
+	}
+	#addSt h1{
+		font-family: "楷体";
+		font-size: 2rem;
+		margin-left: 6rem;
+	}
+	#addSt p{
+		font-family: "楷体";
+		font-size: 1.5rem;
+	}
+	#addSt p select{
+		height: 2rem;
+		width: 6rem;
+	}
+	#addSt p input{
+		height: 1.5rem;
+	}
+	
+	#addKC p{
+		display: flex;		
+	}
+	
+	#addKC p select{
+		position: absolute;
+	    width: 227px;
+	    height: 28px;
+	}
+	#addKC p span{
+		margin-top: 0.5rem;
+	}
+	#addKC .iselect-wrapper {
+	    width: 200px;
+	}
+	.tables tr{
+		border-bottom: 1px solid gray;
+	}
+	.tables tr:last-child{
+		
+	}
+	.tables tr td{
+		width: 10rem;
+		text-align: center;
+		border-left: 1px solid gray;
+		border-right: 1px solid gray;
+	}
+	.tables tr td:first-child {
+		border:none;
+	}
+	.tables tr td:last-child {
+		border:none;
+		width: 21.1rem
+	}
+	.tables{
+		font-size: 1rem;
+		font-family: cursive;
+	}
+	table{
+		margin-left: 0.5rem;
+	}
+	
+	td{
+	border:1px solid black;
+	text-align: center;
+	width: 8rem;
+	height: 2rem;
+	}
+	#addStus h1{
+		font-family: "楷体";
+		font-size: 2rem;
+		margin-left: 6rem;
+	}
+	#addStus p{
+		font-family: "楷体";
+		font-size: 1.5rem;
+	}
+	#addStus p select{
+		height: 2rem;
+		width: 6rem;
+	}
+	#addStus p input{
+		height: 1.5rem;
+	}
+	#addStus{
+		width: 30rem;
+		border: 3px groove #3EAADD;
+		background: #F5F5F5;
+		z-index: 4;
+		position: absolute;
+		left: 32rem;
+		top:9rem;
+		display: none;
+	    padding-left: 7.5rem;
+	    padding-top: 0.5rem;
+	    padding-bottom: 1rem
+	}
+	#max{
+		width: 90rem;		
+		border: 2px solid black;
+		margin-left: 5rem;
+		margin-top: 3rem;
+	}
+	#addStaff{
+		width: 25rem;
+		height: 35rem;
+		border: 1px solid black;
+		position: absolute;
+		left:37rem;
+		top:6rem;
+		z-index: 9;
+		background: #E1E6F6;
+		display: none;
+		font-size: 1.3rem;
+	}
+	#addStaff p input{
+		height: 1.6rem;
+		width: 14rem;
+		font-size: 1.3rem;
+		margin-top: 1rem;
+	}
+	#addStaff p {
+		text-align: center;
+	}
+	#addStaff p select{
+		height: 2.2rem;
+		width: 14.2rem;
+		font-size: 1.3rem;
+		margin-top: 1rem;
+	}
+	
+	#addZw{
+		width: 25rem;
+		height: 14rem;
+		border: 1px solid black;
+		position: absolute;
+		left:37rem;
+		top:6rem;
+		z-index: 10;
+		background: #E1E6F6;
+		display: none;
+		font-size: 1.3rem;
+	}
+	#addZw p input{
+		height: 1.6rem;
+		width: 14rem;
+		font-size: 1.3rem;
+		margin-top: 1rem;
+	}
+	#addZw p {
+		text-align: center;
+	}
+	#addZw p select{
+		height: 2.2rem;
+		width: 14.2rem;
+		font-size: 1.3rem;
+		margin-top: 1rem;
+	}
+	#updateStaff{
+		width: 25rem;
+		height: 35rem;
+		border: 1px solid black;
+		position: absolute;
+		left:37rem;
+		top:6rem;
+		z-index: 11;
+		background: #E1E6F6;
+		display: none;
+		font-size: 1.3rem;
+	}
+	#updateStaff p input{
+		height: 1.6rem;
+		width: 14rem;
+		font-size: 1.3rem;
+		margin-top: 1rem;
+	}
+	#updateStaff p {
+		text-align: center;
+	}
+	#updateStaff p select{
+		height: 2.2rem;
+		width: 14.2rem;
+		font-size: 1.3rem;
+		margin-top: 1rem;
+	}
+</style>
+</head>
+
+<body>	
+	<div id="container">	
+		<div id="addZw">
+			<p style="text-align: center;"><span style="font-family:cursive;font-size: 2rem;font-weight: bold;">新增员工</span></p>
+			<p><span>职位名称:</span><input type="text" id="pname"/></p>
+			<p>
+				<input type="button" style="height: 2.3rem" class="button" value="保存" id="addPost"/>
+				<br/>
+				<input type="reset" style="height: 2.3rem" class="button" value="取消" id="qx"/>
+			</p>
+		</div>
+		<div id="addStaff">			
+			<p style="text-align: center;"><span style="font-family:cursive;font-size: 2rem;font-weight: bold;">新增员工</span></p>
+			<p><span>姓名:</span><input type="text" id="tname"/></p>
+			<p><span>性别:</span><select id="tsex"><option value="0">男</option><option value="1">女</option></select></p>
+			<p><span>年龄:</span><input type="text" id="tage"/></p>
+			<p><span>职位:</span><select id="tzw"><option v-for="(item,index) in posts" v-bind:value="item.postId">{{item.postName}}</option></select></p>
+			<p><span>性格:</span><select id="txg"><option v-for="(item,index) in ccharacter" v-bind:value="item.characterid">{{item.charactername}}</option></select></p>
+			<p><span>状态:</span><select id="tzt"><option value="0">带班老师</option><option value="1">带课老师</option></select></p>
+			<br/>
+			<p>
+				<input type="button" style="height: 2.3rem" class="button" value="保存" id="insertStaff"/>
+				<br/>
+				<input type="reset" style="height: 2.3rem" class="button" value="取消" id="reset"/>
+			</p>
+		</div>
+		<div id="updateStaff">			
+			<p style="text-align: center;"><span style="font-family:cursive;font-size: 2rem;font-weight: bold;">修改员工</span></p>
+			<p><span>姓名:</span><input type="text" id="uptname" v-bind:value="tname"/></p>
+			<p><span>性别:</span><select id="upsex"><option value="0">男</option><option value="1">女</option></select></p>
+			<p><span>年龄:</span><input type="text" v-bind:value="age" id="upage"/></p>
+			<p><span>职位:</span><select id="uppostid"><option v-for="(item,index) in posts" v-bind:value="item.postId">{{item.postName}}</option></select></p>
+			<p><span>性格:</span><select id="upcharacter"><option v-for="(item,index) in ccharacter" v-bind:value="item.characterid">{{item.charactername}}</option></select></p>
+			<p><span>状态:</span><select id="upstatus"><option value="0">带班老师</option><option value="1">带课老师</option></select></p>
+			<br/>
+			<p>
+				<input type="button" style="height: 2.3rem" class="button" value="保存" id="updateSt"/>
+				<br/>
+				<input type="reset" style="height: 2.3rem" class="button" value="取消" id="update"/>
+			</p>
+		</div>
+		<div id="max">			
+			<p style="text-align: center;"><span style="font-family:cursive;font-size: 2.5rem;font-weight: bold;">员工管理</span></p>
+			<br/>
+			<hr style="width: 90rem;border-color: black;"/>
+			<p style="font-size: 1.2rem">
+				<span style="margin-left: 20rem">职位:</span>
+				<select style="font-size: 1.2rem;height: 2rem;width: 7rem;" id="xz">
+					<option value="0">全部</option>
+					<option v-for="(item,index) in posts" v-bind:value="item.postId">{{item.postName}}</option>
+				</select>
+				<a id="toaddZw">添加职位</a>
+				<span style="margin-left: 5rem">状态:</span>
+				<select style="font-size: 1.2rem;height: 2rem;width: 7rem;" id="sstatus">
+					<option value="0">带班老师</option>
+					<option value="1">带课老师</option>
+				</select>
+				<a id="toAddStaff" style="margin-left: 16rem">新增员工</a>
+			</p>
+			
+			<table class="table" style="margin-left: 15rem;margin-top: 1rem;margin-bottom: 3rem;">
+				<tr>
+					<td>姓名</td>
+					<td>性别</td>
+					<td>年龄</td>
+					<td>职位</td>
+					<td>性格</td>
+					<td>状态</td>
+					<td>操作</td>
+				</tr>
+				<tr v-for="(item,index) in staffs">
+					<td>{{item.tname}}</td>
+					<td v-if="item.sex==0">男</td>					
+					<td v-if="item.sex==1">女</td>
+					<td>{{item.age}}</td>
+					<td>{{item.postName}}</td>
+					<td>{{item.characterName}}</td>
+					<td v-if="item.status==0">带班老师</td>					
+					<td v-if="item.status==1">带课老师</td>
+					<td><a id="updateS" v-on:click="ups(item.tid)">修改或职位任免</a>/<a v-on:click="del(item.tid)">删除</a></td>
+				</tr>
+			</table>
+			
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/global.js"></script>
+<script type="text/javascript" src="js/jquery.select.js"></script>
+<script type="text/javascript" src="js/core.js"></script>
+<script type="text/javascript" src="js/jquery.pagination.js"></script>
+<script type="text/javascript" src="js/jquery.grid.js"></script>
+<script type="text/javascript" src="js/WdatePicker.js"></script>
+<script type="text/javascript" src="js/vue.js"></script>
+<script type="text/javascript">
+	$(function(){
+		var v=new Vue({
+			el:"#container",
+			data:{
+				posts:null,
+				staffs:null,
+				ccharacter:null,
+				sex:null,
+				tname:null,
+				postname:null,
+				postid:null,
+				characterid:null,
+				cahractername:null,
+				status:null,
+				age:null,
+				tid:null,
+				ups:function(tid){
+					$("#updateStaff").fadeIn();
+					$.ajax({
+				    	url:'xrStaff',
+						dataType:'json',
+						type:'post',
+						data:'tid='+tid,
+						success:function(data){
+							v.sex=data.sex;
+							v.tname=data.tname;
+							v.postname=data.postName;
+							v.postid=data.postid;
+							v.charactername=data.charactername;
+							v.characterid=data.characterid;
+							v.status=data.status;
+							v.age=data.age;
+							v.tid=data.tid;
+						}
+				    }); 
+				},
+				del:function(tid){
+					$.ajax({
+				    	url:'deleteStaffs',
+						dataType:'json',
+						type:'post',
+						data:'tid='+tid,
+						success:function(data){
+							alert("删除成功!");
+							$.ajax({
+						    	url:'selectStaffs',
+								dataType:'json',
+								type:'post',
+								success:function(data){
+									v.staffs=data;
+								}
+						    });
+						}
+				    }); 
+				}
+			}
+		
+		});	
+		$.ajax({
+	    	url:'selectPost',
+			dataType:'json',
+			type:'post',
+			success:function(data){
+				v.posts=data;
+			}
+	    }); 
+		$("#xz").change(function(){
+			var va=$(this).val();
+			if(va==0){
+				$.ajax({
+			    	url:'selectStaffs',
+					dataType:'json',
+					type:'post',
+					success:function(data){
+						v.staffs=data;
+					}
+			    });
+			}else{
+				$.ajax({
+			    	url:'selectStaffPost',
+					dataType:'json',
+					data:'postid='+va,
+					type:'post',
+					success:function(data){
+						v.staffs=data;
+					}
+			    });
+			}
+		});
+		$("#sstatus").change(function(){
+			var sstatus=$(this).val();
+			$.ajax({
+		    	url:'selectSStatus',
+				dataType:'json',
+				data:'status='+sstatus,
+				type:'post',
+				success:function(data){
+					v.staffs=data;
+				}
+		    });
+		});
+		$.ajax({
+	    	url:'selectStaffs',
+			dataType:'json',
+			type:'post',
+			success:function(data){
+				v.staffs=data;
+			}
+	    });
+		//新增职位
+		$("#addPost").click(function(){
+			var postName=$("#pname").val();
+			$.ajax({
+		    	url:'addSPost',
+				dataType:'json',
+				data:'postName='+postName,
+				type:'post',
+				success:function(data){
+					alert("新增成功!");
+					$("#pname").val("");
+					$("#addZw").fadeOut();
+				}
+		    });
+		});
+		//显示新增员工div
+		$("#toAddStaff").click(function(){
+			$("#addStaff").fadeIn();
+			$.ajax({
+		    	url:'selectAllCharacters',
+				dataType:'json',
+				type:'post',
+				success:function(data){
+					
+					v.ccharacter=data;
+				}
+		    });
+		});
+		//隐藏新增员工div
+		$("#reset").click(function(){
+			$("#addStaff").fadeOut();
+		});
+		//显示新增职位div
+		$("#toaddZw").click(function(){
+			$("#addZw").fadeIn();
+		});
+		//隐藏新增职位div
+		$("#qx").click(function(){
+			$("#addZw").fadeOut();
+		});
+		//隐藏修改员工div
+		$("#update").click(function(){
+			$("#updateStaff").fadeOut();
+		});
+		//修改员工div
+		$("#updateSt").click(function(){
+			var sex=$("#upsex").val();
+			var tname=$("#uptname").val();
+			var age=$("#upage").val();
+			var tzw=$("#tzw").val();
+			var tzt=$("#upstatus").val();
+			var txg=$("#upcharacter").val();
+			$.ajax({
+		    	url:'upStaffs',
+				dataType:'json',
+				type:'post',
+				data:'sex='+sex+'&tname='+tname+'&age='+age+'&postid='+tzw+'&characterid='+txg+'&status='+tzt+'&tid='+v.tid,
+				success:function(data){
+					alert("修改成功!");		
+					$("#updateStaff").fadeOut();
+				}
+		    });
+			
+		});
+		//新增员工
+		$("#insertStaff").click(function(){
+			var sex=$("#tsex").val();
+			var tname=$("#tname").val();
+			var age=$("#tage").val();
+			var tzw=$("#uppostid").val();
+			var tzt=$("#tzt").val();
+			var txg=$("#txg").val();
+			$.ajax({
+		    	url:'addStaffs',
+				dataType:'json',
+				type:'post',
+				data:'sex='+sex+'&tname='+tname+'&age='+age+'&postid='+tzw+'&characterid='+txg+'&status='+tzt,
+				success:function(data){
+					alert("新增成功!");
+					var sex=$("#tsex").val("");
+					var tname=$("#tname").val("");
+					var age=$("#tage").val("");
+					var tzw=$("#tzw").val("");
+					var tzt=$("#tzt").val("");
+					var txg=$("#txg").val("");
+					$("#addStaff").fadeOut();
+					
+				}
+		    });
+	
+		});
+	})
+	
+</script>
+</html>

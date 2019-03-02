@@ -1,5 +1,6 @@
 package com.accp.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,8 @@ import com.accp.domain.Course;
 import com.accp.domain.Examination;
 import com.accp.domain.ExaminationLx;
 import com.accp.domain.Grade;
+import com.accp.domain.Information;
+import com.accp.domain.Login;
 import com.accp.domain.Section;
 import com.accp.domain.Task;
 import com.accp.domain.TaskLx;
@@ -19,6 +22,8 @@ import com.accp.domain.TopicLx;
 import com.accp.domain.TopicNeiRong;
 import com.accp.domain.Vession;
 import com.accp.domain.ZuoYeGuanLi;
+import com.accp.service.InformationService;
+import com.accp.service.LoginService;
 import com.accp.service.WSHService;
 
 @Controller
@@ -27,6 +32,11 @@ public class WSHController {
 	@Autowired
 	WSHService wshService;
 	
+	@Autowired
+	InformationService informationService;
+	
+	@Autowired
+	LoginService loginService;
 	
 	
 	/*进入题库页面*/
@@ -198,9 +208,15 @@ public class WSHController {
 	@ResponseBody
 	public int insertTask(Task task,int[] csId,int[] topic_id,int task_tm_xzt,int task_tm_wdt) {
 		int count = wshService.insertTask(task);
+		List<Information> xueYuanId = new ArrayList<>();
 		for (int i = 0; i < csId.length; i++) {
-			wshService.insertTaskFb(task.getTask_id(), csId[i]);
+				wshService.insertTaskFb(task.getTask_id(), csId[i]);
+				Information in1 = new Information();
+				Login ll1 = loginService.queryloginIds(csId[i], -1);
+				in1.setInformation_sendee(ll1.getLoginId());
+				xueYuanId.add(in1);
 		}
+		informationService.publishbusywork(xueYuanId);
 		for (int i = 0; i < topic_id.length; i++) {
 			wshService.insertTaskTm(topic_id[i], task.getTask_id(), task_tm_xzt, task_tm_wdt);
 		}
@@ -212,9 +228,15 @@ public class WSHController {
 		@ResponseBody
 		public int insertExa(Examination exa,int[] csId,int[] topic_id,int examination_tm_xzt,int examination_tm_wdt) {
 			int count = wshService.insertExa(exa);
+			List<Information> xueYuanId2 = new ArrayList<>();
 			for (int i = 0; i < csId.length; i++) {
 				wshService.insertExaFb(exa.getExamination_id(), csId[i]);
+				Information in2 = new Information();
+				Login ll2 = loginService.queryloginIds(csId[i], -1);
+				in2.setInformation_sendee(ll2.getLoginId());
+				xueYuanId2.add(in2);
 			}
+			informationService.publishexaminations(xueYuanId2);
 			for (int i = 0; i < topic_id.length; i++) {
 				wshService.insertExaTm(topic_id[i], exa.getExamination_id(), examination_tm_xzt, examination_tm_wdt);
 			}

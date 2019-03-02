@@ -3,6 +3,7 @@ package com.accp.mapper;
 import com.accp.domain.Information;
 import com.accp.domain.InformationExample;
 import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -33,6 +34,9 @@ public interface InformationMapper {
     //登录消息通知
     int insertInformation(List<Information> informationList);
     
+    //自定义消息接口
+    int insertInformations(List<Information> informationLists);
+    
     //查询消息
     List<Information> selectInformation(@Param("delete_id") Integer delete_id,@Param("information_sendee") Integer information_sendee);
     
@@ -43,12 +47,11 @@ public interface InformationMapper {
     int deleteInformation(@Param("information_id") Integer information_id);
     
     //查询未读消息
-    int selectcountinformation_fetch();
+    int selectcountinformation_fetch(@Param("information_fetch") Integer information_fetch,@Param("information_sendee") Integer information_sendee);
     
     //修改消息状态
     int updateinformation_fetch(@Param("information_id") Integer information_id);
     
     //查询最新一条并且是当前登录用户的登录提示信息
-    int selectinformation_id(@Param("information_type") Integer information_type,@Param("information_sendee") Integer information_sendee);
-
+    Information selectinformation_id(@Param("information_type") Integer information_type,@Param("information_sendee") Integer information_sendee);
 }

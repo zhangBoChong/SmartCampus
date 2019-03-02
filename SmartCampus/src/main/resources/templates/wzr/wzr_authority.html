@@ -37,7 +37,7 @@
 				margin-top: -280px;
 			}
 			.panel-defaultthree{
-				margin-top: 240px;
+				margin-top: 40px;
 				width: 40%;
 			}
 		</style>
@@ -50,17 +50,17 @@
 			<h4>角色:</h4><select class="form-control" id='selectrole'>
 				  <option v-for="item1 in roList" v-bind:value="item1.roleId" v-text="item1.roleName"></option>
 				</select>
-			<div>
-				<!-- 模块权限 -->
+			<!-- <div>
+				模块权限
 				<div>
 				<div class="panel panel-default panel-defaultone">
-				  <!-- Default panel contents -->
+				  Default panel contents
 				  <div class="panel-heading">模块权限:</div>
-				  <!-- <div class="panel-body">
+				  <div class="panel-body">
 				    <p>...</p>
-				  </div> -->
+				  </div>
 				
-				  <!-- List group -->
+				  List group
 				  <ul class="list-group">
 				    <li class="list-group-item" v-for="item2 in parentIdbyzeroList"><input type='checkbox' name='moduleId' v-bind:value='item2.moduleId'> {{item2.moduleName}}
 				    <span class="badge" v-on:click="querybymoduleId(item2.moduleId)">展开子级模块>></span></li>
@@ -69,13 +69,13 @@
 				
 				
 				<div class="panel panel-default panel-defaulttwo">
-				  <!-- Default panel contents -->
+				  Default panel contents
 				  <div class="panel-heading">二级模块:</div>
-				  <!-- <div class="panel-body">
+				  <div class="panel-body">
 				    <p>...</p>
-				  </div> -->
+				  </div>
 				
-				  <!-- List group -->
+				  List group
 				  <ul class="list-group">
 				    <li class="list-group-item" v-for="item3 in modulechilederList">
 				    <input type='checkbox' name='moduleId' v-bind:value='item3.moduleId'> {{item3.moduleName}}
@@ -84,7 +84,7 @@
 				</div>
 				</div>
 				
-			</div>
+			</div> -->
 			<div>
 				<!-- 功能按钮 -->
 				<div class="panel panel-default panel-defaultthree">
@@ -173,7 +173,18 @@ function xg1(th,brid){
 		url:"/updatebuttonstatus",
 		data:"buttonstatus="+buttonstatus1+"&brid="+brid,
 		success:function(data){
-			
+			if(data>0){
+					var roleId = $("#selectrole option:selected").val();
+					//alert(roleId);
+					$.ajax({
+						url:"/selectbuttonmiddleone",
+						data:"roleId="+roleId,
+						success:function(data){
+							/* console.log(JSON.stringify(data));  */
+							v1.buttonList12=data;
+						}
+					});
+			}
 		}
 	});
 }
@@ -186,7 +197,18 @@ function xg2(th1,brid1){
 		url:"/updatebuttonstatus",
 		data:"buttonstatus="+buttonstatus2+"&brid="+brid1,
 		success:function(data){
-			
+			if(data>0){
+				var roleId1 = $("#selectrole option:selected").val();
+				//alert(roleId1);
+					$.ajax({
+						url:"/selectbuttonmiddleone",
+						data:"roleId="+roleId1,
+						success:function(data){
+							/* console.log(JSON.stringify(data));  */
+							v1.buttonList12=data;
+						}
+					});
+			}
 		}
 	});
 }

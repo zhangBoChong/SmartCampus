@@ -28,11 +28,14 @@ public interface InformationService {
     int publishbusywork(List<Information> information_sendeeList2);
     
   //查询未读消息
-    int selectcountinformation_fetch();
+    int selectcountinformation_fetch(Integer information_fetch,Integer information_sendee);
     
   //修改消息状态
     int updateinformation_fetch(Integer information_id);
     
   //查询最新一条并且是当前登录用户的登录提示信息
-    int selectinformation_id(Integer information_type,Integer information_sendee);
+    Information selectinformation_id(Integer information_type,Integer information_sendee);
+    
+  //自定义消息接口
+    int insertInformations(List<Information> informationLists);
 }

@@ -3,9 +3,13 @@ package com.accp.mapper;
 import com.accp.domain.Character;
 import com.accp.domain.CharacterExample;
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+@Mapper
 public interface CharacterMapper {
+	List<Character> queryAllCharacters();
+	Character queryByCharacterId(Integer characterId);
     long countByExample(CharacterExample example);
 
     int deleteByExample(CharacterExample example);

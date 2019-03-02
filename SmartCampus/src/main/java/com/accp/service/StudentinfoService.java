@@ -15,7 +15,7 @@ public interface StudentinfoService {
 	 
 	 
 	//按sid查询学生表
-	    Studentinfo queryBysid(Integer sid);
+	    Studentinfo queryBysid1(Integer sid);
 	    
 	  //修改学生状态
 	    int updatestudentstatus(Integer status,Integer sid);

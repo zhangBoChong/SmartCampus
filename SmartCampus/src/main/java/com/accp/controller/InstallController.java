@@ -55,9 +55,8 @@ import com.accp.service.StudentinfoService;
 
 /**
  * wzr:
- * ddd:ddd为1717班  S1
- * ccc:ccc1716班  S2
- * 111:111 1716班 S2
+ * ddd:ddd为AT1711班 Y2
+ * 111:111 AT1716班 S1
  * @author Administrator
  *
  */
@@ -180,6 +179,39 @@ public class InstallController {
 			List<Buttonmiddle> ButtonmiddleList11 = buttonmiddleService.querybuttonmiddle(buttonid, l67.getRoleId(), 1);
 			return ButtonmiddleList11;
 		}
+		if(buttonid==15) {
+			List<Buttonmiddle> ButtonmiddleList15 = buttonmiddleService.querybuttonmiddle(buttonid, l67.getRoleId(), 1);
+			return ButtonmiddleList15;
+		}
+		if(buttonid==21) {
+			List<Buttonmiddle> ButtonmiddleList21 = buttonmiddleService.querybuttonmiddle(buttonid, l67.getRoleId(), 1);
+			return ButtonmiddleList21;
+		}
+		if(buttonid==18) {
+			List<Buttonmiddle> ButtonmiddleList18 = buttonmiddleService.querybuttonmiddle(buttonid, l67.getRoleId(), 1);
+			/*System.out.println("ButtonmiddleList18="+ButtonmiddleList18);
+			for (Buttonmiddle buttonmiddle : ButtonmiddleList18) {
+				System.out.println(buttonmiddle.getButtonstatus());
+			}*/
+			return ButtonmiddleList18;
+		}
+		if(buttonid==20) {
+			List<Buttonmiddle> ButtonmiddleList20 = buttonmiddleService.querybuttonmiddle(buttonid, l67.getRoleId(), 1);
+			return ButtonmiddleList20;
+		}
+		if(buttonid==24) {
+			List<Buttonmiddle> ButtonmiddleList24 = buttonmiddleService.querybuttonmiddle(buttonid, l67.getRoleId(), 1);
+			return ButtonmiddleList24;
+		}
+		if(buttonid==26) {
+			List<Buttonmiddle> ButtonmiddleList26 = buttonmiddleService.querybuttonmiddle(buttonid, l67.getRoleId(), 1);
+			return ButtonmiddleList26;
+		}
+		if(buttonid==29) {
+			List<Buttonmiddle> ButtonmiddleList29 = buttonmiddleService.querybuttonmiddle(buttonid, l67.getRoleId(), 1);
+			return ButtonmiddleList29;
+		}
+		//System.out.println(ButtonmiddleList1);
 		return ButtonmiddleList1;
 	}
 	
@@ -279,14 +311,6 @@ public class InstallController {
 	}
 	
 	
-	//查询未读消息
-	@RequestMapping("/selectcountinformation_fetch")
-	public String selectcountinformation_fetch(Model model) {
-		model.addAttribute("countinformation_fetch",informationService.selectcountinformation_fetch());
-		//System.out.println(informationService.selectcountinformation_fetch());
-		return "nav";
-	}
-	
 	//修改消息状态
 	@RequestMapping(value="/updateinformation_fetch",produces="application/json;charset=UTF-8")
 	@ResponseBody
@@ -303,7 +327,7 @@ public class InstallController {
 		List<Affiche> ffList = null;
 		//判断登录人员类型-1为学生
 		if(us.getType()==-1) {
-			Studentinfo st = studentinfoService.queryBysid(us.getPeopleId());
+			Studentinfo st = studentinfoService.queryBysid1(us.getPeopleId());
 			ClazzStudent cs1 = clazzStudentService.clazz_studentBysid(st.getSid());
 			Clazz cl1 = clazzService.clazzBycid(cs1.getCid());
 			if(id==-10 || id==null) {
@@ -328,7 +352,7 @@ public class InstallController {
 		List<Affiche> ssList = null;
 		//判断登录人员类型-1为学生
 		if(us.getType()==-1) {
-			Studentinfo st = studentinfoService.queryBysid(us.getPeopleId());
+			Studentinfo st = studentinfoService.queryBysid1(us.getPeopleId());
 			ClazzStudent cs1 = clazzStudentService.clazz_studentBysid(st.getSid());
 			Clazz cl1 = clazzService.clazzBycid(cs1.getCid());
 			if(id==-10) {
@@ -379,10 +403,15 @@ public class InstallController {
 	}
 	
 	//按tid查询
-	@RequestMapping(value="/queryBytid",produces="application/json;charset=UTF-8")
+	@RequestMapping(value="/queryBytid1",produces="application/json;charset=UTF-8")
 	@ResponseBody
-	public List<Staff> queryBytid(Integer tid){
+	public List<Staff> queryBytid1(Integer tid){
 		List<Staff> tidList = staffService.queryBytid1(tid);
+		//System.out.println(tid);
+		/*for(Staff ss:tidList) {
+			System.out.println("postId="+ss.getPostId());
+			System.out.println("postid="+ss.getPostid());
+		}*/
 		return tidList;
 	}
 	
@@ -553,6 +582,16 @@ public class InstallController {
 	//去nav.html
 	@RequestMapping("/toNav")
 	public String toNav() {
+		return "redirect:/selectcountinformation_fetch";
+	}
+	
+	//查询未读消息
+	@RequestMapping("/selectcountinformation_fetch")
+	public String selectcountinformation_fetch(HttpSession session,Model model) {
+		Login l91 = (Login)session.getAttribute("u");
+		int countinformation_fetch = informationService.selectcountinformation_fetch(1, l91.getLoginId());
+		model.addAttribute("countinformation_fetch",countinformation_fetch);
+		//System.out.println(countinformation_fetch);
 		return "nav";
 	}
 	
@@ -624,7 +663,7 @@ public class InstallController {
 	@RequestMapping("/towzr_UserManage")
 	public String towzr_UserManage(HttpSession session) {
 		Login l71 = (Login)session.getAttribute("u");
-		if(l71.getType()==-3) {
+		if(l71.getRoleId()==8 || l71.getRoleId()==9) {
 			return "wzr/wzr_UserManage";
 		}else {
 			return "wzr/quanxian";
@@ -659,7 +698,7 @@ public class InstallController {
 		/*model.addAttribute("roleList", roleService.queryRole());
 		model.addAttribute("postList", postService.selectPost());
 		model.addAttribute("authorityList", authorityService.queryAuthority());*/
-		if(l69.getType()==-3 && l69.getRoleId()==8 || l69.getRoleId()==9) {
+		if(l69.getRoleId()==8 || l69.getRoleId()==9) {
 			return "wzr/wzr_authority";
 		}else {
 			return "wzr/quanxian";

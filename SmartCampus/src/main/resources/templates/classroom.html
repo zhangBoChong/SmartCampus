@@ -66,9 +66,10 @@
 			<div class="divborder">
 				<p class="subtitleP">教室信息</p>
 				<div class="roomcontent " id="classroominfo">
-					<div class="function_operation ">
+					<div class="function_operation">
+					<input type="hidden" id='id16' value="16">
 						<!-- Button trigger modal -->
-						<a data-toggle="modal" data-target="#myModal">添加</a>
+						<a v-for="item16 in ButtonmiddleList1" v-if="item16.buttonstatus==0" data-toggle="modal" data-target="#myModal">添加</a>
 					</div>
 					<div class="divborder">
 						<div class="querycondition ">
@@ -166,12 +167,14 @@
 		<script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/vue.js" type="text/javascript"></script>
 		<script type="text/javascript">
+		
 			var v=null;
 			$(function(){
 				v=new Vue({
 					el:"#classroominfo",
 					data:{
-						list:null
+						list:null,
+						ButtonmiddleList1:null
 					}
 				});
 				showClassroomInfo();
@@ -327,6 +330,9 @@
 				$("[name=rstatus]").change(function(){
 					showClassroomInfo();
 				});
+				
+				
+				
 			});
 			
 			function showClassroomInfo(){
@@ -342,8 +348,19 @@
 						v.list=result;
 					}
 				});
+				
+				
+				var id16 = $("#id16").val();
+				//alert(id16);
+				$.ajax({
+					url:"/querybuttonmiddle",
+					data:"buttonid="+id16,
+					success:function(result){
+						v.ButtonmiddleList1=result;
+					}
+				});
+				
 			}
-			
 		</script>
 	</body>
 </html>

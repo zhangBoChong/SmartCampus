@@ -170,7 +170,8 @@
 	            			<option v-for="(item,index) in teachers" v-bind:value="item.ctid">{{item.staff.tname}}</option>
 	            		</select>
 	            		<div class="search-button" style="margin-left: 51.5rem;">
-		                	<input class="button" id="AddCourse" type="button" value="新增课程" />
+	            		<input type="hidden" id="id22" value="22">
+		                	<span v-for="i22 in ButtonmiddleList1" v-if="i22.buttonstatus==0"> <input class="button" id="AddCourse" type="button" value="新增课程" v-on:click="show1()"/></span>
 		                </div>
                 </div>
                 <div  class="opt ue-clear tab">
@@ -254,15 +255,31 @@
 				majors:null,
 				courses:null,
 				teachers:null,
-				clazzs:null
+				clazzs:null,
+				ButtonmiddleList1:null
+			},created(){
+				this.cx22();
+			},methods:{
+				show1:function(){
+					$("#addKC").fadeIn();
+				},cx22:function(){
+					var id22 = $("#id22").val();
+					//alert(id22);
+					$.ajax({
+						url:"/querybuttonmiddle",
+						data:"buttonid="+id22,
+						success:function(data){
+							v.ButtonmiddleList1=data;
+						}
+					});
+				}
 			}
 		});
 
 		//显示隐藏新增课程
-		$("#AddCourse").click(
-			function(){	
+		/* $("#AddCourse").click(function(){	
 			$("#addKC").fadeIn();		
-		});
+		}); */
 		//保存隐藏div
 		$("#save").click(function(){
 			$("#addKC").fadeOut();
@@ -361,7 +378,6 @@
 			$("#vgmid option:first").prop("selected", 'selected');
 			$("#coursename").val("");
 			$("#coursetime").val("");
-
 		});
 	})
 </script>

@@ -81,19 +81,13 @@ public class InformationServiceImpl implements InformationService{
 	}
 
 	@Override
-	public int selectcountinformation_fetch() {
-		// TODO Auto-generated method stub
-		return informationMapper.selectcountinformation_fetch();
-	}
-
-	@Override
 	public int updateinformation_fetch(Integer information_id) {
 		// TODO Auto-generated method stub
 		return informationMapper.updateinformation_fetch(information_id);
 	}
 
 	@Override
-	public int selectinformation_id(Integer information_type, Integer information_sendee) {
+	public Information selectinformation_id(Integer information_type, Integer information_sendee) {
 		// TODO Auto-generated method stub
 		return informationMapper.selectinformation_id(information_type, information_sendee);
 	}
@@ -154,6 +148,21 @@ public class InformationServiceImpl implements InformationService{
 			count = informationMapper.insertInformation(informationList);
 		}
 		return count;
+	}
+
+	@Override
+	public int selectcountinformation_fetch(Integer information_fetch, Integer information_sendee) {
+		// TODO Auto-generated method stub
+		return informationMapper.selectcountinformation_fetch(information_fetch, information_sendee);
+	}
+
+	@Override
+	/**
+	 * 自定义消息接口
+	 */
+	public int insertInformations(List<Information> informationLists) {
+		// TODO Auto-generated method stub
+		return informationMapper.insertInformations(informationLists);
 	}
 	
 }

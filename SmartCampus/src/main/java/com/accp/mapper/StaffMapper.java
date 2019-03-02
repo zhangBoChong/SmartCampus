@@ -8,6 +8,13 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 @Mapper
 public interface StaffMapper {
+	int deleteStaffs(Integer tid);
+	int updateStaffs(Staff record);
+	int addStaff(Staff record);
+	List<Staff> queryBySStatus(Integer status);
+	List<Staff> queryBypostIdss(Integer postid);
+	List<Staff> queryAllStaffs();
+
 	Staff selectBytid(Integer tid);
 	Staff queryBytid(Integer tid);
 	//老师以及带的所有班级信息

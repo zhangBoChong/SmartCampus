@@ -80,8 +80,9 @@
 		<div class="mtk">
 			<!-- 模态框 -->
 			<!-- Button trigger modal -->
-			<button type="button" class="btn btn-primary btn-lg"
-				data-toggle="modal" data-target="#myModal">新增题目</button>
+			<input type="hidden" id="id29" value="29">
+			<span v-for="i29 in ButtonmiddleList29" v-if="i29.buttonstatus==0"><button type="button" class="btn btn-primary btn-lg"
+				data-toggle="modal" data-target="#myModal">新增题目</button></span>
 
 			<!-- Modal -->
 			<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
@@ -242,10 +243,11 @@
 							<td>{{item7.sectionName}}</td>
 							<td>{{item7.topic_lx_type}}</td>
 							<td>{{item7.topic_level}}</td>
-							<td><a v-on:click="deleteTopic(item7.topic_id)">删除</a></td>
+							<td><a v-for="i28 in ButtonmiddleList1" v-if="i28.buttonstatus==0" v-on:click="deleteTopic(item7.topic_id)">删除</a></td>
 						</tr>
 
 					</table>
+					<input type="hidden" id="id28" value="28">
 					<div class="sxy"></div>
 
 				</div>
@@ -286,6 +288,27 @@
 <script src="js/vue.js"></script>
 <script src="js/jquery.js"></script>
 <script type="text/javascript">
+	var vm1 = new Vue({
+		el:".mtk",
+		data:{
+			ButtonmiddleList29:null
+		},created(){
+			this.cx29();
+		},methods:{
+			cx29:function(){
+				var id29 = $("#id29").val();
+				$.ajax({
+					url:"/querybuttonmiddle",
+					data:"buttonid="+id29,
+					success:function(data){
+						vm1.ButtonmiddleList29=data;
+					}
+				});
+			}
+		}
+	});
+
+
 	var v = new Vue({
 		el : ".tktj",
 		data : {
@@ -302,15 +325,26 @@
 	var v2 = new Vue({
 		el : ".xstk",
 		data : {
-			pageBean : null
+			pageBean : null,
+			ButtonmiddleList1:null
 		//题库内容
-		},
-		methods : {
+		},created(){
+			this.cx28();
+		},methods : {
 			deleteTopic : function(topic_id) {
 				deleteTopic1(topic_id);
 			},
 			dianJiXianShi : function(topic_id) {
 				dianJiXianShi1(topic_id);
+			},cx28:function(){
+				var id28 = $("#id28").val();
+				$.ajax({
+					url:"/querybuttonmiddle",
+					data:"buttonid="+id28,
+					success:function(data){
+						v2.ButtonmiddleList1=data;
+					}
+				});
 			}
 		}
 	})

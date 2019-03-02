@@ -166,17 +166,22 @@ public class LoginController {
 	@RequestMapping("/toMain")
 	public String toMain(HttpSession session,Model model) {
 		Login us=(Login)session.getAttribute("u");
-		int information_id = informationService.selectinformation_id(2, us.getLoginId());//2为登录提示消息
-		//System.out.println(information_id);
-		List<Information> infoList12=informationService.queryByinformation_id(information_id);
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd E a hh:mm:ss");// 年-月-日 星期几 上、下午 时：分：秒
-		for(Information i:infoList12) {
-			sdf.format(i.getInformation_time());
+		Information information_id = informationService.selectinformation_id(2, us.getLoginId());//2为登录提示消息
+		List<Information> infoList12=null;
+		if(information_id!=null) {
+			infoList12 = informationService.queryByinformation_id(information_id.getInformation_id());
 		}
-		model.addAttribute("infoList12", infoList12);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd E a hh:mm:ss");// 年-月-日 星期几 上、下午 时：分：秒
+		if(infoList12!=null) {
+			for(Information i:infoList12) {
+				sdf.format(i.getInformation_time());
+			}
+			model.addAttribute("infoList12", infoList12);
+		}
 		model.addAttribute("us", us);
 		return "main";
 	}
+	
 	
 	//去注册页面
 	@RequestMapping("/toRegister")

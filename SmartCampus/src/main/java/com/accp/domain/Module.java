@@ -1,29 +1,31 @@
 package com.accp.domain;
 
 public class Module {
-    private Integer moduleid;
+    private Integer moduleId;
 
-    private String modulename;
+    private String moduleName;
 
     private Integer deleteId;
 
-    public Integer getModuleid() {
-        return moduleid;
-    }
+    
 
-    public void setModuleid(Integer moduleid) {
-        this.moduleid = moduleid;
-    }
+    public Integer getModuleId() {
+		return moduleId;
+	}
 
-    public String getModulename() {
-        return modulename;
-    }
+	public void setModuleId(Integer moduleId) {
+		this.moduleId = moduleId;
+	}
 
-    public void setModulename(String modulename) {
-        this.modulename = modulename;
-    }
+	public String getModuleName() {
+		return moduleName;
+	}
 
-    public Integer getDeleteId() {
+	public void setModuleName(String moduleName) {
+		this.moduleName = moduleName;
+	}
+
+	public Integer getDeleteId() {
         return deleteId;
     }
 

@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -231,7 +232,7 @@
 				</select>
 			</p>
 			<br/>
-			<input class="button" type="button" value="保存" id="addsub"/> 
+			<input class="button" type="button" value="保存" id="addsub"/>
     		<input class="button" type="button" value="取消" id="addres" style="margin-left: 8rem"/>
 			<br/>
 		</div>
@@ -259,7 +260,7 @@
 				</select>
 			</p>
 			<br/>
-			<input class="button" type="button" value="保存" id="sub"/> 
+			<input class="button" type="button" value="保存" id="sub"/>
     		<input class="button" type="button" value="取消" id="res" style="margin-left: 8rem"/>
 			<br/>
 		</div>
@@ -277,6 +278,7 @@
         			<td>状态</td>
         			<td>操作</td>
         		</tr>     
+        		<input type="hidden" id='id21' value="21">
         		<tr class="opt" v-for="(item,index) in clazzstu">
         			<td>{{item.stu.snumber}}</td>
         			<td>{{item.stu.sname}}</td>
@@ -289,19 +291,29 @@
         			<td v-if="item.stu.status==1">休学</td>
         			<td v-if="item.stu.status==2">退学</td>
         			<td v-if="item.stu.status==3">升学</td>
-        			<td style="cursor: pointer;color: blue"  v-on:click="stup(item.stu.sid)">
-        				班委任免/修改信息
+        			<td style="cursor: pointer;color: blue">
+					<div v-for="i21 in ButtonmiddleList21" v-if="i21.buttonstatus==0" v-on:click="stup(item.stu.sid)">班委任免/修改信息</div>
         			</td>
         		</tr>         		               		
          	</table>
          	
         </div>
         <p style="margin-top: 2rem;margin-bottom: 2rem;padding-left: 10rem"> 
-    	<input class="button" type="button" value="新增学员" id="submit"/> 
+    	<input type="hidden" id='id15' value="15">
+			<span v-for="i2 in ButtonmiddleList15" v-if="i2.buttonstatus==0">
+			<input class="button" type="button" value="新增学员" id="submit" v-on:click="xz1()"/></span>
 
-    	<input class="button" type="button" value="取消" id="reset" style="margin-left: 8rem"/>
+    	<span><input class="button" type="button" value="取消" id="reset" style="margin-left: 8rem"/></span>
     	</p> 
     </div>
+    	 <div class="table">
+	   		<div class="opt ue-clear" style="display: flex;line-height: 2.5rem;">
+				新增班委职位:
+				<input type="text" id="clazzpositionname" style="height: 1.6rem"/>
+				<input type="button" id="addclazzposition" value="提交" style="height: 2rem"/>
+	       </div>  
+   		 </div>
+    	
 		 <div class="table">
 		 	<table>
 		 		<tr class="opt">
@@ -315,6 +327,7 @@
 		 			<td>班级状态</td>
 		 			<td>操作</td>
 		 		</tr>
+		 		<input type="hidden" id='id14' value="14">
 		 		<tr class="opt" v-for="(item,index) in clazzs">
 		 			<td>{{item.cid}}</td>
 		 			<td>{{item.gname}}</td>
@@ -325,7 +338,7 @@
 		 			<td>{{item.starttime}}</td>
 		 			<td v-if="item.status==0">正常</td>
 		 			<td v-if="item.status==1">结业</td>
-		 			<td style="cursor: pointer;color: blue" v-on:click="look(item.cid)">查看详情</td>
+		 			<td style="cursor: pointer;color: blue"><div v-for="i1 in ButtonmiddleList1" v-if="i1.buttonstatus==0" v-on:click="look(item.cid)">查看详情</div></td>
 		 		</tr>
 		 	</table>
 		 </div>
@@ -357,7 +370,12 @@
 				age:null,
 				status:null,
 				sid:null,
-				look:function(cid){
+				ButtonmiddleList1:null,
+				ButtonmiddleList15:null,
+				ButtonmiddleList21:null,
+				xz1:function(){
+					$("#addStus").fadeIn();
+				},look:function(cid){
 					v.cid=cid;
 					$("#addKC").fadeIn();
 					$.ajax({
@@ -417,6 +435,41 @@
 				v.clazzs=data;
 	    	}
 		});
+		
+		var id14 = $("#id14").val();
+		/* alert(id14); */
+		$.ajax({
+			url:"/querybuttonmiddle",
+			data:"buttonid="+id14,
+			success:function(data){
+				v.ButtonmiddleList1=data;
+	    	}
+		});
+		
+		var id15 = $("#id15").val();
+		/* alert(id15); */
+		$.ajax({
+			url:"/querybuttonmiddle",
+			data:"buttonid="+id15,
+			success:function(data){
+				v.ButtonmiddleList15=data;
+	    	}
+		});
+		
+		var id21 = $("#id21").val();
+		/* alert(id21); */
+		$.ajax({
+			url:"/querybuttonmiddle",
+			data:"buttonid="+id21,
+			success:function(data){
+				v.ButtonmiddleList21=data;
+	    	}
+		});
+		
+		 /* $("#submit").click(function(){
+				$("#addStus").fadeIn();
+			}); */
+		
 		//修改学生信息
 		$("#sub").click(function(){
 			var sname=$("#sname").val();
@@ -486,6 +539,21 @@
 		    	}
 			});
 		});
+		//新增班级职位		
+		$("#addclazzposition").click(function(){
+			var clazzpositionname=$("#clazzpositionname").val();
+			$.ajax({
+				url:'insertClazzPosition',
+				dataType:'json',		
+				type:'post',
+				data:'clazzpositionname='+clazzpositionname,
+				success:function(data){
+					alert("新增成功!");
+					$("#clazzpositionname").val("");
+		    	}
+			});
+		});
+
 	})
 	
 </script>

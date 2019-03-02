@@ -150,11 +150,13 @@
 			<select id="clazz">
 				<option v-for="(item,index) in clazzs" v-bind:value="item.cid">{{item.cname}}</option>
 			</select>
-			<input type="button" id="sure" value="确定" style="height: 2rem"/>		
+			<input type="hidden" id="id25" value="25">
+			<span v-for="i25 in ButtonmiddleList1" v-if="i25.buttonstatus==0"><input type="button" id="sure" value="确定" style="height: 2rem" v-on:click="queding()"/></span>		
 			<span>日期:</span>
 	        <input v-for="(item,index) in datetime" v-if="index==6" v-bind:value="item.datetime" type="date" style="width: 8rem;height: 26px" name="" id="xzstart"/>--
 	        <input v-for="(item,index) in datetime" v-if="index==0" v-bind:value="item.datetime" type="date" style="width: 8rem;height: 26px" name="" id="xzend"/>
-	        <input type="button" id="cha" value="查询" style="height: 2rem"/>
+	        <input type="hidden" id="id26" value="26">
+	        <span v-for="i26 in ButtonmiddleList26" v-if="i26.buttonstatus==0"><input type="button" id="cha" value="查询" style="height: 2rem" v-on:click="cx()"/></span>
         </div>
         <table>	     
        		<tr class="opt" v-if="zhou==1">
@@ -281,7 +283,62 @@
 				clazzs:null,
 				datetime:null,
 				zhou:0,
-				apm:null
+				apm:null,
+				ButtonmiddleList1:null,
+				ButtonmiddleList26:null
+			},created(){
+				this.cx25();
+				this.cx26();
+			},methods:{
+				queding:function(){
+					var cid=$("#clazz").val();		
+					 $.ajax({
+							url:'clazzTime',
+							dataType:'json',
+							data:'cid='+cid,
+							type:'post',
+							success:function(data){
+								v.datetime=data;
+					    	}
+						});
+				},cx25:function(){
+					var id25 = $("#id25").val();
+					$.ajax({
+						url:"/querybuttonmiddle",
+						data:"buttonid="+id25,
+						success:function(data){
+							v.ButtonmiddleList1=data;
+						}
+					});
+				},cx26:function(){
+					var id26 = $("#id26").val();
+					$.ajax({
+						url:"/querybuttonmiddle",
+						data:"buttonid="+id26,
+						success:function(data){
+							v.ButtonmiddleList26=data;
+						}
+					});
+				},cx:function(){
+					datestart=$("#xzstart").val();
+					dateend=$("#xzend").val();
+					var cid=$("#clazz").val();
+					var date = new Date(datestart);
+			        var weeknum = date.getDay();     //返回一周的某一天数字。（0-6）
+			        if (weeknum == 0) {
+			          weeknum = 7;
+			        }
+			        v.zhou=weeknum;
+			        $.ajax({
+				    	url:'queryClazzSchedule1',
+						dataType:'json',
+						data:'datetime1='+datestart+'&datetime2='+dateend+'&cid='+cid,
+						type:'post',
+						success:function(data){
+							v.apm=data;
+						}
+				    });
+				}
 			}
 		});
 		
@@ -293,7 +350,7 @@
 					v.clazzs=data;
 		    	}
 			});
-		 $("#sure").click(function(){			 
+		/*  $("#sure").click(function(){			 
 			 var cid=$("#clazz").val();		
 			 $.ajax({
 					url:'clazzTime',
@@ -304,8 +361,8 @@
 						v.datetime=data;
 			    	}
 				});
-		 });
-		 $("#cha").click(function(){
+		 }); */
+		/*  $("#cha").click(function(){
 			datestart=$("#xzstart").val();
 			dateend=$("#xzend").val();
 			var cid=$("#clazz").val();
@@ -324,7 +381,7 @@
 					v.apm=data;
 				}
 		    });
-		 });
+		 }); */
 		    
 		
 	})

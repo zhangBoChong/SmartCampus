@@ -7,6 +7,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
@@ -21,12 +23,18 @@ import com.accp.domain.Clazzposition;
 import com.accp.domain.Course;
 import com.accp.domain.CourseTeacher;
 import com.accp.domain.Grade;
+import com.accp.domain.Login;
+import com.accp.domain.Character;
+import com.accp.domain.Post;
 import com.accp.domain.Schedule;
+import com.accp.domain.Staff;
 import com.accp.domain.Studentinfo;
 import com.accp.domain.Vession;
 import com.accp.domain.VessionGrade;
 import com.accp.domain.VessionGradeMajorid;
 import com.accp.domain.VessionGradeMajoridCourse;
+import com.accp.service.PostService;
+import com.accp.service.StaffService;
 import com.accp.service.ZBCCourseService;
 
 
@@ -34,6 +42,12 @@ import com.accp.service.ZBCCourseService;
 public class ZBCController {
 	@Autowired
 	ZBCCourseService zbcService;
+	
+	@Autowired
+	PostService postService;
+	
+	@Autowired
+	StaffService staffService;
 /*	@RequestMapping("/Tomain")
 	public String Tomain() {
 		return "main";
@@ -49,8 +63,12 @@ public class ZBCController {
 	}
 	//跳入添加版本页面
 	@RequestMapping("/AddVession")
-	public String AddVession() {
-		return "addVession";
+	public String AddVession(HttpSession session) {
+		Login l20 = (Login)session.getAttribute("u");
+		if(l20.getType()==-3) {
+			return "addVession";
+		}
+		return "wzr/quanxian";
 	}
 	//跳入查询课程页面
 	@RequestMapping("/selectSchedule")
@@ -63,8 +81,12 @@ public class ZBCController {
 		return "clazzs";
 	}
 	@RequestMapping("/AddGrade")
-	public String AddGrade() {
-		return "addGrade";
+	public String AddGrade(HttpSession session) {
+		Login l21 = (Login)session.getAttribute("u");
+		if(l21.getType()==-3) {
+			return "addGrade";
+		}
+		return "wzr/quanxian";
 	}
 	//查版本
 	@RequestMapping("/ToVessions")
@@ -160,8 +182,14 @@ public class ZBCController {
 			return count;
 		}
 	@RequestMapping("/TocourseArrange")
-	public String TocourseArrange() {
-		return "courseArrange";
+	public String TocourseArrange(HttpSession session) {
+		Login l90 = (Login)session.getAttribute("u");
+		if(l90.getRoleId()!=1 && l90.getRoleId()!=2 && l90.getRoleId()!=3) {
+			return "courseArrange";
+		}else {
+			return "wzr/quanxian";
+		}
+		
 	}
 	//生成课表
 	@RequestMapping("/AddClazzSchedule")
@@ -394,8 +422,89 @@ public class ZBCController {
 		int count1=zbcService.insertclazzStudentinfos(cs);
 		return count1;
 	}
+	//跳入查看员工页面
+			@RequestMapping("/toStaffs")
+			public String toStaffs() {
+				return "staff";
+			}
+			//查询所有职位
+			@RequestMapping("lectPost")
+			@ResponseBody
+			public List<Post> selectPost(){
+				List<Post> list=postService.selectPost();
+				return list;
+			}
+			//查询所有员工
+			@RequestMapping("/selectStaffs")
+			@ResponseBody
+			public List<Staff> selectStaff(){
+				List<Staff> list=staffService.queryAllStaffs();		
+				return list;
+			}
+			//根据职位编号查员工
+			@RequestMapping("/selectStaffPost")
+			@ResponseBody
+			public List<Staff> selectStaffPost(Integer postid){
+				List<Staff> list=staffService.queryBypostIdss(postid);
+				return list;
+			}
+			//单个曾员工职位
+			@RequestMapping("/addSPost")
+			@ResponseBody
+			public int addSPost(Post post) {
+				int count=postService.addPost(post);
+				return count;
+			}
+			//根据员工状态查员工
+			@RequestMapping("/selectSStatus")
+			@ResponseBody
+			public List<Staff> selectSStatus(Integer status){
+				List<Staff> list=staffService.queryBySStatus(status);
+				return list;
+			}
+			//查所有性格
+			@RequestMapping("/selectAllCharacters")
+			@ResponseBody
+			public List<Character> selectAllCharacters(){
+				List<Character> list=zbcService.queryAllCharacters();
+				return list;
+			}
+			//新增员工
+			@RequestMapping("/addStaffs")
+			@ResponseBody
+			public int addStaffs(Staff staff) {
+				int count=staffService.addStaff(staff);
+				return count;
+			}
+			//渲染要修改的员工
+			@RequestMapping("/xrStaff")
+			@ResponseBody
+			public Staff xrStaff(Integer tid) {
+				Staff s=staffService.queryBytid(tid);
+				return s;
+			}
+			//修改员工
+			@RequestMapping("/upStaffs")
+			@ResponseBody
+			public int upStaffs(Staff staff) {
+				int count=staffService.updateStaffs(staff);
+				return count;
+			}
+			//删除员工
+			@RequestMapping("/deleteStaffs")
+			@ResponseBody
+			public int deleteStaffs(Integer tid) {
+				int count=staffService.deleteStaffs(tid);
+				return count;
+			}
+			//新增班级职位
+			@RequestMapping("/insertClazzPosition")
+			@ResponseBody
+			public int insertClazzPosition(Clazzposition record) {
+				int count=zbcService.insertClazzposition(record);
+				return count;
+			}
 }
-
 
 
 

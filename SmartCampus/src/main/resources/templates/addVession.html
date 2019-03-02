@@ -135,9 +135,10 @@
 </style>
 </head>
 <body>
-	<div class="table">
+	<div class="table" id="div1">
     	<div class="opt ue-clear" style="display: flex;line-height: 2.5rem;">
-        		 <p>添加版本:<input type="text" id="vname" style="height: 1.6rem"/><input type="button" value="提交"  id="sub" style="height: 2rem"/></p>
+    	<input type="hidden" id='id12' value="12">
+    	       		 <p>添加版本:<input type="text" id="vname" style="height: 1.6rem"/><span v-for="i1 in ButtonmiddleList1" v-if="i1.buttonstatus==0"><input type="button" value="提交"  id="sub" style="height: 2rem" v-on:click="tj()"/></span></p>
         </div>  
     </div>
 </body>
@@ -150,8 +151,14 @@
 <script type="text/javascript" src="js/WdatePicker.js"></script>
 <script type="text/javascript" src="js/vue.js"></script>
 <script type="text/javascript">
-	$(function(){
-		$("#sub").click(function(){
+var vm1 = new Vue({
+	el:"#div1",
+	data:{
+		ButtonmiddleList1:null
+	},created(){
+		this.cx1();
+	},methods:{
+		tj:function(){
 			var vname=$("#vname").val();
 			$.ajax({
 				url:'insertVession',
@@ -163,7 +170,35 @@
 					$("#vname").val("");
 		    	}
 			});
-		});
+		},cx1:function(){
+			var id12 = $("#id12").val();
+			/* alert(id12); */
+			$.ajax({
+				url:"/querybuttonmiddle",
+				data:"buttonid="+id12,
+				success:function(data){
+					vm1.ButtonmiddleList1=data;
+				}
+			});
+		}
+	}
+});
+
+
+	$(function(){
+		/* $("#sub").click(function(){
+			var vname=$("#vname").val();
+			$.ajax({
+				url:'insertVession',
+				dataType:'json',
+				data:'vname='+vname,
+				type:'post',
+				success:function(data){
+					alert("新增成功");
+					$("#vname").val("");
+		    	}
+			});
+		}); */
 	})
 </script>
 </html>

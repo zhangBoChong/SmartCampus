@@ -257,6 +257,7 @@ xzbj1 {
 				</h4>
 			</div>
 			<div class="xstk">
+			<input type="hidden" id="id19" value="19">
 				<!-- 显示题库数据 -->
 				<table border="1" class="table">
 					<tr>
@@ -282,7 +283,7 @@ xzbj1 {
 							<td>{{item7.sectionName}}</td>
 							<td>{{item7.topic_lx_type}}</td>
 							<td>{{item7.topic_level}}</td>
-							<td><a v-on:click="deleteTopic(item7.topic_id)">删除</a></td>
+							<td><span v-for="i19 in ButtonmiddleList1" v-if="i19.buttonstatus==0"><a v-on:click="deleteTopic(item7.topic_id)">删除</a></span></td>
 						</tr>
 					</tbody>
 				</table>
@@ -293,9 +294,10 @@ xzbj1 {
 						</span> -->
 				</div>
 			</div>
-			<div>
-				<input style="background-color:" class="fbzy" type="button"
-					value="发布考试" />
+			<div id="div20">
+			<input type="hidden" id="id20" value="20">
+			<span v-for="i20 in ButtonmiddleList20" v-if="i20.buttonstatus==0">	<input class="fbzy" type="button" v-on:click="addks()"
+					value="发布考试" /> </span>
 			</div>
 		</div>
 	</div>
@@ -307,7 +309,7 @@ xzbj1 {
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/vue.js"></script>
 	<script type="application/javascript">
-		
+	
 		
 		var v = new Vue({
 			el:".tktj",
@@ -324,13 +326,26 @@ xzbj1 {
 		var v2 = new Vue({
 			el:".xstk",
 			data:{
-				pageBean:null
+				pageBean:null,
+				ButtonmiddleList1:null
 				//题库内容
+			},created(){
+				this.cx19();
 			},methods:{
 				deleteTopic:function(topic_id){
 					deleteTopic1(topic_id);
 				},danjitimu:function(topic_id){
 					danjitimu1(topic_id);
+				},cx19:function(){
+					var id19 = $("#id19").val();
+					//alert("id19="+id19);
+					$.ajax({
+						url:"/querybuttonmiddle",
+						data:"buttonid="+id19,
+						success:function(data){
+							v2.ButtonmiddleList1=data;
+						}
+					});
 				}
 			}
 		})
@@ -627,8 +642,31 @@ xzbj1 {
 		} 
 			
 		
-		$(".fbzy").click(function(){
-			 obj = document.getElementsByName("test");
+		/* $(".fbzy").click(function(){
+			 
+		 	 
+		}) */
+		
+		
+		var vm1 = new Vue({
+		el:"#div20",
+		data:{
+			ButtonmiddleList20:null
+		},created(){
+			this.cx20();
+		},methods:{
+			cx20:function(){
+				var id20 = $("#id20").val();
+				//alert(id20);
+				$.ajax({
+					url:"/querybuttonmiddle",
+					data:"buttonid="+id20,
+					success:function(data){
+						vm1.ButtonmiddleList20=data;
+					}
+				});
+			},addks:function(){
+				obj = document.getElementsByName("test");
 			    check_val = []; /*获取的学员编号*/
 			    for(k in obj){
 			        if(obj[k].checked)
@@ -668,11 +706,9 @@ xzbj1 {
 		 		 }
 		 		 
 		 	 })
-		 	 
-		})
-		
-		
-		
+			}
+		}
+	});
 	
 	</script>
 </body>

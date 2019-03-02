@@ -253,9 +253,9 @@
 									  <option v-for="t3 in roList" v-bind:value="t3.roleId" v-if="tt4.roleId==t3.roleId" selected="selected">{{t3.roleName}}</option>
 								<option v-for="t14 in roList" v-bind:value="t14.roleId" v-if="tt4.roleId!=t14.roleId">{{t14.roleName}}</option>
 								</select> 
-						职位：<select id="JobIndex" class="form-control" v-for="tt3 in tidList">
-							  <option v-for="t2 in poList" v-bind:value="t2.postId" v-if="tt3.postId==t2.postId" selected="selected">{{t2.postName}}</option>
-							  <option v-for="t13 in poList" v-bind:value="t13.postId" v-if="tt3.postId!=t13.postId">{{t13.postName}}</option>
+						职位：<select id="JobIndex" class="form-control" v-for="y6 in tidList">
+							  <option v-for="t2 in poList" v-bind:value="t2.postId" v-if="y6.postid==t2.postId" selected="selected">{{t2.postName}}</option>
+							  <option v-for="t13 in poList" v-bind:value="t13.postId" v-if="y6.postid!=t13.postId">{{t13.postName}}</option>
 								</select> 
 						<div v-for="tt2 in tidList" v-if="tt2.status==0">状态：<select id="renzhi" class="form-control">
 								  <option v-bind:value="0" selected="selected">任职</option>
@@ -501,9 +501,9 @@ function staffMapper(tid,type){
 			bean2.tidLists=data;
 		}
 	});
-	
+	//alert(tid);
 	$.ajax({
-		url:"/queryBytid",
+		url:"/queryBytid1",
 		data:"tid="+tid,
 		success:function(data){
 			bean2.tidList=data;

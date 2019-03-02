@@ -17,11 +17,13 @@ import com.accp.domain.Grade;
 import com.accp.domain.Major;
 import com.accp.domain.Schedule;
 import com.accp.domain.Staff;
+import com.accp.domain.Character;
 import com.accp.domain.Studentinfo;
 import com.accp.domain.Vession;
 import com.accp.domain.VessionGrade;
 import com.accp.domain.VessionGradeMajorid;
 import com.accp.domain.VessionGradeMajoridCourse;
+import com.accp.mapper.CharacterMapper;
 import com.accp.mapper.ClassroomMapper;
 import com.accp.mapper.ClazzMapper;
 import com.accp.mapper.ClazzScheduleMapper;
@@ -76,6 +78,8 @@ public class ZBCCourseServiceImpl implements ZBCCourseService{
 	ClazzpositionMapper clazzpositionMapper;
 	@Autowired
 	StudentinfoMapper  studentinfoMapper;
+	@Autowired
+	CharacterMapper  characterMapper;
 	@Override
 	public List<Vession> queryVessions() {
 		List<Vession> list=vessionMapper.queryVessions();
@@ -447,6 +451,22 @@ public class ZBCCourseServiceImpl implements ZBCCourseService{
 	@Override
 	public int insertclazzStudentinfos(ClazzStudent stu) {
 		int count=clazzStudentMapper.insertclazzStudentinfos(stu);
+		return count;
+	}
+	@Override
+	public Character queryByCharacterId(Integer characterId) {
+		Character c=characterMapper.queryByCharacterId(characterId);
+		return c;
+	}
+	@Override
+	public List<Character> queryAllCharacters() {
+		List<Character> list=characterMapper.queryAllCharacters();
+		
+		return list;
+	}
+	@Override
+	public int insertClazzposition(Clazzposition record) {
+		int count=clazzpositionMapper.insertClazzposition(record);
 		return count;
 	}
 

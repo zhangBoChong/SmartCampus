@@ -5,6 +5,9 @@
     <id column="clazzPositionId" jdbcType="INTEGER" property="clazzpositionid" />
     <result column="clazzPositionName" jdbcType="VARCHAR" property="clazzpositionname" />
   </resultMap>
+  <insert id="insertClazzposition">
+  	insert into clazzposition(clazzPositionName)values(#{clazzpositionname})
+  </insert>
   
   <select id="queryBypositionid" resultMap="BaseResultMap">
   	select 

@@ -74,4 +74,10 @@ public class LoginServiceImpl implements LoginService{
 		// TODO Auto-generated method stub
 		return loginMapper.updatestudentpwd(pwd, peopleId, type);
 	}
+
+	@Override
+	public Login queryloginIds(Integer peopleId, Integer type) {
+		// TODO Auto-generated method stub
+		return loginMapper.queryloginIds(peopleId, type);
+	}
 }
