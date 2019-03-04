@@ -103,9 +103,9 @@ public class WYLServiceImpl implements WYLService{
 	}
 
 	@Override
-	public int clazzTeacherinsert(Integer ctid, Integer cid) {
+	public int clazzTeacherinsert(Integer ctid, Integer cid,Integer status,Integer tid) {
 		// TODO Auto-generated method stub
-		return clztmapper.clazzTeacherinsert(ctid, cid);
+		return clztmapper.clazzTeacherinsert(ctid, cid,status,tid);
 	}
 
 	@Override

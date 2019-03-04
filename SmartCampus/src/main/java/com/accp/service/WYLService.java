@@ -34,7 +34,7 @@ public interface WYLService {
 
 	int courseTeacherinsert(CourseTeacher courseTeacher);
 
-    int clazzTeacherinsert(Integer ctid,Integer cid);
+    int clazzTeacherinsert(Integer ctid,Integer cid,Integer status,Integer tid);
     
     List<Studentinfo> queryStudent2();
 

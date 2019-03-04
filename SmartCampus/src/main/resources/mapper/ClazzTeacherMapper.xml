@@ -226,6 +226,6 @@
   </update>
   
   <insert id="clazzTeacherinsert">
-  	INSERT INTO `clazz_teacher`(`ctid`,`cid`,`status`)VALUE(#{ctid},#{cid},'1')
+  	INSERT INTO `clazz_teacher`(`ctid`,`cid`,`status`,`tid`)VALUE(#{ctid},#{cid},#{status},#{tid})
   </insert>
 </mapper>

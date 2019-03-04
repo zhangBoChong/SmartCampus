@@ -265,6 +265,6 @@
   		SELECT * FROM `clazz_student` WHERE STATUS = 1 AND sid = #{sid}
   </select>
   <insert id="clazzStudentinsert">
-  	INSERT INTO`clazz_student`(`cid`,`sid`)VALUE(#{cid},#{sid})
+  	INSERT INTO`clazz_student`(`cid`,`sid`,`status`)VALUE(#{cid},#{sid},1)
   </insert>
 </mapper>

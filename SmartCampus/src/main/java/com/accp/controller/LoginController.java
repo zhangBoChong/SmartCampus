@@ -81,11 +81,8 @@ public class LoginController {
 	//去login.html
 	@RequestMapping("/toLogin")
 	public String toLogin(Integer type,Model model,HttpServletResponse response) throws IOException {
-		/*response.setContentType("text/html;charset=UTF-8");
-		PrintWriter out = response.getWriter();*/
 		if(type!=null && type==1) {
-			/*out.print("<script language='javascript'>alert('登录失败！');</script>");*/
-			return "redirect:/toLogin";
+			return "login";
 		}
 		return "login";
 	}
@@ -151,7 +148,9 @@ public class LoginController {
 			informationService.insertInformation(informationList);
 			return "redirect:/toMain";
 		}
-		return "redirect:/toLogin?type=1";
+		String title="您输入的账户或密码有误！";
+		model.addAttribute("title", title);
+		return "login";
 	}
 	
 	//退出登录
@@ -159,7 +158,6 @@ public class LoginController {
 	public String initLogin(HttpSession session) {
 		session.invalidate();
 		return "redirect:/toLogin";
-		
 	}
 	
 	//去main.html

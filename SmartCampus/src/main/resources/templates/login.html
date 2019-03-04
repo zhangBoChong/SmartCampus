@@ -48,11 +48,14 @@
 	</div>
 		
 		
-		
+		<input type="hidden" id="ti" th:value="${title}"/>
 	</div>
 	<script type="text/javascript">
 		window.onload = function() {
-			
+			var ti=$("#ti").val();
+			if($("#ti").val()!=null && $("#ti").val()!=""){
+				alert(ti);
+			}
 			
 		    //配置
 		    var config = {

@@ -105,7 +105,7 @@ public class WYLController {
 			System.out.println(courseTeacher.getCtid());
 			int ctid=courseTeacher.getCtid();
 			
-			wylService.clazzTeacherinsert(ctid, clazzid);
+			wylService.clazzTeacherinsert(ctid, clazzid,1,staff.getTid());
 			
 			staff = wylService.queryStaff2();
 			courseTeacher.setTid(staff.getTid());
@@ -114,7 +114,7 @@ public class WYLController {
 			System.out.println(courseTeacher.getCtid());
 			ctid=courseTeacher.getCtid();
 			
-			wylService.clazzTeacherinsert(ctid, clazzid);
+			wylService.clazzTeacherinsert(ctid, clazzid,2,staff.getTid());
 			
 			staff = wylService.queryStaff3();
 			wylService.updateClazz(staff.getTid(), clazzid);
@@ -143,7 +143,7 @@ public class WYLController {
 		System.out.println(courseTeacher.getCtid());
 		int ctid=courseTeacher.getCtid();
 		
-		wylService.clazzTeacherinsert(ctid, clazzid);
+		wylService.clazzTeacherinsert(ctid, clazzid,1,id);
 		
 		courseTeacher.setTid(id2);
 		courseTeacher.setCourseid(id22);
@@ -151,7 +151,7 @@ public class WYLController {
 		System.out.println(courseTeacher.getCtid());
 		ctid=courseTeacher.getCtid();
 		
-		wylService.clazzTeacherinsert(ctid, clazzid);
+		wylService.clazzTeacherinsert(ctid, clazzid,2,id2);
 		
 		List<Studentinfo> list = wylService.queryStudent2();
 		for (Studentinfo studentinfo : list) {

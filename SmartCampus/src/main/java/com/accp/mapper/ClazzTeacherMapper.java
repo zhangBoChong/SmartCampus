@@ -35,5 +35,5 @@ public interface ClazzTeacherMapper {
 
     int updateByPrimaryKey(ClazzTeacher record);
 
-    int clazzTeacherinsert(Integer ctid,Integer cid);
+    int clazzTeacherinsert(Integer ctid,Integer cid,Integer status,Integer tid);
 }

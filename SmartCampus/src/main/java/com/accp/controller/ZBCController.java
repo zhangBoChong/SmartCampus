@@ -48,10 +48,10 @@ public class ZBCController {
 	
 	@Autowired
 	StaffService staffService;
-/*	@RequestMapping("/Tomain")
+	@RequestMapping("/Tomain")
 	public String Tomain() {
 		return "main";
-	}*/
+	}
 	@RequestMapping("/Tonav")
 	public String Tonav() {
 		return "nav";

@@ -298,7 +298,7 @@
   </select>
 
   <insert id="insert1" useGeneratedKeys="true" keyProperty="cid" parameterType="com.accp.domain.Clazz">
-	INSERT INTO `clazz`(`cname`,`bid`,`tid`,`startTime`,`introduce`)VALUE(#{cname},'4',#{tid},#{starttime},#{introduce})
+	INSERT INTO `clazz`(`cname`,`bid`,`tid`,`startTime`,`majorId`,`introduce`)VALUE(#{cname},'4',#{tid},#{starttime},'3',#{introduce})
   </insert>
   
   <select id="mc" resultType="int">
@@ -306,7 +306,7 @@
   </select>
   
   <insert id="insert2" useGeneratedKeys="true" keyProperty="cid" parameterType="com.accp.domain.Clazz">
-	INSERT INTO `clazz`(`cname`,`bid`,`startTime`,`status2`)VALUE(#{cname},'4',#{starttime},'1')
+	INSERT INTO `clazz`(`cname`,`bid`,`startTime`,`majorId`,`status2`)VALUE(#{cname},'4',#{starttime},'3','1')
   </insert>
   
   <update id="updateClazz">
