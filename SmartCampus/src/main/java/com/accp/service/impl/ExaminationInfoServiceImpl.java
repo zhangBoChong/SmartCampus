@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.accp.domain.ClazzStudent;
 import com.accp.domain.ClazzStudentExamInfo;
+import com.accp.domain.Examination;
 import com.accp.domain.ExaminationFb;
 import com.accp.domain.ExaminationTm;
 import com.accp.domain.Havetask;
@@ -16,6 +17,7 @@ import com.accp.domain.Havetaskexam;
 import com.accp.domain.Studentinfo;
 import com.accp.mapper.ClazzStudentMapper;
 import com.accp.mapper.ExaminationFbMapper;
+import com.accp.mapper.ExaminationMapper;
 import com.accp.mapper.ExaminationTmMapper;
 import com.accp.mapper.HavetaskexamMapper;
 import com.accp.mapper.StudentinfoMapper;
@@ -34,6 +36,8 @@ public class ExaminationInfoServiceImpl implements ExaminationInfoService{
 	ExaminationTmMapper etmmapper; 
 	@Autowired
 	StudentinfoMapper smapper;
+	@Autowired
+	ExaminationMapper emapper;
 	
 	@Override
 	public List<ExaminationFb> selectBycsid(Integer csid) {
@@ -125,6 +129,12 @@ public class ExaminationInfoServiceImpl implements ExaminationInfoService{
 			}
 		}
 		return list;
+	}
+
+	@Override
+	public List<Examination> chaexamBytidtan(Integer tid) {
+		//老师出的考试试卷
+		return emapper.chaexamBytidtan(tid);
 	}
 	
 

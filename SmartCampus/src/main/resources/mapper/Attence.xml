@@ -66,6 +66,14 @@ WHERE `leaveId` =#{leaveid} ;
 <insert id="insertAtt">
 	INSERT INTO `attence`(`studentid`,`time`,`attence`) VALUE (#{studentid},#{time},#{attence})
 </insert>
+<!-- 通过教师id查询到所带的班级id 再查询到班级 -->
+<select id = "queryClazzByTid" resultType="com.accp.domain.Clazz">
+	SELECT * FROM  `clazz` WHERE  cid IN (SELECT cid FROM `clazz_teacher` WHERE tid = #{tid})
+</select>
+
+<select id="queryAttenceBySid" resultType="com.accp.domain.Attence">
+	SELECT * FROM `attence` WHERE studentid IN (SELECT sid FROM `clazz_student` WHERE  cid = #{cid} AND STATUS = 1) AND DATE(`time`) =DATE(NOW())
+</select>
 </mapper>
 
 

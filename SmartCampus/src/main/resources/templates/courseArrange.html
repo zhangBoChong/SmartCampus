@@ -541,7 +541,9 @@
 <script type="text/javascript" src="js/vue.js"></script>
 <script type="text/javascript">
 	$(function(){
-		
+		var clzss=[];
+		var datestart;
+		var dateend;
 		var v=new Vue({
 			el:"#container",
 			data:{
@@ -597,9 +599,7 @@
 					    }); 			    
 					 });
 				},cx23:function(){
-					var clzss=[];
-					var datestart;
-					var dateend;
+					
 					
 					var id23 = $("#id23").val();
 					//alert(id23);

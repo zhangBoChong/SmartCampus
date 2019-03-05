@@ -9,10 +9,15 @@
     <result column="startTime" jdbcType="DATE" property="starttime" />
     <result column="status" jdbcType="INTEGER" property="status" />
     <result column="majorId" jdbcType="INTEGER" property="majorid" />
+    <association property="count" column="cid" select="clazzRs"></association>
   </resultMap>
   
   <select id="queryClazz" resultMap="BaseResultMap">
   	SELECT * FROM `clazz` WHERE`status2`=1
+  </select>
+  
+  <select id="clazzRs" resultType="int">
+  	SELECT COUNT(*) FROM `studentinfo` WHERE `sid`IN(SELECT `sid` FROM `clazz_student` WHERE `cid`=#{cid})
   </select>
   
   <!-- 按cid查询班级表 -->
@@ -311,6 +316,10 @@
   
   <update id="updateClazz">
   	UPDATE `clazz` SET`tid`=#{tid} WHERE `cid`=#{cid}
+  </update>
+  
+  <update id="updateStatus">
+  	UPDATE `clazz` SET `status2`=0 WHERE `cid`=#{cid}
   </update>
   
 </mapper>

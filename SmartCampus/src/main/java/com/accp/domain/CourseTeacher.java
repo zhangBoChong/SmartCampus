@@ -15,6 +15,25 @@ public class CourseTeacher {
 	private Staff stfobj;//获得教员信息
 	private ClazzSchedule clzscheduleobj;//班级名+上课课时
 	
+	private Course courseobj;
+	private Clazz clzobj;
+	
+	public Course getCourseobj() {
+		return courseobj;
+	}
+
+	public void setCourseobj(Course courseobj) {
+		this.courseobj = courseobj;
+	}
+
+	public Clazz getClzobj() {
+		return clzobj;
+	}
+
+	public void setClzobj(Clazz clzobj) {
+		this.clzobj = clzobj;
+	}
+
 	public Integer getCourseid() {
 		return courseid;
 	}

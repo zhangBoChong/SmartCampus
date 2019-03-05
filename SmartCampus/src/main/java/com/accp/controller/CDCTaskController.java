@@ -274,5 +274,35 @@ public class CDCTaskController {
 		}
 		
 	}
+	@RequestMapping("/nowkaoqin")
+	public String nowkaoqin() {
+		return "nowkaoqin";
+	}
+	
+//	渲染新考勤页面年级下拉框数据
+	@RequestMapping("queryClazzByTid")
+	@ResponseBody
+	public List<Clazz> queryClazz() {
+		Login login = (Login)session.getAttribute("u");
+		List<Clazz> list = cdcAttenceService.queryClazzByTid(login.getRoleId());
+		return list;	
+	}
+	@RequestMapping("queryAttenceBySid")
+	@ResponseBody
+	public List<Attence> queryAttenceBySid(int cid){
+		List<Attence> list = cdcAttenceService.queryAttenceBySid(cid);
+		for (Attence a : list) {
+			a.setStu(taskService.queryStudentinfobyId(a.getStudentid()));
+		}
+		return list;
+	}
+//	进行发布任务的判断
+	@RequestMapping("queryStaffbyId")
+	@ResponseBody
+	public int queryStaffbyId() {
+		Login login = (Login)session.getAttribute("u");
+		Staff staff = taskService.queryStaffbyId(login.getRoleId());
+		return staff.getPostid();
+	}
 	
 }

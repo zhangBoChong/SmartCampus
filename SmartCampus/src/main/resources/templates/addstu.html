@@ -1,0 +1,469 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=emulateIE7" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="css/style.css" />
+<link rel="stylesheet" type="text/css" href="css/WdatePicker.css" />
+<link rel="stylesheet" type="text/css" href="css/skin_/table.css" />
+<link rel="stylesheet" type="text/css" href="css/jquery.grid.css" />
+
+
+<title>报名</title>
+<style type="text/css">
+	.search-box div{
+		margin-left: 1rem;
+	}
+	.search-button:nth-child(2) input{
+		background: #FF7200;
+	}
+	.iselect-wrapper {
+	    position: relative;
+	    width: 80px;
+	    height: 28px;
+	    padding: 0 20px 0 5px;
+	    line-height: 28px;
+	    border-width: 1px;
+	    border-style: solid;
+	    border-left-color: #c5c5c5;
+	    border-top-color: #c5c5c5;
+	    border-right-color: #e0e0e0;
+	    border-bottom-color: #e0e0e0;
+	    background: url(../img/skin_/select_normal.png) no-repeat right center #fff;
+	    margin-top: 0.3rem;
+	}
+	.CK{
+		position: relative;
+	    width: 12.4rem;	
+	    height: 28px;
+	    padding: 0 20px 0 5px;
+	    line-height: 28px;
+	    border-width: 1px;
+	    border-style: solid;
+	    border-left-color: #c5c5c5;
+	    border-top-color: #c5c5c5;
+	    border-right-color: #e0e0e0;
+	    border-bottom-color: #e0e0e0;
+	   
+	    margin-top: 0.3rem;
+	}
+	.opt select{
+		position: relative;
+	    width: 107px;
+	    height: 28px;
+	    top:0.35rem;
+	}
+	.opt input{
+		width: 5rem;
+		height: 1.9rem;
+		margin-top: 0.3rem;
+		background: #url(../img/skin_/formbtnbg.png);
+	}
+	.tab table tr{
+		height: 2.5rem;
+	}
+	.tab table tr td{
+		border: 0.5px solid #CFCFCF;		
+		width: 12rem;
+		text-align: center;
+	}
+	.tab table tr td:last-child{
+		width: 21rem;
+	}
+	
+	.tab table{
+		font-size: 0.8rem;	
+		margin-left: -0.6rem;
+		width: 105.7rem;	
+	}
+	.teacher tr{
+		display: none;
+	}
+	#addKC{
+		width: 54rem;	
+		border: 3px groove #3EAADD;
+		background: #F5F5F5;
+		z-index: 2;
+		position: absolute;
+		left: 20rem;
+		top:8rem;
+		display: none;
+	    padding-left: 7.5rem;
+	    padding-top: 0.5rem;
+	}
+	#addSt{
+		width: 30rem;
+		border: 3px groove #3EAADD;
+		background: #F5F5F5;
+		z-index: 3;
+		position: absolute;
+		left: 32rem;
+		top:9rem;
+	    padding-left: 7.5rem;
+	    padding-top: 0.5rem;
+	    padding-bottom: 1rem;
+	    display: none;
+	}
+	#addKC h1{
+		font-family: "楷体";
+		font-size: 2rem;
+		margin-left: 18rem;
+	}
+	#addSt h1{
+		font-family: "楷体";
+		font-size: 2rem;
+		margin-left: 6rem;
+	}
+	#addSt p{
+		font-family: "楷体";
+		font-size: 1.5rem;
+	}
+	#addSt p select{
+		height: 2rem;
+		width: 6rem;
+	}
+	#addSt p input{
+		height: 1.5rem;
+	}
+	
+	#addKC p{
+		display: flex;		
+	}
+	
+	#addKC p select{
+		position: absolute;
+	    width: 227px;
+	    height: 28px;
+	}
+	#addKC p span{
+		margin-top: 0.5rem;
+	}
+	#addKC .iselect-wrapper {
+	    width: 200px;
+	}
+	.tables tr{
+		border-bottom: 1px solid gray;
+	}
+	.tables tr:last-child{
+		
+	}
+	.tables tr td{
+		width: 10rem;
+		text-align: center;
+		border-left: 1px solid gray;
+		border-right: 1px solid gray;
+	}
+	.tables tr td:first-child {
+		border:none;
+	}
+	.tables tr td:last-child {
+		border:none;
+		width: 21.1rem
+	}
+	.tables{
+		font-size: 1rem;
+		font-family: cursive;
+	}
+	table{
+		margin-left: 0.5rem;
+	}
+	
+	td{
+	border:1px solid black;
+	text-align: center;
+	width: 8rem;
+	height: 2rem;
+	}
+	#addStus h1{
+		font-family: "楷体";
+		font-size: 2rem;
+		margin-left: 6rem;
+	}
+	#addStus p{
+		font-family: "楷体";
+		font-size: 1.5rem;
+	}
+	#addStus p select{
+		height: 2rem;
+		width: 6rem;
+	}
+	#addStus p input{
+		height: 1.5rem;
+	}
+	#addStus{
+		width: 30rem;
+		border: 3px groove #3EAADD;
+		background: #F5F5F5;
+		z-index: 4;
+		position: absolute;
+		left: 32rem;
+		top:9rem;
+		display: none;
+	    padding-left: 7.5rem;
+	    padding-top: 0.5rem;
+	    padding-bottom: 1rem
+	}
+	#max{
+		width: 90rem;		
+		border: 2px solid black;
+		margin-left: 5rem;
+		margin-top: 3rem;
+	}
+</style>
+</head>
+
+<body>	
+	<div id="container">
+		<div id="max">			
+			<p style="text-align: center;"><span style="font-family:cursive;font-size: 2.5rem;font-weight: bold;">报名管理</span></p>
+			<br/>
+			<hr style="width: 90rem;border-color: black;"/>
+			<p style="font-size: 1.2rem">				
+				<a id="submit" style="margin-left: 16rem">新增学员</a>
+				<span id="" style="margin-left: 46rem">导入学员</span><input type="file" name="file" id="file" onchange="importXlsx(this)"/>
+			</p>
+			
+			<table class="table" style="margin-left: 8rem;margin-top: 1rem;margin-bottom: 3rem;">
+				<tr>
+					<td>姓名</td>
+					<td>性别</td>
+					<td>年龄</td>
+					<td>联系方式</td>
+					<td>家庭住址</td>
+					<td>学历</td>
+					<td>性格</td>
+					<td>状态</td>
+					<td>操作</td>
+				</tr>
+				<tr v-for="(item,index) in stusinfo">
+					<td>{{item.sname}}</td>
+					<td v-if="item.sex==0">男</td>
+					<td v-if="item.sex==1">女</td>
+					<td>{{item.age}}</td>
+					<td>{{item.phone}}</td>
+					<td>{{item.address}}</td>
+					<td>{{item.education}}</td>
+					<td>{{item.character.charactername}}</td>
+					<td v-if="item.status==4">报名</td>
+					<td><a v-on:click="delstus(item.sid)">删除</a></td>
+				</tr>				
+			</table>
+			
+		</div>		
+		<div id="addSt">
+			<h1>报名学员信息</h1>
+			<p>学生姓名:<input type="text" id="sname"/></p>
+			<p style="padding-left: 3rem">性别:
+				<select id="sex">
+					<option v-bind:value="0">男</option>
+					<option v-bind:value="1">女</option>
+				</select>
+			</p>
+			<p>联系方式:<input type="text" id="phone" /></p>
+			<p style="padding-left: 3rem">年龄:<input type="text" id="age" /></p>
+			<p>家庭住址:<input type="text" id="address"/></p>
+			<p style="padding-left: 3rem">学历:<input type="text" id="education"/></p>			
+			<p style="padding-left: 3rem">性格:
+				<select id="characterid">
+					<option  v-for="(item,index) in characters" v-bind:value="item.characterid">{{item.charactername}}</option>
+				</select>
+			</p>
+			<p style="padding-left: 3rem">状态:
+				<select id="status">
+					<option v-bind:value="0">正常在读</option>
+					<option v-bind:value="1">休学</option>
+					<option v-bind:value="2">退学</option>
+					<option v-bind:value="3">游离</option>
+					<option v-bind:value="4">报名</option>
+				</select>
+			</p>
+			<br/>
+			<input class="button" type="button" value="保存" id="sub"/>
+    		<input class="button" type="reset" value="取消" id="res" style="margin-left: 8rem"/>
+			<br/>
+		</div>		
+    
+    	
+		
+	</div>
+</body>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/global.js"></script>
+<script type="text/javascript" src="js/jquery.select.js"></script>
+<script type="text/javascript" src="js/core.js"></script>
+<script type="text/javascript" src="js/jquery.pagination.js"></script>
+<script type="text/javascript" src="js/jquery.grid.js"></script>
+<script type="text/javascript" src="js/WdatePicker.js"></script>
+<script type="text/javascript" src="js/vue.js"></script>
+<script type="text/javascript" src="js/xlsx.core.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		var v=new Vue({
+			el:"#container",
+			data:{
+				stusinfo:null,
+				characters:null,
+				delstus:function(sid){
+					$.ajax({
+				    	url:'delstus',
+						dataType:'json',
+						data:'sid='+sid,
+						type:'post',
+						success:function(data){
+							alert("删除成功!");
+							$.ajax({
+						    	url:'selectStu4',
+								dataType:'json',
+								type:'post',
+								success:function(data){
+									v.stusinfo=data;
+								}
+						    });
+						}
+				    });
+				}
+			}
+		
+		});	
+		$.ajax({
+	    	url:'selectStu4',
+			dataType:'json',
+			type:'post',
+			success:function(data){
+				v.stusinfo=data;
+			}
+	    });
+		
+		//显示新增报名学员div
+		$("#submit").click(function(){
+			$.ajax({
+		    	url:'selectAllCharacters',
+				dataType:'json',
+				type:'post',
+				success:function(data){
+					v.characters=data;
+				}
+		    });
+			$("#addSt").fadeIn();
+		});
+		//隐藏新增报名学员div
+		$("#res").click(function(){
+			$("#addSt").fadeOut();
+		});
+		//新增报名学员
+		$("#sub").click(function(){
+			var sname=$("#sname").val();
+			var sex=$("#sex").val();
+			var phone=$("#phone").val();
+			var age=$("#age").val();
+			var address=$("#address").val();
+			var education=$("#education").val();
+			var characterid=$("#characterid").val();
+			var status=$("#status").val();
+			$.ajax({
+		    	url:'addStus4',
+				dataType:'json',
+				data:'sname='+sname+'&sex='+sex+'&phone='+phone+'&age='+age+'&address='+address+'&education='+education+'&characterid='+characterid+'&status='+status,
+				type:'post',
+				success:function(data){
+					alert("新增成功!");
+					var sname=$("#sname").val("");
+					var sex=$("#sex").val("");
+					var phone=$("#phone").val("");
+					var age=$("#age").val("");
+					var address=$("#address").val("");
+					var education=$("#education").val("");
+					var characterid=$("#characterid").val("");
+					var status=$("#status").val("");
+					$.ajax({
+				    	url:'selectStu4',
+						dataType:'json',
+						type:'post',
+						success:function(data){
+							v.stusinfo=data;
+						}
+				    });
+					$("#addSt").fadeOut();
+					
+				}
+		    });
+		});
+	})
+	
+</script>
+<script>
+		function importXlsx(e) {
+
+			const files = e.files;
+
+			let i, f;
+
+			for(i = 0, f = files[i]; i != files.length; ++i) {
+
+				let reader = new FileReader();
+
+				let name = f.name;
+
+				reader.onload = function(e) {
+
+					let data = e.target.result;
+
+					let workbook = XLSX.read(data, {
+
+						type: typeof FileReader !== "undefined" && (FileReader.prototype || {}).readAsBinaryString ?
+
+							'binary' : 'array'
+
+					});
+
+					 
+
+					for(let sheet in workbook.Sheets) {
+
+						if(workbook.Sheets.hasOwnProperty(sheet)) {
+
+							fromTo = workbook.Sheets[sheet]['!ref'];
+
+							let xlsxData = XLSX.utils.sheet_to_json(workbook.Sheets[sheet]);
+
+							for(let i = 0, len = xlsxData.length; i < len; i++) {
+
+								 
+
+								Object.keys(xlsxData[i]).forEach((keys) => {
+
+									// 日期格式会变为数字，所以需要转换一下
+
+									if(typeof xlsxData[i][keys] == 'number') {
+
+										 let date = new Date(timesStamp + 24 * 60 * 60 * 1000 * (i - (currenDay + 6) % 7), 0, xlsxData[i][keys] - 1).toLocaleDateString();
+										
+										xlsxData[i][keys] = date;
+
+									}
+
+								})
+							}
+							// 结果数组
+							console.log(xlsxData);
+							$.ajax({
+			            		url:"insertStu4",
+			            		type:"post",
+			            		data:JSON.stringify(xlsxData),
+			            		contentType:"application/json;charset=utf-8",
+			            		success:function(data){
+			            		location.reload(); 	
+			            		}
+			            	});
+							
+						}
+					}
+
+				};
+				reader.readAsBinaryString(f);
+			}
+
+		}
+</script>
+</html>

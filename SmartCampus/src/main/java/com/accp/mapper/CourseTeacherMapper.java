@@ -14,6 +14,7 @@ public interface CourseTeacherMapper {
 
 	//班级现任教员信息(教员所带的班级)
 	List<CourseTeacher> chaclzteacherBytid(@Param("tid") Integer tid);
+	List<CourseTeacher> chateachercourseclassBytidtan(Integer tid);
 	
     long countByExample(CourseTeacherExample example);
 

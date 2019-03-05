@@ -16,6 +16,24 @@
   		<result column="tname" jdbcType="VARCHAR" property="tname" />
   	</association>
   </resultMap>
+  
+  <resultMap type="com.accp.domain.CourseTeacher" id="teachercourse" extends="BaseResultMap">
+  	<association property="clzteacherobj" column="ctId" javaType="com.accp.domain.ClazzTeacher">
+  		<result column="cid" jdbcType="INTEGER" property="cid" />
+    	<result column="status" jdbcType="INTEGER" property="status" />
+  	</association>
+  	<association property="courseobj" column="cvgmId" javaType="com.accp.domain.Course">
+  		<result column="courseName" jdbcType="VARCHAR" property="coursename" />
+  	</association>
+  </resultMap>
+  
+  <select id="chateachercourseclassBytidtan" resultMap="teachercourse">
+  	SELECT * FROM course_teacher 
+	INNER JOIN clazz_teacher ON clazz_teacher.`ctid`=course_teacher.`ctId`
+	INNER JOIN course ON course.`courseId`=course_teacher.`cvgmId`
+	WHERE clazz_teacher.status=1 AND tid=#{tid}
+  </select>
+  
   <select id="chaclzteacherBytid" resultMap="clzteacher">
   	SELECT cot.*,ct.cid,staff.tname FROM course_teacher cot
 	INNER JOIN clazz_teacher ct ON cot.ctId=ct.ctid 

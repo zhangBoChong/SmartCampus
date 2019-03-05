@@ -32,31 +32,109 @@
 			    border-top: 1px solid #cfcfcf;
 			    cursor: move;
 			}
+			.modal-dialog {
+			    width: 1100px;
+			}
+			td .astyle{
+				padding: 5px 10px;
+				border: solid 1px #ccc;
+				font-size: 14px;
+				text-decoration: none;
+				outline: none;
+			}
 		</style>
 	</head>
 	<body>
-		<div class="container-fluid fdiv2">
+		<div class="container-fluid fdiv2" id="examinfovue">
 			<div class="moreClassExamInforma">
-				<p class="subtitleP">试卷信息</p>
+				<p class="subtitleP">在教的班级</p>
 				<div class="moreClassEDiv">
 					<table class="table table-bordered">
-						<tr class="backgroundtoolbar"><td>题目内容</td><!-- <td>所属章节</td> --><td>做错总次数</td><td>做错的学员名单</td></tr>
-						<tr th:each="e:${etimlist}" th:attr="data-topicid=${e.topic_id}">
-							<td th:text="${e.topicobj.topic_name}"></td>
-							<!-- <td th:text="${e.topicobj.seobj.sectionname}"></td> -->
-							<td th:text="${e.mistakecount}"></td>
-							<td><span th:each="es:${e.mistakestu}"  th:text="${es.stuobj.sname}" class="marginright"></span></td>
+						<tr class="backgroundtoolbar"><td>班级名称</td><td>所教课程</td></tr>
+						<tr th:each="kc:${kcteachlist}" >
+							<td th:text="${kc.clzobj.cname}"></td>
+							<td th:text="${kc.courseobj.coursename}"></td>
+						</tr>
+					</table>
+				</div>
+				<p class="subtitleP">我的试卷</p>
+				<div class="moreClassEDiv">
+					<table class="table table-bordered" >
+						<tr class="backgroundtoolbar"><td>试卷名</td><td>所属课程</td><td style="text-align: center;">操作</td></tr>
+						<tr th:each="sj:${sjlist}" th:attr="data-examid=${sj.examination_id}">
+							<td th:text="${sj.examination_mc}"></td>
+							<td th:text="${sj.coursename.coursename}"></td>
+							<td style="text-align: center;">
+								<a class="astyle" href="#" data-toggle="modal" data-target="#myModal">查看试卷信息</a>
+							</td>
 						</tr>
 					</table>
 				</div>
 			</div>
+			
+			<!-- Modal -->
+			<!-- -------------试卷内容-------------------- -->
+			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			  	<div class="modal-dialog" role="document">
+			    	<div class="modal-content">
+			      		<div class="modal-header">
+			        		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			        		<h4 class="modal-title" id="myModalLabel">试卷内容</h4>
+			      		</div>
+			      		<div class="modal-body">
+				      		<div class="">
+								<div class="moreClassEDiv">
+									<table class="table table-bordered">
+										<tr class="backgroundtoolbar"><td>题目内容</td><td>做错总次数</td><td>做错的学员名单</td></tr>
+										<tr v-for="(e,index) in list" v-bind:data-topicid="e.topic_id">
+											<td>{{e.topicobj.topic_name}}</td>
+											<td>{{e.mistakecount}}</td>
+											<td><span v-for="(es,index) in e.mistakestu" class="marginright">{{es.cstuobj.stuobj.sname}}</span></td>
+										</tr>
+									</table>
+								</div>
+							</div>
+				      	</div>
+				      	<div class="modal-footer">
+				        	<button type="button" class="btn btn-default" data-dismiss="modal">关 闭</button>
+				      	</div>
+				    </div>
+				</div>
+			</div>
+	
 		</div>
 		<script src="js/jquery-1.12.4.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/vue.js" type="text/javascript"></script>
 		<script type="text/javascript">
+			var v=null;
 			$(function(){
+				v=new Vue({
+					el:"#examinfovue",
+					data:{
+						list:[]
+					}
+				});
 				
+				$(".astyle").click(function(){
+					var examinationId=$(this).parents("tr").attr("data-examid");
+					alert("examinationId--"+examinationId);
+					showExaminfo(examinationId);
+				});
 			});
+			
+			function showExaminfo(examinationId){
+				alert("ajax-examinationId--"+examinationId)
+				$.ajax({
+					url:"/toexamtiminfo",
+					data:"examinationId="+examinationId,
+					success:function(result){
+						//console.log(result);
+						v.list=result;
+					}
+				});
+			}
+			
 		</script>
 	</body>
 </html>

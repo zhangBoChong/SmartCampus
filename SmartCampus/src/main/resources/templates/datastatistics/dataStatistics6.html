@@ -45,8 +45,8 @@
 		</style>
 	</head>
 	<body>
-		<div class="container fdiv2"><!-- container-fluid -->
-			<div class="moreClassExamInforma">
+		<div class="container fdiv2" ><!-- container-fluid -->
+			<div class="moreClassExamInforma" id="shxtable">
 				<p class="subtitleP">升学鉴定表</p>
 				<div class="exportdiv">
 					<a class="exporta backgroundtoolbar" href="#" download="升学鉴定表.xls" onclick="return ExcellentExport.excel(this, 'authentication', 'Sheet Name Here');">导 出</a>
@@ -63,11 +63,11 @@
 						<tr th:each="upsx:${uplist}" th:attr="data-stuid=${upsx.stu.sid}" class="gomineup">
 							<td th:text="${upsx.stu.snumber}"></td>
 							<td th:text="${upsx.stu.sname}"></td>
-							<td class="hide examname" th:each="esn:${upsx.examlist}" th:text="${esn.examobj.coursename.coursename}"></td>
+							<td class="hide examname" th:each="esn:${upsx.examlist}" th:text="${esn.examobj.examination_mc}"></td>
 							<td th:each="es:${upsx.examlist}"><span class="ksfshu" th:text="${es.score}"></span></td>
+							<!-- <td></td>
 							<td></td>
-							<td></td>
-							<td></td>
+							<td></td> -->
 						</tr>
 					</table>
 				</div>
@@ -76,8 +76,19 @@
 		<script src="js/jquery-1.12.4.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/excellentexport.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/vue.js" type="text/javascript"></script>
 		<script type="text/javascript">
+			var v=null;
 			$(function(){
+				v=new Vue({
+					el:"#shxtable",
+					data:{
+						list:[]
+					}
+				});
+				showifupclazz();
+				
+				
 				//---考试名称---
 				var tdlist="";
 				var tdcnamelist=[];
@@ -90,6 +101,44 @@
 				$(".examnamestu").after(tdlist);
 				
 			});
+			
+			function showifupclazz(){
+				//104,105,106,107
+				var ids=[];
+				
+				ids=JSON.stringify(ids);
+				alert(ids);
+				$.ajax({
+					url:"toupclazzStudent",
+					contentType:"application/json",
+					type:"post",
+					data:ids,
+					success:function(result){
+						//console.log(result);
+						v.list=result;
+					}
+				});
+				
+				//----参考示例------------
+				/* $("[name=ch]:checked").each(function(){
+						ids.push($(this).val());
+						//ids+="&ch="+$(this).val();
+					});
+					ids=JSON.stringify(ids);
+					//alert(ids);
+					$.ajax({
+						url:"clientele/moredelete",
+						contentType:"application/json",
+						type:"post",
+						data:ids,
+						success:function(result){
+							//alert("123");
+							window.location.href="clientele/query";
+						}
+					}); */
+			}
+			
+			
 		</script>
 	</body>
 </html>

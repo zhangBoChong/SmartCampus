@@ -24,5 +24,10 @@ public interface CDCAttenceService {
 	public int updateLeave(Leave l);
 	
 	public int insertAtt(Attence att);
+//	新写的
+	public List<Clazz> queryClazzByTid (int tid);
+	
+	public List<Attence> queryAttenceBySid(int cid);
+
 
 }

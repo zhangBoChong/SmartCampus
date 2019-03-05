@@ -27,6 +27,13 @@ public interface AttenceMapper {
 	
 	public int updateLeave(Leave l);
 	
+
+//	新写的
+	public List<Clazz> queryClazzByTid (int tid);
+	
+	public List<Attence> queryAttenceBySid(int cid);
+
+	
 //	插入日常表
 	public int insertAtt(Attence att);
 	int selectattenceBysidlx(@Param("studentid") Integer studentid,@Param("attence") Integer attence);

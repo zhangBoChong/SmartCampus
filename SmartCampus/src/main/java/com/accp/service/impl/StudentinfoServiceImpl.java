@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.accp.domain.Login;
 import com.accp.domain.Parents;
 import com.accp.domain.Studentinfo;
+import com.accp.mapper.CharacterMapper;
 import com.accp.mapper.LoginMapper;
 import com.accp.mapper.ParentsMapper;
 import com.accp.mapper.StudentinfoMapper;
@@ -24,9 +25,10 @@ public class StudentinfoServiceImpl implements StudentinfoService{
 	StudentinfoMapper smapper;
 	@Autowired
 	LoginMapper logmapper;
-	
 	@Autowired
 	StudentinfoMapper studentinfoMapper;
+	@Autowired
+	CharacterMapper characterMapper;
 	
 	@Override
 	public Studentinfo queryBysid1(Integer sid) {
@@ -98,6 +100,32 @@ public class StudentinfoServiceImpl implements StudentinfoService{
 	public Studentinfo selectallinfo(Integer sid) {
 		// 个人详情
 		return smapper.selectallinfo(sid);
+	}
+	
+	@Override
+	public List<Studentinfo> queryBystatus() {
+		List<Studentinfo> list=studentinfoMapper.queryBystatus();
+		for (Studentinfo s : list) {
+			s.setCharacter(characterMapper.queryByCharacterId(s.getCharacterid()));
+		}
+		return list;
+	}
+
+	@Override
+	public int addStudentinfo4(Studentinfo stu) {
+		int count=studentinfoMapper.addStudentinfo4(stu);
+		return count;
+	}
+
+	@Override
+	public int deleteStudents(Integer sid) {
+		int count=studentinfoMapper.deleteStudents(sid);
+		return count;
+	}
+	@Override
+	public List<Studentinfo> queryBystatus3() {
+		List<Studentinfo> list=studentinfoMapper.queryBystatus3();
+		return list;
 	}
 
 }

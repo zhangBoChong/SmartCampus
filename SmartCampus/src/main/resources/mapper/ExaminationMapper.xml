@@ -25,6 +25,18 @@
   	</association>
   </resultMap>
   
+  <resultMap type="com.accp.domain.Examination" id="examcourse" extends="BaseResultMap">
+  	<association property="coursename" column="courseId" javaType="com.accp.domain.Course" >
+  		 <result column="courseName" jdbcType="VARCHAR" property="coursename" />
+  	</association>
+  </resultMap>
+
+  <select id="chaexamBytidtan" resultMap="examcourse">
+  	SELECT * FROM examination 
+	INNER JOIN course ON course.`courseId`=examination.`courseId`
+	WHERE tid=#{tid}
+  </select>
+  
   <insert id="insertExa" parameterType="com.accp.domain.Examination" useGeneratedKeys="true" keyProperty="examination_id">
   		INSERT INTO`examination`(`examination_zf`,`examination_lx_id`,`examination_kstime`,`examination_jstime`,`examination_mc`)
 

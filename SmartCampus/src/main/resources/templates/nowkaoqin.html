@@ -1,0 +1,195 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=emulateIE7" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="css/style.css" />
+<link rel="stylesheet" type="text/css" href="css/WdatePicker.css" />
+<link rel="stylesheet" type="text/css" href="css/skin_/table.css" />
+<link rel="stylesheet" type="text/css" href="css/jquery.grid.css" />
+<link rel="stylesheet" type="text/css" href="css/bootstrap.css"  />
+
+<title>表格</title>
+		<style>
+			ul{
+				margin-left: 5rem;
+			}
+			
+			ul li{
+				float: left;
+				list-style-type:none;
+				margin-left: 3rem;
+			}
+			    .page p{
+            		margin-top:-1.5em;
+            		margin-left:5em;
+            	} 
+            	.prev{
+            		width: 4em;
+            		height:2em;
+            		border:0px;
+            		background-color: #0E8BC5;
+            		color: white;
+            		margin-left: 0.5em;
+            		border-radius: 3px;
+            	}
+            	.next{
+            		width: 4em;
+            		height:2em;
+            		border:0px;
+            		background-color: #0E8BC5;
+            		color: white;
+            		border-radius: 3px;
+            		margin-top: -2em;
+            		margin-left: 8em;
+            	}
+            	.page{
+            		float: right;
+            		margin-right: 3em;
+            		margin-top: 2em;
+            	}
+            	
+            	table tr td{
+            		border-left: 1px solid #808080;
+            		border-right: 1px solid #808080;
+            		text-align: center;
+            		white-space: nowrap;
+            	}
+            	table .trr{
+            		border-top: 1px solid #808080;
+            		border-bottom: 1px solid #808080;
+            	} 
+            	.span{
+            		cursor: pointer;
+            	}
+            
+		</style>
+</head>
+
+<body>
+	<h2 style="font-size: 40px; margin-left: 34rem;">日常考勤总表</h2>
+<div id="container">
+	<div id="hd"></div>
+    <div id="bd">
+    	<div id="main">
+        	<div class="search-box ue-clear">
+                    <div class="kv-item ue-clear">
+        <div class="kv-item-content">
+			<ul>
+			<li>
+				<select id = "clazzId" style="width: 200px">
+				<option v-for = "item in list" v-bind:value="item.cid">{{item.cname}}</option>
+				</select>
+			</li>
+		</ul>
+    </div>
+                    </div>
+                </div>
+                <div class="search-button">
+                	
+                </div>
+             </div>
+             
+            <div class="table">
+            	<div class="opt ue-clear">
+                	<span class="sortarea">
+                    	<span class="sort">
+                        	<label>排序：</label>
+                            <span class="name">
+                            	<i class="icon"></i>
+                                <span class="text">名称</span>
+                            </span>
+                        </span>
+                        
+                        <i class="list"></i>
+                        <i class="card"></i>
+                    </span>
+                </div>
+                
+                <div class="grid"></div>
+                
+                <div class="pagination"></div>
+            </div>
+            
+            <div id="pagebean" style="text-align: center;">
+            <table v-if="list.length>0" border="1px" style="font-size: 17px;margin: 0 auto">
+			<tr class="trr" style="background-color: honeydew;">
+				<td width="18.5%">姓名</td>
+				<td width="18.5%">时间</td>
+				<td width="18.5%">类型</td>
+			</tr>
+			<tr v-for="item in list">
+				<td>{{item.stu.sname}}</td>
+				<td>{{item.timeStr}}</td>
+				<td v-if="item.attence==0">正常</td>
+				<td v-else="item.attence==1">
+					异常
+				</td>
+			</tr>
+		</table>
+            </div>
+        </div>
+    </div>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/global.js"></script>
+<script type="text/javascript" src="js/jquery.select.js"></script>
+<script type="text/javascript" src="js/core.js"></script>
+<script type="text/javascript" src="js/jquery.pagination.js"></script>
+<script type="text/javascript" src="js/jquery.grid.js"></script>
+<script type="text/javascript" src="js/WdatePicker.js"></script>
+<script type="text/javascript" src="js/vue.js"></script>
+<script type="text/javascript">
+
+var v = new Vue({
+	el:"#clazzId",
+	data:{
+		list:[]
+	}
+})
+
+$(function(){
+	$.ajax({
+		url:"queryClazzByTid",
+		type:"post",
+		success:function(data){
+			v.list=data;
+			alert(data[0].cid);
+			$.ajax({
+				url:"queryAttenceBySid",
+				type:"post",
+				data:{
+					cid:data[0].cid,
+				},
+				success:function(data){
+					v1.list=data;
+				}
+			});
+		}
+	});
+})
+
+var v1 = new Vue({
+	el:"#pagebean",
+	data:{
+		list:[]
+	}
+})
+
+
+$("#clazzId").change(function(){ 	
+	var clazzId = $("#clazzId").val();
+	$.ajax({
+		url:"queryAttenceBySid",
+		type:"post",
+		data:{
+			cid:clazzId,   			
+		},
+		success:function(data){
+			v1.list=data;
+		}
+	});
+	 });
+
+</script>
+</body>
+</html>

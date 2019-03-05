@@ -69,5 +69,17 @@ public class CDCAttenceServiceImpl implements CDCAttenceService{
 		// TODO Auto-generated method stub
 		return attmapper.insertAtt(att);
 	}
+
+	@Override
+	public List<Clazz> queryClazzByTid(int tid) {
+		// TODO Auto-generated method stub
+		return attmapper.queryClazzByTid(tid);
+	}
+
+	@Override
+	public List<Attence> queryAttenceBySid(int cid) {
+		// TODO Auto-generated method stub
+		return attmapper.queryAttenceBySid(cid);
+	}
 	
 }

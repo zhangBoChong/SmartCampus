@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.accp.domain.Clazz;
+import com.accp.domain.ClazzStudent;
 import com.accp.domain.Course;
 import com.accp.domain.CourseTeacher;
 import com.accp.domain.Staff;
@@ -23,6 +24,28 @@ public class WYLController {
 	
 	@Autowired
 	WYLService wylService;
+	
+	//确认开班
+	@RequestMapping("/confirmClass")
+	@ResponseBody
+	public String confirmClass(int cid){
+		System.out.println("确认开班");
+		wylService.updateStatus(cid);
+		List<ClazzStudent> list = wylService.clazzallstudentBycid2(cid);
+		for (ClazzStudent clazzStudent : list) {
+			System.out.println(clazzStudent.getSid());
+			wylService.updateStudent7(clazzStudent.getSid());
+		}
+		return null;
+	}
+	
+	//预生成完的班级
+	@RequestMapping("/prebuiltClass")
+	@ResponseBody
+	public List<Clazz> prebuiltClass(){
+		List<Clazz> list = wylService.queryClazz();
+		return list;
+	}
 	
 	//自动开班
 	@RequestMapping("/automaticClass")
@@ -60,40 +83,36 @@ public class WYLController {
 	        int clazzid=clazz.getCid();
 			System.out.println("班级id："+clazzid);
 			if(i==zu-1) {
-				for (int k = 0; k < sl; k++) {
-					if(list.get(count).getStatus2()==0) {
-						wylService.updateStudent6(list.get(count).getSid());
-						wylService.clazzStudentinsert(clazzid, list.get(count).getSid());
-					}
+				for (int k = 0; k < list.size(); k++) {
+					wylService.updateStudent6(list.get(count).getSid());
+					wylService.clazzStudentinsert(clazzid, list.get(count).getSid());
 					count++;
 				}
 			}else {
 				for (int j = 0; j < rs;) {
-					if(list.get(count).getStatus2()==0) {
-						if(list.get(count).getAge()>17) {
-							if(a < cnr/zu) {
-								wylService.updateStudent6(list.get(count).getSid());
-								wylService.clazzStudentinsert(clazzid, list.get(count).getSid());
-								a++;
-								j++;
-								count++;
-								continue;
-							}
-						}else {
-							if(b < wcnr/zu) {
-								wylService.updateStudent6(list.get(count).getSid());
-								wylService.clazzStudentinsert(clazzid, list.get(count).getSid());
-								b++;
-								j++;
-								count++;
-								continue;
-							}
-						}
-						if(a==cnr/zu && b==wcnr/zu) {
+					if(list.get(count).getAge()>17) {
+						if(a < cnr/zu) {
 							wylService.updateStudent6(list.get(count).getSid());
 							wylService.clazzStudentinsert(clazzid, list.get(count).getSid());
+							a++;
 							j++;
+							count++;
+							continue;
 						}
+					}else {
+						if(b < wcnr/zu) {
+							wylService.updateStudent6(list.get(count).getSid());
+							wylService.clazzStudentinsert(clazzid, list.get(count).getSid());
+							b++;
+							j++;
+							count++;
+							continue;
+						}
+					}
+					if(a==cnr/zu && b==wcnr/zu) {
+						wylService.updateStudent6(list.get(count).getSid());
+						wylService.clazzStudentinsert(clazzid, list.get(count).getSid());
+						j++;
 					}
 					count++;
 				}

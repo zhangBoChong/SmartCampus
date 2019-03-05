@@ -27,6 +27,19 @@
   		select="com.accp.mapper.ClazzStudentMapper.selectclazzBysid"></collection>
   </resultMap>
   
+   <delete id="deleteStudents">
+  	delete from studentinfo where sid=#{sid}
+  </delete>
+  <insert id="addStudentinfo4">
+  	insert into studentinfo (sname,sex,phone,address,education,characterId,snumber,status,age,choice) values(#{sname},#{sex},#{phone},#{address},#{education},#{characterid},#{snumber},#{status},#{age},0)
+  </insert>
+  <select id="queryBystatus" resultMap="BaseResultMap">
+  	select * from studentinfo where status=4
+  </select>
+  <select id="queryBystatus3" resultMap="BaseResultMap">
+  	select * from studentinfo where status=3
+  </select>
+  
   <!-- 修改学生状态 -->
   <update id="updatestudentstatus">
   	UPDATE `studentinfo` SET `status`=#{status} WHERE `sid`=#{sid}
@@ -103,15 +116,15 @@
   </resultMap>
   
   <select id="studentQuantity2"  resultType="int">
-  	SELECT COUNT(*) FROM `studentinfo` WHERE`status`=4 AND `age`>17
+  	SELECT COUNT(*) FROM `studentinfo` WHERE`status`=4 AND `age`>17 AND `status2`=0
   </select>
   
   <select id="studentQuantity"  resultType="int">
-  	SELECT COUNT(*) FROM `studentinfo` WHERE`status`=4
+  	SELECT COUNT(*) FROM `studentinfo` WHERE`status`=4 AND `status2`=0
   </select>
   
   <select id="queryAllStudent" resultMap="queryStudent" >
-	SELECT * FROM `studentinfo` WHERE `status`=4
+	SELECT * FROM `studentinfo` WHERE `status`=4 AND `status2`=0
   </select>
   
   <select id="characterName" resultType="com.accp.domain.Character">
@@ -165,7 +178,9 @@
   	UPDATE `studentinfo` SET `status2` = 1 WHERE `sid`=#{sid}
   </update>
   
-  
+  <update id="updateStudent7">
+  	UPDATE `studentinfo` SET `status`=0 WHERE `sid`=#{sid}
+  </update>
   
   <sql id="Example_Where_Clause">
     <where>

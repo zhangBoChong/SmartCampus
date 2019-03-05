@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.accp.domain.Clazz;
+import com.accp.domain.ClazzStudent;
 import com.accp.domain.ClazzTeacher;
 import com.accp.domain.Course;
 import com.accp.domain.CourseTeacher;
@@ -178,5 +179,23 @@ public class WYLServiceImpl implements WYLService{
 	public List<Clazz> queryClazz() {
 		// TODO Auto-generated method stub
 		return clzmapper.queryClazz();
+	}
+
+	@Override
+	public int updateStatus(Integer cid) {
+		// TODO Auto-generated method stub
+		return clzmapper.updateStatus(cid);
+	}
+
+	@Override
+	public List<ClazzStudent> clazzallstudentBycid2(Integer cid) {
+		// TODO Auto-generated method stub
+		return clzsmapper.clazzallstudentBycid2(cid);
+	}
+
+	@Override
+	public int updateStudent7(int sid) {
+		// TODO Auto-generated method stub
+		return stumapper.updateStudent7(sid);
 	}
 }

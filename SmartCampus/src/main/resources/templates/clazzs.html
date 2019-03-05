@@ -204,12 +204,26 @@
 	    padding-top: 0.5rem;
 	    padding-bottom: 1rem
 	}
-	
+	#selectyyouli{
+		border: 1px solid black;
+		z-index: 3;
+		position:absolute;
+		text-align: center;
+		width: 70rem;
+		margin-left: 15rem;
+		margin-top: -10rem;
+		background: #D3CAB7;
+		display: none;
+	}
+	#selectyyouli h1{
+		font-size: 1.8rem;
+	}
 </style>
 </head>
 
 <body>	
 	<div id="container">
+		
 		<div id="addStus">
 			<h1>新增学员</h1>
 			<p>学生姓名:<input type="text" id="addsname"/></p>
@@ -264,6 +278,7 @@
     		<input class="button" type="button" value="取消" id="res" style="margin-left: 8rem"/>
 			<br/>
 		</div>
+		
 		<div id="addKC">
     	<h1>班级详情</h1>   	
     	<div style="background: white;border: 1px solid gray;margin-left:-7.5rem;">       		
@@ -301,9 +316,11 @@
         <p style="margin-top: 2rem;margin-bottom: 2rem;padding-left: 10rem"> 
     	<input type="hidden" id='id15' value="15">
 			<span v-for="i2 in ButtonmiddleList15" v-if="i2.buttonstatus==0">
-			<input class="button" type="button" value="新增学员" id="submit" v-on:click="xz1()"/></span>
+			</span>
+			<input class="button" type="button" value="添加游离学员" id="addyouli" style="margin-left: -10rem"/>
+			<input class="button" type="button" value="新增学员" id="submit" v-on:click="xz1()" style="margin-left: 10rem"/>
 
-    	<span><input class="button" type="button" value="取消" id="reset" style="margin-left: 8rem"/></span>
+    		<input class="button" type="button" value="取消" id="reset" style="margin-left: 8rem"/>
     	</p> 
     </div>
     	 <div class="table">
@@ -313,7 +330,7 @@
 				<input type="button" id="addclazzposition" value="提交" style="height: 2rem"/>
 	       </div>  
    		 </div>
-    	
+    		
 		 <div class="table">
 		 	<table>
 		 		<tr class="opt">
@@ -342,6 +359,30 @@
 		 		</tr>
 		 	</table>
 		 </div>
+		 <div id="selectyyouli">
+			<h1>游离学员信息</h1> 
+			<table class="tables" style="margin-bottom: 1rem;">
+				<tr class="opt">
+        			<td>学号</td>
+        			<td>学生姓名</td>
+        			<td>性别</td>
+        			<td>联系方式</td>
+        			<td>年龄</td>
+        			<td>状态</td>
+        			<td>操作</td>
+        		</tr>     
+        		<tr v-for="(item,index) in stus3">
+        			<td>{{item.snumber}}</td>
+        			<td>{{item.sname}}</td>
+        			<td v-if="item.sex==0">男</td><td v-if="item.sex==1">女</td>
+        			<td>{{item.phone}}</td>
+        			<td>{{item.age}}</td>
+        			<td v-if="item.status==3">游离</td>
+        			<td><a v-on:click="updatestus3(item.sid)">添加</a></td>
+        		</tr>	               		
+         	</table>
+         	<input type="button" class="button" value="返回" id="fanhui" style="margin-bottom: 2rem;"/>
+		</div>
 	</div>
 </body>
 <script type="text/javascript" src="js/jquery.js"></script>
@@ -357,6 +398,7 @@
 		var v=new Vue({
 			el:"#container",
 			data:{
+				stus3:null,
 				clazzs:null,
 				clazzstu:null,
 				cid:null,
@@ -423,6 +465,27 @@
 				    	}
 					});
 					$("#addSt").fadeIn();
+				},
+				updatestus3:function(sid){
+					var cid=v.cid;
+					$.ajax({
+						url:'updateStudent33',
+						dataType:'json',		
+						type:'post',
+						data:'cid='+cid+'&sid='+sid,
+						success:function(data){
+							alert("添加成功!");	
+							$.ajax({
+								url:'selectStus3',
+								dataType:'json',		
+								type:'post',			
+								success:function(data){
+									v.stus3=data;
+						    	}
+							});
+							v.look(v.cid);
+				    	}
+					});	
 				}
 			}
 		
@@ -527,7 +590,16 @@
 				type:'post',
 				data:'sname='+sname+'&phone='+phone+'&address='+address+'&education='+education+'&status='+status+'&age='+age+'&sex='+sex+'&cid='+v.cid,
 				success:function(data){
-					alert("新增成功!");d
+					alert("新增成功!");
+					v.look(v.cid);
+					$.ajax({
+						url:'queryClazzs',
+						dataType:'json',		
+						type:'post',
+						success:function(data){
+							v.clazzs=data;
+				    	}
+					});
 					$("#addsname").val("");
 					$("#addsex").val("");
 					$("#addphone").val("");
@@ -553,7 +625,22 @@
 		    	}
 			});
 		});
-
+		//显示游离学生div
+		$("#addyouli").click(function(){
+			$.ajax({
+				url:'selectStus3',
+				dataType:'json',		
+				type:'post',			
+				success:function(data){
+					v.stus3=data;
+		    	}
+			});
+			$("#selectyyouli").fadeIn();
+		});
+		//隐藏游离学生div
+		$("#fanhui").click(function(){
+			$("#selectyyouli").fadeOut();
+		});
 	})
 	
 </script>

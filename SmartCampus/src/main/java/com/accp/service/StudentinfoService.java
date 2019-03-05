@@ -13,7 +13,8 @@ public interface StudentinfoService {
 	 //-----------------------
 	 public Studentinfo selectallinfo(Integer sid);
 	 
-	 
+	//查状态为3,游离
+		List<Studentinfo> queryBystatus3();
 	//按sid查询学生表
 	    Studentinfo queryBysid1(Integer sid);
 	    
@@ -22,4 +23,10 @@ public interface StudentinfoService {
 	    
 	    //
 	    List<Studentinfo> queryBysidnnn(Integer sid);
+	  //删除学员
+		int deleteStudents(Integer sid);	
+		//新增报名学员
+		int addStudentinfo4(Studentinfo stu);
+		//查状态为4，新生
+		List<Studentinfo> queryBystatus();
 }

@@ -62,4 +62,6 @@ public interface ClazzMapper {
 	List<Clazz> queryClazz();
 	
 	int clazzRs(Integer cid);
+	
+	int updateStatus(Integer cid);
 }

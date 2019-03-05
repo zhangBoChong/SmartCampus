@@ -35,6 +35,9 @@
   <select id="clazzallstudentBycid" resultMap="clazzallstudent">
   	SELECT * FROM clazz_student WHERE `status`=1 AND cid=#{cid}
   </select>
+  <select id="clazzallstudentBycid2" resultMap="clazzallstudent">
+  	SELECT * FROM clazz_student WHERE cid=#{cid}
+  </select>
   <select id="selectclazzstudentBysidtan" resultMap="BaseResultMap">
   	SELECT * FROM clazz_student WHERE `status`=1 AND sid=#{sid}
   </select>

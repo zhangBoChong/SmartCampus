@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.accp.domain.Clazz;
+import com.accp.domain.ClazzStudent;
 import com.accp.domain.ClazzTeacher;
 import com.accp.domain.Course;
 import com.accp.domain.CourseTeacher;
@@ -59,4 +60,10 @@ public interface WYLService {
 	int updateClazz(@Param("tid")Integer tid,@Param("cid")Integer cid);
 	
 	List<Clazz> queryClazz();
+	
+	int updateStatus(Integer cid);
+
+	List<ClazzStudent> clazzallstudentBycid2(Integer cid);
+
+    int updateStudent7(int sid);
 }

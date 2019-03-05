@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -29,12 +30,14 @@ import com.accp.domain.Post;
 import com.accp.domain.Schedule;
 import com.accp.domain.Staff;
 import com.accp.domain.Studentinfo;
+import com.accp.domain.Stus;
 import com.accp.domain.Vession;
 import com.accp.domain.VessionGrade;
 import com.accp.domain.VessionGradeMajorid;
 import com.accp.domain.VessionGradeMajoridCourse;
 import com.accp.service.PostService;
 import com.accp.service.StaffService;
+import com.accp.service.StudentinfoService;
 import com.accp.service.ZBCCourseService;
 
 
@@ -48,6 +51,10 @@ public class ZBCController {
 	
 	@Autowired
 	StaffService staffService;
+	
+	@Autowired
+	StudentinfoService studentinfoService;
+	
 	@RequestMapping("/Tomain")
 	public String Tomain() {
 		return "main";
@@ -503,6 +510,89 @@ public class ZBCController {
 			public int insertClazzPosition(Clazzposition record) {
 				int count=zbcService.insertClazzposition(record);
 				return count;
+			}
+			//跳入学员报名页面
+			@RequestMapping("/addStuBM")
+			public String addStuBM() {
+				return "addstu";
+			}
+			//查询报名的学员信息
+			@RequestMapping("/selectStu4")
+			@ResponseBody
+			public List<Studentinfo> selectStu4(){
+				List<Studentinfo> list=studentinfoService.queryBystatus();
+				return list;
+			}
+			//新增报名学员
+			@RequestMapping("/addStus4")
+			@ResponseBody
+			public int addStus4(Studentinfo stu) {
+				int number=(int)((Math.random()*9+1)*100000);		
+				stu.setSnumber(String.valueOf(number));
+				int count=studentinfoService.addStudentinfo4(stu);
+				return count;
+			}
+			//删除学员
+			@RequestMapping("/delstus")
+			@ResponseBody
+			public int delstus(int sid) {
+				int count=studentinfoService.deleteStudents(sid);
+				return count;
+			}
+			
+			@RequestMapping(value="insertStu4",produces="application/json;charset=utf-8")
+			@ResponseBody
+			public void insertStu4(@RequestBody List<Stus> obj) {	
+				for (Stus s : obj) {
+					Studentinfo stu=new Studentinfo();
+					stu.setAddress(s.getAddress());
+					int ages=0;
+					try {
+						ages=Integer.valueOf(s.getAge()).intValue();
+					} catch (NumberFormatException e) {
+						e.printStackTrace();
+					}
+					
+					stu.setAge(ages);
+					stu.setEducation(s.getEducation());
+					stu.setPhone(s.getPhone());
+					if(s.getSex().equals("男")) {
+						stu.setSex(0);
+					}else {
+						stu.setSex(1);
+					}
+					stu.setSname(s.getSname());
+					stu.setSnumber(String.valueOf((int)((Math.random()*9+1)*100000)));
+					stu.setStatus(4);
+					List<Character> lists=zbcService.queryAllCharacters();
+					for (Character c : lists) {
+						if(c.getCharactername().equals(s.getCharacter())) {
+							stu.setCharacterid(c.getCharacterid());
+						}
+					}
+					
+					//新增导入的报名学员
+					studentinfoService.addStudentinfo4(stu);
+				}
+				
+			}
+			//查游离学生
+			@RequestMapping("/selectStus3")
+			@ResponseBody
+			public List<Studentinfo> selectStus3(){
+				List<Studentinfo> list=studentinfoService.queryBystatus3();
+				return list;
+			}
+			//修改游离学生状态为正常同时绑定新班级
+			@RequestMapping("/updateStudent33")
+			@ResponseBody
+			public int updateStudent33(int sid,int cid) {
+				int count1=studentinfoService.updatestudentstatus(0, sid);
+				ClazzStudent stu=new ClazzStudent();
+				stu.setCid(cid);
+				stu.setSid(sid);
+				int count2=zbcService.insertclazzStudentinfos(stu);
+				return count2;
 			}
 }
 

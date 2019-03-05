@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -16,6 +17,8 @@ import com.accp.domain.Clazz;
 import com.accp.domain.ClazzStudent;
 import com.accp.domain.ClazzStudentExamInfo;
 import com.accp.domain.CourseTeacher;
+import com.accp.domain.Examination;
+import com.accp.domain.ExaminationFb;
 import com.accp.domain.ExaminationTm;
 import com.accp.domain.Floor;
 import com.accp.domain.Havetaskexam;
@@ -56,9 +59,18 @@ public class TanController {
 			//tid教的班级
 			System.out.println("员工登录用户id--"+login.getPeopleId());
 			Staff staffobj=cservice.selectstaffclazz(login.getPeopleId());
-			model.addAttribute("staffobj", staffobj);
-			//班级
-			path="datastatistics/dataStatistics2";
+			if(staffobj.getPostid()==2) {
+				model.addAttribute("staffobj", staffobj);
+				//班级
+				path="datastatistics/dataStatistics2";
+			}else if(staffobj.getPostid()==3) {
+				//老师出的考试试卷
+				List<Examination> sjlist=einfoservice.chaexamBytidtan(staffobj.getTid());
+				model.addAttribute("sjlist", sjlist);
+				List<CourseTeacher> kcteachlist=coteaservice.chateachercourseclassBytidtan(staffobj.getTid());
+				model.addAttribute("kcteachlist", kcteachlist);
+				path="datastatistics/dataStatistics5";
+			}
 		}else if(login.getType()==-1) {
 			System.out.println("学生登录用户id--"+login.getPeopleId());
 			//学生
@@ -92,30 +104,6 @@ public class TanController {
 		return tans;
 	}
 	
-	/*@RequestMapping("/toDataStatistics")
-	public String toDataStatistics(Model model,Integer sid) {
-		//学员考试考勤数据
-		if(sid==null) {
-			sid=1;//默认值
-		}
-		System.out.println("个人主页--sid:"+sid);
-		//基本信息 班级+年级
-		Studentinfo stuobj=stuservice.selectallinfo(sid);
-		model.addAttribute("stuobj", stuobj);
-		//参与的考试信息
-		List<Havetaskexam> elist=einfoservice.examscoreBysid(sid);
-		model.addAttribute("elist", elist);
-		AttenceCount acount=ainfoservice.selectattenceBysidlx(sid);
-		model.addAttribute("acount", acount);
-		//System.out.println("进入MyController");
-		
-		TanStudentinfo tans=new TanStudentinfo();
-		tans.setStuobj(stuobj);
-		tans.setElist(elist);
-		tans.setAcount(acount);
-		
-		return "datastatistics/dataStatistics";
-	}*/
 	
 	@RequestMapping("/toshowaclazzinfo")
 	@ResponseBody
@@ -138,44 +126,24 @@ public class TanController {
 		return tanc;
 	}
 	
-	/*@RequestMapping("/toshowaclazzinfo")
-	public String toshow(Model model,Integer cid) {
-		//班级考试考勤数据
-		if(cid==null) {
-			cid=1;//默认值
-		}
-		//System.out.println("班级主页---cid:"+cid);
-		Clazz clzobj=cservice.selectclazzBycid(cid);
-		model.addAttribute("clzobj", clzobj);
-		//学员考试
-		List<ClazzStudentExamInfo> clslist=einfoservice.selectstudentexamBycid(cid);
-		model.addAttribute("clslist", clslist);
-		//学员考勤
-		List<ClazzStudent> clsattencelist=ainfoservice.selectallstuattenceBycid(cid);
-		model.addAttribute("clsattencelist", clsattencelist);
-		
-		TanClassinfo tanc=new TanClassinfo();
-		tanc.setClzobj(clzobj);
-		tanc.setClslist(clslist);
-		tanc.setClsattencelist(clsattencelist);
-		
-		//System.out.println("进入MyController");
-		return "datastatistics/dataStatistics2";
-	}*/
 	
-	
-	@RequestMapping("/toupclazzStudent")
-	public String toupclazzStudent(Model model) {
+	@RequestMapping("/tostudentjdreport")
+	public String tostudentjdreport() {
 		//升学鉴定表
-		Integer[] sid2= {104,105,106,107}; 
-		System.out.println("可以升学的sid");
-		/*for (int i = 0; i < sid2.length; i++) {
-			System.out.println(sid2[i]);
-		}*/
-		List<ClazzStudentExamInfo> uplist=einfoservice.canupclazzStudentexaminfo(sid2);
-		model.addAttribute("uplist", uplist);
 		return "datastatistics/dataStatistics6";
 	}
+	@RequestMapping(value="/toupclazzStudent",produces="application/json;charset=utf-8")
+	@ResponseBody
+	public List<ClazzStudentExamInfo> toupclazzStudent(@RequestBody Integer[] sid) {
+		//Integer[] sid2= {104,105,106,107}; 
+		System.out.println("可以升学的sid");
+		for (int i = 0; i < sid.length; i++) {
+			System.out.println(sid[i]);
+		}
+		List<ClazzStudentExamInfo> uplist=einfoservice.canupclazzStudentexaminfo(sid);
+		return uplist;
+	}
+	
 	
 	@RequestMapping("/toteachercourse")
 	public String toteachercourse() {
@@ -184,29 +152,31 @@ public class TanController {
 	}
 	@RequestMapping("/teacherCoursetimeInfo")
 	@ResponseBody
-	public List<CourseTeacher> teacherCoursetimeInfo(Integer datetime){
+	public List<CourseTeacher> teacherCoursetimeInfo(HttpSession session,Integer datetime){
 		System.out.println("月："+datetime);
-		Integer tid=2;
+		Login login=(Login)session.getAttribute("u");
+		Integer tid=login.getPeopleId();
+		//Integer tid=2;
 		System.out.println("tid:"+tid);
 		List<CourseTeacher> list=coteaservice.selectTeachercoursetime(tid, datetime);
 		return list;
 	}
 	
+	
 	@RequestMapping("/toexamtiminfo")
-	public String toexamtiminfo(Model model,Integer examinationId) {
+	@ResponseBody
+	public List<ExaminationTm> toexamtiminfo(Integer examinationId) {
 		//一套试卷的详细题目信息(教员出的所有试卷)
+		System.out.println("试卷id--"+examinationId);
 		if(examinationId==null) {
 			examinationId=1;//默认值
 		}
 		List<ExaminationTm> etimlist=einfoservice.selectexamtimByexamid(examinationId);
 		for (ExaminationTm e : etimlist) {
 			System.out.println("--"+e.getMistakecount()+"-"+e.getTopic_id()+"--"+e.getTopicobj().getTopic_name());
-			//System.out.println(e.getTopicobj().getSeobj().getSectionName());
 		}
-		model.addAttribute("etimlist", etimlist);
-		return "datastatistics/dataStatistics5";
+		return etimlist;
 	}
-	
 	
 	
 	/*-------------------------*/
@@ -314,6 +284,5 @@ public class TanController {
 		return croomservice.classroomeadd( reviewnub, machinenub, croomnub,fid);
 	}
 	
-	
-	
+
 }

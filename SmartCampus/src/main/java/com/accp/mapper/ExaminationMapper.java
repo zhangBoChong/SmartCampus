@@ -10,6 +10,7 @@ public interface ExaminationMapper {
 	//考试试卷信息（课程+教员）
 	Examination selectexamByexaminationId(Integer examinationId);
 	Examination selectexamByexaminationIdTow(Integer examinationId);
+	List<Examination> chaexamBytidtan(Integer tid);
 	
 	int insertExa(Examination exa);
 	

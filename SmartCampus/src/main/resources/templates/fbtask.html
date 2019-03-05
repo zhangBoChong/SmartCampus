@@ -197,7 +197,7 @@ window.UMEDITOR_HOME_URL = 'umeditor/';  // 请换成绝对路径
     
 </script>
 <!--缩略图-->
-<script type="text/javascript" th:inline = "javascript">            
+<script type="text/javascript" th:inline="javascript">            
             //判断浏览器是否支持FileReader接口
             if (typeof FileReader == 'undefined') {
                 document.getElementById("xmTanDiv").InnerHTML = "<h1>当前浏览器不支持FileReader接口</h1>";
@@ -247,10 +247,17 @@ window.UMEDITOR_HOME_URL = 'umeditor/';  // 请换成绝对路径
             	}
             })
             
-            //登录的类型 1为教员  0为管理员
-            var userType = [[session.u.type]];
+            //登录的类型 1,2为教员班主任  3为管理员
+            var userType;
             $(function() {
-            	if (userType==0) {
+            	$.ajax({
+            		url:"queryStaffbyId",
+            		type:"post",
+            		success:function(data){
+            			userType=data;
+            		}
+            	});	
+            	if (userType==3) {
             		$("#admin").show();
             		$("#teacher").hide();
             	}else{

@@ -10,8 +10,15 @@ import org.apache.ibatis.annotations.Param;
 public interface StudentinfoMapper {
 	int insertStudentinfo(Studentinfo stu);
 	int updateStudentinfo(Studentinfo stu);
+	//查状态为3,游离
+		List<Studentinfo> queryBystatus3();
 	Studentinfo queryBystusid(Integer sid);
-    
+	//删除学员
+	int deleteStudents(Integer sid);	
+	//新增报名学员
+	int addStudentinfo4(Studentinfo stu);
+	//查状态为4，新生
+	List<Studentinfo> queryBystatus();
 	//可以升学的学员
 	List<Studentinfo> canupclazzBysidArray(Integer [] sid);
 	//学员所有考试信息--(不确定)
@@ -81,4 +88,6 @@ public interface StudentinfoMapper {
     int studentQuantity2();
 
     int updateStudent6(int sid);
+
+    int updateStudent7(int sid);
 }

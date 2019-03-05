@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.accp.domain.Clazz;
 import com.accp.domain.ClazzSchedule;
 import com.accp.domain.CourseTeacher;
+import com.accp.mapper.ClazzMapper;
 import com.accp.mapper.ClazzScheduleMapper;
 import com.accp.mapper.CourseTeacherMapper;
 import com.accp.service.CourseTeacherInfoService;
@@ -19,6 +21,8 @@ public class CourseTeacherInfoServiceImpl implements CourseTeacherInfoService{
 	CourseTeacherMapper cotmapper;
 	@Autowired
 	ClazzScheduleMapper clzschmapper;
+	@Autowired
+	ClazzMapper cmapper;
 	
 	
 	public List<CourseTeacher> selectTeachercoursetime(Integer tid,Integer datetime){
@@ -34,6 +38,18 @@ public class CourseTeacherInfoServiceImpl implements CourseTeacherInfoService{
 			System.out.println("---上课课时："+cot.getClzscheduleobj().getCoutime());
 		}
 		return cotlist;
+	}
+
+
+	@Override
+	public List<CourseTeacher> chateachercourseclassBytidtan(Integer tid) {
+		// 
+		List<CourseTeacher> ctealist=cotmapper.chateachercourseclassBytidtan(tid);
+		for (CourseTeacher ct : ctealist) {
+			Clazz c=cmapper.selectBycid(ct.getClzteacherobj().getCid());
+			ct.setClzobj(c);
+		}
+		return ctealist;
 	}
 	
 }
