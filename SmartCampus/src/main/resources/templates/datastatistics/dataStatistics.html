@@ -61,7 +61,7 @@
 								<td class="backgroundtoolbar">姓名</td><td v-if="stuobj">{{stuobj.sname}}</td>
 								<td class="backgroundtoolbar">学号</td><td v-if="stuobj">{{stuobj.snumber}}</td>
 							</tr>
-							<tr v-for="(c,index) in stuobj.clsobj" v-if="c.status==1" >
+							<tr v-for="(c,index) in stuobj.clsobj" v-if="c!=null&&c.status==1" >
 								<td  class="backgroundtoolbar">班级</td><td>{{c.cobj.cname}}</td>
 								<td class="backgroundtoolbar">年级</td>
 								<td>

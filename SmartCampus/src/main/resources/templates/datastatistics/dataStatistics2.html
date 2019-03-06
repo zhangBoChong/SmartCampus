@@ -55,9 +55,6 @@
 			<div class="basicInforma">
 				<p style="font-size: 18px;margin-top: 10px;padding: 5px 20px;">查看班级：
 					<select name="cid">
-						<!-- <option value="1">1801</option>
-						<option value="2">1805</option>
-						<option value="3">1810</option> -->
 						<option th:each="sf:${staffobj.clzlist}" th:attr="value=${sf.cid}" th:text="${sf.cname}"></option>
 					</select>
 					<input type="hidden" name="tid" th:attr="value=${staffobj.tid}">
@@ -139,12 +136,11 @@
 				
 				var cid=$("[name=cid]").val();
 				alert("cid--"+cid);
-				//showClassInfor(cid);
-				
+				showClassInfor(cid);
 				$("[name=cid]").change(function(){
 					var cid=$(this).val();
 					alert("change-cid--"+cid);
-					//showClassInfor(cid);
+					showClassInfor(cid);
 				});
 			});
 			
@@ -165,15 +161,13 @@
 		
 		
 			$(function(){
-				$(".gomine").click(function(){
+				/* $(".gomine").click(function(){
 					//获取当前登录用户的id,判断是否可以查看单个学员具体信息 
-					/* if(true){
-						return;
-					} */
+					
 					var stuid=$(this).attr("data-stuid");
 					alert("sid--"+stuid);
 					//window.location.href="/toDataStatistics?sid="+stuid;
-				});
+				}); */
 				//---考试名称---
 				var tdlist="";
 				var tdcnamelist=[];

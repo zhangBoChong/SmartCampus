@@ -21,7 +21,7 @@
   </resultMap>
   <resultMap type="com.accp.domain.Havetaskexam" id="mistaketimstudent" extends="BaseResultMap">
     <association property="cstuobj" column="csId" javaType="com.accp.domain.ClazzStudent" 
-    		select="com.accp.mapper.ClazzStudentMapper.selectclazzstudentBysidtan"></association>
+    		select="com.accp.mapper.ClazzStudentMapper.selectclazzstudentByczidtan"></association>
   </resultMap>
   <select id="examscoreBysid" resultMap="examinfoscore">
   	SELECT *,SUM(havetask_dafen) AS score FROM havetaskexam 
@@ -43,7 +43,7 @@
   </select>
   
   <select id="chmistakestudents" resultMap="mistaketimstudent">
-  	SELECT * FROM havetask  WHERE havetask_dafen=0 AND topic_id=#{topicId}  GROUP BY csid
+  	SELECT * FROM havetaskexam  WHERE havetask_dafen=0 AND topic_id=#{topicId}  GROUP BY csid
   </select>
   
   <sql id="Example_Where_Clause">

@@ -22,12 +22,12 @@
   
   <!-- 按cid查询班级表 -->
   <select id="clazzBycid" resultType="com.accp.domain.Clazz">
-  	SELECT * FROM `clazz` WHERE `cid`=#{cid}
+  	SELECT * FROM `clazz` WHERE `cid`=#{cid} and `status2`=0
   </select>
   
   <!-- 查询所有班级 -->
   <select id="selectClazz" resultType="com.accp.domain.Clazz">
-  	SELECT * FROM `clazz`
+  	SELECT * FROM `clazz` WHERE`status2`=0
   </select>
   
   <resultMap type="com.accp.domain.Clazz" id="clazzvessiongrade" extends="BaseResultMap">
@@ -41,25 +41,25 @@
   </resultMap>
   
   <select id="queryBybid" resultMap="BaseResultMap">
-  	select * from clazz where bid=#{bid}
+  	select * from clazz where bid=#{bid} and `status2`=0
   </select>
   <select id="queryAllclazz" resultMap="BaseResultMap">
-  	select * from clazz where status=0
+  	select * from clazz where status=0 and  `status2`=0
   </select>
   <select id="queryClazzs" resultMap="BaseResultMap">
-  	select * from clazz 
+  	select * from clazz WHERE`status2`=0
   </select>
   
   <select id="selectBytid" resultMap="clazzvessiongrade">
-  	SELECT * FROM clazz WHERE tid=#{tid}
+  	SELECT * FROM clazz WHERE tid=#{tid} and `status2`=0
   </select>
   
   
   <select id="selectclazzvg" resultMap="clazzvessiongrade">
-  	SELECT * FROM clazz 
+  	SELECT * FROM clazz WHERE`status2`=0
   </select>
   <select id="selectclazzvgBycid" resultMap="clazzvessiongrade">
-  	SELECT * FROM clazz where cid=#{cid}
+  	SELECT * FROM clazz where cid=#{cid} and `status2`=0
   </select>
   <select id="selectclazzBycid" resultMap="clazzteacher">
   	SELECT c.*,sta.tname FROM clazz c
